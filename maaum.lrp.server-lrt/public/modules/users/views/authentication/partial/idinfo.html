@@ -1,0 +1,10 @@
+<fieldset>
+    <legend>{{title}}</legend>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">ID</label>
+        <div class="col-lg-10">
+            <input type="text" data-ng-model="credentials.username" placeholder="아이디" class="form-control" ng-hide="isUpdate" required  />
+            <span class="form-control" ng-show="isUpdate">{{credentials.username}} </span>
+        </div>
+    </div>
+</fieldset>

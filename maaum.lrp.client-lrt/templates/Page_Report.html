@@ -1,0 +1,182 @@
+<ion-view view-title="Play">
+
+    <div>
+
+        <ion-header-bar class="lrp-bar-top lrp-header-padding" style="width: 100%; position: relative">
+            <div class="div-flex  my-row-center">
+                <h3>{{lrpModel.selectedResult.name}}</h3>
+            </div>
+            <div class="buttons">
+                <button class="button button-clear icon ion-printer" ng-click="reportPrint()"></button>
+            </div>
+            <div class="buttons">
+                <button class="button button-clear icon ion-close" ng-click="endReport()"></button>
+            </div>
+        </ion-header-bar>
+
+        <page>
+
+            <div>
+
+                <ion-item style="padding: 10px;">
+                    <h3>{{lrpModel.selectedPatient.name}}</h3>
+                </ion-item>
+
+                <ion-item style="padding: 10px;">
+                    <div class="my-row-center">
+                        <div style="width: 50%;">
+                            <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
+                                <span class="input-label" style="text-align: right; width: 95px; display:table;">등록번호 : </span>
+                                <span class="input-label"> {{lrpModel.selectedPatient.regNo}}</span>
+                            </label>
+
+                            <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
+                                <span class="input-label" style="text-align: right; width: 95px; display:table;">성별 : </span>
+                                <span class="input-label">{{lrpModel.selectedPatient.sex}}</span>
+                            </label>
+
+                            <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
+                                <span class="input-label" style="text-align: right; width: 95px; display:table;">생년월일 : </span>
+                                <span class="input-label">{{lrpModel.selectedPatient.birthday | date: "yyyy-MM-dd"}}</span>
+                            </label>
+
+                            <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
+                                <span class="input-label" style="text-align: right; width: 95px; display:table;">직업 : </span>
+                                <span class="input-label">{{lrpModel.selectedPatient.Job}}</span>
+                            </label>
+                        </div>
+
+                        <div style="width: 48%;">
+                            <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
+                                <span class="input-label" style="text-align: right; width: 95px; display:table;">담당평가자 : </span>
+                                <span class="input-label">{{lrpModel.selectedPatient.assignedTherapistName}}</span>
+                            </label>
+
+                            <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
+                                <span class="input-label" style="text-align: right; width: 95px; display:table;">등록일 : </span>
+                                <span class="input-label">{{lrpModel.selectedPatient.created | date: "yyyy-MM-dd"}}</span>
+                            </label>
+
+                            <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
+                                <span class="input-label" style="text-align: right; width: 95px; display:table;">치료연수 : </span>
+                                <span class="input-label">{{lrpModel.selectedPatient.eduYear}}</span>
+                            </label>
+                            <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
+                                <span class="input-label" style="text-align: right; width: 95px; display:table;">주로쓰는 손 : </span>
+                                <span class="input-label">{{lrpModel.selectedPatient.handType}}</span>
+                            </label>
+                        </div>
+                    </div>
+                </ion-item>
+
+                <ion-item style="padding: 10px;">
+                    <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
+                        <span class="input-label" style="text-align: right; width: 160px; display:table;">진단명 : </span>
+                        <span class="input-label">{{lrpModel.selectedPatient.diagnosis}}</span>
+                    </label>
+
+                    <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
+                        <span class="input-label" style="text-align: right; width: 160px; display:table;">발병일 : </span>
+                        <span class="input-label">{{lrpModel.selectedPatient.inciDate | date: "yyyy-MM-dd"}}</span>
+                    </label>
+
+                    <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
+                        <span class="input-label" style="text-align: right; width: 160px; display:table;">실어증 유형 : </span>
+                        <span class="input-label">{{lrpModel.selectedPatient.aphasiaType}}</span>
+                    </label>
+
+                    <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
+                        <span class="input-label" style="text-align: right; display:table; width: 160px;">1차 실어증 평가점수 : </span>
+                        <span class="input-label">{{lrpModel.selectedPatient.initialAQ}}</span>
+                    </label>
+                </ion-item>
+
+                <ion-item style="padding: 10px;">
+
+                </ion-item>
+
+                <ion-item style="padding: 10px;">
+                    <h2>{{lrpModel.selectedResult.tasks[lrpModel.taskPivot].refTask.name}} Set : {{lrpModel.selectedResult.tasks[lrpModel.taskPivot].setID}}</h2>
+                </ion-item>
+
+                <ion-item style="padding: 10px;">
+                    <div style="position: inherit; width: 48%; float: left;">
+                        <div style="position: absolute; top: calc(50% - 25px); left: calc(10% - 11px); font-size: xx-large;"><span ng-if="lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfCorrect !== lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfResponse">{{lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfCorrect / lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfResponse * 100 | number : 2}}</span>
+                            <span
+                                ng-if="lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfCorrect === lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfResponse">100.0</span>
+                        </div>
+                        <div style="position: absolute; top: calc(50% + 10px); left: calc(12% + 19px); font-size: medium;">{{lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfCorrect}}/ {{lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfResponse}} <span ng-if="lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfResponse !== lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfProblem">({{lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfProblem}})</span></div>
+                        <progress-arc style="margin-left: 1px;" size="123" stroke="#3080E8" stroke-width="25" complete="(lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfCorrect / lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfResponse)" background="#ddd">
+                        </progress-arc>
+                    </div>
+
+                    <div style="width: 48%; float: right;">
+                        <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
+                            <span class="input-label" style="text-align: right; width: 110px; display:table;">총 수행시간 :</span>
+                            <span class="input-label">{{lrpModel.selectedResult.tasks[lrpModel.taskPivot].totalTime / 1000 | number : 2}} s</span>
+                        </label>
+
+                        <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
+                            <span class="input-label" style="text-align: right; width: 110px; display:table;">평균 풀이시간 :</span>
+                            <span class="input-label">{{lrpModel.selectedResult.tasks[lrpModel.taskPivot].meanTime / 1000 | number : 2}} s</span>
+                        </label>
+
+                        <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
+                            <span class="input-label" style="text-align: right; width: 110px; display:table;">표준편차 :</span>
+                            <span class="input-label">{{lrpModel.selectedResult.tasks[lrpModel.taskPivot].stdTime / 1000 | number : 2}} s</span>
+                        </label>
+
+                        <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
+                            <span class="input-label" style="text-align: right; width: 110px; display:table;">등수 :</span>
+                            <span class="input-label">None</span>
+                        </label>
+                    </div>
+                </ion-item>
+
+                <ion-item style="padding: 10px;">
+
+                    <canvas id="line" class="chart chart-line" data="graphData[lrpModel.taskPivot]" labels="labels[lrpModel.taskPivot]" legend="false" series="series" click="" width="640" height="270">
+                    </canvas>
+
+                    <div ng-if="lrpModel.selectedResult.isChecked" style="display: table;text-align:center;border: solid;overflow: hidden;width: 90%;margin-left: 14px;">
+                        <div style="display: table-row">
+                            <div style="display: table-cell;vertical-align: middle; background-color: #11c1f3;width: 12%;">
+                                <div style="height: 24px;">
+                                    문항
+                                </div>
+                                <div style="height: 24px;">
+                                    채점
+                                </div>
+                                <div style="height: 24px;" ng-if="lrpModel.selectedResult.tasks[lrpModel.taskPivot].answerType === 'record'">
+                                    단서
+                                </div>
+                            </div>
+
+                            <div style="display: table-cell;" ng-repeat="grade in lrpModel.selectedResult.tasks[lrpModel.taskPivot].problems">
+                                <div style="height: 24px;">
+                                    {{$index + 1}}
+                                </div>
+                                <div style="height: 24px;">
+                                    <img ng-if="grade.isCorrect" style="width: 24px;" src="./img/res/training_img_answer01.png">
+                                    <img ng-if="!grade.isCorrect" style="width: 24px;" src="./img/res/training_img_answer02_100.png">
+                                </div>
+                                <div style="height: 24px;" ng-if="lrpModel.selectedResult.tasks[lrpModel.taskPivot].answerType === 'record'">
+                                    <i class="icon" ng-class="{ 0:'ion-android-radio-button-off', 1:'ion-ios-lightbulb-outline', 2:'ion-volume-high', 3:'ion-sad-outline' }[grade.wrongType]"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </ion-item>
+
+                <ion-item style="padding: 10px;">
+
+                </ion-item>
+
+            </div>
+
+        </page>
+
+    </div>
+
+</ion-view>

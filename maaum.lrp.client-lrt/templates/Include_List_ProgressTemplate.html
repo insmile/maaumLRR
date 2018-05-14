@@ -1,0 +1,61 @@
+<ion-header-bar class="bar-stable lrp-bar-search">
+    <div class="item-input-inset lrp-input-inset" style="width: 100%;height: 100%;">
+        <label class="item-input-wrapper" style="height: 100%;">
+            <img src="./img/res/search_inputpox_icon.png" style="width: 36px; height: auto;">
+            <input type="text" placeholder="검색" ng-model="formSearch.searchTemplate.name">
+        </label>
+        <button class="button lrp-search-delete-button" ng-click="formSearch.searchTemplate.name = '';">
+            <i class="icon ion-android-close"></i>
+        </button>
+    </div>
+</ion-header-bar>
+
+<ion-content direction="y" has-bouncing="false" style="width: initial; height: calc(100% - 128px);">
+
+    <ion-list>
+
+        <ion-item class="item-divider">
+
+            <div class="div-left">
+                <h2>즐겨 찾는 템플릿</h2>
+            </div>
+
+        </ion-item>
+
+        <ion-item class="my-row-center" ng-repeat="template in lrpModel.templateList | filter:{ starred : true } | filter:formSearch.searchTemplate"  ng-click="selectTemplate(template)">
+            <div class="div-left div-flex">
+                <h2 ng-bind-html="template.name | highlight:formSearch.searchTemplate.name"></h2>
+                <p>{{template.content}}</p>
+            </div>
+            <label class="checkbox" ng-if="lrpModel.statePage === 4">
+                <input type="checkbox" ng-checked="template.starred" ng-click="templateStarClick(template)" ng-disabled="">
+            </label>
+            <div ng-if="lrpModel.statePage !== 4 && template.starred">
+                <!--img src="./img/res/radiobox_on.png" style="width: 36px; height: auto;"-->
+            </div>
+        </ion-item>
+
+        <ion-item class="item-divider">
+
+            <div class="div-left">
+                <h2>모든 템플릿</h2>
+            </div>
+
+        </ion-item>
+
+        <ion-item class="my-row-center" ng-repeat="template in lrpModel.templateList | filter:formSearch.searchTemplate"  ng-click="selectTemplate(template)">
+            <div class="div-left div-flex">
+                <h2 ng-bind-html="template.name | highlight:formSearch.searchTemplate.name"></h2>
+                <p>{{template.content}}</p>
+            </div>
+            <label class="checkbox" ng-if="lrpModel.statePage === 4">
+                <input type="checkbox" ng-checked="template.starred" ng-click="templateStarClick(template)" ng-disabled="">
+            </label>
+            <div ng-if="lrpModel.statePage !== 4 && template.starred">
+                <!--img src="./img/res/radiobox_on.png" style="width: 36px; height: auto;"-->
+            </div>
+        </ion-item>
+
+    </ion-list>
+
+</ion-content>

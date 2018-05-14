@@ -1,0 +1,34 @@
+<ion-header-bar class="bar-stable lrp-bar-search">
+    <div class="item-input-inset lrp-input-inset" style="width: 100%;height: 100%;">
+        <label class="item-input-wrapper" style="height: 100%;">
+            <img src="./img/res/search_inputpox_icon.png" style="width: 36px; height: auto;">
+            <input type="text" placeholder="검색" ng-model="formSearch.searchProtocol.name">
+        </label>
+        <button class="button lrp-search-delete-button" ng-click="formSearch.searchProtocol.name = '';">
+            <i class="icon ion-android-close"></i>
+        </button>
+    </div>
+</ion-header-bar>
+
+<ion-content direction="y" has-bouncing="false" style="width: initial; height: calc(100% - 128px);">
+
+    <ion-list>
+
+        <ion-item class="item-divider">
+
+            <div class="div-left">
+                <h2>구성</h2>
+            </div>
+
+        </ion-item>
+
+        <ion-item class="my-row-center" ng-repeat="protocalLrp in lrpModel.protocolList | filter:formSearch.searchProtocol"  ng-click="selectProtocol(protocalLrp)">
+            <div class="div-left div-flex">
+                <h2 ng-bind-html="protocalLrp.name | highlight:formSearch.searchProtocol.name"></h2>
+                <p>{{protocalLrp.content}}</p>
+            </div>
+        </ion-item>
+
+    </ion-list>
+
+</ion-content>

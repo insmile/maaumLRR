@@ -1,0 +1,39 @@
+<div class="centered" ng-keyup="$event.keyCode == 13 && doLogin()">
+    <img src="./img/res/lrt_logo.png" style="width: 370px; height: auto;">
+
+    <div>
+        <div style="float: left; width: 275px;">
+            <label class="item item-input" style="height: 40px; margin: 0px 0px 10px 0px;">
+                <input type="text" placeholder="아이디" ng-model="loginData.username">
+            </label>
+
+            <label class="item item-input" style="margin: 0; height: 40px;">
+                <input type="password" placeholder="비밀번호" ng-model="loginData.password">
+            </label>
+        </div>
+        <div style="float: right;">
+            <button class="button lrp-button" type="submit" style="width: 90px; height: 90px; margin: 0; background-image: url('./img/res/login_btn_red.png'); background-size: 90px 90px;" ng-click="doLogin()"></button>
+        </div>
+    </div>
+
+    <div style="clear: both; color: black; width: 100%; font-size: 17px;">
+        <div style="float: left; padding-right: 33px;"><input type="checkbox" class="lrp-checkbox" ng-model="loginModel.autoUserName"><label class="lrp-checkbox-lable">아이디 저장</label></div>
+        <div style="float: left;"><input type="checkbox" class="lrp-checkbox" ng-model="loginModel.autoLogin"><label class="lrp-checkbox-lable">패스워드 저장</label></div>
+    </div>
+    <div style="clear: both; padding: 2px 0px 10px 0px; color: red">
+        <div style="height: 20px;">{{logOnMsg}}</div>
+    </div>
+
+    <!--div style="clear: both;">
+        <button class="button button-block button-positive" ng-click="go_offlineMode()">오프라인 모드</button>
+    </div-->
+    <div style="clear: both;">
+        <button class="button button-block button-assertive" ng-click="go_findpassword()">아이디/비밀번호 찾기</button>
+    </div>
+    <div>
+        <button class="button button-block button-assertive" ng-click="go_terms()">신규등록</button>
+    </div>
+    <div style="position: fixed; bottom: 0; white-space:nowrap;">
+        <p>Copyright ⓒ2017 KOREA University. ALL RIGHT RESERVED </p>
+    </div>
+</div>

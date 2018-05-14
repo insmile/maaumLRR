@@ -1,0 +1,33 @@
+<section class="row" data-ng-controller="ProgressesController">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form class="form-horizontal" data-ng-submit="create()" novalidate>
+                <fieldset>
+                    <legend>경과기록지 서식 입력</legend>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label"  for="name">경과기록지 서식 명</label>
+                        <div class="col-lg-10">
+                            <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name" required>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">경과기록지 서식 내용</label>
+                        <div class="col-lg-10">
+                            <textarea data-ng-model="content" id="content"></textarea>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="form-group">
+                    <div class="col-lg-offset-2 col-lg-10">
+                        <button type="submit" class="btn btn-large btn-primary">입력</button>
+                    </div>
+                </div>
+                <div data-ng-show="error" class="text-center text-danger">
+                    <strong data-ng-bind="error"></strong>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

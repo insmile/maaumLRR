@@ -1,0 +1,32 @@
+<ion-view view-title="ListFrame">
+
+    <ion-header-bar class="bar-stable lrp-bar-top lrp-header-padding lrp-header-bottomless">
+        <div class="div-flex"><h3>{{lrpModel.pageTag[lrpModel.statePage]}}</h3></div>
+        <button class="button lrp-bar-top-button" ng-if="(lrpModel.userData.roles !== 'patient' && lrpModel.statePage !== 2)" ng-click="addPopover.show($event)">등록</button>
+    </ion-header-bar>
+
+    <div id="lrpOuterList" style="position: relative; top: 64px; width: 100%; height: 100%;" class="menu-animated">
+
+        <div style="height: 100%;">
+
+            <div class="first" style="position: absolute; height: 100%;" ng-include="lrpModel.listPageHolder[0]">
+
+            </div>
+
+            <div class="lrp-list-block second" ng-if="listStateCode > 0" ng-include="lrpModel.listPageHolder[1]">
+
+            </div>
+
+            <div class="lrp-list-block third" ng-if="listStateCode > 1" ng-include="lrpModel.listPageHolder[2]">
+
+            </div>
+
+            <div class="lrp-list-block fourth" ng-if="listStateCode > 2" ng-include="lrpModel.listPageHolder[3]">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</ion-view>

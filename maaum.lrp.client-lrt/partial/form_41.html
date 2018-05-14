@@ -1,0 +1,117 @@
+<ion-header-bar class="bar-stable lrp-bar-top lrp-header-padding lrp-popover-scroll">
+    <div class="div-flex">
+        <h3>실어증 체크 리스트</h3>
+    </div>
+    <button class="button button-clear icon ion-close" style="color: #ffffff;" ng-click="endExerciseAsk()"></button>
+</ion-header-bar>
+
+<ion-content style="margin: 0px;">
+    <div class="lrp-popover-q-header">
+        <p><label>Intra-individual Pre-stroke</label></p>
+        <div class="lrp-popover-q-content" style='font-size:20px'>
+            <table width='100%'>
+                <tr>
+                    <td width='50%'>Gender</td>
+                    <td width='25%'><label ng-class='{bold:scoreModel.q[0].c==0}'><input type='checkbox' ng-model='scoreModel.q[0]' ng-true-value={s:0,c:0}> Male</label></td>
+                    <td width='25%'><label ng-class='{bold:scoreModel.q[0].c==1}'><input type='checkbox' ng-model='scoreModel.q[0]' ng-true-value={s:0,c:1}> Female</label></td>
+                </tr>
+                <tr>
+                    <td width='50%'>Age</td>
+                    <td width='25%'><label ng-class='{bold:scoreModel.q[1].c==0}'><input type='checkbox' ng-model='scoreModel.q[1]' ng-true-value={s:0,c:0}> 50 years old or younger</label></td>
+                    <td width='25%'><label ng-class='{bold:scoreModel.q[1].c==1}'><input type='checkbox' ng-model='scoreModel.q[1]' ng-true-value={s:0,c:1}> Older than 50 years old</label></td>
+                </tr>
+                <tr>
+                    <td width='50%'>Pre-stroke Depression</td>
+                    <td width='25%'><label ng-class='{bold:scoreModel.q[2].c==0}'><input type='checkbox' ng-model='scoreModel.q[2]' ng-true-value={s:0,c:0}> No history of depression</label></td>
+                    <td width='25%'><label ng-class='{bold:scoreModel.q[2].c==1}'><input type='checkbox' ng-model='scoreModel.q[2]' ng-true-value={s:0,c:1}> History of depression</label></td>
+                </tr>
+                <tr>
+                    <td width='50%'>Ethnic/Cultural Background</td>
+                    <td width='25%'><label ng-class='{bold:scoreModel.q[3].c==0}'><input type='checkbox' ng-model='scoreModel.q[3]' ng-true-value={s:0,c:0}> Caucasian</label></td>
+                    <td width='25%'><label ng-class='{bold:scoreModel.q[3].c==1}'><input type='checkbox' ng-model='scoreModel.q[3]' ng-true-value={s:0,c:1}> Non-Caucasian</label></td>
+                </tr>
+                <tr>
+                    <td width='50%'>Language(s) Spoken</td>
+                    <td width='25%'><label ng-class='{bold:scoreModel.q[4].c==0}'><input type='checkbox' ng-model='scoreModel.q[4]' ng-true-value={s:0,c:0}> Primary language-other</label></td>
+                    <td width='25%'><label ng-class='{bold:scoreModel.q[4].c==1}'><input type='checkbox' ng-model='scoreModel.q[4]' ng-true-value={s:0,c:1}> Primary language-English or Chinese</label></td>
+                </tr>
+                <tr>
+                    <td width='50%'>Socioeconomic Status</td>
+                    <td width='25%'><label ng-class='{bold:scoreModel.q[5].c==0}'><input type='checkbox' ng-model='scoreModel.q[5]' ng-true-value={s:0,c:0}> High SES(Educ/Income)</label></td>
+                    <td width='25%'><label ng-class='{bold:scoreModel.q[5].c==1}'><input type='checkbox' ng-model='scoreModel.q[5]' ng-true-value={s:0,c:1}> Low SES(Educ/Income)</label></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="lrp-popover-q-header">
+        <p><label>Post-stroke</label></p>
+        <div class="lrp-popover-q-content" style='font-size:20px'>
+            <table width='100%'>
+                <tr>
+                    <td width='50%'>Extent of Lesion</td>
+                    <td width='25%'><label ng-class='{bold:scoreModel.q[6].c==0}'><input type='checkbox' ng-model='scoreModel.q[6]' ng-true-value={s:0,c:0}> Mild severity</label></td>
+                    <td width='25%'><label ng-class='{bold:scoreModel.q[6].c==1}'><input type='checkbox' ng-model='scoreModel.q[6]' ng-true-value={s:0,c:1}> Moderate to severe</label></td>
+                </tr>
+                <tr>
+                    <td width='50%'>Depression</td>
+                    <td width='25%'><label ng-class='{bold:scoreModel.q[7].c==0}'><input type='checkbox' ng-model='scoreModel.q[7]' ng-true-value={s:0,c:0}> No depression</label></td>
+                    <td width='25%'><label ng-class='{bold:scoreModel.q[7].c==1}'><input type='checkbox' ng-model='scoreModel.q[7]' ng-true-value={s:0,c:1}> Deperession</label></td>
+                </tr>
+                <tr>
+                    <td width='50%'>Exercise</td>
+                    <td width='25%'><label ng-class='{bold:scoreModel.q[8].c==0}'><input type='checkbox' ng-model='scoreModel.q[8]' ng-true-value={s:0,c:0}> Regular aerobic exercise</label></td>
+                    <td width='25%'><label ng-class='{bold:scoreModel.q[8].c==1}'><input type='checkbox' ng-model='scoreModel.q[8]' ng-true-value={s:0,c:1}> Limited aerobic exercise</label></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="lrp-popover-q-header">
+        <p><label>Extra-individual Personal Context</label></p>
+        <div class="lrp-popover-q-content" style='font-size:20px'>
+            <table width='100%'>
+                <tr>
+                    <td width='50%'>Leisure Status</td>
+                    <td width='25%'><label ng-class='{bold:scoreModel.q[9].c==0}'><input type='checkbox' ng-model='scoreModel.q[9]' ng-true-value={s:0,c:0}> Active leisure life</label></td>
+                    <td width='25%'><label ng-class='{bold:scoreModel.q[9].c==1}'><input type='checkbox' ng-model='scoreModel.q[9]' ng-true-value={s:0,c:1}> Inactive leisure life</label></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="lrp-popover-q-header">
+        <p><label>Social Context</label></p>
+        <div class="lrp-popover-q-content" style='font-size:20px'>
+            <table width='100%'>
+                <tr>
+                    <td width='50%'>Communication Partners-Spouses</td>
+                    <td width='25%'><label ng-class='{bold:scoreModel.q[10].c==0}'><input type='checkbox' ng-model='scoreModel.q[10]' ng-true-value={s:0,c:0}> Positive/married</label></td>
+                    <td width='25%'><label ng-class='{bold:scoreModel.q[10].c==1}'><input type='checkbox' ng-model='scoreModel.q[10]' ng-true-value={s:0,c:1}> Negative/single</label></td>
+                </tr>
+                <tr>
+                    <td width='50%'>Communication Partners-Family</td>
+                    <td width='25%'><label ng-class='{bold:scoreModel.q[11].c==0}'><input type='checkbox' ng-model='scoreModel.q[11]' ng-true-value={s:0,c:0}> High level family support</label></td>
+                    <td width='25%'><label ng-class='{bold:scoreModel.q[11].c==1}'><input type='checkbox' ng-model='scoreModel.q[11]' ng-true-value={s:0,c:1}> Low level family support</label></td>
+                </tr>
+                <tr>
+                    <td width='50%'>Communication Partners-Psyhosocial Attributes</td>
+                    <td width='25%'><label ng-class='{bold:scoreModel.q[12].c==0}'><input type='checkbox' ng-model='scoreModel.q[12]' ng-true-value={s:0,c:0}> Caregiver positive attitude</label></td>
+                    <td width='25%'><label ng-class='{bold:scoreModel.q[12].c==1}'><input type='checkbox' ng-model='scoreModel.q[12]' ng-true-value={s:0,c:1}> Caregiver negative attitude</label></td>
+                </tr>
+                <tr>
+                    <td width='50%'>Communication Partners-Friends</td>
+                    <td width='25%'><label ng-class='{bold:scoreModel.q[13].c==0}'><input type='checkbox' ng-model='scoreModel.q[13]' ng-true-value={s:0,c:0}> Extensive social network</label></td>
+                    <td width='25%'><label ng-class='{bold:scoreModel.q[13].c==1}'><input type='checkbox' ng-model='scoreModel.q[13]' ng-true-value={s:0,c:1}> Limited social network</label></td>
+                </tr>
+                <tr>
+                    <td width='50%'>Communication Partners-Society</td>
+                    <td width='25%'><label ng-class='{bold:scoreModel.q[14].c==0}'><input type='checkbox' ng-model='scoreModel.q[14]' ng-true-value={s:0,c:0}> Positive accommodation</label></td>
+                    <td width='25%'><label ng-class='{bold:scoreModel.q[14].c==1}'><input type='checkbox' ng-model='scoreModel.q[14]' ng-true-value={s:0,c:1}> Negative accommodation</label></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div>
+        <button class="button" style="height: 100px; width: 100px;" ng-click="stageNext()">
+            <span>다음</span>
+        </button>
+    </div>
+</ion-content>

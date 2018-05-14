@@ -1,0 +1,58 @@
+<ion-header-bar class="bar-stable lrp-bar-search ">
+    <div class="item-input-inset lrp-input-inset" style="width: 100%;height: 100%;">
+        <label class="item-input-wrapper" style="height: 100%;">
+            <img src="./img/res/search_inputpox_icon.png" style="width: 36px; height: auto;">
+            <input type="text" placeholder="검색" ng-model="formSearch.searchPatient.name">
+        </label>
+        <button class="button lrp-search-delete-button" ng-click="formSearch.searchPatient.name = '';">
+            <i class="icon ion-android-close"></i>
+        </button>
+    </div>
+</ion-header-bar>
+
+<ion-content direction="y" has-bouncing="false" style="width: initial; height: calc(100% - 128px);">
+
+    <ion-list>
+
+        <ion-item class="item-divider">
+
+            <div class="div-left">
+                <h2>미배정 환자</h2>
+            </div>
+
+        </ion-item>
+
+        <ion-item class="my-row-center" ng-repeat="patient in lrpModel.patientList | filter:{ assignedTherapist : undefined } | filter:formSearch.searchPatient"  ng-click="selectPatient(patient)" ng-class="isSelected(patient, 1)">
+            <div class="div-left div-flex">
+                <h2 ng-bind-html="patient.name | highlight:formSearch.searchPatient.name"></h2>
+                <p>{{patient.center_name}} {{patient.email}}</p>
+            </div>
+            <div>
+                <img src="./img/res/list_icon_unassign.png" style="width: 60px; height: auto;">
+            </div>
+        </ion-item>
+
+        <ion-item class="item-divider">
+
+            <div class="div-left">
+                <h2>모든 환자</h2>
+            </div>
+
+        </ion-item>
+
+        <ion-item class="my-row-center" ng-repeat="patient in lrpModel.patientList | filter:formSearch.searchPatient" ng-click="selectPatient(patient)" ng-class="isSelected(patient, 1)">
+            <div class="div-left div-flex">
+                <h2 ng-bind-html="patient.name | highlight:formSearch.searchPatient.name"></h2>
+                <p>{{patient.center_name}} {{patient.email}}</p>
+            </div>
+            <div ng-if="patient.assignedTherapist === undefined">
+                <img src="./img/res/list_icon_unassign.png" style="width: 60px; height: auto;">
+            </div>
+            <div ng-if="!(patient.assignedTherapist === undefined)">
+                <h2><{{patient.assignedTherapistName}}></h2>
+            </div>
+        </ion-item>
+
+    </ion-list>
+
+</ion-content>

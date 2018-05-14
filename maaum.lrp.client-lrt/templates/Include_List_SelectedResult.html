@@ -1,0 +1,157 @@
+<ion-header-bar class="bar-stable lrp-header-bottomless" style="background-color: #f0f0f0;">
+    <div class="div-flex">
+        <h2 style="font-size: 18px;">{{lrpModel.selectedResult.name}}</h2>
+    </div>
+    <!--div class="my-row-center">
+        <button class="button" ng-click="deleteResult(lrpModel.selectedResult)">삭제</button>
+    </div-->
+</ion-header-bar>
+
+<ion-content class="lrp-header-bottomless" scroll="false" style="background-color: #f0f0f0;">
+    <div class="" style="height: auto; margin-top: 1px;">
+        <div class="">
+            <ion-item ng-if="lrpModel.selectedResult.tasks.length > 1" style="padding: 10px;">
+                <div ng-repeat="task in lrpModel.selectedResult.tasks" style="display: inline;">
+                    <input ng-class="{ lrpMarginResPx : !$first }" type="radio" name="group" ng-model="lrpModel.taskPivot" ng-value="$index" ng-click="setPivot($index)">
+                </div>
+            </ion-item>
+
+            <ion-item style="padding: 10px;">
+                <h2>{{lrpModel.selectedResult.tasks[lrpModel.taskPivot].refTask.name}} Set : {{lrpModel.selectedResult.tasks[lrpModel.taskPivot].setID}}</h2>
+            </ion-item>
+
+            <ion-item style="padding: 10px;">
+                <div ng-switch="" on="lrpModel.selectedResult.tasks[lrpModel.taskPivot].scoreType">
+                    <div ng-switch-when="sfna">
+                        <div style="margin-left:10%; width: 24%; float: left;">
+                            <div style="position: absolute; top: calc(35%); width:123px; text-align:center; font-size: xx-large;">
+                                {{lrpModel.selectedResult.tasks[lrpModel.taskPivot].totalScore}}
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-switch-when="nbab">
+                        <div style="margin-left:10%; width: 24%; float: left;">
+                            <div style="position: absolute; top: calc(35%); width:123px; text-align:center; font-size: xx-large;">
+                                {{lrpModel.selectedResult.tasks[lrpModel.taskPivot].totalScore}}
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-switch-when="ndp">
+                        <div style="margin-left:10%; width: 24%; float: left;">
+                            <div style="position: absolute; top: calc(35%); width:123px; text-align:center; font-size: xx-large;">
+                                {{lrpModel.selectedResult.tasks[lrpModel.taskPivot].totalScore}}
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-switch-default>
+                        <div ng-if="scoringFlag == false">
+                            <div style="margin-left:20%; width: 24%; float: left;">
+                                <div style="position: absolute; top: calc(50% - 25px); width:123px; text-align:center; font-size: xx-large;">
+                                    {{lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfCorrect - lrpModel.numOfPractice}}/ {{lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfResponse - lrpModel.numOfPractice}}
+                                    <span ng-if="lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfResponse !== lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfProblem">({{lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfProblem}})</span>
+                                </div>
+                                <div style="position: absolute; top: calc(50% + 10px); width:123px; text-align:center; font-size: medium;">
+                                    <span ng-if="lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfCorrect !== lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfResponse">{{(lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfCorrect - lrpModel.numOfPractice) / (lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfResponse - lrpModel.numOfPractice) * 100 | number : 2}}%</span>
+                                    <span ng-if="lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfCorrect === lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfResponse">100%</span>
+                                </div>
+                                <progress-arc size="123" stroke="#66ff66" stroke-width="25" complete="((lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfCorrect - lrpModel.numOfPractice) / (lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfResponse - lrpModel.numOfPractice))"
+                                    background="#ddd">
+                                </progress-arc>
+                            </div>
+                        </div>
+                        <div ng-if="scoringFlag == true">
+                            <div style="margin-left:20%; width: 24%; float: left;">
+                                <div style="position: absolute; top: calc(50% - 25px); width:123px; text-align:center; font-size: xx-large;">
+                                    {{lrpModel.selectedResult.tasks[lrpModel.taskPivot].totalScore}} / {{lrpModel.selectedResult.tasks[lrpModel.taskPivot].maxScore}}
+                                    <span ng-if="lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfResponse !== lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfProblem">({{lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfProblem}})</span>
+                                </div>
+                                <div style="position: absolute; top: calc(50% + 10px); width:123px; text-align:center; font-size: medium;">
+                                    <span ng-if="lrpModel.selectedResult.tasks[lrpModel.taskPivot].totalScore !== lrpModel.selectedResult.tasks[lrpModel.taskPivot].maxScore">{{lrpModel.selectedResult.tasks[lrpModel.taskPivot].totalScore / lrpModel.selectedResult.tasks[lrpModel.taskPivot].maxScore * 100 | number : 2}}%</span>
+                                    <span ng-if="lrpModel.selectedResult.tasks[lrpModel.taskPivot].totalScore === lrpModel.selectedResult.tasks[lrpModel.taskPivot].maxScore">100%</span>
+                                </div>
+                                <progress-arc size="123" stroke="#66ff66" stroke-width="25" complete="(lrpModel.selectedResult.tasks[lrpModel.taskPivot].totalScore / lrpModel.selectedResult.tasks[lrpModel.taskPivot].maxScore)" background="#ddd">
+                                </progress-arc>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="width: 48%; float: right;">
+                    <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
+                        <span class="input-label" style="text-align: right; width: 110px; display:table;">총 수행시간 :</span>
+                        <span class="input-label">{{lrpModel.selectedResult.tasks[lrpModel.taskPivot].totalTime / 1000 | number : 2}} s</span>
+                    </label>
+
+                    <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
+                        <span class="input-label" style="text-align: right; width: 110px; display:table;">평균 풀이시간 :</span>
+                        <span class="input-label">{{lrpModel.selectedResult.tasks[lrpModel.taskPivot].meanTime / 1000 | number : 2}} s</span>
+                    </label>
+
+                    <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
+                        <span class="input-label" style="text-align: right; width: 110px; display:table;">표준편차 :</span>
+                        <span class="input-label">{{lrpModel.selectedResult.tasks[lrpModel.taskPivot].stdTime / 1000 | number : 2}} s</span>
+                    </label>
+
+                    <label ng-if="lrpModel.case32" class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
+                            <span class="input-label" style="text-align: right; width: 110px; display:table; font-weight:bold">백분위수 :</span>
+                            <span class="input-label" style="font-weight:bold">{{lrpModel.score32}}</span>
+                        </label>
+                </div>
+            </ion-item>
+
+            <ion-item style="height:40vh; padding: 10px;">
+                <div style="height:40vh; width:33vw;">
+                    <canvas id="line" class="chart chart-line" data="graphData[lrpModel.taskPivot]" labels="labels[lrpModel.taskPivot]" legend="false" series="series" click="">
+                </canvas>
+                </div>
+            </ion-item>
+            <div style="height:10vh; padding: 10px;">
+                <div ng-if="scoringFlag == false && customFlag == false">
+                    <div ng-if="lrpModel.selectedResult.isChecked" style="display: table;text-align:center;border: solid;overflow: hidden;width: 90%;margin-left: 14px;">
+                        <div style="display: table-row">
+                            <div style="display: table-cell;vertical-align: middle; background-color: #11c1f3;width: 12%;">
+                                <div style="height: 24px;">
+                                    문항
+                                </div>
+                                <div style="height: 24px;">
+                                    채점
+                                </div>
+                                <div style="height: 24px;" ng-if="lrpModel.selectedResult.tasks[lrpModel.taskPivot].answerType === 'record'">
+                                    단서
+                                </div>
+                            </div>
+
+                            <div style="display: table-cell;" ng-repeat="grade in lrpModel.selectedResult.tasks[lrpModel.taskPivot].problems">
+                                <div style="height: 24px;">
+                                    {{$index + 1}}
+                                </div>
+                                <div style="height: 24px;">
+                                    <img ng-if="grade.isCorrect" style="width: 24px;" src="./img/res/training_img_answer01.png">
+                                    <img ng-if="!grade.isCorrect" style="width: 24px;" src="./img/res/training_img_answer02_100.png">
+                                </div>
+                                <div style="height: 24px;" ng-if="lrpModel.selectedResult.tasks[lrpModel.taskPivot].answerType === 'record'">
+                                    <i class="icon" ng-class="{ 0:'ion-android-radio-button-off', 1:'ion-ios-lightbulb-outline', 2:'ion-volume-high', 3:'ion-sad-outline' }[grade.wrongType]"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <ion-item class="my-row-center" style="height:5vh" ng-if="lrpModel.userData.roles !== 'patient'">
+                <button class="button" style="width: 100%;" ng-click="gradingExercise()">
+                    <span ng-if="lrpModel.selectedResult.tasks[lrpModel.taskPivot].answerType === 'select' || lrpModel.selectedResult.isChecked">확인</span>
+                    <span ng-if="lrpModel.selectedResult.tasks[lrpModel.taskPivot].answerType !== 'select' && !lrpModel.selectedResult.isChecked ">채점</span>
+                </button>
+            </ion-item>
+
+            <ion-item class="my-row-center" style="height:5vh">
+                <button class="button" style="width: 100%;" ng-click="reportPrintForm()">
+                    <span>결과 기록지</span>
+                </button>
+            </ion-item>
+
+        </div>
+    </div>
+
+</ion-content>

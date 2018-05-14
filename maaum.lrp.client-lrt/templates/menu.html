@@ -1,0 +1,159 @@
+<ion-side-menus enable-menu-with-back-views="false" expose-aside-when="large" class="menu-animated" style="width: calc(100% + 170px);" ng-controller="LoginCtrl" ng-class="{ 'lrp-menu-trans' : !lrpModel.isMenuToggle, 'lrp-on-mark' : lrpModel.isMenuToggle, 'lrp-logoff' : !lrpModel.isMenuOff }">
+
+    <ion-side-menu-content drag-content="false" class="menu-animated" ng-class="{ 'lrp-menu-content' : !lrpModel.isMenuToggle, 'lrp-logoff-contents' : !lrpModel.isMenuOff }">
+        <ion-nav-view name="menuContent"></ion-nav-view>
+    </ion-side-menu-content>
+
+    <ion-side-menu width="250">
+        <ion-header-bar class="bar-stable outer" style="height: 130px;padding: 0">
+            <div class="outer" style="height: 60%;">
+                <div class="inner">
+                    <img src="./img/res/account_icon_doctor.png" class="menu-animated" style="width: 48px; height: auto;" ng-click="userPopover.show($event)" ng-class="{ 'lrp-user-icon' : !lrpModel.isMenuToggle, 'lrp-on-mark' : lrpModel.isMenuToggle }">
+                </div>
+            </div>
+            <div class="outer" style="height: 40%;">
+                <div class="inner" ng-click="(lrpModel.isMenuToggle = !lrpModel.isMenuToggle)">
+                    <div ng-show="!lrpModel.isMenuToggle" class="lrp-user-icon">
+                        <h4 style="margin: 0;">{{lrpModel.userData.name}}</h4>
+                        <p style="margin: 0;">&nbsp;</p>
+                    </div>
+                    <div ng-show="lrpModel.isMenuToggle">
+                        <h4 style="margin: 0;">{{lrpModel.userData.name}} ({{lrpModel.userData.username}})</h4>
+                        <p style="margin: 0;">{{lrpModel.userData.email}}</p>
+                    </div>
+                </div>
+            </div>
+        </ion-header-bar>
+        <ion-content class="lrp-list-content menu-animated" has-bouncing="false" scroll="false" style="margin-top: 0;padding-top: 0;" ng-class="{ 'lrp-on-mark' : lrpModel.isMenuToggle, 'lrp-menu-icon' : !lrpModel.isMenuToggle }">
+            <ion-list>
+
+                <ion-item nav-clear ng-if="lrpModel.userData.roles === 'admin' && !isOffline" style="padding: 0;" ng-click="menuActivate(0)">
+                    <div class="my-row-center">
+                        <div class="lrp-menu-side-active" ng-class="{ lrpMenuSelected: lrpModel.statePage === 0 }"></div>
+                        <div>
+                            <img src="./img/res/menu_icon00_normal.png" style="width: 48px; height: auto;" title="평가자 관리 메뉴">
+                            <div style="text-align: center;">
+                                <h4 ng-show="!lrpModel.isMenuToggle">평가자</h4>
+                            </div>
+                        </div>
+                        <div class="div-left">평가자</div>
+                    </div>
+                </ion-item>
+                <ion-item nav-clear ng-if="lrpModel.userData.roles !== 'patient' && !isOffline" style="padding: 0;" ng-click="menuActivate(1)">
+                    <div class="my-row-center">
+                        <div class="lrp-menu-side-active" ng-class="{ lrpMenuSelected: lrpModel.statePage === 1 }"></div>
+                        <div>
+                            <img src="./img/res/menu_icon02_normal.png" style="width: 48px; height: auto;" title="환자 관리 메뉴">
+                            <div style="text-align: center;">
+                                <h4 ng-show="!lrpModel.isMenuToggle">환자</h4>
+                            </div>
+                        </div>
+                        <div class="div-left">환자</div>
+                    </div>
+                </ion-item>
+                <ion-item nav-clear ng-if="!isOffline" style="padding: 0;" ng-click="menuActivate(2)">
+                    <div class="my-row-center">
+                        <div class="lrp-menu-side-active" ng-class="{ lrpMenuSelected: lrpModel.statePage === 2 }"></div>
+                        <div>
+                            <img src="./img/res/menu_icon03_normal.png" style="width: 48px; height: auto;" title="단일과제 관리 메뉴">
+                            <div style="text-align: center;">
+                                <h4 ng-show="!lrpModel.isMenuToggle">단일평가</h4>
+                            </div>
+                        </div>
+                        <div class="div-left">단일 평가</div>
+                    </div>
+                </ion-item>
+                <ion-item nav-clear ng-if="!isOffline" style="padding: 0;" ng-click="menuActivate(3)">
+                    <div class="my-row-center">
+                        <div class="lrp-menu-side-active" ng-class="{ lrpMenuSelected: lrpModel.statePage === 3 }"></div>
+                        <div>
+                            <img src="./img/res/menu_icon05_normal.png" style="width: 48px; height: auto;" title="구성 평가 관리 메뉴">
+                            <div style="text-align: center;">
+                                <h4 ng-show="!lrpModel.isMenuToggle">구성평가</h4>
+                            </div>
+                        </div>
+                        <div class="div-left">구성 평가</div>
+                    </div>
+                </ion-item>
+
+                <ion-item nav-clear ng-if="lrpModel.userData.roles === 'admin' && !isOffline" style="padding: 0;" ng-click="menuActivate(4)">
+                    <div class="my-row-center">
+                        <div class="lrp-menu-side-active" ng-class="{ lrpMenuSelected: lrpModel.statePage === 4 }"></div>
+                        <div>
+                            <img src="./img/res/menu_icon04_normal.png" style="width: 48px; height: auto;" title="경과기록지 서식 관리 메뉴">
+                            <div style="text-align: center;">
+                                <h4 ng-show="!lrpModel.isMenuToggle">메모</h4>
+                            </div>
+                        </div>
+                        <div class="div-left">메모 서식</div>
+                    </div>
+                </ion-item>
+
+                <!--ion-item nav-clear ng-if="isOffline" style="padding: 0;" ng-click="menuActivate(5)">
+                    <div class="my-row-center">
+                        <div class="lrp-menu-side-active" ng-class="{ lrpMenuSelected: lrpModel.statePage === 5 }"></div>
+                        <img src="./img/res/menu_icon05_normal.png" style="width: 48px; height: auto;">
+                        <div class="div-left">오프라인 과제</div>
+                    </div>
+                </ion-item-->
+
+            </ion-list>
+
+            <!--ion-item ng-if="lrpModel.userData.roles === 'patient'" style="position: absolute;bottom: 0;width: 250px;margin: 0;padding: 0;">
+                <div class="my-row-center" ng-click="homeworkDownload()">
+                    <div class="lrp-menu-side-active" name="lrpMenuSideActive"></div>
+                    <img ng-if="!onDownLoading" src="./img/res/task_download_icon.png" style="width: 48px; height: auto;">
+
+                    <div ng-if="onDownLoading" style="position: relative; top: 3px; right: 12px; z-index: 11;">
+                        <div style="position: absolute; top: 23px; left: 23px;">{{(progressDownLoad / allDownLoad) * 100 | number : 0}} %</div>
+                        <progress-arc style="margin-left: 1px;"
+                                      size="66"
+                                      stroke="#3080E8"
+                                      stroke-width="10"
+                                      complete="(progressDownLoad / allDownLoad)"
+                                      background="#ddd">
+                        </progress-arc>
+                    </div>
+
+                    <div class="div-left">과제 다운로드</div>
+                </div>
+
+            </ion-item-->
+
+        </ion-content>
+
+    </ion-side-menu>
+
+</ion-side-menus>
+
+<script id="popover-user.html" type="text/ng-template">
+    <ion-popover-view class="lrp-user-popover" ng-click="userPopover.hide()">
+        <div class="list" style="margin-bottom: 0;">
+            <a ng-if="!isOffline" class="item" ng-click="userFormOpenManager(0)">
+                정보수정
+            </a>
+            <a class="item" href="#/app/login">
+                로그아웃
+            </a>
+        </div>
+    </ion-popover-view>
+</script>
+
+<script id="popover-addPop.html" type="text/ng-template">
+    <ion-popover-view class="lrp-list-popover" ng-click="addPopover.hide()">
+        <div class="list" style="margin-bottom: 0;">
+            <a ng-if="lrpModel.statePage === 0" class="item" ng-click="userFormOpenManager(1)">
+                평가자 등록
+            </a>
+            <a ng-if="lrpModel.statePage < 2" class="item" ng-click="userFormOpenManager(2)">
+                환자 등록
+            </a>
+            <a ng-if="lrpModel.userData.roles !== 'patient' && lrpModel.statePage === 3" class="item" ng-click="selectListOpenManager(5)">
+                새 프로토콜 등록
+            </a>
+            <a ng-if="lrpModel.statePage === 4" class="item" ng-click="selectListOpenManager(6)">
+                새 서식 등록
+            </a>
+        </div>
+    </ion-popover-view>
+</script>

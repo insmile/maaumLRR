@@ -1,0 +1,86 @@
+<fieldset>
+    <legend>검사 정보</legend>
+    <fieldset>
+        <div class="form-group">
+            <label class="col-lg-2 control-label">검사 순서</label>
+            <div class="col-lg-10">
+                <input type="number" data-ng-model="task.sortOrder" placeholder="숫자를 입력. 클라이언트 앱의 과제 목록에서 오름차순으로 제공">
+            </div>
+        </div>
+    </fieldset>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">검사 카테고리</label>
+        <div class="col-lg-10">
+            <input type="text" data-ng-model="task.category" id="category" class="form-control" placeholder="Category" required>
+        </div>
+    </div>
+    <fieldset>
+        <div class="form-group">
+            <label class="col-lg-2 control-label">문제 유형</label>
+            <div class="col-lg-10">
+                <select data-ng-model="task.answer" data-ng-options="task.id as task.label for task in answerType" class="form-control">
+                    </select>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <div class="form-group">
+            <label class="col-lg-2 control-label">평가 유형</label>
+            <div class="col-lg-10">
+                <select data-ng-model="task.score_type" data-ng-options="score.id as score.label for score in scoreType" class="form-control">
+                    </select>
+            </div>
+        </div>
+    </fieldset>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">문제 랜덤 제시 (옵션)</label>
+        <div class="col-lg-10">
+            <div class="checkbox c-checkbox">
+                <label>
+                    <input type="checkbox"  data-ng-model="task.isRandom"/>
+                    <span class="fa fa-check"></span>랜덤 제시 (미 클릭 시 순차 제시)
+                </label>
+            </div>
+        </div>
+    </div>
+    <fieldset>
+        <div class="form-group">
+            <label class="col-lg-2 control-label">문제 개수 (옵션)</label>
+            <div class="col-lg-10">
+                <input type="number" data-ng-model="task.numOfProblem">
+            </div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <div class="form-group">
+            <label class="col-lg-2 control-label">총점 (옵션)</label>
+            <div class="col-lg-10">
+                <input type="number" data-ng-model="task.max_score">
+            </div>
+        </div>
+    </fieldset>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">검사명</label>
+        <div class="col-lg-10">
+            <input type="text" data-ng-model="task.name" id="name" class="form-control" placeholder="Name" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">미리보기</label>
+        <div class="col-lg-10">
+            <div ng-file-select ng-model="task.preview_file.files" ng-file-change="upload(task.preview_file)"><span class="btn btn-default btn-info">업로드 파일 선택</span> <span data-ng-show="task.preview_file.progressPercentage">업로드 : {{task.preview_file.progressPercentage}}% </span></div>
+            <div data-ng-show="task.preview"><img ng-src="/uploads/{{task.preview}}" class="img-responsive"></div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">과제 공개 여부</label>
+        <div class="col-lg-10">
+            <div class="checkbox c-checkbox">
+                <label>
+                    <input type="checkbox"  data-ng-model="task.isOpen" checked="" />
+                    <span class="fa fa-check"></span>공개
+                </label>
+            </div>
+        </div>
+    </div>
+</fieldset>

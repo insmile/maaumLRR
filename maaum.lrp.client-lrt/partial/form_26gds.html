@@ -1,0 +1,29 @@
+<ion-header-bar class="bar-stable lrp-bar-top lrp-header-padding lrp-popover-scroll">
+    <div class="div-flex">
+        <h3>전반적 퇴화 척도</h3>
+    </div>
+    <button class="button button-clear icon ion-close" style="color: #ffffff;" ng-click="endExerciseAsk()"></button>
+</ion-header-bar>
+
+<ion-content style="margin: 0px;">
+    <div class="lrp-popover-q-header">
+        <p><label>GDS (Global Deterioration Scale)</label></p>
+        <div class="lrp-popover-q-content">
+            <p><label><input type="checkbox" ng-model="scoreModel.q[0]" ng-true-value={s:1,c:0}> 1. <b>인지 장애 없음</b> : 임상적으로 정상. 주관적으로 기억장애를 호소하지 않음. 임상 면담에서도 기억장애가 나타나지 않음.</label></p>
+            <p><label><input type="checkbox" ng-model="scoreModel.q[0]" ng-true-value={s:2,c:0}> 2. <b>매우 경미한 인지 장애</b> : 건망증의 시기. 주관적으로 다음과 같은 기억장애를 주로 호소함: (1) 물건을 둔 곳을 잊음. (2) 전부터 잘 알고 있던 사람 이름과 물건 이름이 생각나지 않음. 임상 면담에서 기억장애의 객관적인 증거는 없음. 직장이나 사회생활에 문제 없음. 이러한 자신의 증상에 적절한 관심을 보임.</label></p>
+            <p><label><input type="checkbox" ng-model="scoreModel.q[0]" ng-true-value={s:3,c:0}> 3. <b>경미한 인지 장애</b> : 분명한 장애를 보이는 가장 초기 단계. 그러나 숙련된 임상가의 자세한 면담에 의해서만 객관적인 기억장애가 드러남. 새로이 소개받은 사람의 이름을 기억하기 어려울 수 있음. 책을 읽어도 예전에 비하여 기억하는 내용이 적을 수 있음. 단어나 이름이 금방 떠오르지 않는 것을 주위에서 알아차리기도 함. 귀중품을 엉뚱한 곳에 두거나 잃어버린 적이 있을 수 있음. 낯선 곳에서 길을 잃은 적이 있을 수 있음. 임상 검사에서는 집중력의 감퇴가 보일 수 있음. 직업이나 사회생활에서 수행 능력이 감퇴함. 동료가 환자의 일 수행 능력이 떨어짐을 느낌. 환자는 이와 같은 사실을 부인할 수 있음. 경하거나 중등도의 불안증이 동반될 수 있음. 현재 상태로는 더 이상 해결할 수 없는 힘든 사회적 요구에 직면하면 불안증이 증가됨.</label></p>
+            <p><label><input type="checkbox" ng-model="scoreModel.q[0]" ng-true-value={s:4,c:0}> 4. <b>중등도의 인지 장애</b> : 후기 혼동의 시기. 자세한 임상 면담 결과 분명한 인지장애. 다음 영역에서 분명한 장애가 있음 : (1) 자신의 생활의 최근 사건과 최근 시사 문제들을 잘 기억하지 못함. (2) 자신의 중요한 과거사를 잊기도 함. (3) 순차적 빼기 (예: 100-7, 93-7...)에서 집중력 장애가 관찰됨. (4) 혼자서 외출하는 것과 금전 관리에 지장이 있음. 그러나 대개 다음 영역에서는 장애가 없음. (1) 시간이나 사람에 대한 지남력. (2) 잘 아는 사람과 낯선 사람을 구분하는 것 (3) 익숙한 길 다니기. 더 이상 복잡한 일을 효율적이고 정확하게 수행할 수 없음. 자신의 문제를 부정하려고 함. 감정이 무디어지고 도전적인 상황을 피하려고 함.</label></p>
+            <p><label><input type="checkbox" ng-model="scoreModel.q[0]" ng-true-value={s:5,c:0}> 5. <b>초기 중증의 인지 장애</b> : 초기 치매. 다른 사람의 도움 없이는 더 이상 지낼 수 없음. 자신의 현재 일상생활과 관련된 주요한 사항들을 기억하지 못함 (예를 들면, 집 주소나 전화 번호, 손자와 같은 가까운 친지의 이름 또는 자신이 졸업한 학교의 이름을 기억하기 어려움). 시간(날짜, 요일, 계절 등)이나 장소에 대한 지남력이 자주 상실됨. 교육을 받은 사람이 40에서 4씩 또는 20에서 2씩 거꾸로 빼나가는 것을 하지 못하기도 함. 이 단계의 환자들은 대개 자신이나 타인에 관한 주요한 정보는 간직하고 있음. 자신의 이름을 알고 있고 대개 배우자와 자녀의 이름도 알고 있음. 화장실 사용이나 식사에 도움을 필요로 하지는 않으나 적절한 옷을 선택하거나 옷을 입는 데는 문제가 있을 수 있음(예를 들면, 신발의 좌우를 바꾸어 신음)</label></p>
+            <p><label><input type="checkbox" ng-model="scoreModel.q[0]" ng-true-value={s:6,c:0}> 6. <b>중증의 인지 장애</b> : 중기 치매. 환자가 전적으로 의존하고 있는 배우자의 이름을 종종 잊음. 최근의 사건들이나 경험들을 거의 기억하지 못함. 오래된 일은 일부 기억하기도 하나 매우 피상적임. 일반적으로 주변 상황, 년도, 계절을 알지 못함. '1부터 10까지' 또는 거꾸로 '10부터 1까지'를 세는데 어려움이 있을 수 있음. 일상생활에 상당한 도움을 필요로 함(예를 들면, 대소변 실수가 있음). 또한 외출 시 도움이 필요하나 때때로 익숙한 곳에 혼자 가기도 함. 낮과 밤의 리듬이 자주 깨짐</label></p>
+            <p><label><input type="checkbox" ng-model="scoreModel.q[0]" ng-true-value={s:7,c:0}> 7. <b>후기 중증의 인지 장애</b> : 말기 치매. 모든 언어 구사 능력이 상실됨. 흔히 말은 없고 단순히 알아들을 수 없는 소리만 냄. 요실금이 있고 화장실 사용과 식사에도 도움이 필요함. 기본적인 정신 운동 능력이 상실됨 (예를 들면, 걷기). 뇌는 더 이상 신체에 무엇을 하라고 명령하는 것 같지 않음. 전반적인 피질성 또는 국소적 신경학적 징후나 증상들이 자주 나타남.</label></p>
+        </div>
+    </div>
+    <div class="lrp-popover-q-result">
+        단계 : {{scoreModel.q | sumOfValue:'s'}}
+    </div>
+    <div>
+        <button class="button" style="height: 100px; width: 100px;" ng-click="stageNext()">
+            <span>다음</span>
+        </button>
+    </div>
+</ion-content>
