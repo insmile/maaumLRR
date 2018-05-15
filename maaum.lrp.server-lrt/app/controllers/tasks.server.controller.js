@@ -247,7 +247,7 @@ exports.list_a = function(req, res) {
     });
 };
 
-/** free lt ศฦทร  ***/ 
+/** free lt ศฦทร   */
 exports.list_b = function(req, res) {
 
     var query = {};
@@ -260,7 +260,7 @@ exports.list_b = function(req, res) {
             ]
         };
     }
-    query = { type: 'LT' };
+    query = { type: 'LT' }; 
     
     Task.find(query, { _id: 1, category: 1, name: 1 }).sort('sortOrder').exec(function(err, tasks) {
         if (err) {
