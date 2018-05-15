@@ -83,7 +83,19 @@ app.config(function($stateProvider, $urlRouterProvider) {
                 controller: 'Ctrl_Page_Report'
             }
         }
-    });
+    })
+    
+    // add
+    .state('app.subPage', {
+        cache: false,
+        url: "/subPage",
+        views: {
+            'menuContent': {
+                templateUrl: "templates/Include_List_SubPage.html",
+                controller: 'Ctrl_List'
+            }
+        }
+    });    
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/login');
