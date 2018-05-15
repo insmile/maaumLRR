@@ -247,7 +247,7 @@ exports.list_a = function(req, res) {
     });
 };
 
-/** free lt ÈÆ·Ã   */
+/** free lt í›ˆë ¨ */
 exports.list_b = function(req, res) {
 
     var query = {};
@@ -260,7 +260,7 @@ exports.list_b = function(req, res) {
             ]
         };
     }
-    query = { type: 'LT' }; 
+    query = { type: 'LT' };
     
     Task.find(query, { _id: 1, category: 1, name: 1 }).sort('sortOrder').exec(function(err, tasks) {
         if (err) {
@@ -287,7 +287,7 @@ exports.list_b = function(req, res) {
     });
 };
 
-/** free rt ÈÆ·Ã */
+/** free rt í›ˆë ¨ */
 exports.list_c = function(req, res) {
 
     var query = {};
