@@ -5,7 +5,7 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
         $http.defaults.withCredentials = true;
 
         var lrpServer = 'https://lrtadmin.maaum.net/';
-        //var lrpServer = 'http://localhost:4040/';
+        //var lrpServer = 'http://alrt.free:4040/';
         var pageCacheHolder = null;
 
         $scope.$on('$locationChangeSuccess', function() {
@@ -49,6 +49,7 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
                 ]
             },
             {
+                /*
                 baseReload: [
                     { url: 'tasks/list', dataSetter: 'taskList' }
                 ],
@@ -56,8 +57,11 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
                     './templates/Include_List_Individual.html',
                     './templates/Include_List_SelectedIndividual.html'
                 ]
+                */
+                //sub page move
             },
             {
+                /*
                 hasTab: false,
                 baseReload: [
                     { url: 'protocols/', dataSetter: 'protocolList' }
@@ -66,6 +70,15 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
                     './templates/Include_List_Protocol.html',
                     './templates/Include_List_SelectedProtocol.html'
                 ]
+                */
+                hasTab: false,
+                baseReload: [
+                    { url: 'tasks/list', dataSetter: 'taskList' }
+                ],
+                listStatePage: [
+                    './templates/Include_List_Individual.html',
+                    './templates/Include_List_SelectedIndividual.html'
+                ]                
             },
             {
                 hasTab: false,
@@ -84,7 +97,7 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
                     './templates/Include_List_OfflineHomework.html',
                     './templates/Include_List_SelectedResult.html'
                 ]
-            }
+            }            
         ];
 
         var pageBluePrintForTab = {
@@ -99,8 +112,8 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
             tabStatePage: [ // 0 ~ 4 //+ 5(Official)
                 './templates/Include_List_SelectedProgressNote.html',
                 './templates/Include_List_SelectedResult.html',
-                './templates/Include_List_SelectedProtocol.html',
-                './templates/Include_List_SelectedIndividual.html',
+                './templates/Include_List_SelectedIndividual2.html',
+                './templates/Include_List_SelectedIndividual.html',              
                 './templates/Include_List_SelectedProtocol.html'
             ],
             nextTabItemClick: [
@@ -142,6 +155,7 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
                 listState: 0,
                 cacheData: []
             }
+                     
         ];
 
         function setListState(object) {
@@ -172,6 +186,7 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
         }
 
         function callbackChecker(obParam) {
+
             if (obParam === undefined || obParam.callback === undefined || obParam.callback === null) return;
 
             if (obParam.callbackArg === undefined || obParam.callbackArg === null) {
@@ -357,6 +372,7 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
                     ]
                 },
                 {
+                   /*
                     baseReload: [
                         { url: 'tasks/list', dataSetter: 'taskList' }
                     ],
@@ -364,8 +380,11 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
                         './templates/Include_List_Individual.html',
                         './templates/Include_List_SelectedIndividual.html'
                     ]
+                    */
+                    // sub page 
                 },
                 {
+                    /*
                     hasTab: false,
                     baseReload: [
                         { url: 'protocols/', dataSetter: 'protocolList' }
@@ -374,6 +393,14 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
                         './templates/Include_List_Protocol.html',
                         './templates/Include_List_SelectedProtocol.html'
                     ]
+                    */
+                    baseReload: [
+                        { url: 'tasks/list', dataSetter: 'taskList' }
+                    ],
+                    listStatePage: [
+                        './templates/Include_List_Individual.html',
+                        './templates/Include_List_SelectedIndividual.html'
+                    ]                    
                 },
                 {
                     hasTab: false,
@@ -392,9 +419,11 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
                         './templates/Include_List_OfflineHomework.html',
                         './templates/Include_List_SelectedResult.html'
                     ]
-                }
+                }              
+                
             ];
-
+            
+            //add 주석추가  환자일 경우 
             if ($scope.lrpModel.userData !== null && $scope.lrpModel.userData.roles === 'patient') {
                 pageBluePrint[3] = {
                     hasTab: false,
@@ -412,7 +441,7 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
 
         //for $http - 이것도 다 합쳐야 되는데...
         $scope.loadDataGet = function(obParam) {
-            //console.log(obParam);
+            console.log(lrpServer + obParam.url);
 
             $http.get(lrpServer + obParam.url).
             success(function(data) {
@@ -452,16 +481,61 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
         };
 
         //for List
-        $scope.menuActivate = function(arg) {
-            if (arg < 0 || arg >= pageBluePrint.length) {
-                $state.transitionTo('app.login');
-                return;
+        $scope.menuActivate = function(arg, arg2) {
+            
+            console.log("[statePage  >> ]" + $scope.lrpModel.statePage);
+            console.log("[statePage bool >> ]" + arg2);
+            
+            if ( arg2 === null || arg2 === undefined) arg2 = 'N';
+            
+            if ( arg2 === 'N'  ) {
+                if (arg < 0 || arg >= pageBluePrint.length) {
+                    $state.transitionTo('app.login');
+                    return;
+                }
             }
 
             var i;
 
             $scope.lrpModel.statePage = arg;
 
+            //add subpage 이동
+            if ( $scope.lrpModel.statePage === 2 && arg2 === 'N' )  {
+                hasTab: false;
+                $state.transitionTo('app.subPage');
+                return;
+            }
+            
+            //add LT 추가 
+            if ( $scope.lrpModel.statePage === 2 && arg2 == 'LT' )  {
+                $scope.lrpModel.pageTag[2] = '기능훈련';
+                pageBluePrint[2] = {
+                    //hasTab: false,
+                    baseReload: [
+                        { url: 'tasks/list1', dataSetter: 'taskList' }
+                    ],
+                    listStatePage: [
+                        './templates/Include_List_Individual2.html',
+                        './templates/Include_List_SelectedIndividual2.html'
+                    ]
+                };                
+            } 
+            //add RT 
+            else if ( $scope.lrpModel.statePage === 2 && arg2 == 'RT' )  {
+                $scope.lrpModel.pageTag[2] = '기능훈련';
+                pageBluePrint[2] = {
+                    //hasTab: false,
+                    baseReload: [
+                        { url: 'tasks/list2', dataSetter: 'taskList' }
+                    ],
+                    listStatePage: [
+                        './templates/Include_List_Individual2.html',
+                        './templates/Include_List_SelectedIndividual2.html'
+                    ] 
+                };               
+            }
+                        
+                                    
             if ($scope.lrpModel.statePage === 5) {
                 $scope.isOffline = true;
 
@@ -517,10 +591,15 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
 
                     $scope.lrpModel.listPageHolder[pageBluePrint[$scope.lrpModel.statePage].listStatePage.length] = pageBluePrintForTab.tabStatePage[pageCacheHolder.hiddenTabState];
                 }
-
+                
                 $scope.lrpModel.setNum = pageCacheHolder.setNum;
             }
-
+            
+            for (i = 0; i < pageBluePrint[arg].listStatePage.length; i++) {
+                console.log("pageCacheHolder >> " + $scope.lrpModel.listPageHolder[i]);
+            }
+            
+            console.log("pageBluePrint >> " + $scope.lrpModel.statePage);
             setListState(pageCacheHolder);
 
             $state.transitionTo('app.list');
@@ -941,6 +1020,7 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
 
             $scope.lrpModel.setNum = 1;
 
+/*
             if ($scope.lrpModel.statePage === 2) {
                 vParam.callback = setListState;
                 vParam.callbackArg = { listState: 1 };
@@ -952,10 +1032,51 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
                 $scope.selectListPopover.hide();
                 return;
             }
+*/            
+            /** free 메뉴위치 조정 */
+            if ($scope.lrpModel.statePage === 3) {
+                vParam.callback = setListState;
+                vParam.callbackArg = { listState: 1 };
 
+                setChacheData(1, vParam);
+            } else if ($scope.lrpModel.statePage === 0 || $scope.lrpModel.statePage === 1) {
+                $scope.selectTabItem(task, 3);
+                $scope.lrpModel.setDelay = 7;
+                $scope.selectListPopover.hide();
+                return;
+            }
+            
+            console.log("vParam => "+ vParam);
             $scope.loadDataGet(vParam);
         };
 
+        /** free 훈련메뉴추가 */
+        $scope.selectIndividualTask2 = function(task) {
+            var vParam = {
+                url: 'tasks/' + task._id,
+                dataSetter: 'selectedTask'
+            };
+
+            $scope.lrpModel.selectedHomework = null;
+
+            $scope.lrpModel.setNum = 1;
+
+            if ($scope.lrpModel.statePage === 2) {
+                vParam.callback = setListState;
+                vParam.callbackArg = { listState: 1 };
+
+                setChacheData(1, vParam);
+            } else if ($scope.lrpModel.statePage === 0 || $scope.lrpModel.statePage === 1) {
+                $scope.selectTabItem(task, 3);
+                $scope.lrpModel.setDelay = 7;
+                $scope.selectListPopover.hide();
+                return;
+            }
+            
+            console.log("vParam => "+ vParam);
+            $scope.loadDataGet(vParam);
+        };
+        
         $scope.setDown = function(obj) {
             if (obj === undefined) obj = $scope.lrpModel;
 
