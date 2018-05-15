@@ -7,7 +7,7 @@
     </div-->
 </ion-header-bar>
 
-<ion-content class="lrp-header-bottomless" scroll="false" style="background-color: #f0f0f0;">
+<ion-content class="lrp-header-bottomless" scroll="true" style="background-color: #f0f0f0;">
     <div class="" style="height: auto; margin-top: 1px;">
         <div class="">
             <ion-item ng-if="lrpModel.selectedResult.tasks.length > 1" style="padding: 10px;">
@@ -105,9 +105,11 @@
                 </canvas>
                 </div>
             </ion-item>
-            <div style="height:10vh; padding: 10px;">
-                <div ng-if="scoringFlag == false && customFlag == false">
-                    <div ng-if="lrpModel.selectedResult.isChecked" style="display: table;text-align:center;border: solid;overflow: hidden;width: 90%;margin-left: 14px;">
+            
+            <div ng-if="scoringFlag == false && customFlag == false">
+                <div ng-if="lrpModel.selectedResult.isChecked" style="display: table;text-align:center;border: solid;overflow: hidden;width: 90%;margin-left: 14px;">
+                    <div style="height:10vh; padding: 10px;">
+                    
                         <div style="display: table-row">
                             <div style="display: table-cell;vertical-align: middle; background-color: #11c1f3;width: 12%;">
                                 <div style="height: 24px;">
@@ -150,8 +152,8 @@
                     <span>결과 기록지</span>
                 </button>
             </ion-item>
-
+            
         </div>
     </div>
-
 </ion-content>
+<div style="padding: 0 0 0 10px;"></div>
