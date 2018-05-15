@@ -68,7 +68,8 @@ button.ripple:focus:not(:active)::after {
 .category {
     padding: 2vh;
     text-align: center;
-    background-image: linear-gradient(to bottom, #E45E5D 10%, darkred 100%);
+    /* background-image: linear-gradient(to bottom, #E45E5D 10%, darkred 100%);*/
+    background-color: #D0E8FF;
 }
 
 .categorytext {
@@ -94,9 +95,10 @@ button.ripple:focus:not(:active)::after {
     border-width: thick;
     border-style: solid;
 }
-
+/** free */
 .item-divider {
-    background-color: #eaf0f4;
+    /*background-color: #eaf0f4;*/
+    background-color: #97CBFF
 }
 
 .item-divider .button {
@@ -459,12 +461,13 @@ h3,
     height: 100%;
     width: 40%;
 }
-
+/** free */
 .lrp-popover-scoring {
     margin: 5%;
     height: 100%;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.5);
+    /*background-color: rgba(255, 255, 255, 0.5);*/
+    background-color: #7BBEFF
     /* Color white with alpha 0.9*/
 }
 
@@ -521,8 +524,9 @@ h3,
     background-color: #f4ffff;
 }
 
+/* free */
 .lrp-bar-top {
-    background-color: #8B0029 !important;
+    background-color: #7BBEFF !important;
     /*#1d68a7 !important;*/
     color: #8B0029 !important;
 }
@@ -560,16 +564,19 @@ h3,
     background-color: #FFFFFF !important;
 }
 
+
+/* free */
 .lrp-tabs {
-    background-color: #8B0029 !important;
+    background-color: #31CF5A !important;
 }
 
+/* free */
 .lrp-button {
-    background-color: #8B0029 !important;
+    background-color: #7BBEFF !important;
 }
 
 .selectedButton {
-    background-color: #8B0029 !important;
+    background-color: #7BBEFF !important;
 }
 
 
@@ -721,9 +728,10 @@ h3,
 .lrpImgCorrected {
     border: 5px solid red !important;
 }
-
+/** free */
 .lrpListSelected {
-    background-color: #8B0029 !important;
+    /*background-color: #8B0029 !important;*/
+    background-color: #7BBEFF !important;
 }
 
 .lrpListSelected h2 {
@@ -767,4 +775,31 @@ page {
     .lrp-bar-top {
         display: none;
     }
+}
+
+/** free */
+#con_lf {
+    display: inline-block;
+    width: 730px;
+    float: left;
+    margin-right: 20px;
+    position: relative;
+    clear: both;
+}
+#con_lf .new_con_cm {
+    width: 730px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}    
+.sv_wr {
+    text-align: center;
+    background: #ffffff;
+    padding: 15px 0 30px 0;
+}    
+
+.sv_pg {
+    display: inline-block;
+    zoom: 1;
+    _display: inline;
+    cursor:pointer;
 }
