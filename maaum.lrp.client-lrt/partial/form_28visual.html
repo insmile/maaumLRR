@@ -1,0 +1,65 @@
+<style>
+    .e-box {
+        height: 75vh;
+        float: left;
+        top: 15vh;
+        margin-left: 30vw;
+        width: 10vw;
+    }
+    
+    .e-box2 {
+        height: 75vh;
+        float: left;
+        top: 15vh;
+        margin-left: 5vw;
+        width: 20vw;
+    }
+    
+    .e-elem {
+        height: 17%;
+        margin: 2%;
+        text-align: center;
+    }
+    
+    .e-img {
+        height: 100%;
+    }
+    
+    .b-elem {
+        height: 9%;
+        margin: 1%;
+        text-align: center;
+    }
+</style>
+
+<ion-header-bar class="bar-stable lrp-bar-top lrp-header-padding lrp-popover-scroll">
+    <div class="div-flex">
+        <h3>Visual Depression Scale</h3>
+    </div>
+    <button class="button button-clear icon ion-close" style="color: #ffffff;" ng-click="endExerciseAsk()"></button>
+</ion-header-bar>
+
+<ion-content style="margin: 0px;">
+    <div class="e-box">
+        <div class="e-elem"><img class='e-img' src='/img/partial/28_vis_1.png'></div>
+        <div class="e-elem"><img class='e-img' src='/img/partial/28_vis_2.png'></div>
+        <div class="e-elem"><img class='e-img' src='/img/partial/28_vis_3.png'></div>
+        <div class="e-elem"><img class='e-img' src='/img/partial/28_vis_4.png'></div>
+        <div class="e-elem"><img class='e-img' src='/img/partial/28_vis_5.png'></div>
+        <div class="e-elem"><img class='e-img' src='/img/partial/28_vis_6.png'></div>
+    </div>
+
+    <div class="e-box2">
+        <div class="b-elem"><button class="button" ng-class="{selectedButton:lrpModel.selectedResult.tasks[lrpModel.taskPivot].totalScore == '0'}" style="height: 100%; width: 100%;" ng-click="stageNextForm('0')"><span>0</span></button></div>
+        <div class="b-elem"><button class="button" ng-class="{selectedButton:lrpModel.selectedResult.tasks[lrpModel.taskPivot].totalScore == '1'}" style="height: 100%; width: 100%;" ng-click="stageNextForm('1')"><span>1</span></button></div>
+        <div class="b-elem"><button class="button" ng-class="{selectedButton:lrpModel.selectedResult.tasks[lrpModel.taskPivot].totalScore == '2'}" style="height: 100%; width: 100%;" ng-click="stageNextForm('2')"><span>2</span></button></div>
+        <div class="b-elem"><button class="button" ng-class="{selectedButton:lrpModel.selectedResult.tasks[lrpModel.taskPivot].totalScore == '3'}" style="height: 100%; width: 100%;" ng-click="stageNextForm('3')"><span>3</span></button></div>
+        <div class="b-elem"><button class="button" ng-class="{selectedButton:lrpModel.selectedResult.tasks[lrpModel.taskPivot].totalScore == '4'}" style="height: 100%; width: 100%;" ng-click="stageNextForm('4')"><span>4</span></button></div>
+        <div class="b-elem"><button class="button" ng-class="{selectedButton:lrpModel.selectedResult.tasks[lrpModel.taskPivot].totalScore == '5'}" style="height: 100%; width: 100%;" ng-click="stageNextForm('5')"><span>5</span></button></div>
+        <div class="b-elem"><button class="button" ng-class="{selectedButton:lrpModel.selectedResult.tasks[lrpModel.taskPivot].totalScore == '6'}" style="height: 100%; width: 100%;" ng-click="stageNextForm('6')"><span>6</span></button></div>
+        <div class="b-elem"><button class="button" ng-class="{selectedButton:lrpModel.selectedResult.tasks[lrpModel.taskPivot].totalScore == '7'}" style="height: 100%; width: 100%;" ng-click="stageNextForm('7')"><span>7</span></button></div>
+        <div class="b-elem"><button class="button" ng-class="{selectedButton:lrpModel.selectedResult.tasks[lrpModel.taskPivot].totalScore == '8'}" style="height: 100%; width: 100%;" ng-click="stageNextForm('8')"><span>8</span></button></div>
+        <div class="b-elem"><button class="button" ng-class="{selectedButton:lrpModel.selectedResult.tasks[lrpModel.taskPivot].totalScore == '9'}" style="height: 100%; width: 100%;" ng-click="stageNextForm('9')"><span>9</span></button></div>
+        <div class="b-elem"><button class="button" ng-class="{selectedButton:lrpModel.selectedResult.tasks[lrpModel.taskPivot].totalScore == '10'}" style="height: 100%; width: 100%;" ng-click="stageNextForm('10')"><span>10</span></button></div>
+    </div>
+</ion-content>

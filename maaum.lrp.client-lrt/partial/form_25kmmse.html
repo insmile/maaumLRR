@@ -1,0 +1,102 @@
+<ion-header-bar class="bar-stable lrp-bar-top lrp-header-padding lrp-popover-scroll">
+    <div class="div-flex">
+        <h3>K-MMSE (Korean version of Mini-Mental State Exam)</h3>
+    </div>
+    <button class="button button-clear icon ion-close" style="color: #ffffff;" ng-click="endExerciseAsk()"></button>
+</ion-header-bar>
+
+<ion-content style="margin: 0px;">
+    <div class="lrp-popover-q-header">
+        <p><label>지남력 - 시간 (5점)</label></p>
+        <div class="lrp-popover-q-content">
+            <p><label>년</label> : <label><input type="checkbox" ng-model="scoreModel.q[0]" ng-true-value={s:0,c:0}> 0 </label> / <label><input type="checkbox" ng-model="scoreModel.q[0]" ng-true-value={s:1,c:0}> 1 </label></p>
+            <p><label>월</label> : <label><input type="checkbox" ng-model="scoreModel.q[1]" ng-true-value={s:0,c:0}> 0 </label> / <label><input type="checkbox" ng-model="scoreModel.q[1]" ng-true-value={s:1,c:0}> 1 </label></p>
+            <p><label>일</label> : <label><input type="checkbox" ng-model="scoreModel.q[2]" ng-true-value={s:0,c:0}> 0 </label> / <label><input type="checkbox" ng-model="scoreModel.q[2]" ng-true-value={s:1,c:0}> 1 </label></p>
+            <p><label>요일</label> : <label><input type="checkbox" ng-model="scoreModel.q[3]" ng-true-value={s:0,c:0}> 0 </label> / <label><input type="checkbox" ng-model="scoreModel.q[3]" ng-true-value={s:1,c:0}> 1 </label></p>
+            <p><label>계절</label> : <label><input type="checkbox" ng-model="scoreModel.q[4]" ng-true-value={s:0,c:0}> 0 </label> / <label><input type="checkbox" ng-model="scoreModel.q[4]" ng-true-value={s:1,c:0}> 1 </label></p>
+        </div>
+    </div>
+    <div class="lrp-popover-q-header">
+        <p><label>지남력 - 장소 (5점)</label></p>
+        <div class="lrp-popover-q-content">
+            <p><label>나라</label> : <label><input type="checkbox" ng-model="scoreModel.q[5]" ng-true-value={s:0,c:0}> 0 </label> / <label><input type="checkbox" ng-model="scoreModel.q[5]" ng-true-value={s:1,c:0}> 1 </label></p>
+            <p><label>시/도</label> : <label><input type="checkbox" ng-model="scoreModel.q[6]" ng-true-value={s:0,c:0}> 0 </label> / <label><input type="checkbox" ng-model="scoreModel.q[6]" ng-true-value={s:1,c:0}> 1 </label></p>
+            <p><label>무엇하는곳</label> : <label><input type="checkbox" ng-model="scoreModel.q[7]" ng-true-value={s:0,c:0}> 0 </label> / <label><input type="checkbox" ng-model="scoreModel.q[7]" ng-true-value={s:1,c:0}> 1 </label></p>
+            <p><label>현재장소명</label> : <label><input type="checkbox" ng-model="scoreModel.q[8]" ng-true-value={s:0,c:0}> 0 </label> / <label><input type="checkbox" ng-model="scoreModel.q[8]" ng-true-value={s:1,c:0}> 1 </label></p>
+            <p><label>몇층</label> : <label><input type="checkbox" ng-model="scoreModel.q[9]" ng-true-value={s:0,c:0}> 0 </label> / <label><input type="checkbox" ng-model="scoreModel.q[9]" ng-true-value={s:1,c:0}> 1 </label></p>
+        </div>
+    </div>
+    <div class="lrp-popover-q-header">
+        <p><label>기억등록 (3점)</label></p>
+        <div class="lrp-popover-q-content">
+            <p><label>비행기</label> : <label><input type="checkbox" ng-model="scoreModel.q[10]" ng-true-value={s:0,c:0}> 0 </label> / <label><input type="checkbox" ng-model="scoreModel.q[10]" ng-true-value={s:1,c:0}> 1 </label></p>
+            <p><label>연필</label> : <label><input type="checkbox" ng-model="scoreModel.q[11]" ng-true-value={s:0,c:0}> 0 </label> / <label><input type="checkbox" ng-model="scoreModel.q[11]" ng-true-value={s:1,c:0}> 1 </label></p>
+            <p><label>소나무</label> : <label><input type="checkbox" ng-model="scoreModel.q[12]" ng-true-value={s:0,c:0}> 0 </label> / <label><input type="checkbox" ng-model="scoreModel.q[12]" ng-true-value={s:1,c:0}> 1 </label></p>
+        </div>
+    </div>
+    <div class="lrp-popover-q-header">
+        <p><label>주의집중 및 계산 (5점)</label></p>
+        <div class="lrp-popover-q-content">
+            <p><label>100-7</label> : <label><input type="checkbox" ng-model="scoreModel.q[13]" ng-true-value={s:0,c:0}> 0 </label> / <label><input type="checkbox" ng-model="scoreModel.q[13]" ng-true-value={s:1,c:0}> 1 </label></p>
+            <p><label>&nbsp;&nbsp;&nbsp;-7</label> : <label><input type="checkbox" ng-model="scoreModel.q[14]" ng-true-value={s:0,c:0}> 0 </label> / <label><input type="checkbox" ng-model="scoreModel.q[14]" ng-true-value={s:1,c:0}> 1 </label></p>
+            <p><label>&nbsp;&nbsp;&nbsp;-7</label> : <label><input type="checkbox" ng-model="scoreModel.q[15]" ng-true-value={s:0,c:0}> 0 </label> / <label><input type="checkbox" ng-model="scoreModel.q[15]" ng-true-value={s:1,c:0}> 1 </label></p>
+            <p><label>&nbsp;&nbsp;&nbsp;-7</label> : <label><input type="checkbox" ng-model="scoreModel.q[16]" ng-true-value={s:0,c:0}> 0 </label> / <label><input type="checkbox" ng-model="scoreModel.q[16]" ng-true-value={s:1,c:0}> 1 </label></p>
+            <p><label>&nbsp;&nbsp;&nbsp;-7</label> : <label><input type="checkbox" ng-model="scoreModel.q[17]" ng-true-value={s:0,c:0}> 0 </label> / <label><input type="checkbox" ng-model="scoreModel.q[17]" ng-true-value={s:1,c:0}> 1 </label></p>
+        </div>
+    </div>
+    <div class="lrp-popover-q-header">
+        <p><label>기억회상 (3점)</label></p>
+        <div class="lrp-popover-q-content">
+            <p><label>비행기</label> : <label><input type="checkbox" ng-model="scoreModel.q[18]" ng-true-value={s:0,c:0}> 0 </label> / <label><input type="checkbox" ng-model="scoreModel.q[18]" ng-true-value={s:1,c:0}> 1 </label></p>
+            <p><label>연필</label> : <label><input type="checkbox" ng-model="scoreModel.q[19]" ng-true-value={s:0,c:0}> 0 </label> / <label><input type="checkbox" ng-model="scoreModel.q[19]" ng-true-value={s:1,c:0}> 1 </label></p>
+            <p><label>소나무</label> : <label><input type="checkbox" ng-model="scoreModel.q[20]" ng-true-value={s:0,c:0}> 0 </label> / <label><input type="checkbox" ng-model="scoreModel.q[20]" ng-true-value={s:1,c:0}> 1 </label></p>
+        </div>
+    </div>
+    <div class="lrp-popover-q-header">
+        <p><label>언어 및 시공간 구성 - 이름대기 (2점)</label></p>
+        <div class="lrp-popover-q-content">
+            <p><label>시계</label> : <label><input type="checkbox" ng-model="scoreModel.q[21]" ng-true-value={s:0,c:0}> 0 </label> / <label><input type="checkbox" ng-model="scoreModel.q[21]" ng-true-value={s:1,c:0}> 1 </label></p>
+            <p><label>볼펜</label> : <label><input type="checkbox" ng-model="scoreModel.q[22]" ng-true-value={s:0,c:0}> 0 </label> / <label><input type="checkbox" ng-model="scoreModel.q[22]" ng-true-value={s:1,c:0}> 1 </label></p>
+        </div>
+    </div>
+    <div class="lrp-popover-q-header">
+        <p><label>언어 및 시공간 구성 - 명령시행 (3점)</label></p>
+        <div class="lrp-popover-q-content">
+            <p><label>종이를 뒤집고</label> : <label><input type="checkbox" ng-model="scoreModel.q[23]" ng-true-value={s:0,c:0}> 0 </label> / <label><input type="checkbox" ng-model="scoreModel.q[23]" ng-true-value={s:1,c:0}> 1 </label></p>
+            <p><label>반으로 접은다음</label> : <label><input type="checkbox" ng-model="scoreModel.q[24]" ng-true-value={s:0,c:0}> 0 </label> / <label><input type="checkbox" ng-model="scoreModel.q[24]" ng-true-value={s:1,c:0}> 1 </label></p>
+            <p><label>저에게 주세요</label> : <label><input type="checkbox" ng-model="scoreModel.q[25]" ng-true-value={s:0,c:0}> 0 </label> / <label><input type="checkbox" ng-model="scoreModel.q[25]" ng-true-value={s:1,c:0}> 1 </label></p>
+        </div>
+    </div>
+    <div class="lrp-popover-q-header">
+        <p><label>언어 및 시공간 구성 - 따라말하기 (1점)</label></p>
+        <div class="lrp-popover-q-content">
+            <p><label>백문이 불여일견</label> : <label><input type="checkbox" ng-model="scoreModel.q[26]" ng-true-value={s:0,c:0}> 0 </label> / <label><input type="checkbox" ng-model="scoreModel.q[26]" ng-true-value={s:1,c:0}> 1 </label></p>
+        </div>
+    </div>
+    <div class="lrp-popover-q-header">
+        <p><label>언어 및 시공간 구성 - 오각형 (1점)</label></p>
+        <div class="lrp-popover-q-content">
+            <p><label><img src='/img/partial/form_25kmmse_res1.PNG'></label> : <label><input type="checkbox" ng-model="scoreModel.q[27]" ng-true-value={s:0,c:0}> 0 </label> / <label><input type="checkbox" ng-model="scoreModel.q[27]" ng-true-value={s:1,c:0}> 1 </label></p>
+        </div>
+    </div>
+    <div class="lrp-popover-q-header">
+        <p><label>언어 및 시공간 구성 - 읽기 (1점)</label></p>
+        <div class="lrp-popover-q-content">
+            <p><label style="font-size: 80px;">눈을 감으세요</label> : <label><input type="checkbox" ng-model="scoreModel.q[28]" ng-true-value={s:0,c:0}> 0 </label> / <label><input type="checkbox" ng-model="scoreModel.q[28]" ng-true-value={s:1,c:0}> 1 </label></p>
+        </div>
+    </div>
+    <div class="lrp-popover-q-header">
+        <p><label>언어 및 시공간 구성 - 쓰기 (1점)</label></p>
+        <div class="lrp-popover-q-content">
+            <p><label></label> : <label><input type="checkbox" ng-model="scoreModel.q[29]" ng-true-value={s:0,c:0}> 0 </label> / <label><input type="checkbox" ng-model="scoreModel.q[29]" ng-true-value={s:1,c:0}> 1 </label></p>
+        </div>
+    </div>
+    <div class="lrp-popover-q-result">
+        총점 : {{scoreModel.q | sumOfValue:'s'}}
+    </div>
+    <div>
+        <button class="button" style="height: 100px; width: 100px;" ng-click="stageNext()">
+            <span>다음</span>
+        </button>
+    </div>
+</ion-content>

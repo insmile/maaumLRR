@@ -1,0 +1,70 @@
+<fieldset>
+    <legend>상품 추가</legend>
+    <div class="form-group" ng-hide="centers">
+        <label class="col-lg-2 control-label">기관 명</label>
+        <div class="col-lg-10">
+            <span class="form-control">{{center_name}}</span>
+        </div>
+    </div>
+    <div class="form-group" ng-show="centers">
+        <label class="col-lg-2 control-label">기관 명</label>
+        <div class="col-lg-10">
+            <select ng-disabled="pay.approved" type="text" data-ng-model="pay.center" class="form-control" required>
+                <option value="">기관을 선택해 주십시오.</option>
+                <option ng-repeat="center in centers" value="{{center._id}}">{{center.name}}</option>
+            </select>
+        </div>
+    </div>
+</fieldset>
+<fieldset>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">결재 상품</label>
+        <div class="col-lg-10">
+            <select ng-disabled="pay.approved" type="text" data-ng-model="pay.product" class="form-control" required>
+                <option value="">결재 상품을 선택해 주십시오.</option>
+                <option ng-repeat="product in products" value="{{product._id}}">{{product.name}}</option>
+            </select>
+        </div>
+    </div>
+</fieldset>
+<fieldset ng-show="selectedProduct">
+    <div class="form-group">
+        <label class="col-lg-2 control-label">상품명</label>
+        <div class="col-lg-10">
+            <span class="form-control">{{selectedProduct.name}}</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">가격</label>
+        <div class="col-lg-10">
+            <span class="form-control">{{selectedProduct.price}}원</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">사용 가능 환자 수</label>
+        <div class="col-lg-10">
+            <span class="form-control">{{selectedProduct.keys}}명</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">지속일</label>
+        <div class="col-lg-10">
+            <span class="form-control">{{selectedProduct.period}}일</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">입금계좌</label>
+        <div class="col-lg-10">
+            <span class="form-control">##은행 ### (예금주) 계좌로 {{selectedProduct.price}}원 입금 후 ###으로 연락 바랍니다.</span>
+        </div>
+    </div>
+</fieldset>
+<fieldset>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">상품 시작일</label>
+        <div class="col-lg-10">
+            <input ng-disabled="pay.approved" type="text" data-ng-model="pay.start_date" placeholder="start_date" class="form-control" required />
+            <datepicker ng-disabled="pay.approved" data-ng-model="pay.start_date" min-date="minDate" show-weeks="false" class="well well-sm"></datepicker>
+        </div>
+    </div>
+</fieldset>

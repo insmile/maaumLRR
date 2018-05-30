@@ -1,0 +1,201 @@
+<ion-popover-view class="lrp-popover-view">
+
+    <ion-header-bar class="bar-stable lrp-bar-top lrp-header-padding lrp-popover-scroll">
+        <div class="div-flex">
+            <h3>Ray 복합도형 따라그리기 채점표</h3>
+        </div>
+        <button class="button button-clear icon ion-checkmark-round" style="color: #ffffff;" ng-click="saveScoring()"></button>
+    </ion-header-bar>
+
+    <ion-content style="margin: 0px;">
+        <div class="lrp-popover-q-header">
+            <p><img src='/img/partial/02_ray_min.png' width="100%"></p>
+            <p><label>1. Vertical cross: 0-2점 ({{scoreModel.q[0].s}})</label></p>
+            <div class="lrp-popover-q-content">
+                <p><label><input type="checkbox" ng-model="scoreModel.q[0]" ng-true-value={s:2,c:0}> 2</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[0]" ng-true-value={s:1.5,c:0}> 1.5</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[0]" ng-true-value={s:1,c:0}> 1</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[0]" ng-true-value={s:0.5,c:0}> 0.5</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[0]" ng-true-value={s:0,c:0}> 0</label></p>
+            </div>
+        </div>
+        <div class="lrp-popover-q-header">
+            <p><label>2. Large rectangle: 0-2점 ({{scoreModel.q[1].s}})</label></p>
+            <div class="lrp-popover-q-content">
+                <p><label><input type="checkbox" ng-model="scoreModel.q[1]" ng-true-value={s:2,c:0}> 2</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[1]" ng-true-value={s:1.5,c:0}> 1.5</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[1]" ng-true-value={s:1,c:0}> 1</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[1]" ng-true-value={s:0.5,c:0}> 0.5</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[1]" ng-true-value={s:0,c:0}> 0</label></p>
+            </div>
+        </div>
+        <div class="lrp-popover-q-header">
+            <p><label>3. Diagonal cross: 0-2점 ({{scoreModel.q[2].s}})</label></p>
+            <div class="lrp-popover-q-content">
+                <p><label><input type="checkbox" ng-model="scoreModel.q[2]" ng-true-value={s:2,c:0}> 2</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[2]" ng-true-value={s:1.5,c:0}> 1.5</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[2]" ng-true-value={s:1,c:0}> 1</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[2]" ng-true-value={s:0.5,c:0}> 0.5</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[2]" ng-true-value={s:0,c:0}> 0</label></p>
+            </div>
+        </div>
+        <div class="lrp-popover-q-header">
+            <p><label>4. Horizontal midline of large rectangle (2): 0-2점 ({{scoreModel.q[3].s}})</label></p>
+            <div class="lrp-popover-q-content">
+                <p><label><input type="checkbox" ng-model="scoreModel.q[3]" ng-true-value={s:2,c:0}> 2</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[3]" ng-true-value={s:1.5,c:0}> 1.5</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[3]" ng-true-value={s:1,c:0}> 1</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[3]" ng-true-value={s:0.5,c:0}> 0.5</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[3]" ng-true-value={s:0,c:0}> 0</label></p>
+            </div>
+        </div>
+        <div class="lrp-popover-q-header">
+            <p><img src='/img/partial/02_ray_min.png' width="100%"></p>
+            <p><label>5. Vertical midline of large rectangle (2): 0-2점 ({{scoreModel.q[4].s}})</label></p>
+            <div class="lrp-popover-q-content">
+                <p><label><input type="checkbox" ng-model="scoreModel.q[4]" ng-true-value={s:2,c:0}> 2</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[4]" ng-true-value={s:1.5,c:0}> 1.5</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[4]" ng-true-value={s:1,c:0}> 1</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[4]" ng-true-value={s:0.5,c:0}> 0.5</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[4]" ng-true-value={s:0,c:0}> 0</label></p>
+            </div>
+        </div>
+        <div class="lrp-popover-q-header">
+            <p><label>6. Small rectangle: 0-2점 ({{scoreModel.q[5].s}})</label></p>
+            <div class="lrp-popover-q-content">
+                <p><label><input type="checkbox" ng-model="scoreModel.q[5]" ng-true-value={s:2,c:0}> 2</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[5]" ng-true-value={s:1.5,c:0}> 1.5</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[5]" ng-true-value={s:1,c:0}> 1</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[5]" ng-true-value={s:0.5,c:0}> 0.5</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[5]" ng-true-value={s:0,c:0}> 0</label></p>
+            </div>
+        </div>
+        <div class="lrp-popover-q-header">
+            <p><label>7. Small horizontal line above small rectangle (6): 0-2점 ({{scoreModel.q[6].s}})</label></p>
+            <div class="lrp-popover-q-content">
+                <p><label><input type="checkbox" ng-model="scoreModel.q[6]" ng-true-value={s:2,c:0}> 2</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[6]" ng-true-value={s:1.5,c:0}> 1.5</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[6]" ng-true-value={s:1,c:0}> 1</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[6]" ng-true-value={s:0.5,c:0}> 0.5</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[6]" ng-true-value={s:0,c:0}> 0</label></p>
+            </div>
+        </div>
+        <div class="lrp-popover-q-header">
+            <p><label>8. Four parallel lines: 0-2점 ({{scoreModel.q[7].s}})</label></p>
+            <div class="lrp-popover-q-content">
+                <p><label><input type="checkbox" ng-model="scoreModel.q[7]" ng-true-value={s:2,c:0}> 2</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[7]" ng-true-value={s:1.5,c:0}> 1.5</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[7]" ng-true-value={s:1,c:0}> 1</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[7]" ng-true-value={s:0.5,c:0}> 0.5</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[7]" ng-true-value={s:0,c:0}> 0</label></p>
+            </div>
+        </div>
+        <div class="lrp-popover-q-header">
+            <p><img src='/img/partial/02_ray_min.png' width="100%"></p>
+            <p><label>9. Small triangle above large rectangle (2): 0-2점 ({{scoreModel.q[8].s}})</label></p>
+            <div class="lrp-popover-q-content">
+                <p><label><input type="checkbox" ng-model="scoreModel.q[8]" ng-true-value={s:2,c:0}> 2</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[8]" ng-true-value={s:1.5,c:0}> 1.5</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[8]" ng-true-value={s:1,c:0}> 1</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[8]" ng-true-value={s:0.5,c:0}> 0.5</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[8]" ng-true-value={s:0,c:0}> 0</label></p>
+            </div>
+        </div>
+        <div class="lrp-popover-q-header">
+            <p><label>10. Small vertical line within large rectangle (2): 0-2점 ({{scoreModel.q[9].s}})</label></p>
+            <div class="lrp-popover-q-content">
+                <p><label><input type="checkbox" ng-model="scoreModel.q[9]" ng-true-value={s:2,c:0}> 2</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[9]" ng-true-value={s:1.5,c:0}> 1.5</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[9]" ng-true-value={s:1,c:0}> 1</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[9]" ng-true-value={s:0.5,c:0}> 0.5</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[9]" ng-true-value={s:0,c:0}> 0</label></p>
+            </div>
+        </div>
+        <div class="lrp-popover-q-header">
+            <p><label>11. Circle with these dots: 0-2점 ({{scoreModel.q[10].s}})</label></p>
+            <div class="lrp-popover-q-content">
+                <p><label><input type="checkbox" ng-model="scoreModel.q[10]" ng-true-value={s:2,c:0}> 2</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[10]" ng-true-value={s:1.5,c:0}> 1.5</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[10]" ng-true-value={s:1,c:0}> 1</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[10]" ng-true-value={s:0.5,c:0}> 0.5</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[10]" ng-true-value={s:0,c:0}> 0</label></p>
+            </div>
+        </div>
+        <div class="lrp-popover-q-header">
+            <p><label>12. Five parallel lines: 0-2점 ({{scoreModel.q[11].s}})</label></p>
+            <div class="lrp-popover-q-content">
+                <p><label><input type="checkbox" ng-model="scoreModel.q[11]" ng-true-value={s:2,c:0}> 2</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[11]" ng-true-value={s:1.5,c:0}> 1.5</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[11]" ng-true-value={s:1,c:0}> 1</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[11]" ng-true-value={s:0.5,c:0}> 0.5</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[11]" ng-true-value={s:0,c:0}> 0</label></p>
+            </div>
+        </div>
+        <div class="lrp-popover-q-header">
+            <p><img src='/img/partial/02_ray_min.png' width="100%"></p>
+            <p><label>13. Sides of large triangle attached to large rectangle (2): 0-2점 ({{scoreModel.q[12].s}})</label></p>
+            <div class="lrp-popover-q-content">
+                <p><label><input type="checkbox" ng-model="scoreModel.q[12]" ng-true-value={s:2,c:0}> 2</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[12]" ng-true-value={s:1.5,c:0}> 1.5</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[12]" ng-true-value={s:1,c:0}> 1</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[12]" ng-true-value={s:0.5,c:0}> 0.5</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[12]" ng-true-value={s:0,c:0}> 0</label></p>
+            </div>
+        </div>
+        <div class="lrp-popover-q-header">
+            <p><label>14. Diamond: 0-2점 ({{scoreModel.q[13].s}})</label></p>
+            <div class="lrp-popover-q-content">
+                <p><label><input type="checkbox" ng-model="scoreModel.q[13]" ng-true-value={s:2,c:0}> 2</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[13]" ng-true-value={s:1.5,c:0}> 1.5</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[13]" ng-true-value={s:1,c:0}> 1</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[13]" ng-true-value={s:0.5,c:0}> 0.5</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[13]" ng-true-value={s:0,c:0}> 0</label></p>
+            </div>
+        </div>
+        <div class="lrp-popover-q-header">
+            <p><label>15. Vertical line within sides of large triangle (13): 0-2점 ({{scoreModel.q[14].s}})</label></p>
+            <div class="lrp-popover-q-content">
+                <p><label><input type="checkbox" ng-model="scoreModel.q[14]" ng-true-value={s:2,c:0}> 2</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[14]" ng-true-value={s:1.5,c:0}> 1.5</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[14]" ng-true-value={s:1,c:0}> 1</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[14]" ng-true-value={s:0.5,c:0}> 0.5</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[14]" ng-true-value={s:0,c:0}> 0</label></p>
+            </div>
+        </div>
+        <div class="lrp-popover-q-header">
+            <p><label>16. Horizontal line within sides of large triangle (13): 0-2점 ({{scoreModel.q[15].s}})</label></p>
+            <div class="lrp-popover-q-content">
+                <p><label><input type="checkbox" ng-model="scoreModel.q[15]" ng-true-value={s:2,c:0}> 2</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[15]" ng-true-value={s:1.5,c:0}> 1.5</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[15]" ng-true-value={s:1,c:0}> 1</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[15]" ng-true-value={s:0.5,c:0}> 0.5</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[15]" ng-true-value={s:0,c:0}> 0</label></p>
+            </div>
+        </div>
+        <div class="lrp-popover-q-header">
+            <p><img src='/img/partial/02_ray_min.png' width="100%"></p>
+            <p><label>17. Horizontal cross: 0-2점 ({{scoreModel.q[16].s}})</label></p>
+            <div class="lrp-popover-q-content">
+                <p><label><input type="checkbox" ng-model="scoreModel.q[16]" ng-true-value={s:2,c:0}> 2</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[16]" ng-true-value={s:1.5,c:0}> 1.5</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[16]" ng-true-value={s:1,c:0}> 1</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[16]" ng-true-value={s:0.5,c:0}> 0.5</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[16]" ng-true-value={s:0,c:0}> 0</label></p>
+            </div>
+        </div>
+        <div class="lrp-popover-q-header">
+            <p><label>18. Square attached to large rectangle (2): 0-2점 ({{scoreModel.q[17].s}})</label></p>
+            <div class="lrp-popover-q-content">
+                <p><label><input type="checkbox" ng-model="scoreModel.q[17]" ng-true-value={s:2,c:0}> 2</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[17]" ng-true-value={s:1.5,c:0}> 1.5</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[17]" ng-true-value={s:1,c:0}> 1</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[17]" ng-true-value={s:0.5,c:0}> 0.5</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[17]" ng-true-value={s:0,c:0}> 0</label></p>
+            </div>
+        </div>
+        <div class="lrp-popover-q-result">
+            총점 : {{scoreModel.q | sumOfValue:'s'}}
+        </div>
+    </ion-content>
+
+</ion-popover-view>

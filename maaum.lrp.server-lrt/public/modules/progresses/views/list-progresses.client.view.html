@@ -1,0 +1,19 @@
+<section data-ng-controller="ProgressesController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>경과기록지 서식</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="progress in progresses" data-ng-href="#!/progressTemplates/{{progress._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				생성일
+				<span data-ng-bind="progress.created | date:'medium'"></span>
+				사용자
+				<span data-ng-bind="progress.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="progress.name"></h4>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!progresses.$resolved || progresses.length">
+    	No Progresses yet, why don't you <a href="/#!/progressTemplates/create">create one</a>?
+    </div>
+</section>

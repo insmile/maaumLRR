@@ -1,0 +1,85 @@
+<section class="row" data-ng-controller="AuthenticationController">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<form data-ng-submit="signin()" class="signin form-horizontal" autocomplete="off">
+				<fieldset>
+					<legend>로그인</legend>
+					<div class="form-group">
+						<label for="username" class="col-lg-4 control-label">ID</label>
+						<div class="col-lg-6">
+							<input type="text" id="username" data-ng-model="credentials.username" placeholder="아이디" class="form-control" required  />
+						</div>
+					</div>
+				</fieldset>
+				<fieldset>
+					<div class="form-group">
+						<label for="password" class="col-lg-4 control-label">비밀번호</label>
+						<div class="col-lg-6">
+							<input type="password" id="password" name="password" class="form-control"
+								   data-ng-model="credentials.password" placeholder="비밀번호">
+						</div>
+					</div>
+				</fieldset>
+				<fieldset>
+					<div class="text-center form-group mt">
+						<button type="submit" class="btn btn-primary">로그인</button>
+						&nbsp; or&nbsp;
+					</div>
+					<div class="forgot-password text-center mt">
+						<a href="/#!/password/forgot" class="text-muted">비밀번호 찾기</a>
+					</div>
+					<div data-ng-show="error" class="text-center text-danger">
+						<strong data-ng-bind="error"></strong>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</section>
+
+<!--<section class="row" data-ng-controller="AuthenticationController">
+	<h3 class="col-md-12 text-center">Sign in using your social accounts</h3>
+	<div class="col-md-12 text-center">
+		<a href="/auth/facebook" class="undecorated-link">
+			<img src="/modules/users/img/buttons/facebook.png">
+		</a>
+		<a href="/auth/twitter" class="undecorated-link">
+			<img src="/modules/users/img/buttons/twitter.png">
+		</a>
+		<a href="/auth/google" class="undecorated-link">
+			<img src="/modules/users/img/buttons/google.png">
+		</a>
+		<a href="/auth/linkedin" class="undecorated-link">
+			<img src="/modules/users/img/buttons/linkedin.png">
+		</a>
+		<a href="/auth/github" class="undecorated-link">
+			<img src="/modules/users/img/buttons/github.png">
+		</a>
+	</div>
+	<h3 class="col-md-12 text-center">Or with your account</h3>
+	<div class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2">
+		<form data-ng-submit="signin()" class="signin form-horizontal" autocomplete="off">
+			<fieldset>
+				<div class="form-group">
+					<label for="username">Username</label>
+					<input type="text" id="username" name="username" class="form-control" data-ng-model="credentials.username" placeholder="Username">
+				</div>
+				<div class="form-group">
+					<label for="password">Password</label>
+					<input type="password" id="password" name="password" class="form-control" data-ng-model="credentials.password" placeholder="Password">
+				</div>
+				<div class="text-center form-group mt">
+					<button type="submit" class="btn btn-primary">Sign in</button>&nbsp; or&nbsp;
+					<a href="/#!/signup">Sign up</a>
+				</div>
+				<div class="forgot-password text-center mt">
+					<a href="/#!/password/forgot" class="text-muted">Forgot your password?</a>
+				</div>
+				<div data-ng-show="error" class="text-center text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</section>-->
+

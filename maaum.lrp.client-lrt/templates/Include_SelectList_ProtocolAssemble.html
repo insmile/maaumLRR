@@ -1,0 +1,57 @@
+<ion-header-bar class="bar-stable" style="background-color: #cbd9e5">
+    <div class="item-input-inset lrp-input-inset" style="width: 100%;height: 100%;">
+        <label class="item-input-wrapper" style="height: 100%;">
+            <img src="./img/res/search_inputpox_icon.png" style="width: 36px; height: auto;">
+            <input class="div-flex" type="text" placeholder="검색" ng-model="formSearch.searchProtocolAssemble.name">
+        </label>
+        <button class="button lrp-search-delete-button" ng-click="formSearch.searchProtocolAssemble.name = '';">
+            <i class="icon ion-android-close"></i>
+        </button>
+    </div>
+</ion-header-bar>
+
+<ion-content style="width: initial; height: calc(100% - 128px);">
+
+    <ion-list>
+
+        <ion-item class="item-divider">
+
+            <div class="div-left">
+                <h2>구성중인 학습</h2>
+            </div>
+
+        </ion-item>
+
+        <ion-item class="my-row-center" ng-repeat="inTask in lrpModel.selectedProtocol.tasks | filter:formSearch.searchProtocolAssemble">
+            <div class="div-left div-flex" ng-click="dessembleProtocol(inTask)">
+                <h2 ng-bind-html="inTask.taskID.name | highlight:formSearch.searchProtocolAssemble.name"></h2>
+            </div>
+            <div ng-hide="inTask.setSize === 1">
+                <button class="button icon ion-ios-arrow-back" ng-click="setDown(inTask);"></button>
+                <a class="button button-icon" style="margin: 0 11px;">세트 : {{inTask.setNum}}</a>
+                <button class="button icon ion-ios-arrow-forward" ng-click="setUp(inTask.setSize, inTask);"></button>
+            </div>
+        </ion-item>
+
+        <div ng-repeat="category in lrpModel.tempDataListPopover">
+
+            <ion-item class="item-divider">
+                <div class="div-left">
+                    <h2>{{category.category}}</h2>
+                </div>
+            </ion-item>
+
+            <ion-item class="my-row-center" ng-repeat="task in category.tasks | filter: formSearch.searchProtocolAssemble" ng-click="assembleProtocol(task)">
+                <div class="div-left div-flex">
+                    <h2 ng-bind-html="task.name | highlight:formSearch.searchProtocolAssemble.name"></h2>
+                </div>
+                <div ng-if="task.starred">
+                    <i class="icon ion-ionic"></i>
+                </div>
+            </ion-item>
+
+        </div>
+
+    </ion-list>
+
+</ion-content>

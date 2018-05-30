@@ -1,0 +1,12 @@
+<ion-popover-view class="lrp-popover-view">
+
+    <ion-header-bar class="bar-stable lrp-bar-top lrp-header-padding lrp-popover-scroll lrp-header-padding">
+        <div class="div-flex"><h3>{{orderData.tag}}</h3></div>
+        <button class="button button-clear icon ion-checkmark-round" style="color: #ffffff;" ng-click="selectListPopover.hide()"></button>
+    </ion-header-bar>
+
+    <div style="top: 64px; position: relative; width: 100%; height: 100%;" ng-include="orderData.template">
+
+    </div>
+
+</ion-popover-view>

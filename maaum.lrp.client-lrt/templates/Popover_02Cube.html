@@ -1,0 +1,48 @@
+<ion-popover-view class="lrp-popover-view">
+
+    <ion-header-bar class="bar-stable lrp-bar-top lrp-header-padding lrp-popover-scroll">
+        <div class="div-flex">
+            <h3>Cube Copying</h3>
+        </div>
+        <button class="button button-clear icon ion-checkmark-round" style="color: #ffffff;" ng-click="saveScoring()"></button>
+    </ion-header-bar>
+
+    <ion-content style="margin: 0px;">
+        <div class="lrp-popover-q-header">
+            <p><label>1. Points of connection (교차점 평가): 0-8점 ({{scoreModel.q[0].s}})</label></p>
+            <div class="lrp-popover-q-content">
+                <p><label><input type="checkbox" ng-model="scoreModel.q[0]" ng-true-value={s:8,c:0}> 8</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[0]" ng-true-value={s:7,c:0}> 7</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[0]" ng-true-value={s:6,c:0}> 6</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[0]" ng-true-value={s:5,c:0}> 5</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[0]" ng-true-value={s:4,c:0}> 4</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[0]" ng-true-value={s:3,c:0}> 3</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[0]" ng-true-value={s:2,c:0}> 2</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[0]" ng-true-value={s:1,c:0}> 1</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[0]" ng-true-value={s:0,c:0}> 0</label></p>
+            </div>
+        </div>
+        <div class="lrp-popover-q-header">
+            <p><label>2. Plane-orientation errors (평면의 정위):  만점 12점 ({{scoreModel.q[1].s}})</label></p>
+            <div class="lrp-popover-q-content">
+                <p><label><input type="checkbox" ng-model="scoreModel.q[1]" ng-true-value={s:12,c:0}> 12</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[1]" ng-true-value={s:11,c:0}> 11</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[1]" ng-true-value={s:10,c:0}> 10</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[1]" ng-true-value={s:9,c:0}> 9</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[1]" ng-true-value={s:8,c:0}> 8</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[1]" ng-true-value={s:7,c:0}> 7</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[1]" ng-true-value={s:6,c:0}> 6</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[1]" ng-true-value={s:5,c:0}> 5</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[1]" ng-true-value={s:4,c:0}> 4</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[1]" ng-true-value={s:3,c:0}> 3</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[1]" ng-true-value={s:2,c:0}> 2</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[1]" ng-true-value={s:1,c:0}> 1</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[1]" ng-true-value={s:0,c:0}> 0</label></p>
+            </div>
+        </div>
+        <div class="lrp-popover-q-result">
+            총점 : {{scoreModel.q | sumOfValue:'s'}}
+        </div>
+    </ion-content>
+
+</ion-popover-view>

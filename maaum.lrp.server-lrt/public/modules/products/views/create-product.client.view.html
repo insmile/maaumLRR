@@ -1,0 +1,17 @@
+<section class="row" data-ng-controller="ProductsController">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form class="form-horizontal" data-ng-submit="create()" data-ng-init="init()" novalidate>
+                <product_info></product_info>
+                <div class="form-group">
+                    <div class="col-lg-offset-2 col-lg-10">
+                        <button type="submit" class="btn btn-large btn-primary">추가</button>
+                    </div>
+                </div>
+                <div data-ng-show="error" class="text-center text-danger">
+                    <strong data-ng-bind="error"></strong>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

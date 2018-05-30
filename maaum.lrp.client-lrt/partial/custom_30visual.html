@@ -1,0 +1,53 @@
+<style>
+    .visual30box {
+        position: absolute;
+        width: 20vh;
+        height: 20vh;
+        border: solid 1px;
+        text-align: center;
+        border-radius: 50%;
+        background: #000;
+        transition-property: opacity;
+        transition-duration: 0.5s;
+        transition-delay: 0s;
+        transition-timing-function: linear;
+    }
+    
+    .visual30box:hover {
+        background: #333;
+    }
+    
+    .visual30box:active {
+        background: #CCC;
+    }
+    
+    .visual30box.ng-hide {
+        opacity: 0;
+    }
+    
+    .visual30plane {
+        top: 64px;
+        width: 100vw;
+        height: 80vh;
+        transform: scale(1);
+    }
+</style>
+
+<ion-header-bar class="bar-stable lrp-bar-top lrp-header-padding lrp-popover-scroll" ng-init="Custom30VisualReady()">
+    <div class="div-flex">
+        <h3>시각 주의력 검사 (Visual Span test) - {{stage + 1}}</h3>
+    </div>
+    <button class="button button-clear icon ion-close" style="color: #ffffff;" ng-click="endExerciseAsk()"></button>
+</ion-header-bar>
+
+<div class='visual30plane'>
+    <div class='visual30box' id="box1" ng-hide="box1hide" ng-click="Custom30Click(1)" style="left:4.5%; top:40%;">1</div>
+    <div class='visual30box' id="box2" ng-hide="box2hide" ng-click="Custom30Click(2)" style="left:17.6%; top:12.5%;">2</div>
+    <div class='visual30box' id="box3" ng-hide="box3hide" ng-click="Custom30Click(3)" style="left:41.2%; top:2.5%;">3</div>
+    <div class='visual30box' id="box4" ng-hide="box4hide" ng-click="Custom30Click(4)" style="left:22%; top:70%;">4</div>
+    <div class='visual30box' id="box5" ng-hide="box5hide" ng-click="Custom30Click(5)" style="left:38.2%; top:45%;">5</div>
+    <div class='visual30box' id="box6" ng-hide="box6hide" ng-click="Custom30Click(6)" style="left:61.7%; top:27.5%;">6</div>
+    <div class='visual30box' id="box7" ng-hide="box7hide" ng-click="Custom30Click(7)" style="left:82.3%; top:15%;">7</div>
+    <div class='visual30box' id="box8" ng-hide="box8hide" ng-click="Custom30Click(8)" style="left:54.4%; top:75%;">8</div>
+    <div class='visual30box' id="box9" ng-hide="box9hide" ng-click="Custom30Click(9)" style="left:79.4%; top:62.5%;">8</div>
+</div>

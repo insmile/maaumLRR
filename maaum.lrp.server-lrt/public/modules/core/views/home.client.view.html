@@ -1,0 +1,120 @@
+<h3>
+    홈 화면
+    <small>Admin page</small>
+</h3>
+
+<section data-ng-controller="DashboardController">
+    <div data-ng-show="isAdmin" class="jumbotron text-center">
+        <!--<div class="btn col-lg-3 col-sm-6">
+            <div class="panel widget bg-primary" data-ng-click="go('/centers/list')">
+                <div class="row row-table">
+                    <div class="col-xs-4 text-center bg-primary-dark pv-lg">
+                        <em class="icon-key fa-3x"></em>
+                    </div>
+                    <div class="col-xs-8 pv-lg">
+                        <div class="h2 mt0">{{dash.centerNum}}
+                            <small>소</small></div>
+                        <div class="text-uppercase">센터</div>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+        <div class="btn col-lg-3 col-sm-6">
+            <!-- START widget-->
+            <div class="panel widget bg-green" data-ng-click="go('/patient/list')">
+                <div class="row row-table">
+                    <div class="col-xs-4 text-center bg-green-dark pv-lg">
+                        <em class="icon-user-following fa-3x"></em>
+                    </div>
+                    <div class="col-xs-8 pv-lg">
+                        <div class="h2 mt0">{{dash.userNum}}
+                            <small>명</small>
+                        </div>
+                        <div class="text-uppercase">환자 수</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<div class="btn col-lg-3 col-sm-6">
+            <div class="panel widget bg-danger" data-ng-click="go('/pay/list')">
+                <div class="row row-table">
+                    <div class="col-xs-4 text-center bg-danger-dark pv-lg">
+                        <em class="icon-clock fa-3x"></em>
+                    </div>
+                    <div class="col-xs-8 pv-lg">
+                        <div class="h2 mt0">{{dash.remainPay}}<small>건</small></div>
+                        <div class="text-uppercase">미승인 결재</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        -->
+        <div class="text-center">
+            <img src="uploads/lrt_logo.png" width="100%"><br>
+        </div>
+    </div>
+    <div class="jumbotron text-center" data-ng-show="isManager">
+        <div class="btn col-lg-3 col-sm-6">
+            <!-- START widget-->
+            <div class="panel widget bg-primary" data-ng-click="go('/patient/list')">
+                <div class="row row-table">
+                    <div class="col-xs-4 text-center bg-primary-dark pv-lg">
+                        <em class="icon-key fa-3x"></em>
+                    </div>
+                    <div class="col-xs-8 pv-lg">
+                        <div class="h2 mt0">{{dash.max_key_num}}
+                            <small>명</small></div>
+                        <div class="text-uppercase">최대 사용 환자 수</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btn col-lg-3 col-sm-6">
+            <!-- START widget-->
+            <div class="panel widget bg-green" data-ng-click="go('/patient/list')">
+                <div class="row row-table">
+                    <div class="col-xs-4 text-center bg-green-dark pv-lg">
+                        <em class="icon-user-following fa-3x"></em>
+                    </div>
+                    <div class="col-xs-8 pv-lg">
+                        <div class="h2 mt0">{{dash.active_key_num}}
+                            <small>명</small>
+                        </div>
+                        <div class="text-uppercase">활성 환자 수</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btn col-lg-3 col-sm-6">
+            <!-- START widget-->
+            <div class="panel widget bg-purple" data-ng-click="go('/patient/list')">
+                <div class="row row-table">
+                    <div class="col-xs-4 text-center bg-purple-dark pv-lg">
+                        <em class="icon-user-follow fa-3x"></em>
+                    </div>
+                    <div class="col-xs-8 pv-lg">
+                        <div class="h2 mt0">{{dash.left_key_num}}<small>명</small></div>
+                        <div class="text-uppercase">사용 가능 환자 수</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btn col-lg-3 col-sm-6">
+            <!-- START widget-->
+            <div class="panel widget bg-danger" data-ng-click="go('/pay/list')">
+                <div class="row row-table">
+                    <div class="col-xs-4 text-center bg-danger-dark pv-lg">
+                        <em class="icon-clock fa-3x"></em>
+                    </div>
+                    <div class="col-xs-8 pv-lg">
+                        <div class="h2 mt0">{{dash.remainDays}}<small>일</small></div>
+                        <div class="text-uppercase">계얀 만료 잔여 일</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <img src="uploads/lrt_logo.png" width="100%"><br>
+        </div>
+    </div>
+</section>

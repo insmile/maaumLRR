@@ -1,0 +1,195 @@
+<ion-header-bar class="bar-stable lrp-header-padding lrp-sub-header">
+    <div class="div-flex">
+        <h3>{{lrpModel.selectedPatient.name}}</h3>
+    </div>
+    <div class="my-row-center">
+        <div ng-show="lrpModel.selectedPatient.assignedTherapist === undefined">
+            <button class="button button-balanced" ng-show="lrpModel.userData.roles === 'admin'" ng-click="selectListOpenManager(1)" style="margin-right: 5px;">평가자배정</button>
+            <button class="button button-balanced" ng-show="lrpModel.userData.roles === 'therapist'" ng-click="AllocateTherapist(lrpModel.userData)" style="margin-right: 5px;">환자담당</button>
+        </div>
+        <button class="button button-balanced" ng-click="userFormOpenManager(4)" style="margin-right: 5px;">정보수정</button>
+        <button class="button button-balanced" ng-click="playReportPrint()">출력</button>
+    </div>
+</ion-header-bar>
+
+<ion-content direction="y" style="height: calc(100% - 128px);">
+
+    <div class="outer" style="height: auto;">
+        <div class="inner">
+            <ion-item class="item">
+                <div class="my-row-center">
+                    <div style="width: 50%;">
+                        <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
+                            <span class="input-label" style="text-align: right; width: 95px; display:table;">등록번호 : </span>
+                            <span class="input-label"> {{lrpModel.selectedPatient.regNo}}</span>
+                        </label>
+
+                        <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
+                            <span class="input-label" style="text-align: right; width: 95px; display:table;">성별 : </span>
+                            <span class="input-label">{{lrpModel.selectedPatient.sex === "male" ? "남자" : "여자"}}</span>
+                        </label>
+
+                        <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
+                            <span class="input-label" style="text-align: right; width: 95px; display:table;">생년월일 : </span>
+                            <span class="input-label">{{lrpModel.selectedPatient.birthday | date: "yyyy-MM-dd"}}</span>
+                        </label>
+
+                        <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
+                            <span class="input-label" style="text-align: right; width: 95px; display:table;">직업 : </span>
+                            <span class="input-label">{{lrpModel.selectedPatient.Job}}</span>
+                        </label>
+                    </div>
+
+                    <div style="width: 48%;">
+                        <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
+                            <span class="input-label" style="text-align: right; width: 95px; display:table;">담당평가자 : </span>
+                            <span class="input-label">{{lrpModel.selectedPatient.assignedTherapistName}}</span>
+                        </label>
+
+                        <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
+                            <span class="input-label" style="text-align: right; width: 95px; display:table;">등록일 : </span>
+                            <span class="input-label">{{lrpModel.selectedPatient.created | date: "yyyy-MM-dd"}}</span>
+                        </label>
+
+                        <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
+                            <span class="input-label" style="text-align: right; width: 95px; display:table;">치료연수 : </span>
+                            <span class="input-label">{{lrpModel.selectedPatient.eduYear}}</span>
+                        </label>
+                        <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
+                            <span class="input-label" style="text-align: right; width: 95px; display:table;">주로쓰는 손 : </span>
+                            <span class="input-label">{{lrpModel.selectedPatient.handType === "left" ? "왼손" : "오른손"}}</span>
+                        </label>
+                    </div>
+                </div>
+            </ion-item>
+
+            <ion-item class="item">
+
+                <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
+                    <span class="input-label" style="text-align: right; width: 160px; display:table;">진단명 : </span>
+                    <span class="input-label">{{lrpModel.selectedPatient.diagnosis}}</span>
+                </label>
+
+                <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
+                    <span class="input-label" style="text-align: right; width: 160px; display:table;">발병일 : </span>
+                    <span class="input-label">{{lrpModel.selectedPatient.inciDate | date: "yyyy-MM-dd"}}</span>
+                </label>
+
+                <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
+                    <span class="input-label" style="text-align: right; width: 160px; display:table;">실어증 유형 : </span>
+                    <span class="input-label">{{lrpModel.selectedPatient.aphasiaType}}</span>
+                </label>
+
+                <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
+                    <span class="input-label" style="text-align: right; display:table; width: 160px;">1차 실어증 평가점수 : </span>
+                    <span class="input-label">{{lrpModel.selectedPatient.initialAQ}}</span>
+                </label>
+
+            </ion-item>
+
+            <ion-item class="item">
+                <button class="button icon button-balanced" style="width: 48%;" ng-click="selectListOpenManager(3)">개별선택 평가 <span ng-if="tabStateCode !== 2">시작</span><span ng-if="tabStateCode === 2">과제 추가</span></button>
+                <button class="button icon button-balanced" style="width: 48%;" ng-click="selectListOpenManager(4)">구성 평가 <span ng-if="tabStateCode !== 2">시작</span><span ng-if="tabStateCode === 2">과제 추가</span></button>
+            </ion-item>
+
+        </div>
+    </div>
+
+    <div class="tabs tabs-top tabs-virtual lrp-relative lrp-tabs">
+        <a href="" class="tab-item disable-user-behavior" ng-class="{active: tabStateCode === 5}" ng-click="selectTabHeader(5)">
+            공식검사정보
+        </a>
+        <a href="" class="tab-item disable-user-behavior" ng-class="{active: tabStateCode === 0}" ng-click="selectTabHeader(0)">
+            기타특이사항
+        </a>
+        <a href="" class="tab-item disable-user-behavior" ng-class="{active: tabStateCode === 1}" ng-click="selectTabHeader(1)">
+            평가결과기록
+        </a>
+        <a href="" class="tab-item disable-user-behavior" ng-class="{active: tabStateCode === 2}" ng-click="selectTabHeader(2)">
+            과제할당
+        </a>
+    </div>
+
+    <div>
+
+        <ion-list class="lrp-relative lrp-sub-header" ng-if="tabStateCode === 5">
+
+            <ion-item class="my-row-center item-divider" style="height: 45px;">
+                <button class="button button-clear button-positive" style="width: 100%;" ng-click="selectListOpenManager(2)">
+                    추가
+                </button>
+            </ion-item>
+
+            <ion-item class="my-row-center" ng-repeat="official in lrpModel.tabDataList" ng-click="">
+                <div style="flex: 100 1 auto; padding-left: 20px;">
+                    <h2>{{official.memo}} : {{official.value}}</h2>
+                    <p>{{official.testDate | date: "yyyy-MM-dd"}}</p>
+                </div>
+                <div>
+                    <img src="./img/res/action_icon_delete_normal.png" style="width: 36px; height: auto;" ng-click="deleteOfficialTest(official)">
+                </div>
+            </ion-item>
+
+        </ion-list>
+
+        <ion-list class="lrp-relative lrp-sub-header" ng-if="tabStateCode === 0">
+
+            <ion-item class="my-row-center item-divider" style="height: 45px;">
+                <button class="button button-clear button-positive" style="width: 100%;" ng-click="addTabItem()">
+                    추가
+                </button>
+            </ion-item>
+
+            <ion-item class="my-row-center" ng-repeat="pNote in lrpModel.tabDataList" ng-click="selectTabItem(pNote)">
+                <div style="flex: 100 1 auto; padding-left: 20px;">
+                    <h2>{{pNote.name}}</h2>
+                    <p>{{pNote.updated | date: "yyyy-MM-dd"}}</p>
+                </div>
+            </ion-item>
+
+        </ion-list>
+
+        <ion-header-bar class="bar-stable lrp-bar-search" ng-if="tabStateCode === 1" style="position:relative">
+            <div class="item-input-inset lrp-input-inset" style="width: 100%;height: 100%;">
+                <label class="item-input-wrapper" style="height: 100%;">
+                            <img src="./img/res/search_inputpox_icon.png" style="width: 36px; height: auto;">
+                            <input type="text" placeholder="검색" ng-model="formSearch.searchResult.name">
+                        </label>
+                <button class="button lrp-search-delete-button" ng-click="formSearch.searchResult.name = '';">
+                            <i class="icon ion-android-close"></i>
+                        </button>
+            </div>
+        </ion-header-bar>
+
+        <ion-list class="lrp-relative lrp-sub-header" ng-if="tabStateCode === 1">
+
+            <ion-item class="my-row-center" ng-repeat="result in lrpModel.resultList |  filter: formSearch.searchResult" ng-click="selectTabItem(result)">
+                <div class="div-left div-flex" style="width: 90%;">
+                    <h2 ng-bind-html="result.name | highlight:formSearch.searchResult.name"></h2>
+                    <p>{{result.updated | date: "yyyy-MM-dd"}}</p>
+                </div>
+                <div ng-if="result.isChecked">
+                    <p>채점 완료</p>
+                </div>
+            </ion-item>
+
+        </ion-list>
+
+        <ion-list class="lrp-relative lrp-sub-header" ng-if="tabStateCode === 2">
+
+            <ion-item class="my-row-center" ng-repeat="homework in lrpModel.homeworkList" ng-click="selectTabItem(homework)">
+                <div class="div-left div-flex">
+                    <h2>{{homework.name}} <span ng-if="!homework.isProtocol">(세트 : {{homework.setNum}})</span></h2>
+                    <p>{{homework.assigner.name}} <span ng-if="homework.expired !== undefined">{{homework.expired | date: "yyyy-MM-dd"}} 까지</span></p>
+                </div>
+                <div>
+                    <!--img src="./img/res/action_icon_move_normal.png" style="width: 36px; height: auto;"-->
+                    <img src="./img/res/action_icon_delete_normal.png" ng-click="deleteHomework(homework)" style="width: 36px; height: auto;">
+                </div>
+            </ion-item>
+
+        </ion-list>
+
+    </div>
+
+</ion-content>

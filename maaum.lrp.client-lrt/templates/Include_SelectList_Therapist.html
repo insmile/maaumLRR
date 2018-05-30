@@ -1,0 +1,27 @@
+<ion-content style="top: 124px;">
+    <ion-list>
+
+        <ion-item class="my-row-center" ng-repeat="therpist in lrpModel.therapistList | filter:{ certified : true } | filter: formSearch.searchSelectList" ng-click="AllocateTherapist(therpist)">
+            <div style="flex: 100 1 auto; padding-left: 20px;">
+                <h2 ng-bind-html="therpist.name | highlight:formSearch.searchSelectList.name"></h2>
+                <p>{{therpist.email}}</p>
+            </div>
+        </ion-item>
+
+        <ion-item class="my-row-center item-divider">
+            <div class="div-left div-flex">
+                <h2>미승인 평가자</h2>
+            </div>
+        </ion-item>
+
+        <ion-item class="my-row-center" ng-repeat="therpist in lrpModel.therapistList | filter:{ certified : false }  | filter: formSearch.searchSelectList">
+            <div style="flex: 100 1 auto; padding-left: 20px;">
+                <h2 ng-bind-html="therpist.name | highlight:formSearch.searchSelectList.name"></h2>
+            </div>
+            <div>
+                <img src="./img/res/list_icon_unapproval.png" style="width: 60px; height: auto;">
+            </div>
+        </ion-item>
+
+    </ion-list>
+</ion-content>

@@ -1,0 +1,28 @@
+<div class="my-row-center">
+    <div style="width: 28%;">
+        <label class="item-stacked-label" style="border: 0;padding: 0; display: flex;">
+            <span class="input-label" style="text-align: right; width: 100%; display:table;">공식검사 :</span>
+        </label>
+    </div>
+
+    <div style="width: 72%;">
+        <select class="lrp-popover-input" style="font-size: 22px;" ng-model="lrpModel.tempDataPopover.selectedOfficialTest" ng-options="ofTemplate.name for ofTemplate in lrpModel.tempDataListPopover">
+        </select>
+    </div>
+</div>
+
+<div class="my-row-center">
+    <div style="width: 28%;">
+        <label class="item-stacked-label" style="border: 0;padding: 0; display: flex;">
+            <span class="input-label" style="text-align: right; width: 100%; display:table;">결과 :</span>
+        </label>
+    </div>
+
+    <div style="width: 72%;">
+        <input class="lrp-popover-input" type="text" placeholder="결과" ng-model="lrpModel.tempDataPopover.value">
+    </div>
+</div>
+
+<div class="my-row-center">
+    <button class="button icon" style="width: 94%; margin: 3%;" ng-click="addOfficialTest()">확인</button>
+</div>
