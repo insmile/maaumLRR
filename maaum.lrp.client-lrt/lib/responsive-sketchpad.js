@@ -1,5 +1,10 @@
 (function() {
 
+    var canvas;
+    // var backCode;// 배경 스트링 코드
+
+    var backCode2;
+
     function mergeObjects(obj1, obj2) {
         var obj3 = {};
         var attrname;
@@ -28,10 +33,14 @@
         var strokes = [];
         var undos = [];
 
+        var backCode;
+
         if (opts.data) {
             opts.aspectRatio = opts.data.aspectRatio;
-            strokes = opts.data.strokes;
+            strokes = opts.data.strokes;            
         }
+
+        // alert("sketch init: opts ="+JSON.stringify(opts));
 
         opts.aspectRatio = opts.aspectRatio || 1;
         opts.width = opts.width || el.clientWidth;
@@ -50,7 +59,7 @@
         var sketching = false;
 
         // Create a canvas element
-        var canvas = document.createElement('canvas');
+        canvas = document.createElement('canvas');
 
         /**
          * Set the size of canvas
@@ -65,15 +74,36 @@
         /**
          * Set a background of canvas
          */
+        // bbbbbbbbbbb
         function setCanvasBackground(url = undefined, opacity = 0.5) {
+            
+            // alert("setCanvasBackground");
+            
             if (url == undefined)
                 canvas.style.background = "white";
             else {
+                
                 canvas.style.background = "linear-gradient(rgba(255, 255, 255, " + opacity + "), rgba(255, 255, 255, " + opacity + ")), url('" + url + "') no-repeat";
                 canvas.style.backgroundSize = "contain";
                 canvas.style.backgroundPositionX = "center";
                 canvas.style.backgroundPositionY = "center";
             }
+                        
+            // alert("data.backDDD2="+ backCode2);
+
+            if(backCode2 != "" && backCode2!=null &&  backCode2!='undefined'){
+                canvas.style.background = "linear-gradient(rgba(255, 255, 255, " + opacity + "), rgba(255, 255, 255, " + opacity + ")), url('" + backCode2 + "') no-repeat";
+                canvas.style.backgroundSize = "contain";
+                canvas.style.backgroundPositionX = "center";
+                canvas.style.backgroundPositionY = "center";
+
+                // canvas.style.backgroundImage = "url('"+backCode+"')";
+            }
+        
+
+            // canvas.style.background = "white";
+            // canvas.style.opacity=0.5;
+
         }
 
         /**
@@ -137,6 +167,8 @@
          * Erase everything in the canvase
          */
         function clearCanvas() {
+            
+            
             context.clearRect(0, 0, canvas.width, canvas.height);
 
             if (opts.backgroundColor) {
@@ -168,19 +200,27 @@
         /**
          * Draw a stroke on the canvas
          */
-        function drawStroke(stroke) {
+        function drawStroke(stroke ,lineWidth_ ) {
+            
             context.beginPath();
+
+            
             for (var j = 0; j < stroke.points.length - 1; j++) {
                 var start = normalizePoint(stroke.points[j]);
                 var end = normalizePoint(stroke.points[j + 1]);
 
                 context.moveTo(start.x, start.y);
                 context.lineTo(end.x, end.y);
+
+                //context.lineWidth = lineWidth_;
             }
+
             context.closePath();
 
             context.strokeStyle = stroke.color;
             context.lineWidth = normalizeLineSize(stroke.size);
+            // context.lineWidth = lineWidth_;
+
             context.lineJoin = stroke.join;
             context.lineCap = stroke.cap;
             context.miterLimit = stroke.miterLimit;
@@ -188,13 +228,64 @@
             context.stroke();
         }
 
+        // ddddd1
+        function makeBack()
+        {
+
+        }
+        
+        var lineWidth_ = 1;
+        var lineFlag = true;
+
         /**
          * Redraw the canvas
          */
         function redraw() {
             clearCanvas();
+
+            /*
+            var imageCode = new Image();
+            imageCode.src = backCode;
+            
+            var opacity = 0.5;
+            canvas.style.background = "linear-gradient(rgba(255, 255, 255, " + opacity + "), rgba(255, 255, 255, " + opacity + ")), url('" + imageCode + "') no-repeat";
+            */
+            
+            // canvas.style.background = imageCode;
+
+            // var ctx = canvas.getContext('2d');
+            // ctx.drawImage(imageCode,0,0);
+            
+            //var lineWidth_ = 1;
+            // var lineFlag = true;
+
+            console.log("that.strokes.length="+that.strokes.length);
+
             for (var i = 0; i < that.strokes.length; i++) {
-                drawStroke(that.strokes[i]);
+
+                console.log("lineWidth_=" + lineWidth_);
+
+                drawStroke(that.strokes[i], lineWidth_ );
+                
+                lineWidth_  += 0.1;
+
+                /*
+                if(lineFlag){
+                    lineWidth_  += 0.1;
+
+                    if(lineWidth_ > 5){
+                        lineFlag = false;
+                    }
+
+                }else {
+                    lineWidth_  -= 0.1;
+
+                    if(lineWidth_<1){
+                        lineFlag = true;
+                    }
+                }
+                */
+                
             }
         }
 
@@ -251,6 +342,7 @@
                 x: cursor.x,
                 y: cursor.y
             });
+
             that.redraw();
 
             if (that.onDrawEnd) that.onDrawEnd();
@@ -281,6 +373,8 @@
         this.strokes = strokes;
         this.undos = undos;
         this.opts = opts;
+
+        this.backCode = backCode;
 
         // Public functions
         this.redraw = redraw;
@@ -327,14 +421,18 @@
         this.redraw();
     };
 
+
     /**
      * Convert the sketchpad to a JSON object that can be loaded into
      * other sketchpads or stored on a server
      */
     Sketchpad.prototype.toJSON = function() {
+        
+        
         return {
             aspectRatio: this.canvas.height / this.canvas.width,
-            strokes: this.strokes
+            strokes: this.strokes,
+            backDDD:this.backCode
         };
     };
 
@@ -344,6 +442,12 @@
      */
     Sketchpad.prototype.loadJSON = function(data) {
         this.strokes = data.strokes;
+        
+        // this.backCode = data.backDDD;
+        backCode2 = data.backDDD;
+        // alert("data.backDDD0="+data.backDDD);
+        // alert("data.backDDD1="+backCode2);
+        
         this.redraw();
     };
 
@@ -399,6 +503,69 @@
         this.setCanvasBackground(this.opts.url, this.opts.opacity);
         this.redraw();
     };
+
+
+
+    // tttttt1
+    Sketchpad.prototype.makeShapeDD = function(shapeType, count) {
+        
+        var c_w = canvas.width;
+        var c_h = canvas.height;
+                
+        var min = 10;
+        var add = 10;
+
+        console.log("pad gogo Shape111: ");
+        
+        var ctx = canvas.getContext('2d');
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // var count = 6;
+
+        // 전체너비 500 도형 너비 20일 때 안나가게.        
+        // (500 - 40)랜덤 + 20. 20~480
+        
+        for(var i=0; i<count; i++) {
+            // var index = Math.floor(Math.random() * 10); // 0~9까지.
+            // var ranIndex = Math.floor(Math.random() * length);
+
+            var www = min + add*i;
+
+            var x_ran = Math.floor(Math.random() * (c_w - www*2 )) + www;
+            var y_ran = Math.floor(Math.random() * (c_h - www*2 )) + www;
+
+            var r=  Math.floor(Math.random() *255) ;
+            var g=  Math.floor(Math.random() *255) ;
+            var b=  Math.floor(Math.random() *255) ;
+
+            ctx.fillStyle = 'rgb('+r+',' +g+',' +b+')';
+
+            if(shapeType=="rect"){ // 네모
+                ctx.fillRect(x_ran, y_ran, www, www);
+
+            } else if(shapeType=="number"){ // 숫자
+                ctx.font = "32px Arial";
+                ctx.fillText(""+i, x_ran, y_ran);
+
+            }            
+            else { // 원.
+                ctx.beginPath();
+                ctx.arc(x_ran, y_ran, www, 0,2*Math.PI);
+                ctx.stroke();
+
+            }
+
+        }
+        
+        this.backCode = canvas.toDataURL();
+        //alert("bbb"+this.backCode);
+
+        // 만들어진 도형으로 배경 세팅.
+        this.setCanvasBackground(this.backCode, 0.5);
+
+    };
+
 
     /**
      * Set a background image with opacity
