@@ -1,0 +1,29 @@
+<section class="row" data-ng-controller="ManagerController">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<form name="userForm" data-ng-submit="signup(userForm.$valid)" novalidate class="form-horizontal" autocomplete="off">
+				<fieldset>
+					<legend>관리자 계정 정보 입력</legend>
+					<div class="form-group">
+						<label class="col-lg-2 control-label">센터명</label>
+						<div class="col-lg-10">
+							<span class="form-control">{{center.name}}</span>
+						</div>
+					</div>
+				</fieldset>
+				<id_info></id_info>
+				<pw_info></pw_info>
+				<default_info></default_info>
+				<signin_info></signin_info>
+				<div class="form-group">
+					<div class="col-lg-offset-2 col-lg-10">
+						<button type="submit" class="btn btn-large btn-primary">가입</button>
+					</div>
+				</div>
+				<div data-ng-show="error" class="text-center text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+			</form>
+		</div>
+	</div>
+</section>

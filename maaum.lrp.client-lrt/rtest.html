@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="lib/RecordRTC.min.js"></script>
+    <script src="lib/gumadapter.js"></script>
+</head>
+<body>
+<button id="btnRecordStart" onclick="captureAudio()">Start Recording</button>
+<button id="btnRecordStop" onclick="stopRecord()" disabled>Stop Recording</button>
+<audio id="recordingPlayer" controls muted hidden></audio>
+</body>
+
+<script>
+    (function() {
+        var params = {},
+                r = /([^&=]+)=?([^&]*)/g;
+
+        function d(s) {
+            return decodeURIComponent(s.replace(/\+/g, ' '));
+        }
+
+        var match, search = window.location.search;
+        while (match = r.exec(search.substring(1))) {
+            params[d(match[1])] = d(match[2]);
+
+            if(d(match[2]) === 'true' || d(match[2]) === 'false') {
+                params[d(match[1])] = d(match[2]) === 'true' ? true : false;
+            }
+        }
+
+        window.params = params;
+    })();
+
+    var recordRTC;//RecordRTC(mediaStream);
+    var recordingPlayer;
+    var lrpStream;
+    recordingPlayer = document.getElementById('recordingPlayer');
+
+    function captureUserMedia(mediaConstraints, successCallback, errorCallback) {
+        var isBlackBerry = !!(/BB10|BlackBerry/i.test(navigator.userAgent || ''));
+        if(isBlackBerry && !!(navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia)) {
+            navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+            navigator.getUserMedia(mediaConstraints, successCallback, errorCallback);
+            return;
+        }
+
+        navigator.mediaDevices.getUserMedia(mediaConstraints).then(successCallback).catch(errorCallback);
+    }
+
+    function captureAudio() {
+        captureUserMedia({audio: true}, function(audioStream) {
+            //recordingPlayer = document.getElementById('recordingPlayer');
+            lrpStream = audioStream;
+            recordingPlayer.srcObject = audioStream;
+            recordingPlayer.play();
+
+            onRecord(audioStream);
+
+        }, function(error) {
+            console.log(error);
+        });
+    }
+
+    function onRecord(audioStream)
+    {
+        var options = {
+            type: 'audio',
+            mimeType: 'audio/wav',
+            bufferSize: typeof params.bufferSize == 'undefined' ? 0 : parseInt(params.bufferSize),
+            sampleRate: typeof params.sampleRate == 'undefined' ? 44100 : parseInt(params.sampleRate),
+            leftChannel: params.leftChannel || false,
+            disableLogs: params.disableLogs || false,
+            recorderType: webrtcDetectedBrowser === 'edge' ? StereoAudioRecorder : null
+        };
+
+        recordRTC = RecordRTC(audioStream, options);
+
+        recordRTC.startRecording();
+
+        document.getElementById('btnRecordStart').disabled = true;
+        document.getElementById('btnRecordStop').disabled = false;
+    }
+
+    function stopRecord()
+    {
+        recordRTC.stopRecording(function(audioURL) {
+            lrpStream.stop();
+            document.getElementById('btnRecordStart').disabled = false;
+            document.getElementById('btnRecordStop').disabled = true;
+
+            var audio = new Audio();
+            audio.src = audioURL;
+            audio.controls = true;
+            recordingPlayer.parentNode.appendChild(document.createElement('hr'));
+            recordingPlayer.parentNode.appendChild(audio);
+
+            if(audio.paused) audio.play();
+
+            audio.onended = function() {
+                audio.pause();
+                //audio.src = URL.createObjectURL(recordRTC.blob);
+                //console.log(audio.src);
+                console.log(audio.src
+                );
+                console.log(audioURL);
+            };
+        });
+    }
+</script>
+
+</html>

@@ -1,0 +1,58 @@
+<ion-header-bar class="bar-stable lrp-header-padding lrp-sub-header">
+    <div class="div-flex">
+        <h3>{{lrpModel.selectedTask.name}} <span ng-if="lrpModel.selectedHomework !== null">{{lrpModel.selectedHomework.setNum}} Set </span></h3>
+    </div>
+</ion-header-bar>
+
+<div class="scroll-content has-header">
+
+    <div class="outer" style="height: auto;">
+        <div class="inner">
+            <ion-item class="item-divider" style="height: 38px;">
+                <h2>{{lrpModel.selectedTask.category}}</h2>
+            </ion-item>
+
+            <div class="centered" style="margin: 39px 0px 38px 0px;">
+                <div>
+                    <a href="{{lrpServer}}uploads/{{lrpModel.selectedTask.preview}}" target="_blank"><img style="max-height: 40vh;" src="{{lrpServer}}uploads/{{lrpModel.selectedTask.preview}}"></a>
+                </div>
+            </div>
+
+            <ion-item>
+                <button class="button" style="width: 200px;" ng-click="selectListOpenManager(9);">
+                    <div ng-if="lrpModel.selectedPatient === null">환자 선택</div>
+                    <div ng-if="lrpModel.selectedPatient !== null">{{lrpModel.selectedPatient.name}}</div>
+                </button>
+            </ion-item>
+
+            <ion-item ng-if="lrpModel.selectedHomework === null" ng-hide="lrpModel.selectedTask.setSize == 1">
+                <button class="button icon ion-ios-arrow-back" ng-click="setDown();"></button>
+
+                <a class="button button-icon" style="width: 220px;margin: 0 21px;">세트 : {{lrpModel.setNum}} / {{lrpModel.selectedTask.setSize}}</a>
+
+                <button class="button icon ion-ios-arrow-forward" ng-click="setUp(lrpModel.selectedTask.setSize);"></button>
+            </ion-item>
+
+            <ion-item ng-if="lrpModel.statePage > 1 || tabStateCode !== 2 || lrpModel.selectedHomework !== null">
+                <button class="button button-balanced" style="width: 200px;" ng-click="playIndividual()">
+                    <span ng-if="lrpModel.selectedHomework === null">개별 평가</span><span ng-if="lrpModel.selectedHomework !== null">과제</span> 시작
+                </button>
+            </ion-item>
+
+            <ion-item ng-if="lrpModel.statePage < 2 && tabStateCode === 2 && lrpModel.selectedHomework === null">
+                <input type='hidden' ng-model='lrpModel.setDelay' value="0" />
+                <!--<select style="width: 45%; height: 46px; line-height: 18px !important; padding: 0px 0px 0px 6px !important; border: 2px solid #1e88e5 !important;" ng-model="lrpModel.setDelay">
+                    <option value="0">없음</option>
+                    <option value="7">7 일</option>
+                    <option value="14">14 일</option>
+                    <option value="21">21 일</option>
+                    <option value="28">28 일</option>
+                </select>-->
+                <button class="button" style="width: 30%;" ng-click="assignHomework(lrpModel.selectedTask, lrpModel.setDelay, false)">
+                    과제 할당
+                </button>
+            </ion-item>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+<section class="row" data-ng-controller="PayController" data-ng-init="findOne()">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<div class="form-horizontal">
+				<pay_info></pay_info>
+				<div class="form-group">
+					<a ng-disabled="pay.approved" class="btn btn-primary" data-ng-click="update();">
+						수정
+					</a>
+					<a ng-disabled="pay.approved" class="btn btn-primary" data-ng-click="remove();">
+						제거
+					</a>
+				</div>
+				<div data-ng-show="error" class="text-center text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+			</form>
+		</div>
+	</div>
+</section>
+

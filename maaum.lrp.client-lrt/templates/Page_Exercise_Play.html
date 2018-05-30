@@ -1,0 +1,497 @@
+<ion-view view-title="Play">
+    <div ng-if="!endFlag" style="height: 100%;">
+        <ion-header-bar class="lrp-bar-top lrp-header-padding" style="width: 100%; position: relative">
+            <div class="buttons">
+                <button class="button button-clear icon ion-android-arrow-back" ng-click="endExerciseAsk()" style="margin-right:12px"></button>
+            </div>
+            <div ng-switch="" on="lrpModel.selectedProblemSet[stage].practice">
+                <div ng-switch-when="true">
+                    <div class="div-flex" style="overflow: hidden;">
+                        <h3>{{stringByteLength(lrpModel.selectedProblemSet[stage].def[0].value)}}{{lrpModel.selectedTask.category}} : {{lrpModel.selectedTask.name}} 연습문제 ({{stage + 1}} / {{lrpModel.numOfPractice}})</h3>
+                    </div>
+                </div>
+                <div ng-switch-default>
+                    <h3>{{stringByteLength(lrpModel.selectedProblemSet[stage].def[0].value)}}{{lrpModel.selectedTask.category}} : {{lrpModel.selectedTask.name}} ({{stage + 1 - lrpModel.numOfPractice}} / {{lrpModel.selectedProblemSet.length - lrpModel.numOfPractice}})</h3>
+                </div>
+            </div>
+            <!--<div class="buttons">
+                <button class="button button-clear icon ion-close" ng-click="endExerciseAsk()"></button>
+            </div>-->
+        </ion-header-bar>
+
+        <div style="height: 100%;">
+            <div class="outer-excercise">
+                <div class="inner-middle">
+                    <!-- 타이틀 표시 : definition 1인 경우 -->
+                    <div ng-if="(lrpModel.selectedProblemSet[stage].def.length === 1)" style="display: table; width: 100%; height: 10vh;padding-left: 5px;" ng-class="{ lrpRecordMarginTop : lrpModel.selectedTask.answer === 'record' }">
+                        <div style="display: table-row;">
+                            <div style="display: table-cell; vertical-align: middle;" ng-repeat="definition in lrpModel.selectedProblemSet[stage].def">
+                                <div ng-if="lrpModel.selectedProblemSet[stage].res.length === 0">
+                                    <img ng-if="definition.resType === 'file'" class="lrp-fade" src="{{lrpServer}}uploads/{{definition.value}}">
+                                </div>
+                                <div ng-if="lrpModel.selectedProblemSet[stage].res.length !== 0">
+                                    <img ng-if="definition.resType === 'file'" class="lrp-fade" ng-class="{ lrpPlayImgL: lrpModel.selectedTask.answer === 'record', lrpPlayImgM: lrpModel.selectedTask.answer === 'select' }" src="{{lrpServer}}uploads/{{definition.value}}">
+                                </div>
+                                <div>
+                                    <h1 style="font-size: {{setFontSize(definition, lrpModel.selectedProblemSet[stage].def.length)}}px" ng-if="definition.resType === 'str' && definition.value.length < 24">{{definition.value}}</h1>
+                                    <h1 style="font-size: 60px; text-align: left; padding-left: 10px;" ng-if="definition.resType === 'str' && definition.value.length > 23">{{definition.value}}</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 설문조사 -->
+                    <div style="text-align:left" ng-if="(lrpModel.selectedTask.answer === 'forms')">
+                        res: {{lrpModel.selectedProblemSet[stage].res[0].value}} def: {{lrpModel.selectedProblemSet[stage].def[0].value}}
+                        <ng-include src="lrpModel.selectedProblemSet[stage].res[0].value"></ng-include>
+                    </div>
+                    <!-- 04번 과제 -->
+                    <div style="text-align:left" ng-if="(lrpModel.selectedTask.answer === 'pick15')">
+                        <ng-include src="'partial/custom_04.html'"></ng-include>
+                    </div>
+                    <!-- 08번 과제 -->
+                    <div style="text-align:left" ng-if="(lrpModel.selectedTask.answer === 'pick08')">
+                        <ng-include src="'partial/custom_08.html'"></ng-include>
+                    </div>
+                    <!-- 30번 과제 -->
+                    <div style="text-align:left" ng-if="(lrpModel.selectedTask.answer === 'visual30')">
+                        <ng-include src="'partial/custom_30visual.html'"></ng-include>
+                    </div>
+                    <!-- 34번 과제 -->
+                    <div style="text-align:left" ng-if="(lrpModel.selectedTask.answer === 'visual34')">
+                        <ng-include src="'partial/custom_34visual.html'"></ng-include>
+                    </div>
+                    <!-- 35번 과제 -->
+                    <div style="text-align:left" ng-if="(lrpModel.selectedTask.answer === 'sound')">
+                        <ng-include src="'partial/custom_35sound.html'"></ng-include>
+                    </div>
+
+                    <!-- 대고 그림 그리기 과제 -->
+                    <div ng-if="(lrpModel.selectedTask.answer === 'draw-one')">
+                        <div style="position:relative; right:0;text-align:right">
+                            <button style='height:5vh' ng-click="dpUndo()">되돌리기</button>
+                            <button style='height:5vh' ng-click="dpWhite()">지우개</button>
+                            <button style='height:5vh' ng-click="dpBlack()">검정펜</button>
+                            <button style='height:5vh' ng-click="dpRed()">빨간펜</button>
+                            <button style='height:5vh' ng-click="dpBlue()">파란펜</button>
+                        </div>
+                        <div style="display: table-row;" ng-init="initDrawingPad(1.0, 0.7)">
+                            <div style="display: table-cell; vertical-align: middle; width:100vw; height:70vh" my-directive>
+                                <div id="sketchpad"></div>
+                            </div>
+                        </div>
+                        <div style="display: table-row; height:20vh">
+                            <div style='display: table-cell; width:100vw'>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 보고 그림 그리기 과제 -->
+                    <div ng-if="(lrpModel.selectedTask.answer === 'draw-two')">
+                        <div style="position:relative; right:0;text-align:right">
+                            <button style='height:5vh' ng-click="dpUndo()">되돌리기</button>
+                            <button style='height:5vh' ng-click="dpWhite()">지우개</button>
+                            <button style='height:5vh' ng-click="dpBlack()">검정펜</button>
+                            <button style='height:5vh' ng-click="dpRed()">빨간펜</button>
+                            <button style='height:5vh' ng-click="dpBlue()">파란펜</button>
+                        </div>
+                        <div style="display: table-row;" ng-init="initDrawingPad(0.5, 0.7)">
+                            <div id="resizeTarget" style="display: table-cell; vertical-align: middle; width:50vw; height:60vh">
+                                <div>
+                                    <img src='{{lrpServer}}uploads/{{lrpModel.selectedProblemSet[stage].res[0].value}}' style="max-width: 100%; max-height: 100%;">
+                                </div>
+                            </div>
+                            <div style="display: table-cell; vertical-align: middle; width:50vw; height:60vh" my-directive>
+                                <div id="sketchpad"></div>
+                            </div>
+                        </div>
+                        <div style="display: table-row; height:20vh">
+                            <div style='display: table-cell; width:100vw'>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div ng-if="(lrpModel.selectedProblemSet[stage].def.length === 2)" style="margin-left:auto; margin-right:auto; display: table;padding-bottom: 20px; padding-left: 5px; height: 368px;" ng-class="{ lrpRecordMarginTop : lrpModel.selectedTask.answer === 'record' }">
+                        <div style="display: table-row;">
+                            <div style="display: table-cell; vertical-align: middle;padding-bottom: 20px;">
+                                <img ng-if="lrpModel.selectedProblemSet[stage].def[0].resType === 'file'" class="lrp-fade" ng-class="{ lrpPlayImgL: lrpModel.selectedTask.answer === 'record', lrpPlayImgM: lrpModel.selectedTask.answer === 'select' }" src="{{lrpServer}}uploads/{{lrpModel.selectedProblemSet[stage].def[0].value}}">
+                                <div ng-if="lrpModel.selectedProblemSet[stage].def[0].resType === 'str'">
+                                    <h1 style="font-size: 45px; text-align: left; padding-left: 10px;">{{lrpModel.selectedProblemSet[stage].def[0].value}}</h1>
+                                </div>
+                                <img ng-if="lrpModel.selectedProblemSet[stage].def[1].resType === 'file'" class="lrp-fade" ng-class="{ lrpPlayImgL: lrpModel.selectedTask.answer === 'record', lrpPlayImgM: lrpModel.selectedTask.answer === 'select' }" src="{{lrpServer}}uploads/{{lrpModel.selectedProblemSet[stage].def[1].value}}">
+                                <div ng-if="lrpModel.selectedProblemSet[stage].def[1].resType === 'str'">
+                                    <h1 style="font-size: 55px; text-align: left; padding-left: 10px;">{{lrpModel.selectedProblemSet[stage].def[1].value}}</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div ng-if="lrpModel.selectedTask.answer === 'select' && lrpModel.selectedProblemSet[stage].def.length === 2 && lrpModel.selectedProblemSet[stage].res.length === 4" style="display: table; width: 100%; margin-top: 5px;">
+                        <div style="display: table-cell; vertical-align: middle;">
+                            <div ng-if="lrpModel.selectedProblemSet[stage].res.length < 1 || lrpModel.selectedProblemSet[stage].res[0].resType !== 'bool'">
+                                <div ng-repeat="resource in lrpModel.selectedProblemSet[stage].res" style="display: inline-block; width: 50%; height: 140px;" ng-class="{
+                              lrpImgCorrected: selectFlag && (resource.isAnswer) && selectImg !== $index,
+                              lrpImgSelected : selectImg === $index
+                            }" ng-click="selectAnswer($index)">
+                                    <div style="display: table; width: 100%; height: 100%;">
+                                        <div style="display: table-cell; vertical-align: middle; text-align: center;">
+                                            <img ng-if="resource.resType === 'file'" class="lrpPlayImgS lrp-fade" src="{{lrpServer}}uploads/{{resource.value}}">
+                                            <h1 ng-if="resource.resType === 'str'" style="font-size: 60px;">{{resource.value}}</h1>
+                                            <img ng-if="lrpModel.selectedTask.answer === 'select' && (resource.isAnswer) && selectFlag && selectImg === $index" style="position: absolute;max-width: 300px;max-height: 300px;" class="{{'lrpCorrect244' + $index}}" src="./img/res/training_img_answer01.png">
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div ng-if="lrpModel.selectedTask.answer === 'select' && lrpModel.selectedProblemSet[stage].def.length === 0 && lrpModel.selectedProblemSet[stage].res.length === 4" style="display: table; width: 100%; height: 285px; margin-top: 5px;">
+                        <div style="display: table-cell; vertical-align: middle;">
+                            <div ng-if="lrpModel.selectedProblemSet[stage].res.length < 1 || lrpModel.selectedProblemSet[stage].res[0].resType !== 'bool'">
+                                <div ng-repeat="resource in lrpModel.selectedProblemSet[stage].res" style="display: inline-block; width: 50%; height: 285px;" ng-class="{
+                              lrpImgCorrected: selectFlag && (resource.isAnswer) && selectImg !== $index,
+                              lrpImgSelected : selectImg === $index
+                            }" ng-click="selectAnswer($index)">
+                                    <div style="display: table; width: 100%; height: 100%;">
+
+                                        <div style="display: table-cell; vertical-align: middle; text-align: center;">
+                                            <img ng-if="resource.resType === 'file'" class="lrpPlayImgM lrp-fade" src="{{lrpServer}}uploads/{{resource.value}}">
+                                            <h1 ng-if="resource.resType === 'str'" class="lrpPlayFontSizeS">{{resource.value}}</h1>
+                                            <img ng-if="lrpModel.selectedTask.answer === 'select' && (resource.isAnswer) && selectFlag && selectImg === $index" style="position: absolute;max-width: 600px;max-height: 600px;" class="{{'lrpCorrect44' + $index}}" src="./img/res/training_img_answer01.png">
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div ng-if="lrpModel.selectedTask.answer === 'select' && lrpModel.selectedProblemSet[stage].res.length < 4" style="display: table; width: 100%; height: 285px; margin-top: 5px;">
+                        <div style="display: table-cell; vertical-align: middle;">
+                            <div ng-if="lrpModel.selectedProblemSet[stage].res.length < 1 || lrpModel.selectedProblemSet[stage].res[0].resType !== 'bool'">
+                                <div ng-repeat="resource in lrpModel.selectedProblemSet[stage].res" style="display: inline-block; min-width: 33%;" ng-class="{
+                              lrpImgCorrected: selectFlag && (resource.isAnswer) && selectImg !== $index,
+                              lrpImgSelected : selectImg === $index
+                            }" ng-click="selectAnswer($index)">
+                                    <div style="display: table; width: 100%; height: 100%;">
+
+                                        <div style="display: table-cell; vertical-align: middle; text-align: center;">
+                                            <img ng-if="resource.resType === 'file'" class="lrpPlayImgM lrp-fade" src="{{lrpServer}}uploads/{{resource.value}}">
+                                            <h1 ng-if="resource.resType === 'str'" class="lrpPlayFontSizeS">{{resource.value}}</h1>
+                                            <img ng-if="lrpModel.selectedTask.answer === 'select' && (resource.isAnswer) && selectFlag && selectImg === $index" style="position: absolute;max-width: 600px;max-height: 600px;top: calc(75% - 265px);" class="{{'lrpCorrect' + $index}}" src="./img/res/training_img_answer01.png">
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div ng-if="lrpModel.selectedProblemSet[stage].res.length === 1 && lrpModel.selectedProblemSet[stage].res[0].resType === 'bool'">
+                                <div style="display: inline-block; width: 33%; height: 285px;" ng-class="{
+                              lrpImgCorrected: selectFlag && (lrpModel.selectedProblemSet[stage].res[0].isAnswer) && selectImg !== 1,
+                              lrpImgSelected : selectImg === 1
+                            }" ng-click="selectAnswer(1)">
+                                    <div style="display: table; width: 100%; height: 100%;">
+                                        <div style="display: table-cell; vertical-align: middle; text-align: center;">
+                                            <h1 class="lrpPlayFontSizeS">예</h1>
+                                            <img ng-if="lrpModel.selectedProblemSet[stage].res[0].isAnswer && selectFlag && selectImg === 1" style="position: absolute;max-width: 600px;max-height: 600px;top: calc(75% - 265px);left: calc(33.3% - 300px);" src="./img/res/training_img_answer01.png">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="display: inline-block; width: 33%; height: 285px;" ng-class="{
+                              lrpImgCorrected: selectFlag && (!lrpModel.selectedProblemSet[stage].res[0].isAnswer) && selectImg !== 2,
+                              lrpImgSelected : selectImg === 2
+                            }" ng-click="selectAnswer(2)">
+                                    <div style="display: table; width: 100%; height: 100%;">
+                                        <div style="display: table-cell; vertical-align: middle; text-align: center;">
+                                            <h1 class="lrpPlayFontSizeS">아니오</h1>
+                                            <img ng-if="!lrpModel.selectedProblemSet[stage].res[0].isAnswer && selectFlag && selectImg === 2" style="position: absolute;max-width: 600px;max-height: 600px;top: calc(75% - 265px);left: calc(66.6% - 300px);" src="./img/res/training_img_answer01.png">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="position: absolute; padding: 10px; bottom: 0px;">
+                <div ng-if="lrpModel.selectedTask.answer === 'select'" style="float: left;">
+                    <!--<button class="button" style="height: 100px; width: 100px;" ng-click="showAnswer()">
+                        정답 확인
+                    </button>-->
+                    <button class="button" style="height: 100px; width: 100px;" ng-click="stageNextCap()">
+                        다음
+                    </button>
+                </div>
+
+                <div ng-if="lrpModel.selectedTask.answer === 'record' && !onRecordFlag" style="float: left;">
+                    <button class="button" style="height: 100px; width: 100%;" ng-click="recordStart()">
+                        <img src="./img/res/training_btn_rec_select.png" style="width: 70px; margin-top: 14px;">
+                    </button>
+                </div>
+
+                <div ng-if="onRecordFlag" style="float: left;">
+                    <button class="button" style="height: 100px; width: 100%;" ng-click="recordStop()">
+                        <img src="./img/res/training_progress_btn_pause_normal.png" style="width: 70px; margin-top: 14px;">녹음 진행 중...
+                    </button>
+                </div>
+
+                <div ng-if="!onRecordFlag && recordFlag" style="float: left; margin-left: 10px;">
+                    <button class="button" style="height: 100px; width: 100px;" ng-click="recordPlay()">
+                        <img src="./img/res/training_progress_btn_play_normal.png" style="width: 70px; margin-top: 14px;">
+                    </button>
+                </div>
+
+                <div ng-if="!onRecordFlag && (selectFlag || recordFlag)" style="float: left; margin-left: 10px;">
+                    <button class="button" style="height: 100px; width: 100px;" ng-click="stageNextCap()" ng-disabled="saveLock">
+                        <span ng-if="!saveLock">다음</span><span ng-if="saveLock">녹음 저장 중</span>
+                    </button>
+                </div>
+
+                <div ng-switch="" on="lrpModel.selectedTask.score_type" style="float: left; margin-left: 10px;">
+                    <!--<div ng-switch-when="sfna">
+                        <div ng-switch="" on="lrpModel.selectedProblemSet[stage].practice">
+                            <div ng-switch-when="true">
+                                <button class="button" style="height: 100px; width: 100px;" ng-click="stageNext()">
+                                    <span>다음</span>
+                                </button>
+                            </div>
+                            <div ng-switch-default>
+                                <button class="button" style="height: 100px; width: 100px;" ng-click="stageNext('S')">
+                                    <span>S</span>
+                                </button>
+                                <button class="button" style="height: 100px; width: 100px;" ng-click="stageNext('F')">
+                                    <span>F</span>
+                                </button>
+                                <button class="button" style="height: 100px; width: 100px;" ng-click="stageNext('NA')">
+                                    <span>NA</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>-->
+                    <div ng-switch-when="nbab">
+                        <div ng-switch="" on="lrpModel.selectedProblemSet[stage].practice">
+                            <div ng-switch-when="true">
+                                <button class="button" style="height: 100px; width: 100px;" ng-click="stageNext()">
+                                        <span>다음</span>
+                                    </button>
+                            </div>
+                            <div ng-switch-default>
+                                <button class="button" style="height: 100px; width: 100px;" ng-click="stageNext('N')">
+                                        <span>N</span>
+                                    </button>
+                                <button class="button" style="height: 100px; width: 100px;" ng-click="stageNext('B')">
+                                        <span>B</span>
+                                    </button>
+                                <button class="button" style="height: 100px; width: 100px;" ng-click="stageNext('AB')">
+                                        <span>AB</span>
+                                    </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-switch-when="ndp">
+                        <div ng-switch="" on="lrpModel.selectedProblemSet[stage].practice">
+                            <div ng-switch-when="true">
+                                <button class="button" style="height: 100px; width: 100px;" ng-click="stageNext()">
+                                            <span>다음</span>
+                                        </button>
+                            </div>
+                            <div ng-switch-default>
+                                <button class="button" style="height: 100px; width: 100px;" ng-click="stageNext('N')">
+                                            <span>N</span>
+                                        </button>
+                                <button class="button" style="height: 100px; width: 100px;" ng-click="stageNext('D')">
+                                            <span>D</span>
+                                        </button>
+                                <button class="button" style="height: 100px; width: 100px;" ng-click="stageNext('P')">
+                                            <span>P</span>
+                                        </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-switch-when="정반응/오반응">
+                        <div ng-switch="" on="lrpModel.selectedProblemSet[stage].practice">
+                            <div ng-switch-when="true">
+                                <button class="button" style="height: 100px; width: 100px;" ng-click="stageNext()">
+                                                <span>다음</span>
+                                            </button>
+                            </div>
+                            <div ng-switch-default>
+                                <button class="button" style="height: 100px; width: 100px;" ng-click="stageNext('정반응')">
+                                                <span>정반응</span>
+                                            </button>
+                                <button class="button" style="height: 100px; width: 100px;" ng-click="stageNext('오반응')">
+                                                <span>오반응</span>
+                                            </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-switch-default>
+                        <div ng-if="(lrpModel.selectedTask.answer === 'draw-one')" style="float: left; margin-left: 10px;">
+                            <button class="button" style="height: 100px; width: 100px;" ng-click="stageNext()">
+                                        <span>다음</span>
+                                    </button>
+                        </div>
+
+                        <div ng-if="(lrpModel.selectedTask.answer === 'draw-two')" style="float: left; margin-left: 10px;">
+                            <button class="button" style="height: 100px; width: 100px;" ng-click="stageNext()">
+                                        <span>다음</span>
+                                    </button>
+                        </div>
+                    </div>
+                </div>
+
+                <audio id="recordingPlayer" controls muted hidden></audio>
+            </div>
+
+            <!--div style="position: absolute; right: 0; padding: 10px; bottom: 0px;">
+                <div ng-if="!onRecordFlag && (selectFlag || recordFlag)" style="float: right;">
+                    <button class="button" style="height: 100px; width: 100px;" ng-click="stageNextCap()" ng-disabled="saveLock">
+                        <span ng-if="!saveLock">다음</span><span ng-if="saveLock">녹음 저장 중</span>
+                    </button>
+                </div>
+            </div-->
+        </div>
+
+    </div>
+
+    <div ng-if="endFlag">
+
+        <ion-header-bar class="lrp-bar-top lrp-header-padding" style="width: 100%; position: relative">
+            <div class="div-flex my-row-center">
+                <h3>{{resultSchema.name}}</h3>
+            </div>
+            <div class="buttons">
+                <button class="button button-clear icon ion-close" ng-click="reportResult()"></button>
+            </div>
+        </ion-header-bar>
+
+        <div>
+            <div style="text-align: center; padding: 20px; height: 140px; background-color: azure;">
+                <div style="width: 20%; float: left; margin-left: 5%;">
+                    <h4>평가자 : {{lrpModel.selectedPatient.name}}</h4>
+                    <h4>평가자 : {{lrpModel.selectedPatient.assignedTherapistName}}</h4>
+                    <h4>평가일 : {{resultSchema.created | date: "yyyy-MM-dd"}}</h4>
+                </div>
+                <div style="width: 70%; height: 100%; float: left; margin-left: 5%; display: table;">
+                    <div style="display: table-cell; vertical-align: middle;">
+                        <div ng-if="resultSchema.tasks.length > 1" style="margin-bottom: 10px;">
+                            <div ng-repeat="task in resultSchema.tasks" style="display: inline;">
+                                <input ng-class="{ lrpMarginResPx : !$first }" type="radio" name="group" ng-model="lrpModel.taskPivot" ng-value="$index" ng-click="setPivot($index)">
+                            </div>
+                        </div>
+                        <div>
+                            <div ng-if="resultSchema.tasks.length > 1" style="float: left;">
+                                <button class="button icon ion-ios-arrow-back" style="background-color: azure;" ng-click="backPivot()"></button>
+                            </div>
+                            <div style="display: inline-block; width: 80%; overflow: hidden; white-space: nowrap;" style="overflow: hidden;">
+                                <h1>{{taskName[lrpModel.taskPivot]}} Set : {{resultSchema.tasks[lrpModel.taskPivot].setID}}</h1>
+                            </div>
+                            <div ng-if="resultSchema.tasks.length > 1" style="float: right;">
+                                <button class="button icon ion-ios-arrow-forward" style="background-color: azure;" ng-click="frontPivot(resultSchema.tasks.length)"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="outer" style="margin-top: 6%;">
+                <div class="inner">
+
+                    <div style="width: 32%; float: left; margin-left: 10px;">
+                        <ion-item style="border: none;">
+
+                            <div ng-if="lrpModel.selectedTask.showPieChart === true" style="position: inherit;">
+                                <div ng-if="scoringFlag === false">
+                                    <div style="position: absolute; top: calc(50% - 25px); left: calc(50% - 50px); font-size: xx-large;">{{((resultSchema.tasks[lrpModel.taskPivot].numOfCorrect - lrpModel.numOfPractice) / (resultSchema.tasks[lrpModel.taskPivot].numOfResponse - lrpModel.numOfPractice)) * 100 | number : 2}} %</div>
+                                    <div style="position: absolute; top: calc(50% + 10px); left: calc(50% - 12px); font-size: medium;">{{(resultSchema.tasks[lrpModel.taskPivot].numOfCorrect - lrpModel.numOfPractice)}} / {{resultSchema.tasks[lrpModel.taskPivot].numOfResponse - lrpModel.numOfPractice}} <span ng-if="resultSchema.tasks[lrpModel.taskPivot].numOfResponse !== resultSchema.tasks[lrpModel.taskPivot].numOfProblem">({{resultSchema.tasks[lrpModel.taskPivot].numOfResponse}})</span></div>
+                                    <progress-arc style="margin-left: 1px;" size="300" stroke="#3080E8" stroke-width="55" complete="((resultSchema.tasks[lrpModel.taskPivot].numOfCorrect - lrpModel.numOfPractice) / (resultSchema.tasks[lrpModel.taskPivot].numOfProblem - lrpModel.numOfPractice))"
+                                        background="#ddd">
+                                    </progress-arc>
+                                </div>
+                                <div ng-if="scoringFlag === true">
+                                    <div style="position: absolute; top: calc(50% - 25px); left: calc(50% - 50px); font-size: xx-large;">{{((resultSchema.tasks[lrpModel.taskPivot].totalScore) / (resultSchema.tasks[lrpModel.taskPivot].maxScore)) * 100 | number : 2}} %</div>
+                                    <div style="position: absolute; top: calc(50% + 10px); left: calc(50% - 12px); font-size: medium;">{{(resultSchema.tasks[lrpModel.taskPivot].totalScore)}} / {{resultSchema.tasks[lrpModel.taskPivot].maxScore}} <span ng-if="resultSchema.tasks[lrpModel.taskPivot].numOfResponse !== resultSchema.tasks[lrpModel.taskPivot].numOfProblem">({{resultSchema.tasks[lrpModel.taskPivot].numOfResponse}})</span></div>
+                                    <progress-arc style="margin-left: 1px;" size="300" stroke="#3080E8" stroke-width="55" complete="((resultSchema.tasks[lrpModel.taskPivot].totalScore) / (resultSchema.tasks[lrpModel.taskPivot].maxScore))" background="#ddd">
+                                    </progress-arc>
+                                </div>
+                            </div>
+
+                        </ion-item>
+                    </div>
+
+                    <div style="width: 50%; float: left">
+                        <ion-item style="border: none;">
+                            <canvas id="line" class="chart chart-line" data="graphData[lrpModel.taskPivot]" labels="labels[lrpModel.taskPivot]" legend="false" series="series" click="" style="width: 100%; height: 296px;">
+                            </canvas>
+                        </ion-item>
+                    </div>
+
+                    <div ng-hide="resultSchema.tasks[lrpModel.taskPivot].totalTime === 0" style="display: table; float: right; margin-right: 10px; height: 336px;">
+                        <div style="display: table-cell; vertical-align: middle;">
+                            <div>
+                                <h2>총 수행시간</h2>
+                                <h2>{{resultSchema.tasks[lrpModel.taskPivot].totalTime / 1000 | number : 2}} s</h2>
+                            </div>
+                            <div>
+                                <h2>평균시간</h2>
+                                <h2>{{resultSchema.tasks[lrpModel.taskPivot].meanTime / 1000 | number : 2}} s</h2>
+                            </div>
+                            <div>
+                                <h2>표준편차</h2>
+                                <h2>{{resultSchema.tasks[lrpModel.taskPivot].stdTime / 1000 | number : 2}} s</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div style="position: absolute; width: 100%; padding: 10px; bottom: 0px; text-align: end;">
+            <div ng-if="lrpModel.selectedTask.answer === 'select'" style="display: table; position: absolute; top: -32%;left: 10%;text-align:center;border: solid;overflow: hidden;">
+                <div style="display: table-row">
+                    <div style="display: table-cell;vertical-align: middle; background-color: #11c1f3;">
+                        <div style="height: 24px;">
+                            문항
+                        </div>
+                        <div style="height: 24px;">
+                            채점
+                        </div>
+                        <!--div style="height: 24px;" ng-if="resultSchema.tasks[lrpModel.taskPivot].answerType === 'record'">
+                            단서
+                        </div-->
+                    </div>
+
+                    <div style="display: table-cell;" ng-repeat="grade in resultSchema.tasks[lrpModel.taskPivot].problems">
+                        <div style="height: 24px;">
+                            {{$index + 1}}
+                        </div>
+                        <div style="height: 24px;">
+                            <img ng-if="grade.isCorrect" style="width: 24px;" src="./img/res/training_img_answer01.png">
+                            <img ng-if="!grade.isCorrect" style="width: 24px;" src="./img/res/training_img_answer02_100.png">
+                        </div>
+                        <!--div style="height: 24px;" ng-if="resultSchema.tasks[lrpModel.taskPivot].answerType === 'record'">
+                            <i class="icon" ng-class="{ 0:'ion-android-radio-button-off', 1:'ion-ios-lightbulb-outline', 2:'ion-volume-high', 3:'ion-sad-outline' }[grade.wrongType]"></i>
+                        </div-->
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button class="button" style="height: 100px; width: 100px;" ng-click="reportResult()">
+                    확인
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+</ion-view>

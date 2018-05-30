@@ -1,0 +1,66 @@
+<fieldset>
+    <legend>기관 정보</legend>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">기관 ID</label>
+        <div class="col-lg-10">
+            <input type="text" data-ng-model="center.center_id" id="center_id" class="form-control" placeholder="" required>
+        </div>
+    </div>
+</fieldset>
+<fieldset>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">기관 명</label>
+        <div class="col-lg-10">
+            <input type="text" data-ng-model="center.name" id="name" class="form-control" placeholder="" required>
+        </div>
+    </div>
+</fieldset>
+<fieldset>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">사업자 등록번호</label>
+        <div class="col-lg-10">
+            <input type="number" data-ng-model="center.reg_id" id="reg_id" class="form-control" placeholder="10자리 숫자로 입력" required>
+        </div>
+    </div>
+</fieldset>
+<fieldset>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">주소</label>
+        <div class="col-lg-10">
+            <input type="text" data-ng-model="center.address" id="address" class="form-control" placeholder="도로명 주소로 입력" required>
+        </div>
+    </div>
+</fieldset>
+<fieldset>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">전화번호</label>
+        <div class="col-lg-10">
+            <input type="tel" data-ng-model="center.tel" id="tel" class="form-control" placeholder="000-0000-0000" required>
+        </div>
+    </div>
+</fieldset>
+<fieldset>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">담당자</label>
+        <div class="col-lg-10">
+            <input type="text" data-ng-model="center.officer" id="officer" class="form-control" placeholder="">
+        </div>
+    </div>
+</fieldset>
+<fieldset>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">담당자 연락처</label>
+        <div class="col-lg-10">
+            <input type="tel" data-ng-model="center.officer_tel" id="officer_tel" class="form-control" placeholder="000-0000-0000">
+        </div>
+    </div>
+</fieldset>
+<fieldset>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">이메일</label>
+        <div class="col-lg-10">
+            <input type="email" data-ng-model="center.email" name="email" id="email" class="form-control" placeholder="" required>
+            <div role="alert"><span class="text-danger" ng-show="centerForm.email.$error.email">이메일 양식(a@a.com)에 어긋납니다.</span></div>
+        </div>
+    </div>
+</fieldset>

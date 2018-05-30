@@ -1,0 +1,60 @@
+<fieldset>
+    <legend>리소스 항목 {{$index+1}} <a data-ng-click="removeResource({{$index}})" class="btn btn-large btn-warning">리소스 제거</a></legend>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">리소스 타입</label>
+        <div class="col-lg-10">
+            <label class="radio-inline c-radio">
+                <input id="{{$index}}resTyperadio1" data-ng-model="resource.resType" type="radio" name="{{$index}}resType" value="str" checked="checked" />
+                <span class="fa fa-circle"></span>문자열</label>
+            <label class="radio-inline c-radio">
+                <input id="{{$index}}resTyperadio2" data-ng-model="resource.resType" type="radio" name="{{$index}}resType" value="file" />
+                <span class="fa fa-circle"></span>파일 (이미지, etc)</label>
+            <label class="radio-inline c-radio">
+                <input id="{{$index}}resTyperadio3" data-ng-model="resource.resType" type="radio" name="{{$index}}resType" value="bool" />
+                <span class="fa fa-circle"></span>논리값 (예 / 아니오)</label>
+            <label class="radio-inline c-radio">
+                <input id="{{$index}}resTyperadio4" data-ng-model="resource.resType" type="radio" name="{{$index}}resType" value="video" />
+                <span class="fa fa-circle"></span>동영상</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">문자열 타입</label>
+        <div class="col-lg-10">
+            <label class="radio-inline c-radio">
+                <input id="{{$index}}strTyperadio1" data-ng-model="resource.strType" type="radio" name="{{$index}}strType" value="text" checked="checked" />
+                <span class="fa fa-circle"></span>한줄입력</label>
+            <label class="radio-inline c-radio">
+                <input id="{{$index}}strTyperadio2" data-ng-model="resource.strType" type="radio" name="{{$index}}strType" value="textarea" />
+                <span class="fa fa-circle"></span>여러줄 입력</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">리소스 이름</label>
+        <div class="col-lg-10">
+            <input type="text" data-ng-model="resource.name" id="resName" class="form-control" placeholder="Name" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">정의 리소스 여부</label>
+        <div class="col-lg-10">
+            <div class="checkbox c-checkbox">
+                <label>
+                    <input type="checkbox"  data-ng-model="resource.isDefinition" checked="" />
+                    <span class="fa fa-check"></span>정의 리소스
+                </label>
+            </div>
+            <span class="help-block">문제를 정의하는 리소스 (예: 범주 매칭 문제에서 문제 그림). 참고 : 리소스는 정의 리소스와 문항 리소스로 구분됨.</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">비고</label>
+        <div class="col-sm-10">
+            <!--<script type="text/ng-template" id="ng-wig/views/ng-wig.html">
+                <div class="ng-wig"><div class="btn-group btn-group-sm wd-wide"><button type="button" title="Header" ng-click="execCommand('formatblock', '&lt;h1&gt;')" class="btn btn-sm btn-default"><em class="fa fa-header"></em></button><button type="button" title="Paragraph" ng-click="execCommand('formatblock', '&lt;p&gt;')" class="btn btn-sm btn-default"><em class="fa fa-paragraph"></em></button><button type="button" title="Unordered List" ng-click="execCommand('insertunorderedlist')" class="btn btn-sm btn-default"><em class="fa fa-list-ul"></em></button><button type="button" title="Ordered List" ng-click="execCommand('insertorderedlist')" class="btn btn-sm btn-default"><em class="fa fa-list-ol"></em></button><button type="button" title="Bold" ng-click="execCommand('bold')" class="btn btn-sm btn-default"><em class="fa fa-bold"></em></button><button type="button" title="Italic" ng-click="execCommand('italic')" class="btn btn-sm btn-default"><em class="fa fa-italic"></em></button><button type="button" title="link" ng-click="execCommand('createlink')" class="btn btn-sm btn-default"><em class="fa fa-link"></em></button><button type="button" title="Edit Html" ng-class="{ 'nw-button--active': editMode }" ng-click="toggleEditMode()" class="pull-right btn btn-sm btn-default"><em class="fa fa-pencil"></em></button></div><div class="nw-editor"><textarea ng-show="editMode" ng-model="content" class="nw-editor__src"> </textarea><iframe scrolling="{{ autoexpand ? 'no' : 'yes' }}" frameBorder="0" ng-hide="editMode" ng-model="content" ng-wig-editable="" class="nw-editor__res"></iframe></div></div>
+            </script>
+            <textarea ng-wig="resource.note"></textarea>-->
+            <input type="text" data-ng-model="resource.note" class="form-control" placeholder="note">
+            <span class="help-block">문항 등록 시 표시되는 도움말</span>
+        </div>
+    </div>
+</fieldset>

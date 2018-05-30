@@ -1,0 +1,108 @@
+<section class="row" data-ng-controller="AdminSignUpController">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<form name="userForm" data-ng-submit="signup(userForm.$valid)" novalidate class="form-horizontal" autocomplete="off">
+				<fieldset>
+					<legend>관리자 계정 정보 입력</legend>
+					<div class="form-group">
+						<label class="col-lg-2 control-label">ID</label>
+						<div class="col-lg-10">
+							<input type="text" data-ng-model="credentials.username" placeholder="ID" class="form-control" required  />
+						</div>
+					</div>
+				</fieldset>
+				<fieldset>
+					<div class="form-group">
+						<label class="col-lg-2 control-label">관리자 이름</label>
+						<div class="col-lg-10">
+							<input type="text" data-ng-model="credentials.name" placeholder="name" class="form-control" required  />
+						</div>
+					</div>
+				</fieldset>
+				<fieldset>
+					<div class="form-group">
+						<label class="col-lg-2 control-label">이메일 주소</label>
+						<div class="col-lg-10">
+							<input type="email" data-ng-model="credentials.email" placeholder="Email" class="form-control" required data-ng-class="{'ng-invalid':userForm.confirmEmail.$error.match}" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 control-label">이메일 주소 확인</label>
+						<div class="col-lg-10">
+							<input type="email" data-ng-model="credentials.confirmEmail" placeholder="Confirm Email" class="form-control" required match="credentials.email" name="confirmEmail" />
+							<span class="help-block" data-ng-show="userForm.confirmEmail.$error.match">이메일 주소가 일치해야 합니다.</span>
+						</div>
+					</div>
+				</fieldset>
+				<fieldset>
+					<div class="form-group">
+						<label class="col-lg-2 control-label">비밀번호</label>
+						<div class="col-lg-10">
+							<input data-ng-model="credentials.password" name="password" type="password" placeholder="Password" required class="form-control" data-ng-minlength="6" data-ng-class="{'ng-invalid':userForm.confirmPassword.$error.match}" />
+							<span class="help-block" data-ng-show="userForm.password.$error.minlength">비밀번호는 6글자 이상이어야 합니다.</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 control-label">비밀번호 확인</label>
+						<div class="col-lg-10">
+							<input type="password" placeholder="Confirm Password" required class="form-control" data-ng-model="credentials.confirmPassword" match="credentials.password" name="confirmPassword" />
+							<span class="help-block" data-ng-show="userForm.confirmPassword.$error.match">비밀번호가 일치해야 합니다.</span>
+						</div>
+					</div>
+				<fieldset>
+				<div class="form-group">
+					<div class="col-lg-offset-2 col-lg-10">
+						<button type="submit" class="btn btn-large btn-primary">가입</button>
+					</div>
+				</div>
+				<div data-ng-show="error" class="text-center text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+			</form>
+		</div>
+	</div>
+	<!--<div class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2">
+		<form name="userForm" data-ng-submit="signup()" class="signin form-horizontal" novalidate autocomplete="off">
+			<fieldset>
+				Profile Picture: <input class="btn btn-default btn-lg" type="file" ng-file-select="" ng-model="picFile" name="file" accept="image/*" ng-file-change="generateThumb(picFile[0], $files)" required="">
+				<i ng-show="myForm.file.$error.required">*required</i>
+				<br>
+
+				<button ng-click="upload(picFile)">Submit</button>
+				<img ng-show="picFile[0].dataUrl != null" ng-src="{{picFile[0].dataUrl}}" class="thumb">
+				<span class="progress" ng-show="picFile[0].progress >= 0">
+					<div style="width:{{picFile[0].progress}}%" ng-bind="picFile[0].progress + '%'" class="ng-binding"></div>
+				</span>
+				<span ng-show="picFile[0].result">Upload Successful</span>
+				<img ng-show="files[0].dataUrl != null" ng-src="{{files[0].dataUrl}}">
+				<div class="form-group">
+					<label for="firstName">First Name</label>
+					<input type="text" required id="firstName" name="firstName" class="form-control" data-ng-model="credentials.firstName" placeholder="First Name">
+				</div>
+				<div class="form-group">
+					<label for="lastName">Last Name</label>
+					<input type="text" id="lastName" name="lastName" class="form-control" data-ng-model="credentials.lastName" placeholder="Last Name">
+				</div>
+				<div class="form-group">
+					<label for="email">Email</label>
+					<input type="email" id="email" name="email" class="form-control" data-ng-model="credentials.email" placeholder="Email">
+				</div>
+				<div class="form-group">
+					<label for="username">Username</label>
+					<input type="text" id="username" name="username" class="form-control" data-ng-model="credentials.username" placeholder="Username">
+				</div>
+				<div class="form-group">
+					<label for="password">Password</label>
+					<input type="password" id="password" name="password" class="form-control" data-ng-model="credentials.password" placeholder="Password">
+				</div>
+				<div class="text-center form-group mt">
+					<button type="submit" class="btn btn-large btn-primary">Sign up</button>&nbsp; or&nbsp;
+					<a href="/#!/signin" class="show-signup">Sign in</a>
+				</div>
+				<div data-ng-show="error" class="text-center text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+			</fieldset>
+		</form>
+	</div>-->
+</section>

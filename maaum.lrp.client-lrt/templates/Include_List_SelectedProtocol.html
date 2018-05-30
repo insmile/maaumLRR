@@ -1,0 +1,71 @@
+<ion-header-bar class="bar-stable lrp-header-padding lrp-sub-header">
+    <div class="div-flex">
+        <h3>{{lrpModel.selectedProtocol.name}}</h3>
+    </div>
+    <div class="my-row-center" ng-if="lrpModel.statePage === 3">
+        <button class="button" ng-click="protcolDelete()">삭제</button>
+    </div>
+</ion-header-bar>
+
+<div style="position: absolute;width: inherit;top: 64px;">
+    <ion-item class="my-row-center">
+        <div class="div-left div-flex">
+            <h2>작성자 : {{lrpModel.selectedProtocol.user.name}}</h2>
+            <h2>생성일 : {{lrpModel.selectedProtocol.created | date : "yyyy-MM-dd"}}</h2>
+            <h2>갱신일 : {{lrpModel.selectedProtocol.updated | date : "yyyy-MM-dd"}}</h2>
+        </div>
+    </ion-item>
+
+    <ion-item style="text-align: center;">
+        <button class="button" style="width: 200px;" ng-click="selectListOpenManager(9);">
+            <div ng-if="lrpModel.selectedPatient === null">평가자 선택</div>
+            <div ng-if="lrpModel.selectedPatient !== null">{{lrpModel.selectedPatient.name}}</div>
+        </button>
+    </ion-item>
+
+    <ion-item style="text-align: center;" ng-if="lrpModel.statePage > 1 || tabStateCode !== 2 || lrpModel.selectedHomework !== null">
+        <button class="button" style="width: 200px;" ng-click="playProtocol()">
+            <span ng-if="lrpModel.selectedHomework === null">프로토콜 평가</span><span ng-if="lrpModel.selectedHomework !== null">과제</span> 시작
+        </button>
+    </ion-item>
+
+    <ion-item style="text-align: center;" ng-if="lrpModel.statePage < 2 && tabStateCode === 2 && lrpModel.selectedHomework === null">
+        <select style="width: 45%; height: 46px; line-height: 18px !important; padding: 0px 0px 0px 6px !important; border: 2px solid #1e88e5 !important;" ng-model="lrpModel.setDelay">
+            <option value="0">없음</option>
+            <option value="7">7 일</option>
+            <option value="14">14 일</option>
+            <option value="21">21 일</option>
+            <option value="28">28 일</option>
+        </select>
+        <button class="button" style="width: 30%;" ng-click="assignHomework(lrpModel.selectedProtocol, lrpModel.setDelay, true)">
+            과제 할당
+        </button>
+    </ion-item>
+
+    <ion-item class="item-divider my-row-center" style="height: 52px;">
+        <button ng-if="lrpModel.statePage === 3" class="button button-clear button-positive" style="width: 100%;" ng-click="selectListOpenManager(8);">
+            개별평가 추가
+        </button>
+    </ion-item>
+</div>
+
+<ion-content direction="y" style="top: 368px;">
+
+    <ion-list>
+
+        <ion-item class="my-row-center" ng-repeat="task in lrpModel.selectedProtocol.tasks">
+            <div class="div-left div-flex">
+                <h2>{{task.taskID.name}} set : {{task.setNum}}</h2>
+                <p>{{task.taskID.category}}</p>
+            </div>
+            <div>
+                <!--img src="./img/res/action_icon_move_normal.png" style="width: 36px; height: auto;">
+                <img src="./img/res/action_icon_delete_normal.png" style="width: 36px; height: auto;"-->
+            </div>
+        </ion-item>
+
+    </ion-list>
+
+</ion-content>
+
+</div>

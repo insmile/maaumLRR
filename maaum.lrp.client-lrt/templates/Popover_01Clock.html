@@ -1,0 +1,129 @@
+<ion-popover-view class="lrp-popover-view">
+
+    <ion-header-bar class="bar-stable lrp-bar-top lrp-header-padding lrp-popover-scroll">
+        <div class="div-flex">
+            <h3>시계 그리기 채점표</h3>
+        </div>
+        <button class="button button-clear icon ion-checkmark-round" style="color: #ffffff;" ng-click="saveScoring()"></button>
+    </ion-header-bar>
+
+    <ion-content style="margin: 0px;">
+        <div class="lrp-popover-q-header">
+            <p><label>1. 시계 판에 숫자들 몇개 있습니까? 문맥과 잘 알아볼 수 있습니까? 0-3점 ({{scoreModel.q[0].s}})</label></p>
+            <div class="lrp-popover-q-content">
+                <p><label><input type="checkbox" ng-model="scoreModel.q[0]" ng-true-value={s:3,c:0}> 3- 숫자 1부터 12까지 모두 있고 빠졌거나 추가된 숫자가 없습니다.</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[0]" ng-true-value={s:3,c:1}> 숫자 하나 이상 환자가 스스로 수정했으면 여기 체크를 하십시오.</label></p>
+                <p><label>2- 다음 중 하나 이상 있습니다.</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[0]" ng-true-value={s:2,c:0}> 적절한 숫자 6개에서 11개까지만 있습니다</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[0]" ng-true-value={s:2,c:1}> 적절한 숫자 6개에서 12개까지 있는데다가 12보다 큰 숫자 하나 이상 있습니다.</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[0]" ng-true-value={s:2,c:2}> 적절한 숫자 6개에서 12개까지 있는데 숫자 한 개 이상은 반복했습니다.</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[0]" ng-true-value={s:1,c:0}> 1- 적절한 숫자는 1개에서 5개까지만 있습니다.</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[0]" ng-true-value={s:0,c:0}> 0- 적절한 숫자가 없습니다.</label></p>
+            </div>
+        </div>
+        <div class="lrp-popover-q-header">
+            <p><label>2. 시계 판에 12개와 오직 12개만 있는 무언가가 있습니까? ({{scoreModel.q[1].s}})</label></p>
+            <div class="lrp-popover-q-content">
+                <p><label><input type="checkbox" ng-model="scoreModel.q[1]" ng-true-value={s:1,c:0}> 1- 시계 판이 12개의 무언가 (숫자, 바늘, 점, 등)로 나누어졌습니다.</label></p>
+                <p><label>0- 다음 중 하나 있습니다.</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[1]" ng-true-value={s:0,c:0}> 시계 판이 12개 미만으로 나누어졌습니다.</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[1]" ng-true-value={s:0,c:1}> 시계 판이 12개 초과(반복된 것, 추가된 것)로 나누어졌습니다.</label></p>
+            </div>
+        </div>
+        <div class="lrp-popover-q-header">
+            <p><label>3. 숫자들이 읽기 편한 올바른 방향으로 적혀 있거나 회전됐습니까? ({{scoreModel.q[2].s}})</label></p>
+            <div class="lrp-popover-q-content">
+                <p><label><input type="checkbox" ng-model="scoreModel.q[2]" ng-true-value={s:1,c:0}> 1- 숫자 2개 이하 회전됐습니다.</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[2]" ng-true-value={s:0,c:0}> 0- 숫자 3개 이상 회전됐습니다.</label></p>
+            </div>
+        </div>
+        <div class="lrp-popover-q-header">
+            <p><label>4. 숫자들이 제 위치에 있습니까? ({{scoreModel.q[3].s}})</label></p>
+            <div class="lrp-popover-q-content">
+                <p><label><input type="checkbox" ng-model="scoreModel.q[3]" ng-true-value={s:1,c:0}> 1- 12, 3, 6, 9 숫자들이 제 위치에 있고 나머지 숫자들이 충분히 적절한 위치에 있습니다.</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[3]" ng-true-value={s:1,c:1}> 위치 또는 배치를 환자가 스스로 수정했으면 여기 체크 하십시오.</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[3]" ng-true-value={s:0,c:0}> 0- 숫자들이 각 부분에 맞게 들어가지 않습니다.</label></p>
+            </div>
+        </div>
+        <div class="lrp-popover-q-header">
+            <p><label>5. 숫자들이 시계 판 안에 들어가 있고 모두 원 모양으로 배치되어 있습니까? ({{scoreModel.q[4].s}})</label></p>
+            <div class="lrp-popover-q-content">
+                <p><label><input type="checkbox" ng-model="scoreModel.q[4]" ng-true-value={s:1,c:0}> 1- 시계 판 안에 원 모양으로 배치되어 있습니다. 한 두 개만 원형에서 조금 떨어져도 괜찮지만 한 숫자의 반 이상 원형 밖으로 나가면 안 됩니다.</label></p>
+                <p><label>0- 다음 중 하나 이상 있습니다.</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[4]" ng-true-value={s:0,c:0}> 원형으로 배치하려는 의도가 없어 보입니다.</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[4]" ng-true-value={s:0,c:1}> 숫자 3개 이상 원형에서 떨어졌습니다.</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[4]" ng-true-value={s:0,c:2}> 한 숫자 이상의 반 이상 시계 판 밖으로 나갔습니다.</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[4]" ng-true-value={s:0,c:3}> 한 숫자 이상 시계 판 밖에서 배치됩니다.</label></p>
+            </div>
+        </div>
+        <div class="lrp-popover-q-header">
+            <p><label>6. 숫자들이 시계 방향으로 표기됩니까? ({{scoreModel.q[5].s}})</label></p>
+            <div class="lrp-popover-q-content">
+                <p><label><input type="checkbox" ng-model="scoreModel.q[5]" ng-true-value={s:1,c:0}> 1- 모든 숫자들이 시계 방향으로 표기됩니다.</label></p>
+                <p><label>0- 다음 중 하나 이상 있습니다.</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[5]" ng-true-value={s:0,c:0}> 숫자들이 시계 반대방향으로 표기됩니다.</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[5]" ng-true-value={s:0,c:1}> 숫자들이 비순서적으로 표기됩니다.</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[5]" ng-true-value={s:0,c:2}> 숫자들이 열로 표기됩니다.</label></p>
+            </div>
+        </div>
+        <div class="lrp-popover-q-header">
+            <p><label>7. 시계바늘이 몇 개 있습니까? ({{scoreModel.q[6].s}})</label></p>
+            <div class="lrp-popover-q-content">
+                <p><label><input type="checkbox" ng-model="scoreModel.q[6]" ng-true-value={s:1,c:0}> 1- 두 개의 시계바늘이 있습니다</label></p>
+                <p><label>0- 다음 중 하나 있습니다.</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[6]" ng-true-value={s:0,c:0}> 시계바늘이 없습니다.</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[6]" ng-true-value={s:0,c:1}> 시계바늘 한 개만 있습니다.</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[6]" ng-true-value={s:0,c:2}> 시계바늘 두 개 이상 있습니다 (초침 경우 제외).</label></p>
+            </div>
+        </div>
+        <div class="lrp-popover-q-header">
+            <p><label>8. 시계바늘들의 길이가 어떻습니까? ({{scoreModel.q[7].s}})</label></p>
+            <div class="lrp-popover-q-content">
+                <p><label>1- 분명한 시침과 분침의 차이가 있습니다.</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[7]" ng-true-value={s:1,c:0}> 시계바늘 길이를 환자가 스스로 수정했으면 여기 체크를 하십시오.
+                    <p><label>0- 다음 중 하나 이상 있습니다.</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[7]" ng-true-value={s:0,c:0}> 시계바늘의 길이가 같습니다.</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[7]" ng-true-value={s:0,c:1}> 시계바늘이 없습니다.</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[7]" ng-true-value={s:0,c:2}> 시계바늘 한 개만 있습니다.</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[7]" ng-true-value={s:0,c:3}> 시계바늘 두 개 이상 있습니다 (초침 경우 제외)</label></p>
+            </div>
+        </div>
+        <div class="lrp-popover-q-header">
+            <p><label>9. 시계바늘이 어디서 나옵니까? ({{scoreModel.q[8].s}})</label></p>
+            <div class="lrp-popover-q-content">
+                <p><label><input type="checkbox" ng-model="scoreModel.q[8]" ng-true-value={s:1,c:0}> 1- 시계바늘(들)이 시계 판의 중심에서 0.5인치(1.3센티)보다 멀리 벗어나지 않은 점에서 나옵니다.</label></p>
+                <p><label>0- 다음 중 하나 이상 있습니다.</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[8]" ng-true-value={s:0,c:0}> 시계바늘(들)이 시계 판의 중심에서 0.5인치(1.3센티)보다 멀리 벗어나옵니다.</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[8]" ng-true-value={s:0,c:1}> 시계바늘(들)이 삽입점에서 서로 0.5인치(1.3센티)보다 멀리 떨어져 있습니다.</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[8]" ng-true-value={s:0,c:2}> 시계바늘이 없습니다.</label></p>
+            </div>
+        </div>
+        <div class="lrp-popover-q-header">
+            <p><label>10. 시계바늘이 어디로 가리킵니까? ({{scoreModel.q[9].s}})</label></p>
+            <div class="lrp-popover-q-content">
+                <p><label><input type="checkbox" ng-model="scoreModel.q[9]" ng-true-value={s:1,c:0}> 1- 한 바늘은 11을 가리키고 다른 한 바늘은 2를 가리키거나, 한 이방향 바늘이 11과 2를 동시에 가리킵니다.</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[9]" ng-true-value={s:1,c:1}> 시계바늘 위치나 방향을 환자가 스스로 수정했으면 여기 체크를 하십시오.</label></p>
+                <p><label>0- 다음 중 하나 이상 있습니다.</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[9]" ng-true-value={s:0,c:0}> 한 시계바늘 이상 11이나 2를 가리키지 않습니다.</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[9]" ng-true-value={s:0,c:1}> 시계바늘이 없습니다.</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[9]" ng-true-value={s:0,c:2}> 시계바늘 두 개 이상 있습니다 (초침 경우 제외).</label></p>
+            </div>
+        </div>
+        <div class="lrp-popover-q-header">
+            <p><label>11. 시계바늘이 알맞은 시간을 표기합니까? ({{scoreModel.q[10].s}})</label></p>
+            <div class="lrp-popover-q-content">
+                <p><label><input type="checkbox" ng-model="scoreModel.q[10]" ng-true-value={s:1,c:0}> 1- 분침은 11을 가리키고 시침은 2를 가리킵니다.</label></p>
+                <p><label>0- 다음 중 하나 이상 있습니다.</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[10]" ng-true-value={s:0,c:0}> 시계바늘 하나 이상 알맞은 숫자를 가리키지 않습니다.</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[10]" ng-true-value={s:0,c:1}> 시계바늘의 길이가 같습니다.</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[10]" ng-true-value={s:0,c:2}> 시계바늘이 없습니다.</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[10]" ng-true-value={s:0,c:3}> 시계바늘 한 개만 있습니다.</label></p>
+                <p><label><input type="checkbox" ng-model="scoreModel.q[10]" ng-true-value={s:0,c:4}> 시계바늘 두 개 이상 있습니다 (초침 경우 제외).</label></p>
+            </div>
+        </div>
+        <div class="lrp-popover-q-result">
+            총점 : {{scoreModel.q | sumOfValue:'s'}}
+        </div>
+    </ion-content>
+
+</ion-popover-view>

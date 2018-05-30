@@ -1,0 +1,22 @@
+<ion-header-bar class="bar-stable lrp-header-bottomless" style="background-color: #f0f0f0;">
+    <div class="item-input-inset lrp-input-inset div-flex" style="margin: 0 5px 0;">
+        <label class="item-input-wrapper" style="background-color: white;">
+            <input type="text" placeholder="Title" ng-model="lrpModel.selectedTemplate.name">
+        </label>
+    </div>
+    <div class="my-row-center" ng-if="lrpModel.selectedTemplate._id === undefined">
+        <button class="button" style="margin-right: 5px;" ng-click="selectListOpenManager(7)">템플릿</button>
+        <button class="button" style="margin-right: 5px;" ng-click="templateWrite(lrpModel.selectedTemplate)">작성</button>
+    </div>
+    <div class="my-row-center" ng-if="lrpModel.selectedTemplate._id !== undefined">
+        <button class="button" style="margin-right: 5px;" ng-click="templateModify(lrpModel.selectedTemplate)">수정</button>
+        <button class="button" style="margin-right: 5px;" ng-click="templateDelete(lrpModel.selectedTemplate)">삭제</button>
+        <button class="button" style="margin-right: 5px;" ng-click="selectTemplate(lrpModel.selectedTemplate)">취소</button>
+    </div>
+</ion-header-bar>
+
+<ion-content class="lrp-header-bottomless" scroll="false" style="background-color: #f0f0f0; padding: 11px; border: 0;">
+    <label class="item item-input" style="height: calc(100% - 64px);">
+        <textarea placeholder="Content" style="resize:none;" ng-model="lrpModel.selectedTemplate.content"></textarea>
+    </label>
+</ion-content>

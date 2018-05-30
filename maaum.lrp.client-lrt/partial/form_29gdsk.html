@@ -1,0 +1,52 @@
+<ion-header-bar class="bar-stable lrp-bar-top lrp-header-padding lrp-popover-scroll">
+    <div class="div-flex">
+        <h3>한국형 노인 우울 척도 (GDS-K)</h3>
+    </div>
+    <button class="button button-clear icon ion-close" style="color: #ffffff;" ng-click="endExerciseAsk()"></button>
+</ion-header-bar>
+
+<ion-content style="margin: 0px;">
+    <div class="lrp-popover-q-header">
+        <p><label>(Geriatric Depression Scale-K : GDS-K)</label></p>
+        <div class="lrp-popover-q-content">
+            <p><label>1. 쓸데없는 생각들이 자꾸 떠올라 괴롭다.</label> : <label><input type="checkbox" ng-model="scoreModel.q[0]" ng-true-value={s:1,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[0]" ng-true-value={s:0,c:0}> 아니오 </label></p>
+            <p><label>2. 아무것도 할 수 없을 것처럼 무기력하게 느껴진다.</label> : <label><input type="checkbox" ng-model="scoreModel.q[1]" ng-true-value={s:1,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[1]" ng-true-value={s:0,c:0}> 아니오 </label></p>
+            <p><label>3. 안절부절 못하고 초조할 때가 자주 있다.</label> : <label><input type="checkbox" ng-model="scoreModel.q[2]" ng-true-value={s:1,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[2]" ng-true-value={s:0,c:0}> 아니오 </label></p>
+            <p><label>4. 밖에 나가기보다는 주로 집에 있으려 한다.</label> : <label><input type="checkbox" ng-model="scoreModel.q[3]" ng-true-value={s:1,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[3]" ng-true-value={s:0,c:0}> 아니오 </label></p>
+            <p><label>5. 앞날에 대해 걱정할 때가 많다.</label> : <label><input type="checkbox" ng-model="scoreModel.q[4]" ng-true-value={s:1,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[4]" ng-true-value={s:0,c:0}> 아니오 </label></p>
+            <p><label>6. 지금 내가 살아있다는 것이 참 기쁘다.</label> : <label><input type="checkbox" ng-model="scoreModel.q[5]" ng-true-value={s:0,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[5]" ng-true-value={s:1,c:0}> 아니오 </label></p>
+            <p><label>7. 인생은 즐거운 것이다.</label> : <label><input type="checkbox" ng-model="scoreModel.q[6]" ng-true-value={s:0,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[6]" ng-true-value={s:1,c:0}> 아니오 </label></p>
+            <p><label>8. 아침에 기분 좋게 일어난다.</label> : <label><input type="checkbox" ng-model="scoreModel.q[7]" ng-true-value={s:0,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[7]" ng-true-value={s:1,c:0}> 아니오 </label></p>
+            <p><label>9. 예전처럼 정신이 맑다.</label> : <label><input type="checkbox" ng-model="scoreModel.q[8]" ng-true-value={s:0,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[8]" ng-true-value={s:1,c:0}> 아니오 </label></p>
+            <p><label>10. 건강에 대해서 걱정하는 일이 별로 없다.</label> : <label><input type="checkbox" ng-model="scoreModel.q[9]" ng-true-value={s:0,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[9]" ng-true-value={s:1,c:0}> 아니오 </label></p>
+            <p><label>11. 내 판단력은 여전히 좋다.</label> : <label><input type="checkbox" ng-model="scoreModel.q[10]" ng-true-value={s:0,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[10]" ng-true-value={s:1,c:0}> 아니오 </label></p>
+            <p><label>12. 내 나이의 다른 사람들 못지않게 건강하다.</label> : <label><input type="checkbox" ng-model="scoreModel.q[11]" ng-true-value={s:0,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[11]" ng-true-value={s:1,c:0}> 아니오 </label></p>
+            <p><label>13. 사람들과 잘 어울린다.</label> : <label><input type="checkbox" ng-model="scoreModel.q[12]" ng-true-value={s:0,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[12]" ng-true-value={s:1,c:0}> 아니오 </label></p>
+            <p><label>14. 정말 자신이 없다.</label> : <label><input type="checkbox" ng-model="scoreModel.q[13]" ng-true-value={s:1,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[13]" ng-true-value={s:0,c:0}> 아니오 </label></p>
+            <p><label>15. 즐겁고 행복하다.</label> : <label><input type="checkbox" ng-model="scoreModel.q[14]" ng-true-value={s:0,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[14]" ng-true-value={s:1,c:0}> 아니오 </label></p>
+            <p><label>16. 내 기억력은 괜찮은 것 같다.</label> : <label><input type="checkbox" ng-model="scoreModel.q[15]" ng-true-value={s:0,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[15]" ng-true-value={s:1,c:0}> 아니오 </label></p>
+            <p><label>17. 지쳐버리지나 않을까 걱정된다.</label> : <label><input type="checkbox" ng-model="scoreModel.q[16]" ng-true-value={s:1,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[16]" ng-true-value={s:0,c:0}> 아니오 </label></p>
+            <p><label>18. 별일 없이 얼굴이 화끈거리고 진땀이 날 때가 있다.</label> : <label><input type="checkbox" ng-model="scoreModel.q[17]" ng-true-value={s:1,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[17]" ng-true-value={s:0,c:0}> 아니오 </label></p>
+            <p><label>19. 농담을 들어도 재미가 없다.</label> : <label><input type="checkbox" ng-model="scoreModel.q[18]" ng-true-value={s:1,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[18]" ng-true-value={s:0,c:0}> 아니오 </label></p>
+            <p><label>20. 예전에 좋아하던 일들을 여전히 즐긴다.</label> : <label><input type="checkbox" ng-model="scoreModel.q[19]" ng-true-value={s:0,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[19]" ng-true-value={s:1,c:0}> 아니오 </label></p>
+            <p><label>21. 기분이 좋은 편이다.</label> : <label><input type="checkbox" ng-model="scoreModel.q[20]" ng-true-value={s:0,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[20]" ng-true-value={s:1,c:0}> 아니오 </label></p>
+            <p><label>22. 앞날에 대해 희망적으로 느낀다.</label> : <label><input type="checkbox" ng-model="scoreModel.q[21]" ng-true-value={s:0,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[21]" ng-true-value={s:1,c:0}> 아니오 </label></p>
+            <p><label>23. 사람들이 나를 싫어한다고 느낀다.</label> : <label><input type="checkbox" ng-model="scoreModel.q[22]" ng-true-value={s:1,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[22]" ng-true-value={s:0,c:0}> 아니오 </label></p>
+            <p><label>24. 나의 잘못에 대하여 항상 나 자신을 탓한다.</label> : <label><input type="checkbox" ng-model="scoreModel.q[23]" ng-true-value={s:1,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[23]" ng-true-value={s:0,c:0}> 아니오 </label></p>
+            <p><label>25. 전부다 화가 나고 짜증이 날 때가 많다.</label> : <label><input type="checkbox" ng-model="scoreModel.q[24]" ng-true-value={s:1,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[24]" ng-true-value={s:0,c:0}> 아니오 </label></p>
+            <p><label>26. 전보다 내 모습(용모)이 추해졌다고 생각한다.</label> : <label><input type="checkbox" ng-model="scoreModel.q[25]" ng-true-value={s:1,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[25]" ng-true-value={s:0,c:0}> 아니오 </label></p>
+            <p><label>27. 어떤 일을 시작하려면 예전보다 힘이 많이 든다.</label> : <label><input type="checkbox" ng-model="scoreModel.q[26]" ng-true-value={s:1,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[26]" ng-true-value={s:0,c:0}> 아니오 </label></p>
+            <p><label>28. 무슨 일을 하던지 곧 피곤해진다.</label> : <label><input type="checkbox" ng-model="scoreModel.q[27]" ng-true-value={s:1,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[27]" ng-true-value={s:0,c:0}> 아니오 </label></p>
+            <p><label>29. 요즈음 몸무게가 많이 줄었다.</label> : <label><input type="checkbox" ng-model="scoreModel.q[28]" ng-true-value={s:1,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[28]" ng-true-value={s:0,c:0}> 아니오 </label></p>
+            <p><label>30. 이성에 대해 여전히 관심이 있다.</label> : <label><input type="checkbox" ng-model="scoreModel.q[29]" ng-true-value={s:0,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[29]" ng-true-value={s:1,c:0}> 아니오 </label></p>
+        </div>
+    </div>
+    <div class="lrp-popover-q-result">
+        점수 : {{scoreModel.q | sumOfValue:'s'}}
+    </div>
+    <div>
+        <button class="button" style="height: 100px; width: 100px;" ng-click="stageNext()">
+            <span>다음</span>
+        </button>
+    </div>
+</ion-content>

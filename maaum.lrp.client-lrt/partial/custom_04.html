@@ -1,0 +1,77 @@
+<style>
+    .custom04box {
+        position: absolute;
+        width: 80vh;
+        height: 80vh;
+        margin-left: 10vh;
+        margin-top: 10vh;
+        text-align: center;
+        border: solid 1px;
+        border-radius: 2%;
+    }
+    
+    .custom04plane img {
+        width: 70%;
+        height: 70%;
+        object-fit: contain;
+        margin: 15% 15% 15% 15%;
+    }
+    
+    .custom04selector {
+        margin: 10px;
+        float: left;
+        border: solid 3px gray;
+        width: 17vw;
+        height: 17vw;
+        border-radius: 10%;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, .4);
+    }
+    
+    .custom04selector:hover {
+        opacity: 0.8;
+    }
+    
+    .custom04selector:active {
+        opacity: 0.5;
+    }
+    
+    .custom04selector.select {
+        border: solid 3px #0888F9;
+    }
+    
+    .custom04plane {
+        top: 64px;
+        width: 100vw;
+        height: 80vh;
+        transform: scale(1);
+    }
+    
+    .custom04selector.true {
+        box-shadow: 0px 0px 10px rgba(255, 0, 0, 1.0);
+    }
+</style>
+
+<ion-header-bar class="bar-stable lrp-bar-top lrp-header-padding lrp-popover-scroll" ng-init="Custom04Ready()">
+    <div class="div-flex">
+        <h3>시각 기억 검사 (Visual Learning test) - {{stage + 1}}</h3>
+    </div>
+    <button class="button button-clear icon ion-close" style="color: #ffffff;" ng-click="endExerciseAsk()"></button>
+</ion-header-bar>
+
+<ion-content style="margin: 0px;">
+    <div class='custom04plane'>
+        <div ng-switch on="custom04mode">
+            <div ng-switch-when="stage1" class='custom04box'>
+                <img class='custom04img' src={{custom04url}}>
+            </div>
+            <div ng-switch-when="stage2">
+                <div ng-repeat="p in custom04list">
+                    <div id="custom04{{p}}" class='custom04selector' ng-class='{select : custom04sel[p], true : custom04positives[p]}' ng-click="Custom04Click({{p}})">
+                        <img src='/img/partial/04_{{p}}.png'>
+                    </div>
+                </div>
+                <button style='margin:10% 10% 10% 10%; width:80%; height:10vh' class='ripple' ng-click="Custom04Done()">{{Custom04NextText}}</button>
+            </div>
+        </div>
+    </div>
+</ion-content>

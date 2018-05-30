@@ -1,0 +1,17 @@
+<ion-header-bar class="bar-stable lrp-header-bottomless" style="background-color: #f0f0f0;">
+    <div class="item-input-inset lrp-input-inset div-flex" style="margin: 0 5px 0;">
+        <label class="item-input-wrapper" style="background-color: white;">
+            <input type="text" placeholder="Title" ng-model="lrpModel.tempDataPopover.name">
+        </label>
+    </div>
+    <div class="my-row-center">
+        <button class="button" style="margin-right: 5px;" ng-click="templateWrite(lrpModel.tempDataPopover)">완료</button>
+        <button class="button" style="margin-right: 5px;" ng-click="selectListPopover.hide()">취소</button>
+    </div>
+</ion-header-bar>
+
+<ion-content class="lrp-header-bottomless" scroll="false" style="background-color: #f0f0f0; padding: 11px; border: 0;">
+    <label class="item item-input" style="height: 100%">
+        <textarea placeholder="Content" style="resize:none;" ng-model="lrpModel.tempDataPopover.content"></textarea>
+    </label>
+</ion-content>

@@ -1,0 +1,21 @@
+<section class="row" data-ng-controller="TherapistController">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<form name="userForm" data-ng-submit="signup(userForm.$valid)" novalidate class="form-horizontal" autocomplete="off">
+				<id_info></id_info>
+				<pw_info></pw_info>
+				<default_info></default_info>
+				<signin_info></signin_info>
+				<therapist_info></therapist_info>
+				<div class="form-group">
+					<div class="col-lg-offset-2 col-lg-10">
+						<button type="submit" class="btn btn-large btn-primary">가입</button>
+					</div>
+				</div>
+				<div data-ng-show="error" class="text-center text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+			</form>
+		</div>
+	</div>
+</section>

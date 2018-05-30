@@ -1,0 +1,37 @@
+<ion-header-bar class="bar-stable lrp-bar-top lrp-header-padding lrp-popover-scroll">
+    <div class="div-flex">
+        <h3>노인 우울 척도 단축형 (SGDS)</h3>
+    </div>
+    <button class="button button-clear icon ion-close" style="color: #ffffff;" ng-click="endExerciseAsk()"></button>
+</ion-header-bar>
+
+<ion-content style="margin: 0px;">
+    <div class="lrp-popover-q-header">
+        <p><label>(Short Form of Geriatric Depression Scale : SGDS)</label></p>
+        <div class="lrp-popover-q-content">
+            <p><label>1. 현재의 생활에 대체적으로 만족하십니까?</label> : <label><input type="checkbox" ng-model="scoreModel.q[0]" ng-true-value={s:0,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[0]" ng-true-value={s:1,c:0}> 아니오 </label></p>
+            <p><label>2. 요즈음 들어 활동량이나 의욕이 많이 떨어지셨습니까?</label> : <label><input type="checkbox" ng-model="scoreModel.q[1]" ng-true-value={s:1,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[1]" ng-true-value={s:0,c:0}> 아니오 </label></p>
+            <p><label>3. 자신이 헛되이 살고 있다고 느끼십니까?</label> : <label><input type="checkbox" ng-model="scoreModel.q[2]" ng-true-value={s:1,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[2]" ng-true-value={s:0,c:0}> 아니오 </label></p>
+            <p><label>4. 생활이 지루하게 느껴질 때가 많습니까?</label> : <label><input type="checkbox" ng-model="scoreModel.q[3]" ng-true-value={s:1,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[3]" ng-true-value={s:0,c:0}> 아니오 </label></p>
+            <p><label>5. 평소에 기분은 상쾌한 편이십니까?</label> : <label><input type="checkbox" ng-model="scoreModel.q[4]" ng-true-value={s:0,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[4]" ng-true-value={s:1,c:0}> 아니오 </label></p>
+            <p><label>6. 자신에게 불길한 일이 닥칠 것 같아 불안하십니까?</label> : <label><input type="checkbox" ng-model="scoreModel.q[5]" ng-true-value={s:1,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[5]" ng-true-value={s:0,c:0}> 아니오 </label></p>
+            <p><label>7. 대체로 마음이 즐거운 편이십니까?</label> : <label><input type="checkbox" ng-model="scoreModel.q[6]" ng-true-value={s:0,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[6]" ng-true-value={s:1,c:0}> 아니오 </label></p>
+            <p><label>8. 절망적이라는 느낌이 자주 드십니까?</label> : <label><input type="checkbox" ng-model="scoreModel.q[7]" ng-true-value={s:1,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[7]" ng-true-value={s:0,c:0}> 아니오 </label></p>
+            <p><label>9. 바깥에 나가기가 싫고 집에만 있고 싶습니까?</label> : <label><input type="checkbox" ng-model="scoreModel.q[8]" ng-true-value={s:1,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[8]" ng-true-value={s:0,c:0}> 아니오 </label></p>
+            <p><label>10. 비슷한 나이의 다른 노인들보다 기억력이 더 나쁘다고 느끼십니까?</label> : <label><input type="checkbox" ng-model="scoreModel.q[9]" ng-true-value={s:1,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[9]" ng-true-value={s:0,c:0}> 아니오 </label></p>
+            <p><label>11. 현재 살아있다는 것이 즐겁게 생각되십니까?</label> : <label><input type="checkbox" ng-model="scoreModel.q[10]" ng-true-value={s:0,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[10]" ng-true-value={s:1,c:0}> 아니오 </label></p>
+            <p><label>12. 지금의 내 자신이 아무 쓸모없는 사람이라고 느끼십니까?</label> : <label><input type="checkbox" ng-model="scoreModel.q[11]" ng-true-value={s:1,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[11]" ng-true-value={s:0,c:0}> 아니오 </label></p>
+            <p><label>13. 기력이 좋으신 편이십니까?</label> : <label><input type="checkbox" ng-model="scoreModel.q[12]" ng-true-value={s:0,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[12]" ng-true-value={s:1,c:0}> 아니오 </label></p>
+            <p><label>14. 지금 자신의 처지가 아무런 희망도 없다고 느끼십니까?</label> : <label><input type="checkbox" ng-model="scoreModel.q[13]" ng-true-value={s:1,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[13]" ng-true-value={s:0,c:0}> 아니오 </label></p>
+            <p><label>15. 자신이 다른 사람들의 처지보다 더 못하다고 느끼십니까?</label> : <label><input type="checkbox" ng-model="scoreModel.q[14]" ng-true-value={s:1,c:0}> 예 </label> / <label><input type="checkbox" ng-model="scoreModel.q[14]" ng-true-value={s:0,c:0}> 아니오 </label></p>
+        </div>
+    </div>
+    <div class="lrp-popover-q-result">
+        점수 : {{scoreModel.q | sumOfValue:'s'}}
+    </div>
+    <div>
+        <button class="button" style="height: 100px; width: 100px;" ng-click="stageNext()">
+            <span>다음</span>
+        </button>
+    </div>
+</ion-content>

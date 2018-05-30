@@ -1,0 +1,57 @@
+<h3>상품 관리</h3>
+<section data-ng-controller="ProductsController" data-ng-init="find()">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div dynamic-layout items="cards"></div>
+                <div class="panel-heading">
+                    상품 목록
+                </div>
+                <div class="panel-body">
+
+                    <div class="grid">
+                        <div class="grid-item">...</div>
+                        <div class="grid-item grid-item--width2">...</div>
+                        <div class="grid-item">...</div>
+                        ...
+                    </div>
+                    <div class="row-masonry row-masonry-xl-6 row-masonry-lg-4 row-masonry-md-3 row-masonry-sm-2">
+                        <div class="col-masonry">
+                            <div class="box-placeholder m0">
+                                <p class="text-center text-muted">
+                                    <strong>Masonry Item</strong>
+                                </p>
+                                <p>Integer tincidunt nisi id libero tristique aliquet. Pellentesque a commodo est. Proin ut mi augue, non laoreet ligula. Vestibulum ante ipsum primis in faucibus orci et ultrices posuere cubilia Curae; Class taciti conubia nostra, per himenaeos.</p>
+                            </div>
+                        </div>
+                        <div class="col-masonry">
+                            <div class="box-placeholder m0">
+                                <p class="text-center text-muted">
+                                    <strong>Masonry Item</strong>
+                                </p>
+                                <p>Integer tincidunt nisi id libero tristique aliquet. Pellentesque a commodo est. Proin ut mi augue, non laoreet ligula.</p>
+                            </div>
+                        </div>
+                        <div class="col-masonry">
+                            <div class="box-placeholder m0">
+                                <p class="text-center text-muted">
+                                    <strong>Masonry Item</strong>
+                                </p>
+                                <p>Integer tincidunt nisi id libero tristique aliquet. Pellentesque a commodo est. Proin ut mi augue, non laoreet ligula. Vestibulum ante ipsum primis in faucibus orci et ultrices posuere cubilia Curae; Class taciti conubia nostra, per himenaeos.</p>
+                            </div>
+                        </div>
+                    </div>
+                        <a data-ng-repeat="progressnote in products" data-ng-href="#!/progressnotes/{{progressnote._id}}" class="ng-scope">
+                        <small class="list-group-item-text">
+                            Posted on
+                            <span data-ng-bind="progressnote.created | date:'medium'"></span>
+                            by
+                            <span data-ng-bind="progressnote.user.displayName"></span>
+                        </small>
+                        <h4 class="list-group-item-heading" data-ng-bind="progressnote.name"></h4>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
