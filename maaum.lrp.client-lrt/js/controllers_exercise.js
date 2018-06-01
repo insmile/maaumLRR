@@ -607,13 +607,18 @@ angular.module('LRProject.controllers.exercise', ['LRProject.services'])
 
         $scope.stageNext = function(totalScore = undefined) {
 
+            // alert("stageNExt: exercise");
+            console.log("다음1:"+totalScore);
+
             $scope.collectProblemStats(totalScore);
 
             $scope.stage++;
 
             if (!endFlag && $scope.stage < $scope.resultSchema.tasks[$scope.lrpModel.taskPivot].numOfProblem) {
                 $scope.prepareNextStage();
+
             } else {
+
                 $scope.collectTaskStats();
                 $scope.stageEnd();
             }
@@ -652,6 +657,9 @@ angular.module('LRProject.controllers.exercise', ['LRProject.services'])
         }
 
         $scope.collectProblemStats = function(totalScore = undefined) {
+            
+            console.log("collectProblemStats start");
+
             if (totalScore !== undefined) {
                 $scope.resultSchema.tasks[$scope.lrpModel.taskPivot].totalScore = totalScore;
             }
@@ -665,11 +673,21 @@ angular.module('LRProject.controllers.exercise', ['LRProject.services'])
 
             $scope.resultSchema.tasks[$scope.lrpModel.taskPivot].problems[$scope.stage].recordFile = recordeWebPath;
 
+            console.log("collectProblemStats recordeWebPath:"+recordeWebPath);
+
             if (drawingPadUtil.isDrawing($scope)) {
                 $scope.resultSchema.tasks[$scope.lrpModel.taskPivot].totalTime += $scope.resultSchema.tasks[$scope.lrpModel.taskPivot].problems[$scope.stage].endTime;
                 $scope.resultSchema.tasks[$scope.lrpModel.taskPivot].problems[$scope.stage].selectTime = $scope.resultSchema.tasks[$scope.lrpModel.taskPivot].problems[$scope.stage].endTime;
                 $scope.resultSchema.tasks[$scope.lrpModel.taskPivot].numOfResponse++;
                 scopeJson = JSON.stringify($scope.pad.toJSON());
+
+                // 그림판에서 얻어온 내가 그린거 정보.
+                /*
+                {"aspectRatio":0.34911242603550297,"strokes":[{"points":[{"x":0.7020285087719298,"y":0.32420035321821034},
+                ,{"x":0.6297482565511412,"y":0.35718069007263925}],"color":"#000","size":0.00253592561284869,"cap":"round","join":"round","miterLimit":10}]}
+                */
+                console.log("collectProblemStats draw scopeJson:"+scopeJson);
+
                 $scope.resultSchema.tasks[$scope.lrpModel.taskPivot].problems[$scope.stage].drawJson = scopeJson;
                 $scope.pad.clear();
             }
@@ -684,6 +702,7 @@ angular.module('LRProject.controllers.exercise', ['LRProject.services'])
         }
 
         $scope.collectTaskStats = function() {
+            console.log("collectTaskStats");
             $scope.resultSchema.tasks[$scope.lrpModel.taskPivot].endDate = new Date();
             $scope.resultSchema.tasks[$scope.lrpModel.taskPivot].meanTime = $scope.resultSchema.tasks[$scope.lrpModel.taskPivot].totalTime / $scope.resultSchema.tasks[$scope.lrpModel.taskPivot].numOfResponse;
 
@@ -703,6 +722,9 @@ angular.module('LRProject.controllers.exercise', ['LRProject.services'])
             $scope.resultSchema.numOfProblem += $scope.resultSchema.tasks[$scope.lrpModel.taskPivot].numOfProblem;
             $scope.resultSchema.numOfCorrect += $scope.resultSchema.tasks[$scope.lrpModel.taskPivot].numOfCorrect;
             $scope.resultSchema.numOfResponse += $scope.resultSchema.tasks[$scope.lrpModel.taskPivot].numOfResponse;
+
+            console.log("collectTaskStats_ $scope.resultSchema:"+JSON.stringify($scope.resultSchema));
+
         }
 
         function getStdTime(selectTimes, meanTime) {
@@ -793,8 +815,8 @@ angular.module('LRProject.controllers.exercise', ['LRProject.services'])
 
                 $scope.lrpModel.taskPivot = 0;
 
-                console.log("result Schema");
-                console.log($scope.resultSchema.tasks[$scope.lrpModel.taskPivot]);
+                // console.log("result Schema");
+                console.log("result Schema="+$scope.resultSchema.tasks[$scope.lrpModel.taskPivot]);
 
                 $scope.$apply();
             }
