@@ -4,24 +4,37 @@
     <div class="div-flex"><h3>{{lrpModel.pageTag[lrpModel.statePage]}}</h3></div>
 </ion-header-bar>
 
-<ion-content direction="y" has-bouncing="false" style="width: initial; height: calc(100% - 128px);">
+<ion-content direction="y" has-bouncing="false" style="width: initial;">
             
 <div id="con_lf">
-    <div class="new_con_cm svc_01">
-
-            
+    
+    <!--div class="new_con_cm svc_01">
+       
         <div class="sv_wr">
-            <p>기능 훈련을 선택하세요.</p>
+            <p>기능 훈련을 선택하세요.</p> 
             <div class="sv_pg" ng-click="menuActivate(2,'LT')">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBJ02UIZNVUfNdXUSw46JpdeIGb9KKD0Oloq61M_73s8FQNBfcJA"><br>
+                <img src="./img/res/btn_01.gif"><br>
                 언어기능훈련[LT]</h3>
             </div>
             <div class="sv_pg" ng-click="menuActivate(2, 'RT')">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6Lkbrt9MbkTiGx_AYTOqE-n47jHwD7R_ZgjWY93sIv4RoWmbP"><br>
+                <img src="./img/res/btn_02.gif"><br>
                 인지기능훈련[RT]
             </div>
         </div>
-
+    </div-->
+    
+    <div id="detailWrap">
+        
+    	<div class="contents">
+    		<h3>기능 훈련을 선택하세요</h3>
+    
+    		<ul>
+    			<li><a href="#" ng-click="menuActivate(2,'LT')"><img src="./img/res/sub_lr.png" alt="" /></a></li>
+    			<li><a href="#" ng-click="menuActivate(2,'RT')"><img src="./img/res/sub_rt.png" alt="" /></a></li>
+    		</ul>
+    	</div>
+    	
+    	
     </div>
 </div>
 

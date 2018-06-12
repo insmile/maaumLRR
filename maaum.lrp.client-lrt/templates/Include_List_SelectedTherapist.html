@@ -1,11 +1,11 @@
 <ion-header-bar class="bar-stable lrp-header-padding lrp-sub-header">
     <div class="div-flex"><h3>{{lrpModel.selectedTherapist.name}}</h3></div>
     <div class="my-row-center">
-        <button class="button button-balanced" ng-if="lrpModel.selectedTherapist.certified" ng-click="selectListOpenManager(0)" style="margin-right: 5px;">환자배정</button>
+        <button class="button button-dark" ng-if="lrpModel.selectedTherapist.certified" ng-click="selectListOpenManager(0)" style="margin-right: 5px;">환자배정</button>
         <div style="margin-right: 5px;" ng-if="!lrpModel.selectedTherapist.certified">
             <img src="./img/res/list_icon_unapproval.png" style="width: 60px; height: auto;" ng-click="certifyTherapist()">
         </div>
-        <button class="button button-balanced" ng-click="userFormOpenManager(3)">정보수정</button>
+        <button class="button button-dark" ng-click="userFormOpenManager(3)">정보수정</button>
     </div>
 </ion-header-bar>
 
@@ -17,8 +17,8 @@
                 <p>{{lrpModel.selectedTherapist.center_name}} {{lrpModel.selectedTherapist.department}}</p>
                 <p>{{lrpModel.selectedTherapist.sex}}</p>
                 <p>{{lrpModel.selectedTherapist.email}}</p>
-            </div>
-        </ion-item>
+            </div> 
+        </ion-item> 
 
         <ion-item class="item-divider my-row-center" style="height: 52px;">
 

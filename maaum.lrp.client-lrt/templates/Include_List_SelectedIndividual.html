@@ -18,7 +18,7 @@
                 </div>
             </div>
 
-            <ion-item>
+            <ion-item>  
                 <button class="button" style="width: 200px;" ng-click="selectListOpenManager(9);">
                     <div ng-if="lrpModel.selectedPatient === null">환자 선택</div>
                     <div ng-if="lrpModel.selectedPatient !== null">{{lrpModel.selectedPatient.name}}</div>
@@ -34,7 +34,7 @@
             </ion-item>
 
             <ion-item ng-if="lrpModel.statePage > 1 || tabStateCode !== 2 || lrpModel.selectedHomework !== null">
-                <button class="button button-balanced" style="width: 200px;" ng-click="playIndividual()">
+                <button class="button button-dark" style="width: 200px;" ng-click="playIndividual()">
                     <span ng-if="lrpModel.selectedHomework === null">개별 평가</span><span ng-if="lrpModel.selectedHomework !== null">과제</span> 시작
                 </button>
             </ion-item>
