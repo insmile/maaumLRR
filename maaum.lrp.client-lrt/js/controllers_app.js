@@ -4,9 +4,8 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
 
         $http.defaults.withCredentials = true;
 
-        // var lrpServer = 'https://lrtadmin.maaum.net/';
-        
-        var lrpServer = 'http://localhost:4040/';
+        var lrpServer = 'https://lrtadmin.maaum.net/';
+        //var lrpServer = 'http://alrt.free:4040/';
         var pageCacheHolder = null;
 
         $scope.$on('$locationChangeSuccess', function() {
@@ -309,7 +308,7 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
             $scope.progressDownLoad = 0;
 
             $scope.lrpModel.pageTag = [
-                '평가자', '환자', '선택과제 평가', '구성 평가', '경과기록지 서식', '오프라인 과제'
+                '평가자', '환자', '기능훈련', '구성평가', '경과기록지 서식', '오프라인 과제'
             ];
 
             pageCacheData = [{
@@ -499,6 +498,17 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
             var i;
 
             $scope.lrpModel.statePage = arg;
+            
+            /*
+            var imgidx = arg+2;
+
+            for ( var i=2; i <= 7; i++ ) {
+                if ( i != imgidx ) 
+                    angular.element(document.getElementById("leftMenu"+i)).attr("src","./img/res/leftMenu0"+i+"_off.png");
+            }
+         
+            angular.element(document.getElementById("leftMenu"+imgidx)).attr("src","./img/res/leftMenu0"+imgidx+"_on.png");
+            */
 
             //add subpage 이동
             if ( $scope.lrpModel.statePage === 2 && arg2 === 'N' )  {
@@ -1692,50 +1702,6 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
             });
         };
 
-        
-        //dddddd start
-        var isShapeDraw = false;
-
-        $scope.makeShape =function()
-        {
-            isShapeDraw = true;
-            // var shapeTeype = "1";
-            $scope.pad.makeShapeDD($scope.shapeName, $scope.shape_count);
-        }
-
-        $scope.shape_count = 1;
-
-        $scope.dddd_count = function(flag) {
-            var dd = $scope.shape_count;
-            dd = Number(dd);
-            
-            if(flag=="up"){
-                dd++;
-                
-            }else {
-                dd--;                
-            }
-            $scope.shape_count= dd;
-
-            if(isShapeDraw){
-                $scope.makeShape();
-            }
-            //dddd3_make($scope.shape_count);
-        }
-        
-        $scope.shapeName = "rect";
-
-        $scope.shapeChange = function(shape ) {
-            $scope.shapeName = shape;
-            
-            // alert("dddddw"+$scope.shapeName);
-            
-            if(isShapeDraw){
-                $scope.makeShape();
-            }
-        }
-
-        
         $scope.initDrawingPad = function(vw = 0.5, vh = 0.7, lock = false) {
             var el = document.getElementById('sketchpad');
             var aspectRatio = (window.innerHeight * vh) / (window.innerWidth * vw);
@@ -1758,7 +1724,6 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
             $scope.vw = vw;
             $scope.vh = vh;
             $scope.aspectRatio = aspectRatio;
-
         }
 
         $scope.dpUndo = function() {
@@ -1787,15 +1752,7 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
 
         $scope.initDrawingPadAndLoad = function(vw = 0.5, vh = 0.7, bg = false) {
             $scope.initDrawingPad(vw, vh, true);
-            
-            console.log("aaaa=" + $scope.lrpModel.selectedResult.tasks[$scope.lrpModel.taskPivot].problems[0].drawJson);
-
-            console.log("bbbb=" +  JSON.stringify( $scope.lrpModel.selectedResult.tasks[$scope.lrpModel.taskPivot].problems[0].drawJson));
-
-            
             $scope.pad.loadJSON(JSON.parse($scope.lrpModel.selectedResult.tasks[$scope.lrpModel.taskPivot].problems[0].drawJson));
-            
-            
             if (bg) {
                 console.log($scope.lrpModel.selectedResult.tasks[$scope.lrpModel.taskPivot].problems[0]);
                 drawingPadUtil.loadBackgroundGrading($scope, true);
@@ -2187,9 +2144,9 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
         error(function (data, status) { console.log('Error : loadDataPost : ' + lrpServer + obParam.url + ' =>(' + obParam.dataSetter + ' : ' + obParam.callback + ') ! status : ' + status); });
         */
 
-        $scope.loginData = { username: 'admin', password: 'rhfueo!' };
+        //$scope.loginData = { username: 'admin', password: 'rhfueo!' };
         //$scope.loginData = { username: 'testpatient', password: 'rhfueo!' };
-        
+
         $scope.doLogin = function() {
 
             //console.log($scope.loginModel.autoUserName);
@@ -2282,7 +2239,7 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
                             }, onFail);
                         }, onFail);
                     }
-                }``
+                }
 
                 if (check) setLogin();
             }, onFail);

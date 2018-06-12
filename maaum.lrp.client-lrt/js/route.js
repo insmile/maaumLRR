@@ -81,14 +81,14 @@ app.config(function($stateProvider, $urlRouterProvider) {
             'menuContent': {
                 templateUrl: "templates/Page_Report.html",
                 controller: 'Ctrl_Page_Report'
-            }
+            } 
         }
     })
     
     // add
     .state('app.subPage', {
         cache: false,
-        url: "/subPage",
+        url: "/sub",
         views: {
             'menuContent': {
                 templateUrl: "templates/Include_List_SubPage.html",
