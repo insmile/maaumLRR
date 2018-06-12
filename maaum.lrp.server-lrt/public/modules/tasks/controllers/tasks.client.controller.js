@@ -49,6 +49,17 @@ angular.module('tasks').controller('TasksController', ['$scope', '$stateParams',
         }, {
             id: 'pick08',
             label: 'Rey 복합도형 재인 [08]'
+        }, {
+            id: 'draw-one2',
+            label: '그리기2'
+        }];
+
+        $scope.type_ = [{
+            id: 'LT',
+            label: 'LT'
+        }, {
+            id: 'LRT',
+            label: 'LRT'
         }];
 
         $scope.scoreType = [{
@@ -173,12 +184,18 @@ angular.module('tasks').controller('TasksController', ['$scope', '$stateParams',
             $scope.task.resources.splice(idx, 1);
         };
 
+
         // Create new Task
         $scope.create = function() {
             $scope.task.preview = $scope.task.preview_file.value;
             // Redirect after save
             $scope.task.$save(function(response) {
-                console.log($scope.task);
+                
+                // dddddd
+                // Resource {__v: 0, user: "59cbd52af5f8bdff402c46cd", isOpen: true, sortOrder: 1, category: "구성 (Construction)", …}
+                console.log("등록1!!!"+$scope.task);
+                console.log("등록2!!!"+JSON.stringify($scope.task));
+
 
                 var newTask = new Tasks({
                     resources: []
@@ -189,6 +206,7 @@ angular.module('tasks').controller('TasksController', ['$scope', '$stateParams',
                 });
                 newTask.category = $scope.task.category;
                 newTask.answer = $scope.task.answer;
+                newTask.type = $scope.task.type;
                 newTask.isOpen = $scope.task.isOpen;
 
                 $scope.task = newTask;
@@ -198,6 +216,8 @@ angular.module('tasks').controller('TasksController', ['$scope', '$stateParams',
                 // Clear form fields
             }, function(errorResponse) {
                 $scope.error = errorResponse.data.message;
+                alert("등록중 에러"+$scope.error);
+                // 'draw-one2' is not a valid enum value for path `answer`.
             });
         };
 

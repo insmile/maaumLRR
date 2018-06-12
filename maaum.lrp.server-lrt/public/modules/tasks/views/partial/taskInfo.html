@@ -14,6 +14,7 @@
             <input type="text" data-ng-model="task.category" id="category" class="form-control" placeholder="Category" required>
         </div>
     </div>
+    
     <fieldset>
         <div class="form-group">
             <label class="col-lg-2 control-label">문제 유형</label>
@@ -23,6 +24,18 @@
             </div>
         </div>
     </fieldset>
+
+    <fieldset>
+        <div class="form-group">
+            <label class="col-lg-2 control-label">문제 타입</label>
+            <div class="col-lg-10">
+                <select data-ng-model="task.type" data-ng-options="task.id as task.label for task in type_" class="form-control">
+                </select>
+            </div>
+        </div>
+    </fieldset>
+
+
     <fieldset>
         <div class="form-group">
             <label class="col-lg-2 control-label">평가 유형</label>

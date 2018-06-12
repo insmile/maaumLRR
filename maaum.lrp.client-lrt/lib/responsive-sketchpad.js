@@ -23,7 +23,7 @@
 
     // 문제등록. 흐음.
     function Sketchpad(el, opts) {
-        alert("sketchpad 초기화!");
+        // alert("sketchpad 초기화!");
         
         backCode2 = "";
 
@@ -238,12 +238,12 @@
                 ddd_term++;
 
                 if(j==0){
-                    makeCircle(start.x, start.y);
+                    makeCircle(start.x, start.y, j);
                 }
 
                 if(j == stroke.points.length - 2){
                     // alert("last!!!!");
-                    makeCircle(start.x, start.y);
+                    makeCircle(start.x, start.y, j);
                 }
                 
             }
@@ -255,10 +255,16 @@
 
         }
 
-        function makeCircle(posX, posY){
+        function makeCircle(posX, posY, order){
             var ctx = canvas.getContext('2d');
             ctx.beginPath();
-            ctx.arc(posX, posY, 10, 0,2*Math.PI);
+
+            if(order==0){
+                ctx.arc(posX, posY, 5, 0,2*Math.PI);    
+            }else {
+                ctx.arc(posX, posY, 8, 0,2*Math.PI);
+            }
+            
             ctx.stroke();
         }
         
@@ -387,7 +393,7 @@
         this.setCanvasBackground = setCanvasBackground;
         this.getPointRelativeToCanvas = getPointRelativeToCanvas;
         this.getLineSizeRelativeToCanvas = getLineSizeRelativeToCanvas;
-
+        this.makeShapeDD = makeShapeDD;
         this.makeCircle = makeCircle;
 
         if (strokes) {
@@ -514,18 +520,148 @@
 
     var myShapeArr = [];
 
-    // tttttt1
-    Sketchpad.prototype.makeShapeDD = function(shapeType, count) {
+    var draw2Data;
+
+    // 외부에서 호출하는 인터페이스.
+    Sketchpad.prototype.makeDraw2 = function(drawData) {
         
-        myShapeArr = [];
+        // {"sstt1":"off","sstt2":"on","sstt3":"off","sstt4":"off","sstt5":"off","shapeCount":6}
+        // 삼각형, 사각형, 원, // 숫자, 가나다.
+        draw2Data = drawData;
+        
+        var makeShape="";
+
+        if(drawData.sstt1=="on") {
+            if(makeShape=="") {
+                makeShape="triangle"
+            }else {
+                makeShape += ":";
+                makeShape += "triangle";
+            }
+        }
+
+        if(drawData.sstt2=="on") {
+            if(makeShape=="") {
+                makeShape="rect"
+            }else {
+                makeShape += ":";
+                makeShape += "rect";
+            }
+        }
+
+        if(drawData.sstt3=="on") {
+            if(makeShape=="") {
+                makeShape="circle"
+            }else {
+                makeShape += ":";
+                makeShape += "circle";
+            }
+        }
+
+        if(drawData.sstt4=="on") {
+            if(makeShape=="") {
+                makeShape="number"
+            }else {
+                makeShape += ":";
+                makeShape += "number";
+            }
+        }
+
+        if(drawData.sstt5=="on") {
+            if(makeShape=="") {
+                makeShape="ganada"
+            }else {
+                makeShape += ":";
+                makeShape += "ganada";
+            }
+        }
+        
+        var count = drawData.shapeCount;
+
+        this.makeShapeDD(makeShape, count);
+    };
+
+    Sketchpad.prototype.makeDraw2_reset = function() {
+        // alert("939393912333");
+        var drawData = draw2Data;
+        this.undos = []; // TODO: Add clear action to undo
+        this.strokes = [];
+
+        var makeShape="";
+
+        if(drawData.sstt1=="on") {
+            if(makeShape=="") {
+                makeShape="triangle"
+            }else {
+                makeShape += ":";
+                makeShape += "triangle";
+            }
+        }
+
+        if(drawData.sstt2=="on") {
+            if(makeShape=="") {
+                makeShape="rect"
+            }else {
+                makeShape += ":";
+                makeShape += "rect";
+            }
+        }
+
+        if(drawData.sstt3=="on") {
+            if(makeShape=="") {
+                makeShape="circle"
+            }else {
+                makeShape += ":";
+                makeShape += "circle";
+            }
+        }
+
+        if(drawData.sstt4=="on") {
+            if(makeShape=="") {
+                makeShape="number"
+            }else {
+                makeShape += ":";
+                makeShape += "number";
+            }
+        }
+
+        if(drawData.sstt5=="on") {
+            if(makeShape=="") {
+                makeShape="ganada"
+            }else {
+                makeShape += ":";
+                makeShape += "ganada";
+            }
+        }
+
+        var count = draw2Data.shapeCount;
+
+        this.makeShapeDD(makeShape, count);
+    }
+
+
+    // 도형 그리기.
+    /*
+        원 안에 숫자.
+        원 크기.
+        원+세모.
+        원 안에 숫자+가나다.
+    */
+    function makeShapeDD(shapeType, count) {
+        
+        // shapeType = "ganada:number";
+        
+        var my_shapesArr = shapeType.split(":");
+        
+        var shapeIndex = 0; 
+
+        myShapeArr = []; // 그린 곳에 또 그리지 않기 위해 만들어진 도형 저장.
 
         var c_w = canvas.width;
         var c_h = canvas.height;
                 
         var min = 10;
         var add = 10;
-
-        console.log("pad gogo Shape111: ");
         
         var ctx = canvas.getContext('2d');
 
@@ -539,12 +675,24 @@
 
         var index = 0;
         var indexLimit = 0;
+
+        var index_number = 1;
+        var index_ganada = 0;
+        var ganadaArr = ["가","나","다","라","마","바","사","아","자","차","카","타","파","하"];
+
         while(true){
+            var shapeStr = my_shapesArr[shapeIndex];
+            
+            console.log("daddddd:"+shapeStr);
+
+            // var my_shapesArr = shapeType.split(":");        
+            // var shapeIndex = 0; 
+
             indexLimit++
             var www = min + add * index;
 
-            if(shapeType=="number"){ // 숫자
-                www = 50; // 글자크기 적당히.
+            if(shapeStr=="number" || shapeStr=="ganada" ){ // 숫자 혹은 가나다.
+                www = 40; // 글자크기 적당히.
             }
 
             var padding_x = 150;
@@ -553,12 +701,12 @@
             var x_ran;
             var y_ran;
 
-            if(shapeType=="rect"){
+            if(shapeStr=="rect"){
                 // 도형 기준점이 왼쪽 위.
                 x_ran = Math.floor(Math.random() * (c_w - www - padding_x*2 ) ) + padding_x;
                 y_ran = Math.floor(Math.random() * (c_h - www - padding_y*2 ) ) + padding_y;
 
-            }else {
+            } else {
                 // 기준점이 가운데.
                 x_ran = Math.floor(Math.random() * (c_w - (www+padding_x)*2 )) + www+padding_x;
                 y_ran = Math.floor(Math.random() * (c_h - (www+padding_y)*2 )) + www+padding_y;
@@ -567,7 +715,6 @@
             
             // x_ran = Math.floor(Math.random() * 200 );
             // y_ran = Math.floor(Math.random() * 200 );
-
 
             var r=  Math.floor(Math.random() *255) ;
             var g=  Math.floor(Math.random() *255) ;
@@ -582,34 +729,45 @@
                 // myShapeArr.push({"x":x_ran, "y":y_ran, "www":www});
                 
             }else {
-                isDrawReady = !checkOverlap(myShapeArr, x_ran, y_ran, www,shapeType );
+                isDrawReady = !checkOverlap(myShapeArr, x_ran, y_ran, www, shapeStr );
             }
 
             if(isDrawReady) {
-                index++;
-                myShapeArr.push({"x":x_ran, "y":y_ran, "www":www});
 
+                shapeIndex++;
 
-                if(shapeType=="rect"){ // 네모
-                    ctx.fillRect(x_ran, y_ran, www, www);
-    
-                } else if(shapeType=="number"){ // 숫자
-                    
-                    ctx.beginPath();
-                    ctx.arc(x_ran, y_ran-10, 30, 0,2*Math.PI);
-                    
-                    ctx.font = "32px Arial";
-                    ctx.fillText(index, x_ran, y_ran);
-                    ctx.textAlign = "center"; 
-
-                    ctx.stroke();
-    
-                }            
-                else { // 원.
-                    ctx.beginPath();
-                    ctx.arc(x_ran, y_ran, www, 0,2*Math.PI);
-                    ctx.stroke();
+                if(shapeIndex == my_shapesArr.length) {
+                    shapeIndex = 0; // 초기화.
                 }
+                
+                index++;
+                var textData="";
+                
+                if(shapeStr=="rect"){ // 네모
+    
+                } else if(shapeStr=="number"){ // 숫자
+        
+                    textData = index_number;
+
+                    index_number++;
+    
+                } else if(shapeStr=="ganada"){ // 가나다
+                    
+                    var ttt = ganadaArr[index_ganada];
+                    textData = ttt;
+
+                   
+                    index_ganada++;
+                }
+                else if(shapeStr=="triangle") {
+                    
+                }
+                else { // 원.
+
+                }
+
+                myShapeArr.push({"x":x_ran, "y":y_ran, "www":www, "shapeStr":shapeStr,"textData":textData});
+
                 indexLimit = 0;
             }  
 
@@ -619,10 +777,10 @@
             }
             if(index >= count){
                 break;
-            }
-            
-        }
-        
+            }            
+        }      
+
+        realDraw_(myShapeArr);
         
         this.backCode = canvas.toDataURL();
         
@@ -630,6 +788,60 @@
         this.setCanvasBackground(this.backCode, 0.5);
     };
 
+    
+    function realDraw_(drawDataArr) {
+        
+        var ctx = canvas.getContext('2d');
+
+        /* 컬러 설정.
+            var r=  Math.floor(Math.random() *255) ;
+            var g=  Math.floor(Math.random() *255) ;
+            var b=  Math.floor(Math.random() *255) ;
+            ctx.fillStyle = 'rgb('+r+',' +g+',' +b+')';
+        */
+
+        // myShapeArr.push({"x":x_ran, "y":y_ran, "www":www, "shapeStr":shapeStr,"textData":textData});
+        
+        for(var i = 0; i<drawDataArr.length; i++) {
+            
+            var data = drawDataArr[i];
+
+            var x_ran = data.x;
+            var y_ran = data.y;
+            var www = data.www;
+            var textData = data.textData;
+            var shapeStr = data.shapeStr;
+
+            if(data.shapeStr=="rect") {
+                ctx.fillRect(x_ran, y_ran, www, www);
+
+            }else if(shapeStr=="number" || shapeStr=="ganada"){ // 숫자
+                ctx.beginPath();
+                ctx.arc(x_ran, y_ran-10, 15, 0,2*Math.PI);
+                
+                ctx.font = "20px Arial";
+                ctx.fillStyle = "grey";
+                ctx.fillText(textData, x_ran, y_ran);
+                ctx.textAlign = "center";                     
+                ctx.stroke(); 
+            }
+            else if(shapeStr=="triangle") {
+                ctx.beginPath();                
+                ctx.moveTo(x_ran - www/2 , y_ran + www/2);
+                ctx.lineTo(x_ran + www/2 , y_ran + www/2);
+                ctx.lineTo(x_ran, y_ran - www/2);
+    
+                ctx.fill();
+            }
+            else { // 원.
+                ctx.beginPath();
+                ctx.arc(x_ran, y_ran, www, 0,2*Math.PI);
+                // ctx.stroke();
+                ctx.fill();
+            }
+        }             
+    }
+    
 
     // 하..오버랩 체크 함수가 없네 수동으로 체크.....ㅠㅠ
     function checkOverlap(myShapeArr, x_ran, y_ran, www, shapeType){
@@ -640,14 +852,14 @@
 
         var ddf = false;
         
-        www = www + 20; // 약간 더 크게 해서 계산.
+        www = www + 10; // 약간 더 크게 해서 계산.
 
         for(var i=0; i<myShapeArr.length; i++) {
             var x_ = myShapeArr[i]['x'];
             var y_ = myShapeArr[i]['y'];
             var www_ = myShapeArr[i]['www'];
 
-            www_ = www_ + 20; // 약간 더 크게 해서 계산.
+            www_ = www_ + 10; // 약간 더 크게 해서 계산.
 
             var x_term1;
             var x_term2;
@@ -699,7 +911,6 @@
                 newShape_y2 = y_ran + www ;
             }
 
-
             console.log("index="+i+"기본x : "+x_term1+ ", "+x_term2);
             console.log("index="+i+"기본y : "+y_term1+ ", "+y_term2);
 
@@ -735,6 +946,8 @@
     }
 
     
+    
+
     /**
      * Set a background image with opacity
      * @param  {string} url - image url

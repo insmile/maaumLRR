@@ -155,6 +155,7 @@ exports.list = function(req, res) {
     });
 };
 
+// 문제 조회
 exports.listByTask = function(req, res) {
     if (req.body.taskID === undefined) {
         return res.status(400).send({
@@ -168,6 +169,8 @@ exports.listByTask = function(req, res) {
     }
     var taskID = req.body.taskID;
     var setNO = req.body.setNum;
+
+    console.log("ddd _ Problem.find_1::taskID="+taskID);
 
     Problem.find({
         'refTask': taskID,
@@ -193,12 +196,20 @@ exports.listByTask = function(req, res) {
                 p.seq = x.seq;
                 p.def = [];
                 p.res = [];
+
                 x.resources.forEach(function(x, index) {
+
+                    console.log("ddd _ Problem.find_2::x._id="+x._id);
+
                     var r = {};
                     r._id = x._id;
                     r.value = x.value;
                     r.name = x.name;
                     r.resType = x.resType;
+                    r.note = x.note;
+
+                    console.log("ddd _ Problem.find_2::x.note = "+x.note);
+
                     if (x.isDefinition === true) {
                         p.def.push(r);
                     } else {
@@ -218,7 +229,9 @@ exports.listByTask = function(req, res) {
  * Problem middleware
  */
 exports.problemByID = function(req, res, next, id) {
-    console.log("in");
+    
+    console.log("ddd _ problemByID::"+id);
+
     Problem.findById(id).populate('user', 'name').populate('refTask', 'name center isOpen').exec(function(err, problem) {
         if (err) return next(err);
         if (!problem) return next(new Error('Failed to load Problem ' + id));
@@ -226,6 +239,9 @@ exports.problemByID = function(req, res, next, id) {
         if (problem.refTask.isOpen === false && req.user.center.equals(problem.refTask.center) === false) {
             return res.status(400).send("has no permission");
         } else {
+
+            console.log("ddd _ problemByID2::"+problem);
+
             req.problem = problem;
             next();
         }

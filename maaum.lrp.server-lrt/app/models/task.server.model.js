@@ -10,6 +10,7 @@ var ResourceSchema = new Schema({
     name: {
         type: String
     },
+    /* 리소스 타입. */
     resType: {
         type: String,
         enum: ['str', 'file', 'bool', 'video']
@@ -21,7 +22,7 @@ var ResourceSchema = new Schema({
     value: {
         type: String
     },
-    timeout: { // 이미지 과제에서 자동으로 넘어가는 시간
+    timeout: { // 이미지 과제에서 자동으로 넘어가는 시간.
         type: Number,
         default: -1
     },
@@ -48,7 +49,7 @@ var ResourceSchema = new Schema({
     }
 });
 
-/**
+/*
  * Task Schema
  */
 var TaskSchema = new Schema({
@@ -65,8 +66,9 @@ var TaskSchema = new Schema({
     },
     answer: {
         type: String,
-        enum: ['select', 'record', 'draw-one', 'draw-two', 'manual', 'manual_now', 'same', 'pick15', 'ray', 'forms', 'visual30', 'visual34', 'sound', 'pick08']
+        enum: ['select', 'record', 'draw-one', 'draw-two', 'manual', 'manual_now', 'same', 'pick15', 'ray', 'forms', 'visual30', 'visual34', 'sound', 'pick08','draw-one2']
     },
+    
     isRandom: {
         type: Boolean
     },
@@ -91,20 +93,28 @@ var TaskSchema = new Schema({
     updated: {
         type: Date
     },
+    
     created: {
         type: Date,
         default: Date.now
     },
+
     sortOrder: Number,
     setSize: Number,
     isOpen: Boolean,
+    
     center: {
         type: Schema.ObjectId,
         ref: 'Center'
+    },
+    
+    type: {
+        type: String,
+        enum: ['LRT', 'LT']
     }
 });
 
-
+// 문제구성
 var ProblemSchema = new Schema({
     name: {
         type: Number,

@@ -40,22 +40,42 @@ app.service('customUtil', function() {
 
 app.service('drawingPadUtil', function() {
     this.isDrawing = function(scope) {
-        if (scope.resultSchema.tasks[scope.lrpModel.taskPivot].answerType === 'draw-one' || scope.resultSchema.tasks[scope.lrpModel.taskPivot].answerType === 'draw-two')
+        if (scope.resultSchema.tasks[scope.lrpModel.taskPivot].answerType === 'draw-one' || scope.resultSchema.tasks[scope.lrpModel.taskPivot].answerType === 'draw-two'|| scope.resultSchema.tasks[scope.lrpModel.taskPivot].answerType === 'draw-one2')
             return true;
         else
             return false;
     }
     this.loadBackground = function(scope) {
         if (scope.pad !== undefined) {
-            debugger;
+            // debugger;
+            // alert("setBackground1");
             if (scope.lrpModel.selectedTask.answer == 'draw-one') {
                 if (scope.lrpModel.selectedProblemSet[scope.stage].res.length > 0) {
                     scope.pad.setBackground(scope.lrpServer + 'uploads/' + scope.lrpModel.selectedProblemSet[scope.stage].res[0].value, 0);
                 }
             }
+
+            // alert("make pad background");
+
+            if (scope.lrpModel.selectedTask.answer == 'draw-one2') {
+                
+                var note = scope.lrpModel.selectedProblemSet[scope.stage].res[0].note;
+                
+                var noteJson = JSON.parse(note);
+
+                scope.shape_count = note.shapeCount; // 도형 개수.
+
+                if (scope.lrpModel.selectedProblemSet[scope.stage].res.length > 0) {
+                    scope.pad.setBackground(scope.lrpServer + 'uploads/' + scope.lrpModel.selectedProblemSet[scope.stage].res[0].value, 0);
+                    scope.pad.makeDraw2(noteJson);
+                }
+            }
+
         }
     };
     this.loadBackgroundGrading = function(scope, init = false) {
+        //alert("setBackground2");
+
         if (init) {
             if (scope.lrpModel.selectedResult.tasks[scope.lrpModel.taskPivot].problems[0].refProblem.res.length > 0) {
                 scope.pad.setBackground(scope.lrpServer + 'uploads/' + scope.lrpModel.selectedResult.tasks[scope.lrpModel.taskPivot].problems[0].refProblem.res[0].value, 0);

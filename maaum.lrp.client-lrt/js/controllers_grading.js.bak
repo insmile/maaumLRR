@@ -302,6 +302,8 @@ angular.module('LRProject.controllers.grading', ['LRProject.services'])
 
         $scope.stageNext = function(totalScore) {
 
+            alert("stageNExt: grading");
+
             $scope.stage++;
 
             if (totalScore !== undefined) {

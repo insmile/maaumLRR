@@ -101,8 +101,6 @@
                     
                     <div ng-if="(lrpModel.selectedTask.answer === 'draw-one2')">
                         <div style="position:relative; right:0;text-align:right">
-                        	      
-                        	  <button style='height:5vh' ng-click="makeShape2()">다시섞기</button>
                             <button style='height:5vh' ng-click="dpUndo()">되돌리기</button>
                             <button style='height:5vh' ng-click="dpWhite()">지우개</button>
                             <button style='height:5vh' ng-click="dpBlack()">검정펜</button>
@@ -119,7 +117,8 @@
                         <div style="display:table-row; " ng-init="initDrawingPad(1.0, 0.7)" >
                             <div style="display: table-cell; vertical-align: middle; width:100vw; height:70vh" my-directive>
                                 
-                               
+                                <button ng-click="makeShape2()" >makeShape</button>
+
                                 <!-- 
                                 <button ng-click="makeShape()" >makeShape</button>
 
