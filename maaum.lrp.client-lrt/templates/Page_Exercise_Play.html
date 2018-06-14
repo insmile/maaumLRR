@@ -85,7 +85,7 @@
                             정보를 보낸다.
                             ddddddd
                         -->
-                        <div style="display:table-row; " ng-init="initDrawingPad(1.0, 0.7)" >
+                        <div style="display:table-row; " ng-init="initDrawingPad(1.0, 0.7,false, 'draw-one')" >
                             <div style="display: table-cell; vertical-align: middle; width:100vw; height:70vh" my-directive>                                
                                 <div id="sketchpad"></div>                                
                             </div>
@@ -116,7 +116,7 @@
                             정보를 보낸다.
                             ddddddd
                         -->
-                        <div style="display:table-row; " ng-init="initDrawingPad(1.0, 0.7)" >
+                        <div style="display:table-row; " ng-init="initDrawingPad(1.0, 0.7,false, 'draw-one2')" >
                             <div style="display: table-cell; vertical-align: middle; width:100vw; height:70vh" my-directive>
                                 
                                
@@ -156,7 +156,7 @@
                             <button style='height:5vh' ng-click="dpRed()">빨간펜</button>
                             <button style='height:5vh' ng-click="dpBlue()">파란펜</button>
                         </div>
-                        <div style="display: table-row;" ng-init="initDrawingPad(0.5, 0.7)">
+                        <div style="display: table-row;" ng-init="initDrawingPad(0.5, 0.7,false, 'draw-two')">
                             <div id="resizeTarget" style="display: table-cell; vertical-align: middle; width:50vw; height:60vh">
                                 <div>
                                     <img src='{{lrpServer}}uploads/{{lrpModel.selectedProblemSet[stage].res[0].value}}' style="max-width: 100%; max-height: 100%;">

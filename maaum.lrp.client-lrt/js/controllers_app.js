@@ -1730,7 +1730,7 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
         }
 
         
-        $scope.initDrawingPad = function(vw = 0.5, vh = 0.7, lock = false) {
+        $scope.initDrawingPad = function(vw = 0.5, vh = 0.7, lock = false, drawType) {
             var el = document.getElementById('sketchpad');
             var aspectRatio = (window.innerHeight * vh) / (window.innerWidth * vw);
             var opts = {
@@ -1746,7 +1746,7 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
             }
             console.log("Sketchpad="+JSON.stringify(opts));
 
-            var pad = new Sketchpad(el, opts);
+            var pad = new Sketchpad(el, opts, drawType);
 
             $scope.el = el;
             $scope.pad = pad;
@@ -1781,12 +1781,12 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
         }
 
         // 그리기 초기 설정.
-        $scope.initDrawingPadAndLoad = function(vw = 0.5, vh = 0.7, bg = false) {
-            $scope.initDrawingPad(vw, vh, true);
+        $scope.initDrawingPadAndLoad = function(vw = 0.5, vh = 0.7, bg = false, drawType) {
+            $scope.initDrawingPad(vw, vh, true, drawType);
             
-            console.log("aaaa=" + $scope.lrpModel.selectedResult.tasks[$scope.lrpModel.taskPivot].problems[0].drawJson);
+            // console.log("aaaa=" + $scope.lrpModel.selectedResult.tasks[$scope.lrpModel.taskPivot].problems[0].drawJson);
 
-            console.log("bbbb=" +  JSON.stringify( $scope.lrpModel.selectedResult.tasks[$scope.lrpModel.taskPivot].problems[0].drawJson));
+            // console.log("bbbb=" +  JSON.stringify( $scope.lrpModel.selectedResult.tasks[$scope.lrpModel.taskPivot].problems[0].drawJson));
 
             
             $scope.pad.loadJSON(JSON.parse($scope.lrpModel.selectedResult.tasks[$scope.lrpModel.taskPivot].problems[0].drawJson));
