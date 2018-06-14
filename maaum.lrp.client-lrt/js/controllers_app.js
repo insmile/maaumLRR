@@ -4,8 +4,7 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
 
         $http.defaults.withCredentials = true;
 
-        // var lrpServer = 'https://lrtadmin.maaum.net/';
-        
+        //var lrpServer = 'https://lrtadmin.maaum.net/';
         var lrpServer = 'http://localhost:4040/';
         var pageCacheHolder = null;
 
@@ -375,28 +374,11 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
                     ]
                 },
                 {
-                   /*
-                    baseReload: [
-                        { url: 'tasks/list', dataSetter: 'taskList' }
-                    ],
-                    listStatePage: [
-                        './templates/Include_List_Individual.html',
-                        './templates/Include_List_SelectedIndividual.html'
-                    ]
-                    */
                     // sub page 
+                   
+                                        
                 },
                 {
-                    /*
-                    hasTab: false,
-                    baseReload: [
-                        { url: 'protocols/', dataSetter: 'protocolList' }
-                    ],
-                    listStatePage: [
-                        './templates/Include_List_Protocol.html',
-                        './templates/Include_List_SelectedProtocol.html'
-                    ]
-                    */
                     baseReload: [
                         { url: 'tasks/list', dataSetter: 'taskList' }
                     ],
@@ -483,15 +465,23 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
             error(function(data, status) { console.log('Error : loadDataDelete : ' + lrpServer + obParam.url + ' =>(' + obParam.dataSetter + ' : ' + obParam.callback + ') ! status : ' + status); });
         };
 
+        
+        $scope.subLocation = function(arg) {
+             $scope.lrpModel.statePage = arg;
+             $state.transitionTo('app.subPage');
+         }
+       
+        
         //for List
         $scope.menuActivate = function(arg, arg2) {
             
             console.log("[statePage  >> ]" + $scope.lrpModel.statePage);
+
+            if ( arg2 == undefined || arg2 === null ) arg2 = 'N';
+            
             console.log("[statePage bool >> ]" + arg2);
-            
-            if ( arg2 === null || arg2 === undefined) arg2 = 'N';
-            
-            if ( arg2 === 'N'  ) {
+                        
+            if ( arg2 == 'N'  ) {
                 if (arg < 0 || arg >= pageBluePrint.length) {
                     $state.transitionTo('app.login');
                     return;
@@ -503,17 +493,16 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
             $scope.lrpModel.statePage = arg;
 
             //add subpage 이동
-            if ( $scope.lrpModel.statePage === 2 && arg2 === 'N' )  {
+            if ( $scope.lrpModel.statePage == 2 && arg2 == 'N' )  {
                 hasTab: false;
                 $state.transitionTo('app.subPage');
-                return;
+                //return;
             }
             
             //add LT 추가 
             if ( $scope.lrpModel.statePage === 2 && arg2 == 'LT' )  {
                 $scope.lrpModel.pageTag[2] = '기능훈련';
                 pageBluePrint[2] = {
-                    //hasTab: false,
                     baseReload: [
                         { url: 'tasks/list1', dataSetter: 'taskList' }
                     ],
@@ -527,7 +516,6 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
             else if ( $scope.lrpModel.statePage === 2 && arg2 == 'RT' )  {
                 $scope.lrpModel.pageTag[2] = '기능훈련';
                 pageBluePrint[2] = {
-                    //hasTab: false,
                     baseReload: [
                         { url: 'tasks/list2', dataSetter: 'taskList' }
                     ],
@@ -602,7 +590,7 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
                 console.log("pageCacheHolder >> " + $scope.lrpModel.listPageHolder[i]);
             }
             
-            console.log("pageBluePrint >> " + $scope.lrpModel.statePage);
+            console.log("statePage >> " + $scope.lrpModel.statePage);
             setListState(pageCacheHolder);
 
             $state.transitionTo('app.list');
