@@ -845,4 +845,5 @@ page {
 #detailWrap .contents h3		{height:60px;line-height:60px;padding-left:20px;font-family: 'Nanum Gothic'; color:#656565;font-size:14px;margin:0px;}
 #detailWrap .contents ul 		{display:inline-block;margin-left:20px;}
 #detailWrap .contents ul li		{margin-right:12px;;float:left;}
-/** ¡÷ºÆ **/
+
+.login_etc			{width:530px;margin:0 auto; margin-top:120px;}
