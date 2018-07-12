@@ -49,28 +49,13 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
                 ]
             },
             {
-                /*
-                baseReload: [
-                    { url: 'tasks/list', dataSetter: 'taskList' }
-                ],
-                listStatePage: [
-                    './templates/Include_List_Individual.html',
-                    './templates/Include_List_SelectedIndividual.html'
-                ]
-                */
                 //sub page move
+                hasTab: false,
+                baseReload: [],                
+                listStatePage: ['','']                
             },
             {
-                /*
-                hasTab: false,
-                baseReload: [
-                    { url: 'protocols/', dataSetter: 'protocolList' }
-                ],
-                listStatePage: [
-                    './templates/Include_List_Protocol.html',
-                    './templates/Include_List_SelectedProtocol.html'
-                ]
-                */
+
                 hasTab: false,
                 baseReload: [
                     { url: 'tasks/list', dataSetter: 'taskList' }
@@ -374,8 +359,10 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
                     ]
                 },
                 {
-                    // sub page 
-                   
+                    //sub page move
+                    hasTab: false,
+                    baseReload: [],                
+                    listStatePage: ['','']      
                                         
                 },
                 {
@@ -554,6 +541,9 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
 
                 if ($scope.lrpModel.userData !== null) pageBluePrint[4].baseReload.url = 'progressTemplates/list/' + $scope.lrpModel.userData._id;
 
+                
+                console.log("[listStatePage length  >> ]" + pageBluePrint[arg].listStatePage.length);
+                
                 for (i = 0; i < pageBluePrint[arg].listStatePage.length; i++) {
                     $scope.lrpModel.listPageHolder[i] = pageBluePrint[arg].listStatePage[i];
                 }
@@ -2184,7 +2174,7 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
         error(function (data, status) { console.log('Error : loadDataPost : ' + lrpServer + obParam.url + ' =>(' + obParam.dataSetter + ' : ' + obParam.callback + ') ! status : ' + status); });
         */
 
-        $scope.loginData = { username: 'admin', password: 'rhfueo!' };
+        //$scope.loginData = { username: 'admin', password: 'rhfueo!' };
         //$scope.loginData = { username: 'testpatient', password: 'rhfueo!' };
         
         $scope.doLogin = function() {
@@ -2286,7 +2276,7 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
         }
 
         function setLogin() {
-            var arg = null;
+            var arg = 0;
             if ($scope.lrpModel.userData.roles == 'admin')
                 arg = 0;
             else if ($scope.lrpModel.userData.roles == 'therapist')
@@ -2439,7 +2429,11 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
         $scope.go_findpassword = function() {
             $scope.logonInclude = './templates/Include_Login_Find.html';
         };
-
+        
+        $scope.forgotData = {
+            email: ''   
+        }
+        
         $scope.joinData = {
             role: "therapist",
             name: '',
@@ -2459,12 +2453,46 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
         };
 
         $scope.findAccount_email = function() {
+            /*
             $ionicPopup.alert({
                 title: '개발중', //'발송',
                 content: '이메일을 통한 계정 찾기' //'이메일로 발송 하였습니다.'
             });
 
             $scope.cancleAndGoLogin();
+            */
+            
+            if ($scope.forgotData.email == "" ) {
+                $ionicPopup.alert({
+                    title: '확인',
+                    content: 'email 주소를 입력하세요.'
+                });
+                return;
+            }
+                        
+            var forgotData = {
+                email: $scope.forgotData.email,
+                username : 'theingka'
+            };            
+            $http.post($scope.lrpServer + "auth/forgot", forgotData).
+            success(function(data, status) {
+                if (status == 400) {
+                    return;
+                }
+
+                $ionicPopup.alert({
+                    title: '이메일발송',
+                    content: '이메일 발송했습니다.'
+                });
+
+                $scope.cancleAndGoLogin();
+            }).
+            error(function(data) {
+                $ionicPopup.alert({
+                    title: '이메일발송 실패',
+                    content: data.message
+                });
+            });            
         };
 
         $scope.makeSignup = function() {
