@@ -14,11 +14,16 @@
             </div>
 
             <div style="width: 72%;">
-                <input class="lrp-popover-input" type="text" placeholder="이메일" ng-model="userData.email">
+                <input class="lrp-popover-input" type="text" placeholder="이메일" ng-model="forgotData.email">
             </div>
         </div>
-
-        <div style="display: flex;margin-top: 55px;">
+		
+        
+        <div style="display: flex;margin-left: 45px;margin-top: 15px;color: red">
+            <div style="height: 20px;">{{FindeMsg}}</div>
+        </div>	
+                
+        <div style="display: flex;margin-top: 35px;">
             <button class="button button-block button-dark" style="margin-right: 10px" ng-click="cancleAndGoLogin()">취소</button>
             <button class="button button-block button-dark" ng-click="findAccount_email()">이메일로 확인</button>
         </div>

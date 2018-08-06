@@ -16,55 +16,53 @@
 
 <ion-content scroll="true">
         <page>
-        
-            
+           
             <div>
-
                 <ion-item style="padding: 10px;">
                     <h3>{{lrpModel.selectedPatient.name}}</h3>
                 </ion-item>
 
                 <ion-item style="padding: 10px;">
                     <div class="my-row-center">
-                        <div style="width: 50%;">
+                        <div style="width: 50%;text-align:left;">
                             <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
-                                <span class="input-label" style="text-align: right; width: 95px; display:table;">등록번호 : </span>
+                                <span class="input-label patient_c" style="width: 95px; display:table;">등록번호</span>
                                 <span class="input-label"> {{lrpModel.selectedPatient.regNo}}</span>
                             </label>
 
                             <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
-                                <span class="input-label" style="text-align: right; width: 95px; display:table;">성별 : </span>
+                                <span class="input-label patient_c" style="width: 95px; display:table;">성별</span>
                                 <span class="input-label">{{lrpModel.selectedPatient.sex}}</span>
                             </label>
 
                             <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
-                                <span class="input-label" style="text-align: right; width: 95px; display:table;">생년월일 : </span>
+                                <span class="input-label patient_c" style="width: 95px; display:table;">생년월일</span>
                                 <span class="input-label">{{lrpModel.selectedPatient.birthday | date: "yyyy-MM-dd"}}</span>
                             </label>
 
                             <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
-                                <span class="input-label" style="text-align: right; width: 95px; display:table;">직업 : </span>
+                                <span class="input-label patient_c" style="width: 95px; display:table;">직업</span>
                                 <span class="input-label">{{lrpModel.selectedPatient.Job}}</span>
                             </label>
                         </div>
 
-                        <div style="width: 48%;">
+                        <div style="width: 48%;text-align:left;">
                             <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
-                                <span class="input-label" style="text-align: right; width: 95px; display:table;">담당평가자 : </span>
+                                <span class="input-label patient_c" style="width: 95px; display:table;">담당평가자</span>
                                 <span class="input-label">{{lrpModel.selectedPatient.assignedTherapistName}}</span>
                             </label>
 
                             <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
-                                <span class="input-label" style="text-align: right; width: 95px; display:table;">등록일 : </span>
+                                <span class="input-label patient_c" style="width: 95px; display:table;">등록일</span>
                                 <span class="input-label">{{lrpModel.selectedPatient.created | date: "yyyy-MM-dd"}}</span>
                             </label>
 
                             <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
-                                <span class="input-label" style="text-align: right; width: 95px; display:table;">치료연수 : </span>
+                                <span class="input-label patient_c" style="width: 95px; display:table;">치료연수</span>
                                 <span class="input-label">{{lrpModel.selectedPatient.eduYear}}</span>
                             </label>
                             <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
-                                <span class="input-label" style="text-align: right; width: 95px; display:table;">주로쓰는 손 : </span>
+                                <span class="input-label patient_c" style="width: 95px; display:table;">주로쓰는 손</span>
                                 <span class="input-label">{{lrpModel.selectedPatient.handType}}</span>
                             </label>
                         </div>
@@ -73,22 +71,22 @@
 
                 <ion-item style="padding: 10px;">
                     <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
-                        <span class="input-label" style="text-align: right; width: 160px; display:table;">진단명 : </span>
+                        <span class="input-label patient_c" style="width: 160px; display:table;">진단명</span>
                         <span class="input-label">{{lrpModel.selectedPatient.diagnosis}}</span>
                     </label>
 
                     <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
-                        <span class="input-label" style="text-align: right; width: 160px; display:table;">발병일 : </span>
+                        <span class="input-label patient_c" style="width: 160px; display:table;">발병일</span>
                         <span class="input-label">{{lrpModel.selectedPatient.inciDate | date: "yyyy-MM-dd"}}</span>
                     </label>
 
                     <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
-                        <span class="input-label" style="text-align: right; width: 160px; display:table;">실어증 유형 : </span>
+                        <span class="input-label patient_c" style="width: 160px; display:table;">실어증 유형</span>
                         <span class="input-label">{{lrpModel.selectedPatient.aphasiaType}}</span>
                     </label>
 
                     <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
-                        <span class="input-label" style="text-align: right; display:table; width: 160px;">1차 실어증 평가점수 : </span>
+                        <span class="input-label patient_c" style="display:table; width: 160px;">1차 실어증 평가점수</span>
                         <span class="input-label">{{lrpModel.selectedPatient.initialAQ}}</span>
                     </label>
                 </ion-item>
@@ -112,24 +110,24 @@
                         </progress-arc>
                     </div>
 
-                    <div style="width: 48%; float: right;">
+                    <div style="width: 50%; float: right;text-align:left;">
                         <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
-                            <span class="input-label" style="text-align: right; width: 110px; display:table;">총 수행시간 :</span>
+                            <span class="input-label patient_c" style="width: 110px; display:table;">총 수행시간</span>
                             <span class="input-label">{{lrpModel.selectedResult.tasks[lrpModel.taskPivot].totalTime / 1000 | number : 2}} s</span>
                         </label>
 
                         <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
-                            <span class="input-label" style="text-align: right; width: 110px; display:table;">평균 풀이시간 :</span>
+                            <span class="input-label patient_c" style="width: 110px; display:table;">평균 풀이시간</span>
                             <span class="input-label">{{lrpModel.selectedResult.tasks[lrpModel.taskPivot].meanTime / 1000 | number : 2}} s</span>
                         </label>
 
                         <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
-                            <span class="input-label" style="text-align: right; width: 110px; display:table;">표준편차 :</span>
+                            <span class="input-label patient_c" style="width: 110px; display:table;">표준편차</span>
                             <span class="input-label">{{lrpModel.selectedResult.tasks[lrpModel.taskPivot].stdTime / 1000 | number : 2}} s</span>
                         </label>
 
                         <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
-                            <span class="input-label" style="text-align: right; width: 110px; display:table;">등수 :</span>
+                            <span class="input-label patient_c" style="width: 110px; display:table;">등수</span>
                             <span class="input-label">None</span>
                         </label>
                     </div>

@@ -76,24 +76,24 @@
                     </div>
                 </div>
 
-                <div style="width: 48%; float: right;">
+                <div style="width: 50%; float: right;text-align:left;">
                     <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
-                        <span class="input-label" style="text-align: right; width: 110px; display:table;">총 수행시간 :</span>
+                        <span class="input-label patient_c" style="width: 120px; display:table;">총 수행시간 </span>
                         <span class="input-label">{{lrpModel.selectedResult.tasks[lrpModel.taskPivot].totalTime / 1000 | number : 2}} s</span>
                     </label>
 
                     <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
-                        <span class="input-label" style="text-align: right; width: 110px; display:table;">평균 풀이시간 :</span>
+                        <span class="input-label patient_c" style="width: 120px; display:table;">평균 풀이시간</span>
                         <span class="input-label">{{lrpModel.selectedResult.tasks[lrpModel.taskPivot].meanTime / 1000 | number : 2}} s</span>
                     </label>
 
                     <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
-                        <span class="input-label" style="text-align: right; width: 110px; display:table;">표준편차 :</span>
+                        <span class="input-label patient_c" style="width: 120px; display:table;">표준편차</span>
                         <span class="input-label">{{lrpModel.selectedResult.tasks[lrpModel.taskPivot].stdTime / 1000 | number : 2}} s</span>
                     </label>
 
                     <label ng-if="lrpModel.case32" class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
-                            <span class="input-label" style="text-align: right; width: 110px; display:table; font-weight:bold">백분위수 :</span>
+                            <span class="input-label patient_c" style="width: 120px; display:table; font-weight:bold">백분위수</span>
                             <span class="input-label" style="font-weight:bold">{{lrpModel.score32}}</span>
                         </label>
                 </div>

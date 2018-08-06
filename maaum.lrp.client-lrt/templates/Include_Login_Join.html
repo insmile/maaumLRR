@@ -7,15 +7,15 @@
             <h1 style="color: #015495;">신규 등록</h1>
         </div>
 
-        <div style="display: inline-flex; margin: 15px 0px 5px 0px;">
+        <div  class="my-row-center">
             <input id="roleT" style="margin-right: 5px;" type="radio" name="userrole" ng-model="joinData.role" ng-value="'therapist'">
             <label for="roleT" style="margin-right: 28px;">평가자</label>
             <input id="roleP" style="margin-right: 5px;" type="radio" name="userrole" ng-model="joinData.role" ng-value="'patient'">
             <label for="roleP">환자</label>
         </div>
 
-        <!--<div class="my-row-center">
-            <div class='item-calm' style="width: 28%;">
+        <div class="my-row-center">
+            <div style="width: 28%;">
                 <label class="item-stacked-label" style="border: 0;padding: 0; display: flex;">
                     <span class="input-label" style="text-align: right; width: 100%; display:table;">센터 :</span>
                 </label>
@@ -26,7 +26,7 @@
                     <option ng-repeat="center in lrpModel.centers" value="{{center._id}}">{{center.name}} - {{center.officer_tel}}</option>
                 </select>
             </div>
-        </div>-->
+        </div>
 
         <div class="my-row-center">
             <div style="width: 28%;">
