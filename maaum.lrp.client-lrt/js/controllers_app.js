@@ -2453,26 +2453,16 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
         };
 
         $scope.findAccount_email = function() {
-            /*
-            $ionicPopup.alert({
-                title: '개발중', //'발송',
-                content: '이메일을 통한 계정 찾기' //'이메일로 발송 하였습니다.'
-            });
-
-            $scope.cancleAndGoLogin();
-            */
+            $scope.FindeMsg = '';
             
             if ($scope.forgotData.email == "" ) {
-                $ionicPopup.alert({
-                    title: '확인',
-                    content: 'email 주소를 입력하세요.'
-                });
+                $scope.FindeMsg = "이메일 주소를 입력하세요.";
                 return;
             }
                         
             var forgotData = {
-                email: $scope.forgotData.email,
-                username : 'theingka'
+                email: $scope.forgotData.email
+                //username : 'theingka'
             };            
             $http.post($scope.lrpServer + "auth/forgot", forgotData).
             success(function(data, status) {
@@ -2481,7 +2471,7 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
                 }
 
                 $ionicPopup.alert({
-                    title: '이메일발송',
+                    title: '확인',
                     content: '이메일 발송했습니다.'
                 });
 
@@ -2489,7 +2479,7 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
             }).
             error(function(data) {
                 $ionicPopup.alert({
-                    title: '이메일발송 실패',
+                    title: '확인',
                     content: data.message
                 });
             });            
