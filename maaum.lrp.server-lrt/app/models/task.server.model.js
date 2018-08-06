@@ -46,6 +46,11 @@ var ResourceSchema = new Schema({
     note: {
         type: String
     }
+    ,
+    taskGb: {
+        type: String,
+        default: "RRR"
+    }
 });
 
 /**
@@ -101,6 +106,10 @@ var TaskSchema = new Schema({
     center: {
         type: Schema.ObjectId,
         ref: 'Center'
+    },
+    taskGb: {
+        type: String,
+        default: "RRR"
     }
 });
 
@@ -150,6 +159,11 @@ var ProblemSchema = new Schema({
     },
     updated: {
         type: Date
+    }
+    ,
+    taskGb: {
+        type: String,
+        default: "RRR"
     }
 });
 

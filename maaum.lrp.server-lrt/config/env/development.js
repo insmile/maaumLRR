@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-    db: 'mongodb://localhost/new-lrt-dev',
+    db: 'mongodb://localhost/new-lrr-dev',
     app: {
         title: 'LRT admin'
     },

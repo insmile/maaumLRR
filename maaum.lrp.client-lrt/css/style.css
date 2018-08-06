@@ -4,7 +4,7 @@
 */
 
 .body {
-    font-family: "NotoSansCJKkr", "NotoSans-Regular", sans-serif !important;
+    font-family: "Nanum Gothic", "NotoSansCJKkr", "NotoSans-Regular", sans-serif !important;
 }
 
 .menu {
@@ -98,7 +98,7 @@ button.ripple:focus:not(:active)::after {
 /** free */
 .item-divider {
     /*background-color: #eaf0f4;*/
-    background-color: #97CBFF
+    background-color: #B8C2CF
 }
 
 .item-divider .button {
@@ -423,14 +423,13 @@ h3,
 }
 
 .outer h4 {
-    color: #CB708A;
+    color: #0071C6;
 }
 
 .inner-middle {
     display: table-cell;
     vertical-align: middle;
     text-align: center;
-    background-image: url('../img/res/12345.jpg');
 }
 
 .inner {
@@ -441,7 +440,6 @@ h3,
     position: relative;
     display: inline-block;
     padding: 1em;
-    background-color: #eff5f4 !important;
 }
 
 .icon-size {
@@ -518,8 +516,7 @@ h3,
 .lrp-checkbox-lable {
     position: relative;
     top: -6px;
-    font-size: 0.9em;
-    font-family: 'ë‚˜ëˆ”ê³ ë”•', 'Nanum Gothic' !important;
+    font-size: 17px;
 }
 
 .lrp-ion-content {
@@ -529,9 +526,8 @@ h3,
 
 /* free */
 .lrp-bar-top {
-    background-color: #7BBEFF !important;
-    /*#1d68a7 !important;*/
-    color: #8B0029 !important;
+    background-color: #425163 !important;
+    color: #FFF !important;
 }
 
 .lrp-header-padding {
@@ -559,8 +555,9 @@ h3,
     /*#cbd9e5 !important;*/
 }
 
+/* free */
 .lrp-sub-header h3 {
-    color: #AA4563 !important;
+    color: #2186CE !important;
 }
 
 .lrp-sub-header {
@@ -570,7 +567,7 @@ h3,
 
 /* free */
 .lrp-tabs {
-    background-color: #31CF5A !important;
+    background-color: #425163 !important;
 }
 
 /* free */
@@ -634,8 +631,7 @@ h3,
 }
 
 .lrpMenuSelected {
-    /* background-color: #2196f3; */
-    background-color: #8B0029;
+    background-color: #425163;
 }
 
 
@@ -734,7 +730,7 @@ h3,
 /** free */
 .lrpListSelected {
     /*background-color: #8B0029 !important;*/
-    background-color: #7BBEFF !important;
+    background-color: #B8C2CF !important;
 }
 
 .lrpListSelected h2 {
@@ -780,6 +776,7 @@ page {
     }
 }
 
+
 /** free */
 #con_lf {
     display: inline-block;
@@ -807,16 +804,45 @@ page {
     cursor:pointer;
 }
 
-.lrpList111111111111 {
-    background-color: #eff5f4 !important;
-}
 
-button{
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: 0;
-    cursor:pointer;
-    background:none;
-    color:white;
-  }
+/** ·Î±×ÀÎ **/
+.login_wrap			{width:930px;margin:0 auto; margin-top:160px;}
+.left{float:left; border-top:1px solid #fff;}
+.right{float:right; border-top:1px solid #fff;}
+
+.login_h1		{border-bottom:2px solid #d9d9d9;}
+.login_h1 img   {margin-bottom:1px;}
+
+
+.right .check		{padding: 5px 0;font-size: 13px;color: #888888; height:30px;line-height:30px;}
+
+.left			{width:540px;float:left; border-top:1px solid #fff;}
+.left .subject	{font-size:15px; font-family: 'Nanum Gothic'; font-weight:600; color:#656565;margin-top:40px;padding-left: 3px;}
+.left .info		{font-size:14px; font-family: 'Nanum Gothic'; color:#656565;height:30px;line-height:17px;padding-left: 3px;margin-top: 10px;}
+.left .img		{margin-top:50px;}
+.right          {width:346px; height:388px;border:1px solid #dddddd;padding:20px;}
+.right .login_h2{margin-bottom:10px;} 
+
+.loginBtn		{margin-top:20px;cursor:pointer}
+
+.login_util			{margin-top:40px;display:inline-block;border-top:1px solid #dddddd;}
+.login_util li		{margin-top:5px;}
+.login_util .join	{float:left;width:100px;font-size:14px; font-family: 'Nanum Gothic'; color:#656565;}
+.login_util .search	{float:right;width:190px;font-size:14px; font-family: 'Nanum Gothic'; color:#656565;text-align:right;}
+
+
+ a.login:link {text-decoration:none;color:#888888;font-size:13px; font-family: 'Nanum Gothic';}
+ a.login:visited	{text-decoration:none;color:#888888;font-size:13px; font-family: 'Nanum Gothic';}
+ a.login:hover {text-decoration:none;color:#000000;font-size:13px; font-family: 'Nanum Gothic';}
+  
+
+#detailWrap						{width:100%;overflow:hidden;display:block;}
+#detailWrap h1					{height:60px;background-color:#414042;margin:0px;border:0px;line-height:60px;vertical-align:middle;}
+#detailWrap h1 img				{margin-top:20px;margin-left:20px;}
+#detailWrap .leftMenu			{width:75px;float:left;background-color:#445163;}
+#detailWrap .contents			{overflow:hidden;}
+#detailWrap .contents h2		{height:60px;line-height:60px;border-bottom:1px solid #ddd;padding-left:20px;font-family: 'Nanum Gothic'; color:#656565;font-size:20px;margin:0px;}
+#detailWrap .contents h3		{height:60px;line-height:60px;padding-left:20px;font-family: 'Nanum Gothic'; color:#656565;font-size:14px;margin:0px;}
+#detailWrap .contents ul 		{display:inline-block;margin-left:20px;}
+#detailWrap .contents ul li		{margin-right:12px;;float:left;}
+/** ÁÖ¼® **/

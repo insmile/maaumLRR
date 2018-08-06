@@ -1,5 +1,10 @@
 (function() {
 
+    var canvas;
+    // var backCode;// 배경 스트링 코드
+
+    var backCode2;
+
     function mergeObjects(obj1, obj2) {
         var obj3 = {};
         var attrname;
@@ -16,8 +21,12 @@
         return obj3;
     }
 
-
+    // 문제등록. 흐음.
     function Sketchpad(el, opts) {
+        alert("sketchpad 초기화!");
+        
+        backCode2 = "";
+
         var that = this;
 
         if (!el) {
@@ -28,10 +37,14 @@
         var strokes = [];
         var undos = [];
 
+        var backCode;
+
         if (opts.data) {
             opts.aspectRatio = opts.data.aspectRatio;
-            strokes = opts.data.strokes;
+            strokes = opts.data.strokes;            
         }
+
+        // alert("sketch init: opts ="+JSON.stringify(opts));
 
         opts.aspectRatio = opts.aspectRatio || 1;
         opts.width = opts.width || el.clientWidth;
@@ -50,7 +63,7 @@
         var sketching = false;
 
         // Create a canvas element
-        var canvas = document.createElement('canvas');
+        canvas = document.createElement('canvas');
 
         /**
          * Set the size of canvas
@@ -65,15 +78,28 @@
         /**
          * Set a background of canvas
          */
-        function setCanvasBackground(url = undefined, opacity = 0.5) {
+        // bbbbbbbbbbb
+        function setCanvasBackground(url = undefined, opacity = 0.5) {            
+            // alert("setCanvasBackground");
+            
             if (url == undefined)
                 canvas.style.background = "white";
             else {
+                
                 canvas.style.background = "linear-gradient(rgba(255, 255, 255, " + opacity + "), rgba(255, 255, 255, " + opacity + ")), url('" + url + "') no-repeat";
                 canvas.style.backgroundSize = "contain";
                 canvas.style.backgroundPositionX = "center";
                 canvas.style.backgroundPositionY = "center";
             }
+            // alert("data.backDDD2="+ backCode2);
+
+            if(backCode2 != "" && backCode2!=null &&  backCode2!='undefined'){
+                canvas.style.background = "linear-gradient(rgba(255, 255, 255, " + opacity + "), rgba(255, 255, 255, " + opacity + ")), url('" + backCode2 + "') no-repeat";
+                canvas.style.backgroundSize = "contain";
+                canvas.style.backgroundPositionX = "center";
+                canvas.style.backgroundPositionY = "center";
+            }
+
         }
 
         /**
@@ -137,6 +163,8 @@
          * Erase everything in the canvase
          */
         function clearCanvas() {
+            
+            
             context.clearRect(0, 0, canvas.width, canvas.height);
 
             if (opts.backgroundColor) {
@@ -165,36 +193,104 @@
             return size * canvas.width;
         }
 
+
+        var ddddd=1; // 선두께 초기값
+
         /**
          * Draw a stroke on the canvas
          */
         function drawStroke(stroke) {
-            context.beginPath();
+                        
+            var ddd_term = 0;
+
             for (var j = 0; j < stroke.points.length - 1; j++) {
+                
+                context.lineWidth = ddddd;
+                context.beginPath();
+
                 var start = normalizePoint(stroke.points[j]);
                 var end = normalizePoint(stroke.points[j + 1]);
 
+                // console.log("start_x:"+start.x+", start_y:"+start.y);
+                // console.log("end_x:"+end.x+", end_y:"+end.y);
+
                 context.moveTo(start.x, start.y);
                 context.lineTo(end.x, end.y);
+
+                context.closePath();
+                // context.miterLimit = stroke.miterLimit;
+    
+                context.strokeStyle = stroke.color;
+
+                context.lineJoin = stroke.join;
+                context.lineCap = stroke.cap;
+            
+                context.stroke();
+
+                if(ddddd < 7){ // 두께 최대치
+
+                    if(ddd_term > 4){                    
+                        ddddd += 0.1;
+                        ddd_term=0;
+                    }
+                }
+
+                ddd_term++;
+
+                if(j==0){
+                    makeCircle(start.x, start.y);
+                }
+
+                if(j == stroke.points.length - 2){
+                    // alert("last!!!!");
+                    makeCircle(start.x, start.y);
+                }
+                
             }
-            context.closePath();
-
-            context.strokeStyle = stroke.color;
-            context.lineWidth = normalizeLineSize(stroke.size);
-            context.lineJoin = stroke.join;
-            context.lineCap = stroke.cap;
-            context.miterLimit = stroke.miterLimit;
-
-            context.stroke();
         }
+
+        // ddddd1
+        function makeBack()
+        {
+
+        }
+
+        function makeCircle(posX, posY){
+            var ctx = canvas.getContext('2d');
+            ctx.beginPath();
+            ctx.arc(posX, posY, 10, 0,2*Math.PI);
+            ctx.stroke();
+        }
+        
+        var lineWidth_ = 1;
+        var lineFlag = true;
 
         /**
          * Redraw the canvas
          */
         function redraw() {
+            
+            ddddd=1;
             clearCanvas();
+
+            /*
+            var imageCode = new Image();
+            imageCode.src = backCode;
+            
+            var opacity = 0.5;
+            canvas.style.background = "linear-gradient(rgba(255, 255, 255, " + opacity + "), rgba(255, 255, 255, " + opacity + ")), url('" + imageCode + "') no-repeat";
+            */
+            
+            // canvas.style.background = imageCode;
+
+            // var ctx = canvas.getContext('2d');
+            // ctx.drawImage(imageCode,0,0);
+            
+            
             for (var i = 0; i < that.strokes.length; i++) {
+
                 drawStroke(that.strokes[i]);
+                
             }
         }
 
@@ -251,6 +347,7 @@
                 x: cursor.x,
                 y: cursor.y
             });
+
             that.redraw();
 
             if (that.onDrawEnd) that.onDrawEnd();
@@ -282,12 +379,16 @@
         this.undos = undos;
         this.opts = opts;
 
+        this.backCode = backCode;
+
         // Public functions
         this.redraw = redraw;
         this.setCanvasSize = setCanvasSize;
         this.setCanvasBackground = setCanvasBackground;
         this.getPointRelativeToCanvas = getPointRelativeToCanvas;
         this.getLineSizeRelativeToCanvas = getLineSizeRelativeToCanvas;
+
+        this.makeCircle = makeCircle;
 
         if (strokes) {
             redraw();
@@ -327,14 +428,18 @@
         this.redraw();
     };
 
+
     /**
      * Convert the sketchpad to a JSON object that can be loaded into
      * other sketchpads or stored on a server
      */
     Sketchpad.prototype.toJSON = function() {
+        
+        
         return {
             aspectRatio: this.canvas.height / this.canvas.width,
-            strokes: this.strokes
+            strokes: this.strokes,
+            backDDD:this.backCode
         };
     };
 
@@ -344,6 +449,12 @@
      */
     Sketchpad.prototype.loadJSON = function(data) {
         this.strokes = data.strokes;
+        
+        // this.backCode = data.backDDD;
+        backCode2 = data.backDDD;
+        // alert("data.backDDD0="+data.backDDD);
+        // alert("data.backDDD1="+backCode2);
+        
         this.redraw();
     };
 
@@ -400,6 +511,230 @@
         this.redraw();
     };
 
+
+    var myShapeArr = [];
+
+    // tttttt1
+    Sketchpad.prototype.makeShapeDD = function(shapeType, count) {
+        
+        myShapeArr = [];
+
+        var c_w = canvas.width;
+        var c_h = canvas.height;
+                
+        var min = 10;
+        var add = 10;
+
+        console.log("pad gogo Shape111: ");
+        
+        var ctx = canvas.getContext('2d');
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // var count = 6;
+
+        // 전체너비 500 도형 너비 20일 때 안나가게.        
+        // (500 - 40)랜덤 + 20. 20~480
+        // count = 3;
+
+        var index = 0;
+        var indexLimit = 0;
+        while(true){
+            indexLimit++
+            var www = min + add * index;
+
+            if(shapeType=="number"){ // 숫자
+                www = 50; // 글자크기 적당히.
+            }
+
+            var padding_x = 150;
+            var padding_y = 150;
+
+            var x_ran;
+            var y_ran;
+
+            if(shapeType=="rect"){
+                // 도형 기준점이 왼쪽 위.
+                x_ran = Math.floor(Math.random() * (c_w - www - padding_x*2 ) ) + padding_x;
+                y_ran = Math.floor(Math.random() * (c_h - www - padding_y*2 ) ) + padding_y;
+
+            }else {
+                // 기준점이 가운데.
+                x_ran = Math.floor(Math.random() * (c_w - (www+padding_x)*2 )) + www+padding_x;
+                y_ran = Math.floor(Math.random() * (c_h - (www+padding_y)*2 )) + www+padding_y;
+
+            }
+            
+            // x_ran = Math.floor(Math.random() * 200 );
+            // y_ran = Math.floor(Math.random() * 200 );
+
+
+            var r=  Math.floor(Math.random() *255) ;
+            var g=  Math.floor(Math.random() *255) ;
+            var b=  Math.floor(Math.random() *255) ;
+
+            ctx.fillStyle = 'rgb('+r+',' +g+',' +b+')';
+
+            var isDrawReady = false;
+
+            if(index==0){
+                isDrawReady = true;
+                // myShapeArr.push({"x":x_ran, "y":y_ran, "www":www});
+                
+            }else {
+                isDrawReady = !checkOverlap(myShapeArr, x_ran, y_ran, www,shapeType );
+            }
+
+            if(isDrawReady) {
+                index++;
+                myShapeArr.push({"x":x_ran, "y":y_ran, "www":www});
+
+
+                if(shapeType=="rect"){ // 네모
+                    ctx.fillRect(x_ran, y_ran, www, www);
+    
+                } else if(shapeType=="number"){ // 숫자
+                    
+                    ctx.beginPath();
+                    ctx.arc(x_ran, y_ran-10, 30, 0,2*Math.PI);
+                    
+                    ctx.font = "32px Arial";
+                    ctx.fillText(index, x_ran, y_ran);
+                    ctx.textAlign = "center"; 
+
+                    ctx.stroke();
+    
+                }            
+                else { // 원.
+                    ctx.beginPath();
+                    ctx.arc(x_ran, y_ran, www, 0,2*Math.PI);
+                    ctx.stroke();
+                }
+                indexLimit = 0;
+            }  
+
+            if(indexLimit>200){
+                alert("겹치지 않게 그릴 공간이 없습니다.");
+                break;
+            }
+            if(index >= count){
+                break;
+            }
+            
+        }
+        
+        
+        this.backCode = canvas.toDataURL();
+        
+        // 만들어진 도형으로 배경 세팅.
+        this.setCanvasBackground(this.backCode, 0.5);
+    };
+
+
+    // 하..오버랩 체크 함수가 없네 수동으로 체크.....ㅠㅠ
+    function checkOverlap(myShapeArr, x_ran, y_ran, www, shapeType){
+        
+        // 중심 포인트가 왼쪽 위. 
+        console.log("myShapeArr.length==="+myShapeArr.length);
+        console.log("myShapeArr.length==="+JSON.stringify(myShapeArr));
+
+        var ddf = false;
+        
+        www = www + 20; // 약간 더 크게 해서 계산.
+
+        for(var i=0; i<myShapeArr.length; i++) {
+            var x_ = myShapeArr[i]['x'];
+            var y_ = myShapeArr[i]['y'];
+            var www_ = myShapeArr[i]['www'];
+
+            www_ = www_ + 20; // 약간 더 크게 해서 계산.
+
+            var x_term1;
+            var x_term2;
+            var y_term1;
+            var y_term2;
+            var newShape_x1;
+            var newShape_x2;
+            var newShape_y1;
+            var newShape_y2;
+
+            // 왼쪽 상단이 기준점.
+            if(shapeType=="rect"){
+                // 왼쪽.
+                x_term1 = x_ ;
+
+                // 오른쪽.
+                x_term2 = x_ + www_ ;
+
+                // 아래
+                y_term1 = y_ ;
+
+                // 위
+                y_term2 = y_ + www_;
+                
+                newShape_x1 = x_ran;
+                newShape_x2 = x_ran + www;
+
+                newShape_y1 = y_ran;
+                newShape_y2 = y_ran + www;
+
+            }else { // 가운데가 기준점.
+                // 왼쪽.
+                x_term1 = x_ - www_ ;
+
+                // 오른쪽.
+                x_term2 = x_ + www_ ;
+
+                // 아래
+                y_term1 = y_ - www_ ;
+
+                // 위
+                y_term2 = y_ + www_ ;
+
+                
+                newShape_x1 = x_ran - www ;
+                newShape_x2 = x_ran + www ;
+
+                newShape_y1 = y_ran - www ;
+                newShape_y2 = y_ran + www ;
+            }
+
+
+            console.log("index="+i+"기본x : "+x_term1+ ", "+x_term2);
+            console.log("index="+i+"기본y : "+y_term1+ ", "+y_term2);
+
+            console.log("index="+i+"newShape_x : "+newShape_x1+ ", "+newShape_x2);
+            console.log("index="+i+"newShape_y : "+newShape_y1+ ", "+newShape_y2);
+
+            var x_overlap = false;
+            var y_overlap = false;
+
+            if( x_term1 > newShape_x1 && x_term1 < newShape_x2) {
+                x_overlap = true;                    
+            }
+
+            if(x_term2 > newShape_x1 && x_term2 < newShape_x2){
+                x_overlap = true;
+            }
+
+                
+            if(  y_term1 > newShape_y1 && y_term1 < newShape_y2) {
+                y_overlap = true;                    
+            }
+
+            if(y_term2 > newShape_y1 && y_term2 < newShape_y2) {
+                y_overlap = true;
+            }
+
+            if(x_overlap && y_overlap){
+                console.log("겹친다 다시 그려!");
+                return true;                
+            }
+        }
+        return false;
+    }
+
+    
     /**
      * Set a background image with opacity
      * @param  {string} url - image url

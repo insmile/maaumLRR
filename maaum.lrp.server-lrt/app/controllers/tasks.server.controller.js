@@ -14,6 +14,7 @@ var mongoose = require('mongoose'),
  * Create a Task
  */
 exports.create = function(req, res) {
+    console.log("DDJJ create");
     var task = new Task(req.body);
     task.user = req.user;
     if (req.user.center !== undefined)
@@ -31,6 +32,7 @@ exports.create = function(req, res) {
 };
 
 exports.DT = function getData(req, res) {
+    console.log("DDJJ DT getData");
     var conditions = {};
 
     conditions.$or = [{ 'isOpen': null }, { 'isOpen': true }];
@@ -49,6 +51,7 @@ exports.DT = function getData(req, res) {
  * Show the current Task
  */
 exports.read = function(req, res) {
+    console.log("DDJJ read");
     if (req.profile !== undefined) {
         console.log(req.profile);
     }
@@ -84,7 +87,7 @@ exports.read = function(req, res) {
  * Update a Task
  */
 exports.update = function(req, res) {
-
+    console.log("DDJJ update");
     console.log(req);
     var task = req.task;
 
@@ -104,6 +107,7 @@ exports.update = function(req, res) {
     //task._id
 
     task.save(function(err) {
+        console.log("DDJJ save");
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
@@ -114,12 +118,77 @@ exports.update = function(req, res) {
     });
 };
 
+exports.update_Sever = function(req, res) {
+    console.log("DDJJ update_Sever");
+
+    var task = req.task;
+
+    task = _.extend(task, req.body);
+
+    Problem.find({ 'refTask': task._id }, function(err, tasks) {
+        tasks.forEach(function(problem, index) {
+            problem.taskName = task.name;
+            problem.taskCategory = task.category;
+            
+            problem.save();
+        })
+    });
+
+    //task._id
+
+    task.save(function(err) {
+        console.log("DDJJ save11");
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.jsonp(task);
+        }
+    });
+};
+
+exports.test_clientService = function(req, res) {
+    console.log("DDJJ test_clientService");
+
+    var task = req.task;
+
+    task = _.extend(task, req.body);
+
+    Problem.find({ 'refTask': task._id }, function(err, tasks) {
+        tasks.forEach(function(problem, index) {
+            
+            console.log("DDJJ index  :" + index);
+            console.log("DDJJ task.name  :" + task.name);
+            console.log("DDJJ task.category  :" + task.category);
+            problem.taskName = task.name;
+            problem.taskCategory = task.category;
+            
+            problem.save();
+        })
+    });
+
+    //task._id
+
+    task.save(function(err) {
+        console.log("DDJJ save11");
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            console.log("DDJJ task" + task);
+            res.jsonp(task);
+        }
+    });
+};
+
 /**
  * Delete an Task
  */
 exports.delete = function(req, res) {
     var task = req.task;
-
+    console.log("DDJJ delete");
     task.remove(function(err) {
         if (err) {
             return res.status(400).send({
@@ -135,6 +204,7 @@ exports.delete = function(req, res) {
  * List of Tasks
  */
 exports.list = function(req, res) {
+    console.log("DDJJ list");
     var query = {};
     if (req.user.roles !== 'admin') {
         query = {
@@ -184,6 +254,7 @@ exports.list = function(req, res) {
 };
 
 exports.category = function(req, res) {
+    console.log("DDJJ category");
     Task.find().distinct('category').exec(function(err, tasks) {
         if (err) {
             return res.status(400).send({
@@ -196,6 +267,7 @@ exports.category = function(req, res) {
 };
 
 exports.name = function(req, res) {
+    console.log("DDJJ name");
     Task.find().distinct('name').exec(function(err, tasks) {
         if (err) {
             return res.status(400).send({
@@ -208,7 +280,7 @@ exports.name = function(req, res) {
 };
 
 exports.list_a = function(req, res) {
-
+    console.log("DDJJ list_a");
     var query = {};
     if (req.user.roles !== 'admin') {
         query = {
@@ -249,7 +321,7 @@ exports.list_a = function(req, res) {
 
 /** free lt 훈련 */
 exports.list_b = function(req, res) {
-
+    console.log("DDJJ list_b");
     var query = {};
     if (req.user.roles !== 'admin') {
         query = {
@@ -289,7 +361,7 @@ exports.list_b = function(req, res) {
 
 /** free rt 훈련 */
 exports.list_c = function(req, res) {
-
+    console.log("DDJJ list_c");
     var query = {};
     if (req.user.roles !== 'admin') {
         query = {
@@ -329,9 +401,13 @@ exports.list_c = function(req, res) {
 
 
 exports.info = function(req, res) {
+    console.log("DDJJ info");
     var taskInfo = {};
     taskInfo.answer = req.task.answer;
     taskInfo.resources = req.task.resources;
+
+    taskInfo.taskGb = req.task.taskGb;
+    
     res.jsonp(taskInfo);
 };
 
@@ -339,6 +415,7 @@ exports.info = function(req, res) {
  * Task middleware
  */
 exports.taskByID = function(req, res, next, id) {
+    console.log("DDJJ taskByID");
     Task.findById(id).populate('user', 'displayName').exec(function(err, task) {
         if (err) return next(err);
         if (!task) return next(new Error('Failed to load Task ' + id));
@@ -356,6 +433,7 @@ exports.taskByID = function(req, res, next, id) {
  * Task authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
+    console.log("DDJJ hasAuthorization");
     /*if (req.task.user.id !== req.user.id) {
     	return res.status(403).send('User is not authorized');
     }*/

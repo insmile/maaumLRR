@@ -4,11 +4,11 @@
     </div>
     <div class="my-row-center">
         <div ng-show="lrpModel.selectedPatient.assignedTherapist === undefined">
-            <button class="button button-balanced" ng-show="lrpModel.userData.roles === 'admin'" ng-click="selectListOpenManager(1)" style="margin-right: 5px;">평가자배정</button>
-            <button class="button button-balanced" ng-show="lrpModel.userData.roles === 'therapist'" ng-click="AllocateTherapist(lrpModel.userData)" style="margin-right: 5px;">환자담당</button>
+            <button class="button button-dark" ng-show="lrpModel.userData.roles === 'admin'" ng-click="selectListOpenManager(1)" style="margin-right: 5px;">평가자배정</button>
+            <button class="button button-dark" ng-show="lrpModel.userData.roles === 'therapist'" ng-click="AllocateTherapist(lrpModel.userData)" style="margin-right: 5px;">환자담당</button>
         </div>
-        <button class="button button-balanced" ng-click="userFormOpenManager(4)" style="margin-right: 5px;">정보수정</button>
-        <button class="button button-balanced" ng-click="playReportPrint()">출력</button>
+        <button class="button button-dark" ng-click="userFormOpenManager(4)" style="margin-right: 5px;">정보수정</button>
+        <button class="button button-dark" ng-click="playReportPrint()">출력</button>
     </div>
 </ion-header-bar>
 
@@ -85,17 +85,17 @@
                     <span class="input-label">{{lrpModel.selectedPatient.initialAQ}}</span>
                 </label>
 
-            </ion-item>
-
+            </ion-item> 
+ 
             <ion-item class="item">
-                <button class="button icon button-balanced" style="width: 48%;" ng-click="selectListOpenManager(3)">개별선택 평가 <span ng-if="tabStateCode !== 2">시작</span><span ng-if="tabStateCode === 2">과제 추가</span></button>
-                <button class="button icon button-balanced" style="width: 48%;" ng-click="selectListOpenManager(4)">구성 평가 <span ng-if="tabStateCode !== 2">시작</span><span ng-if="tabStateCode === 2">과제 추가</span></button>
+                <button class="button icon button-dark" style="width: 48%;" ng-click="selectListOpenManager(3)">개별선택 평가 <span ng-if="tabStateCode !== 2">시작</span><span ng-if="tabStateCode === 2">과제 추가</span></button>
+                <button class="button icon button-dark" style="width: 48%;" ng-click="selectListOpenManager(4)">구성 평가 <span ng-if="tabStateCode !== 2">시작</span><span ng-if="tabStateCode === 2">과제 추가</span></button>
             </ion-item>
 
         </div>
     </div>
 
-    <div class="tabs tabs-top tabs-virtual lrp-relative lrp-tabs">
+    <div class="tabs tabs-top lrp-relative lrp-tabs">
         <a href="" class="tab-item disable-user-behavior" ng-class="{active: tabStateCode === 5}" ng-click="selectTabHeader(5)">
             공식검사정보
         </a>

@@ -15,13 +15,14 @@ module.exports = function(app) {
 	app.route('/tasks/category').get(users.requiresLogin, tasks.category);
 	app.route('/tasks/name').get(users.requiresLogin, tasks.name);
 	app.route('/tasks/list').get(users.requiresLogin, tasks.list_a);
+
 	app.route('/tasks/list1').get(users.requiresLogin, tasks.list_b);	
 	app.route('/tasks/list2').get(users.requiresLogin, tasks.list_c);
 	app.route('/tasks/info/:taskId').get(users.requiresLogin, tasks.info);
 
 	app.route('/tasks/:taskId')
 		.get(users.requiresLogin, tasks.read)
-		.put(users.requiresLogin, tasks.hasAuthorization, tasks.update)
+		.put(users.requiresLogin, tasks.hasAuthorization, tasks.test_clientService) //테스트
 		.delete(users.requiresLogin, tasks.hasAuthorization, tasks.delete);
 	app.route('/tasks/:taskId/:userID')
 		.get(users.requiresLogin, users.expiredTest, tasks.read);

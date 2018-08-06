@@ -5,8 +5,12 @@ angular.module('tasks').factory('Tasks', ['$resource',
 	function($resource) {
 		return $resource('tasks/:taskId', { taskId: '@_id'
 		}, {
-			update: {
-				method: 'PUT'
+			
+			update_ClientService: {
+				method: 'put'
+			},
+			test_clientService: {
+				method: 'put'
 			}
 		});
 	}

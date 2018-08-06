@@ -308,7 +308,7 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
             $scope.progressDownLoad = 0;
 
             $scope.lrpModel.pageTag = [
-                '평가자', '환자', '선택과제 평가', '구성 평가', '경과기록지 서식', '오프라인 과제'
+                '평가자', '환자', '기능훈련', '구성평가', '경과기록지 서식', '오프라인 과제'
             ];
 
             pageCacheData = [{
@@ -498,6 +498,17 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
             var i;
 
             $scope.lrpModel.statePage = arg;
+            
+            /*
+            var imgidx = arg+2;
+
+            for ( var i=2; i <= 7; i++ ) {
+                if ( i != imgidx ) 
+                    angular.element(document.getElementById("leftMenu"+i)).attr("src","./img/res/leftMenu0"+i+"_off.png");
+            }
+         
+            angular.element(document.getElementById("leftMenu"+imgidx)).attr("src","./img/res/leftMenu0"+imgidx+"_on.png");
+            */
 
             //add subpage 이동
             if ( $scope.lrpModel.statePage === 2 && arg2 === 'N' )  {
