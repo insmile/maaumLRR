@@ -56,6 +56,7 @@ exports.forgot = function(req, res, next) {
             });
         },
         // Lookup user by username
+        /*
         function(token, done) {
             if (req.body.username) {
                 User.findOne({
@@ -85,6 +86,39 @@ exports.forgot = function(req, res, next) {
             } else {
                 return res.status(400).send({
                     message: 'ID는 필수입니다.'
+                });
+            }
+        },
+        */
+        function(token, done) {
+            if (req.body.email) {
+                User.findOne({
+                    email: req.body.email
+                }, '-salt -password', function(err, user) {
+                    if (!user) {
+                        return res.status(400).send({
+                            message: '해당 ID는 존재하지 않습니다.'
+                        });
+                    } else if (user.email === undefined) {
+                        return res.status(400).send({
+                            message: '이메일 주소가 없는 사용자 입니다. 관리 기관에 문의 후 처리 바랍니다.'
+                        });
+                    } else if (user.provider !== 'local') {
+                        return res.status(400).send({
+                            message: 'It seems like you signed up using your ' + user.provider + ' account'
+                        });
+                    } else {
+                        user.resetPasswordToken = token;
+                        user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+
+                        user.save(function(err) {
+                            done(err, token, user);
+                        });
+                    }
+                });
+            } else {
+                return res.status(400).send({
+                    message: '이메일 주소는 필수입니다.'
                 });
             }
         },
