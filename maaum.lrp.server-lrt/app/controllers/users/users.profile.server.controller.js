@@ -221,6 +221,7 @@ exports.activation = function(req,res) {
 	var center = null;
 	var has_key = true;
     var u;
+    var certified = true;
 
     console.log("exports.activation : ");
     console.log(_query);
@@ -247,6 +248,8 @@ exports.activation = function(req,res) {
                     u.expired_date = _query.expired_date;
                 if(_query.has_key == false)
                     u.expired_date = undefined;
+                    
+                u.certified = true; //강제
                 return saveUser(u);
 			}
 		})
