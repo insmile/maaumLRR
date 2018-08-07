@@ -2,7 +2,7 @@
 
 module.exports = {
     app: {
-        title: 'LRT Admin',
+        title: 'LRR Admin',
         description: 'Bootstrap Admin Theme + Meanjs',
         keywords: 'MongoDB, Express, AngularJS, Node.js'
     },
