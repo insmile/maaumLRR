@@ -39,6 +39,7 @@ module.exports = function(app) {
 	app.route('/users/password/:userId').post(users.hasAuthorization(['admin', 'manager']), users.changePasswordByAdmin);
 	app.route('/users/role/:userId').post(users.hasAuthorization(['admin', 'manager']), users.changeRoleByAdmin);
 	app.route('/auth/forgot').post(users.forgot);
+	app.route('/auth/forgot_admin').post(users.forgot_admin);
 	app.route('/auth/reset/:token').get(users.validateResetToken);
 	app.route('/auth/reset/:token').post(users.reset);
 	app.route('/auth/adminPasswordReset').get(users.apr);
