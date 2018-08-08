@@ -146,6 +146,14 @@ angular.module('users').controller('ManagerController', ['$scope', '$stateParams
                 alert(response.message);
             });
         };
+        
+        $scope.remove = function() {
+            if (confirm('제거하시겠습니까?')) {
+                $scope.credentials.$remove(function() {
+                    $location.path('therapist/list');
+                });
+            }
+        }        
     }
 ]);
 
