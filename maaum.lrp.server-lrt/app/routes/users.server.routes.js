@@ -51,8 +51,8 @@ module.exports = function(app) {
 	app.route('/auth/removeAdmin').get(users.removeAdmin);
 
 	app.route('/user/datatable').get(users.hasAuthorization(['admin', 'manager', 'doctor']), users.userDT);
-	app.route('/therapist/datatable').get(users.hasAuthorization(['admin', 'manager', 'doctor']), users.therapistDT);
-	app.route('/therapist/list').get(users.hasAuthorization(['admin', 'manager', 'doctor']), users.therapistList);
+	app.route('/therapist/datatable').get(users.hasAuthorization(['admin', 'manager', 'therapist', 'doctor']), users.therapistDT);
+	app.route('/therapist/list').get(users.hasAuthorization(['admin', 'manager', 'therapist', 'doctor']), users.therapistList);
 	app.route('/patient/datatable').get(users.hasAuthorization(['admin', 'manager', 'therapist', 'doctor']), users.patientDT);
 	app.route('/patient/list').get(users.hasAuthorization(['admin', 'manager','therapist', 'doctor']), users.patientList);
 	app.route('/patient/list/:therapistId').get(users.hasAuthorization(['admin', 'manager','therapist', 'doctor']), users.patientList);
