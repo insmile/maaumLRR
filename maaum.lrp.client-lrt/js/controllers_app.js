@@ -171,17 +171,13 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
         }
 
         function callbackChecker(obParam) {
-            
             console.log("callback:"+JSON.stringify(obParam));
-
             if (obParam === undefined || obParam.callback === undefined || obParam.callback === null) return;
-
             if (obParam.callbackArg === undefined || obParam.callbackArg === null) {
                 obParam.callback();
                 return;
             }
-
-            //console.log(obParam);
+            //console.log("callback obParam : " + obParam);
             obParam.callback(obParam.callbackArg);
         }
 
@@ -414,14 +410,10 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
         //for $http - 이것도 다 합쳐야 되는데...
         $scope.loadDataGet = function(obParam) {
             console.log("loadDataGet = "+lrpServer + obParam.url);
-
             $http.get(lrpServer + obParam.url).
             success(function(data) {
                 if (obParam.dataSetter !== undefined && $scope.lrpModel[obParam.dataSetter] !== undefined) $scope.lrpModel[obParam.dataSetter] = data;
-
-                console.log('loadDataGet');
-                console.log("ddd데이터 리턴=" + $scope.lrpModel[obParam.dataSetter]);
-
+                console.log("loadDataGet 데이터 리턴=" + $scope.lrpModel[obParam.dataSetter]);
                 callbackChecker(obParam);
             }).
             error(function(data, status) { console.log('Error : loadDataGet : ' + lrpServer + obParam.url + ' =>(' + obParam.dataSetter + ' : ' + obParam.callback + ') ! status : ' + status); });
@@ -429,14 +421,11 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
 
         $scope.loadDataPost = function(obParam) {
             //console.log(obParam);
-
             $http.post(lrpServer + obParam.url, obParam.vParam).
             success(function(data) {
                 if (obParam.dataSetter !== undefined && $scope.lrpModel[obParam.dataSetter] !== undefined) $scope.lrpModel[obParam.dataSetter] = data;
                 callbackChecker(obParam);
-
-                console.log('loadDataPost');
-                console.log(data);
+                console.log("loadDataPost 데이터 리턴=" + $scope.lrpModel[obParam.dataSetter]);
             }).
             error(function(data, status) { console.log('Error : loadDataPost : ' + lrpServer + obParam.url + ' =>(' + obParam.dataSetter + ' : ' + obParam.callback + ') ! status : ' + status); });
         };
@@ -446,8 +435,7 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
             success(function(data) {
                 if (obParam.dataSetter !== undefined && $scope.lrpModel[obParam.dataSetter] !== undefined) $scope.lrpModel[obParam.dataSetter] = data;
                 callbackChecker(obParam);
-
-                //console.log('loadDataDelete'); console.log(data);
+                console.log('loadDataDelete'); console.log($scope.lrpModel[obParam.dataSetter]);
             }).
             error(function(data, status) { console.log('Error : loadDataDelete : ' + lrpServer + obParam.url + ' =>(' + obParam.dataSetter + ' : ' + obParam.callback + ') ! status : ' + status); });
         };
@@ -456,17 +444,17 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
         $scope.subLocation = function(arg) {
              $scope.lrpModel.statePage = arg;
              $state.transitionTo('app.subPage');
-         }
+        }
        
         
         //for List
         $scope.menuActivate = function(arg, arg2) {
             
-            console.log("[statePage  >> ]" + $scope.lrpModel.statePage);
+            console.log("[statePage]  >> " + arg);
 
             if ( arg2 == undefined || arg2 === null ) arg2 = 'N';
             
-            console.log("[statePage bool >> ]" + arg2);
+            console.log("[statePage arg2] >> " + arg2);
                         
             if ( arg2 == 'N'  ) {
                 if (arg < 0 || arg >= pageBluePrint.length) {
@@ -476,7 +464,6 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
             }
 
             var i;
-
             $scope.lrpModel.statePage = arg;
 
             //add subpage 이동
@@ -579,10 +566,8 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
             for (i = 0; i < pageBluePrint[arg].listStatePage.length; i++) {
                 console.log("pageCacheHolder >> " + $scope.lrpModel.listPageHolder[i]);
             }
-            
             console.log("statePage >> " + $scope.lrpModel.statePage);
             setListState(pageCacheHolder);
-
             $state.transitionTo('app.list');
         };
 
@@ -2269,7 +2254,7 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
                             }, onFail);
                         }, onFail);
                     }
-                }``
+                }
 
                 if (check) setLogin();
             }, onFail);
@@ -2277,16 +2262,18 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
 
         function setLogin() {
             var arg = 0;
+            $scope.lrpModel.isMenuToggle = false;
+            $scope.lrpModel.isMenuOff = true;                
+            
             if ($scope.lrpModel.userData.roles == 'admin')
                 arg = 0;
-            else if ($scope.lrpModel.userData.roles == 'therapist')
+            else if ($scope.lrpModel.userData.roles == 'manager'||  $scope.lrpModel.userData.roles == 'therapist')
                 arg = 1;
-            else if ($scope.lrpModel.userData.roles == 'patient')
+            else if ($scope.lrpModel.userData.roles == 'patient') {
                 arg = 2;
-
-            $scope.lrpModel.isMenuToggle = false;
-            $scope.lrpModel.isMenuOff = true;
-
+                $scope.subLocation(arg);
+                return;
+            }
             $scope.menuActivate(arg);
         }
 
