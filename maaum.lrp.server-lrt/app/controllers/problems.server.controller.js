@@ -8,6 +8,7 @@ var mongoose = require('mongoose'),
     Problem = mongoose.model('Problem'),
     Center = mongoose.model('Center'),
     Task = mongoose.model('Task'),
+    MyTaskCategory = mongoose.model('MyTaskCategory'),
     _ = require('lodash');
 
 /**
@@ -41,24 +42,93 @@ exports.create = function(req, res) {
     });
 };
 
+
 exports.DT = function getData(req, res) {
     getTaskList(req, res, getData2);
 };
 
+
+// 업무 가테고리 조회.
 function getData2(req, res, taskList) {
+
+    MyTaskCategory.find().exec(function(err, taskCategory) {
+        if (taskCategory === null) return [];
+        if (taskCategory === undefined) return [];
+
+        console.log("problem 조회 2차 = 카테고리 먼저 조회.");
+        // console.log("task 조회 1차 result = "+JSON.stringify(taskCategory));
+
+        // callback(req, res, taskCategory);
+        getData3(req, res, taskList, taskCategory);
+    });
+}
+
+
+function getData3(req, res, taskList, taskCategory) {
+    // 3
+    console.log("3차 get problem DATA====");
+    // console.log("3차 get taskCategory DATA===="+JSON.stringify(taskCategory));
+    
     var conditions = {};
     conditions.refTask = { $in: taskList };
 
+    // console.log("getData2====req.taskTypeSearch = "+ req.query.taskTypeSearch);
+
+    if (req.query.taskTypeSearch != null && req.query.taskTypeSearch != undefined && req.query.taskTypeSearch != 'ALL') {
+        //console.log("getData3====req.taskTypeSearch 세팅. = "+ req.query.taskTypeSearch);
+        conditions.taskType = req.query.taskTypeSearch;    
+    }
+
+    // console.log("getData4==== conditions.type = "+ conditions.taskType);
+
+
     Problem.dataTable(req.query, { 'conditions': conditions }, function(err, data) {
         if (err) console.log(err);
-        console.log(data);
+        
+        console.log( "문제 조회 결과 : "+ JSON.stringify(data) );
+        
+        // taskCategory
+        // console.log( "문제 조회 결과 :data.data.length "+ data.data.length );        
+
+        for(var i = 0; i < data.data.length;i++) {
+            if(data.data[i].taskCategory !== undefined) {
+ 
+                 for(var j = 0; j < taskCategory.length; j++) {
+ 
+                     // console.log("비교 시작. data.data[i].category ="+data.data[i].category+", taskList[j]._id="+taskList[j]._id);
+                     
+                     var com1 = data.data[i].taskCategory + ""; // 스트링으로 인식 안대서 replace하면 에러뜸. 가끔 공백 붙어있어서 같아도 같다고 인식 안함. 그래서 그냥 화면에 아이디 뜸. 그래서 일부러 "" 붙여줌.
+                     var com2 = taskCategory[j]._id + "";
+                     
+                     if(com1 !==null && com1 !==undefined){
+                         com1 = com1.replace(/^\s*|\s*$/g,''); 
+ 
+                     }
+ 
+                     if(com2 !==null && com2 !==undefined){
+                         com2 = com2.replace(/^\s*|\s*$/g,'');  
+                     }
+                     // console.log( "비교"+ com1+":::"+com2 );
+                    
+                     // 이름 바꾸기.
+                     if(com1 == com2) {
+                         console.log("비교 매치!" + taskCategory[j].categoryName);
+                         data.data[i].taskCategory = taskCategory[j].categoryName;
+                     }                    
+                 }
+             }
+        }   
         res.send(data);
     });
 }
 
-function getTaskList(req, res, callback) {
 
-    console.log(req.user);
+function getTaskList(req, res, callback) {
+    // 1
+    console.log("1차 getTaskList ====");
+
+    // console.log("problem req.query ===="+JSON.stringify(req.query));
+    // console.log("problem req.params ===="+JSON.stringify(req.params));
 
     var query = {};
     if (req.user.roles !== 'admin') {
@@ -80,6 +150,8 @@ function getTaskList(req, res, callback) {
         }));
     });
 }
+
+
 /**
  * Show the current Problem
  */
@@ -139,6 +211,11 @@ exports.delete = function(req, res) {
  * List of Problems
  */
 exports.list = function(req, res) {
+    
+    console.log("pppppp: list1");
+    console.log("pppppp: req"+JSON.stringify(req.params));
+
+
     Problem.find().sort('-created').populate('user', 'name').populate('refTask', 'center isOpen').exec(function(err, problems) {
         if (err) {
             return res.status(400).send({
@@ -177,6 +254,7 @@ exports.listByTask = function(req, res) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
             });
+            
         } else {
             var rst = [];
             problems = problems.filter(function(problem) {

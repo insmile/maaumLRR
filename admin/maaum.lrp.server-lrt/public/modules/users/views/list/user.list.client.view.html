@@ -1,0 +1,40 @@
+<h3>사용자 관리</h3>
+<div ng-controller="UserListController" data-ng-init="initDatatable()">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    사용자 목록
+                </div>
+                <div class="panel-body">
+                    <table id="dt" class="table table-striped table-hover">
+                        <thead>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot>
+                        <tr>
+                            <th>
+                                <input type="text" placeholder="기관명" class="datatable_input_col_search">
+                            </th>
+                            <th>
+                                <input type="text" placeholder="회원등급" class="datatable_input_col_search">
+                            </th>
+                            <th>
+                                <input type="text" placeholder="ID" class="datatable_input_col_search">
+                            </th>
+                            <th>
+                                <input type="text" placeholder="이름" class="datatable_input_col_search">
+                            </th>
+                            <th>
+                                <input type="text" placeholder="이메일" class="datatable_input_col_search">
+                            </th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

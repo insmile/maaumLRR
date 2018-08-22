@@ -1,0 +1,146 @@
+<section class="row" data-ng-controller="ProblemsController" data-ng-init="findOne()">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="form-horizontal">
+                <fieldset>
+                    <legend>문제 입력</legend>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">문제 세트 ID</label>
+                        <div class="col-lg-10">
+                            <input type="text" data-ng-model="problem.name" id="name" class="form-control" placeholder="problem ID" required>
+                            <span class="help-block">1부터 자연수로 입력, 오름차순으로 정렬되어 훈련 프로그램 시 문제 세트가 제시됨</span>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">문제 유형</label>
+                        <div class="col-lg-10">
+                            <span data-ng-switch="toggle">
+								{{problem.refTask.name}}
+								<select data-ng-model="task" data-ng-options="task.name for task in tasks" class="form-control" data-ng-change="changeTask()">
+								</select>
+							</span>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset data-ng-show="problem.refTask">
+                    <legend>문제 상세 정보</legend>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">문제 순서</label>
+                        <div class="col-lg-10">
+                            <input type="number" data-ng-model="problem.seq" class="form-control" placeholder="seq" required>
+                            <span class="help-block">1~10 사이의 자연수로 입력, 오름 차순으로 제공</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">문제 설명</label>
+                        <div class="col-lg-10">
+                            <textarea data-ng-model="problem.note"></textarea>
+                            <span class="help-block">채점 기준을 적음, 환자에게 제공되지 않음</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">연습문제 여부</label>
+                        <div class="col-lg-10">
+                            <div class="checkbox c-checkbox">
+                                <label>
+									<input type="checkbox" data-ng-model="problem.practice" checked="" />
+									<span class="fa fa-check"></span>
+									{{define.note}}
+								</label>
+                            </div>
+                            <span class="help-block">연습문제 여부를 체크, 연습문제는 점수에 포함 안됨</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">일치여부</label>
+                        <div class="col-lg-10">
+                            <div class="checkbox c-checkbox">
+                                <label>
+									<input type="checkbox" data-ng-model="problem.same" checked="" />
+									<span class="fa fa-check"></span>
+									{{define.note}}
+								</label>
+                            </div>
+                            <span class="help-block">일치여부를 체크, 체크 시 동일</span>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset data-ng-repeat="res in problem.resources">
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">{{res.name}}</label>
+                        <div class="col-lg-10" data-ng-switch on="res.resType">
+                            <span data-ng-switch-when="str">
+								<span data-ng-switch on="res.strType">
+									<input data-ng-switch-when="text" data-ng-model="problem.resources[$index].value" type="text" class="form-control" placeholder="{{define.note}}" required>
+									<input data-ng-switch-default data-ng-model="problem.resources[$index].value" type="text" class="form-control" placeholder="{{define.note}}" required>
+									<textarea data-ng-switch-when="textarea" rows="4" cols="100" data-ng-model="problem.resources[$index].value"></textarea>
+								</span>
+                            </span>
+                            <div data-ng-switch-when="file" ng-file-select ng-model="problem.resources[$index].files" ng-file-change="upload(problem.resources[$index])"><span class="btn btn-default btn-info">업로드 파일 선택</span> <span data-ng-show="problem.resources[$index].progressPercentage">업로드 : {{problem.resources[$index].progressPercentage}}%</span>
+                                <div data-ng-show="problem.resources[$index].value"><img ng-src="/uploads/{{problem.resources[$index].value}}" class="img-responsive">
+                                </div>
+                                <!--<div data-ng-switch-when="file"><input data-ng-model="problem.resources[$index].value" type="text" class="form-control" placeholder="{{define.note}}" required>
+								<img data-ng-src="/uploads/{{problem.resources[$index].value}}" class="img-responsive">
+							</div>-->
+                            </div>
+                        </div>
+                        <div class="form-group" data-ng-hide="res.isDefinition">
+                            <label class="col-lg-2 control-label">정답여부</label>
+                            <div class="col-lg-10">
+                                <div class="checkbox c-checkbox">
+                                    <label>
+									<input type="checkbox"  data-ng-model="problem.resources[$index].isAnswer" checked="" />
+									<span class="fa fa-check"></span>
+								</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" data-ng-if="problem.resources[$index].resType == 'file'">
+                            <label class="col-lg-2 control-label">이미지 숨김 시간 (초)</label>
+                            <div class="col-lg-10">
+                                <input type="number" ng-model="problem.resources[$index].timeout" placeholder="비울 시 기능 사용 안함">
+                            </div>
+                        </div>
+                        <div class="form-group" data-ng-if="problem.resources[$index].resType == 'file'">
+                            <label class="col-lg-2 control-label">그리기 과제에서 이미지 위치</label>
+                            <div class="col-lg-10">
+                                <select data-ng-model="problem.resources[$index].imageOrientation" data-ng-options="obj.id as obj.label for obj in imageOrientation" class="form-control">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">비고</label>
+                            <div class="col-lg-10">
+                                <input data-ng-model="problem.resources[$index].note" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group" data-ng-if="problem.resources[$index].resType == 'file'">
+                            <label class="col-lg-2 control-label">Width</label>
+                            <div class="col-lg-10">
+                                <input type="number" ng-model="problem.resources[$index].width" placeholder="비울 시 기능 사용 안함">
+                            </div>
+                        </div>
+                        <div class="form-group" data-ng-if="problem.resources[$index].resType == 'file'">
+                            <label class="col-lg-2 control-label">Height</label>
+                            <div class="col-lg-10">
+                                <input type="number" ng-model="problem.resources[$index].height" placeholder="비울 시 기능 사용 안함">
+                            </div>
+                        </div>
+                </fieldset>
+                <div class="form-group">
+                    <a class="btn btn-primary" data-ng-click="update();">
+						수정
+					</a>
+                    <a class="btn btn-primary" data-ng-click="remove();">
+						제거
+					</a>
+                </div>
+                <div data-ng-show="error" class="text-center text-danger">
+                    <strong data-ng-bind="error"></strong>
+                </div>
+                </form>
+                </div>
+            </div>
+</section>

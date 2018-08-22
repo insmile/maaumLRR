@@ -1,0 +1,24 @@
+<section class="row" data-ng-controller="TherapistController" data-ng-init="findOne()">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<form name="userForm" data-ng-submit="updateUserProfile(userForm.$valid)" class="signin form-horizontal" autocomplete="off">
+				<id_info></id_info>
+				<default_info></default_info>
+				<modify_info></modify_info>
+				<therapist_info></therapist_info>
+				<div class="form-group">
+					<div class="col-lg-offset-2 col-lg-10">
+						<button type="submit" class="btn btn-large btn-primary">저장</button>
+						<a class="btn btn-primary" data-ng-click="remove();">제거</a>
+					</div>
+				</div>
+				<div data-ng-show="success" class="text-center text-success">
+					<strong>사용자 정보 갱신이 완료되었습니다.</strong>
+				</div>
+				<div data-ng-show="error" class="text-center text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+			</form>
+		</div>
+	</div>
+</section>

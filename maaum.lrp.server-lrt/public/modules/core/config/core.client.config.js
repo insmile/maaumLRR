@@ -25,12 +25,16 @@ angular.module('core').run(['Menus',
             Menus.addMenuItem('sidebar', '환자 관리', 'patient/list', 'dropdown', '/patient(/.*)?', false, ['admin', 'manager', 'therapist'], 6, 'icon-users');
             Menus.addSubMenuItem('sidebar', 'patient/list', '환자 목록', 'patient/list');
             Menus.addSubMenuItem('sidebar', 'patient/list', '환자 등록', 'patient/signup');
-            /*Menus.addMenuItem('sidebar', 'Articles', 'articles', 'dropdown', '/articles(/.*)?', false, null, 20);
+            
+            /* Menus.addMenuItem('sidebar', 'Articles', 'articles', 'dropdown', '/articles(/.*)?', false, null, 20);
             Menus.addSubMenuItem('sidebar', 'articles', 'List Articles', 'articles');
-            Menus.addSubMenuItem('sidebar', 'articles', 'New Article', 'articles/create');*/
+            Menus.addSubMenuItem('sidebar', 'articles', 'New Article', 'articles/create'); */
+
             Menus.addMenuItem('sidebar', '검사 관리', 'tasks', 'dropdown', '/tasks(/.*)?', false, ['admin', 'manager'], 7, 'icon-magnifier');
-            Menus.addSubMenuItem('sidebar', 'tasks', '검사 목록', 'tasks');
+            
+            Menus.addSubMenuItem('sidebar', 'tasks', '검사 목록', 'tasks');            
             Menus.addSubMenuItem('sidebar', 'tasks', '검사 등록', 'tasks/create');
+
             Menus.addMenuItem('sidebar', '문제 관리', 'problems', 'dropdown', '/problems(/.*)?', false, ['admin', 'manager'], 8, 'icon-puzzle');
             Menus.addSubMenuItem('sidebar', 'problems', '문제 목록', 'problems');
             Menus.addSubMenuItem('sidebar', 'problems', '문제 등록', 'problems/create');

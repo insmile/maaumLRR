@@ -18,70 +18,70 @@
         <div class="inner">
             <ion-item class="item">
                 <div class="my-row-center">
-                    <div style="width: 50%;">
+                    <div style="width: 50%;text-align:left;">
                         <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
-                            <span class="input-label" style="text-align: right; width: 95px; display:table;">등록번호 : </span>
+                            <span class="input-label patient_c" style="width: 95px; display:table;">등록번호</span>
                             <span class="input-label"> {{lrpModel.selectedPatient.regNo}}</span>
                         </label>
 
                         <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
-                            <span class="input-label" style="text-align: right; width: 95px; display:table;">성별 : </span>
+                            <span class="input-label patient_c" style="width: 95px; display:table;">성별</span>
                             <span class="input-label">{{lrpModel.selectedPatient.sex === "male" ? "남자" : "여자"}}</span>
                         </label>
 
                         <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
-                            <span class="input-label" style="text-align: right; width: 95px; display:table;">생년월일 : </span>
+                            <span class="input-label patient_c" style="width: 95px; display:table;">생년월일</span>
                             <span class="input-label">{{lrpModel.selectedPatient.birthday | date: "yyyy-MM-dd"}}</span>
                         </label>
 
                         <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
-                            <span class="input-label" style="text-align: right; width: 95px; display:table;">직업 : </span>
+                            <span class="input-label patient_c" style="width: 95px; display:table;">직업</span>
                             <span class="input-label">{{lrpModel.selectedPatient.Job}}</span>
                         </label>
                     </div>
 
-                    <div style="width: 48%;">
+                    <div style="width: 48%;text-align:left;">
                         <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
-                            <span class="input-label" style="text-align: right; width: 95px; display:table;">담당평가자 : </span>
+                            <span class="input-label patient_c" style="width: 95px; display:table;">담당평가자</span>
                             <span class="input-label">{{lrpModel.selectedPatient.assignedTherapistName}}</span>
                         </label>
 
                         <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
-                            <span class="input-label" style="text-align: right; width: 95px; display:table;">등록일 : </span>
+                            <span class="input-label patient_c" style="width: 95px; display:table;">등록일</span>
                             <span class="input-label">{{lrpModel.selectedPatient.created | date: "yyyy-MM-dd"}}</span>
                         </label>
 
                         <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
-                            <span class="input-label" style="text-align: right; width: 95px; display:table;">치료연수 : </span>
+                            <span class="input-label patient_c" style="width: 95px; display:table;">치료연수</span>
                             <span class="input-label">{{lrpModel.selectedPatient.eduYear}}</span>
                         </label>
                         <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
-                            <span class="input-label" style="text-align: right; width: 95px; display:table;">주로쓰는 손 : </span>
+                            <span class="input-label patient_c" style="width: 95px; display:table;">주로쓰는 손</span>
                             <span class="input-label">{{lrpModel.selectedPatient.handType === "left" ? "왼손" : "오른손"}}</span>
                         </label>
                     </div>
                 </div>
             </ion-item>
 
-            <ion-item class="item">
+            <ion-item class="item" style="text-align:left;">
 
                 <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
-                    <span class="input-label" style="text-align: right; width: 160px; display:table;">진단명 : </span>
+                    <span class="input-label patient_c" style="width: 160px; display:table;">진단명</span>
                     <span class="input-label">{{lrpModel.selectedPatient.diagnosis}}</span>
                 </label>
 
                 <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
-                    <span class="input-label" style="text-align: right; width: 160px; display:table;">발병일 : </span>
+                    <span class="input-label patient_c" style="width: 160px; display:table;">발병일</span>
                     <span class="input-label">{{lrpModel.selectedPatient.inciDate | date: "yyyy-MM-dd"}}</span>
                 </label>
 
                 <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
-                    <span class="input-label" style="text-align: right; width: 160px; display:table;">실어증 유형 : </span>
+                    <span class="input-label patient_c" style="width: 160px; display:table;">실어증 유형</span>
                     <span class="input-label">{{lrpModel.selectedPatient.aphasiaType}}</span>
                 </label>
 
                 <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
-                    <span class="input-label" style="text-align: right; display:table; width: 160px;">1차 실어증 평가점수 : </span>
+                    <span class="input-label patient_c" style="display:table; width: 160px;">1차 실어증 평가점수</span>
                     <span class="input-label">{{lrpModel.selectedPatient.initialAQ}}</span>
                 </label>
 

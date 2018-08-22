@@ -56,6 +56,116 @@ exports.forgot = function(req, res, next) {
             });
         },
         // Lookup user by username
+        /*
+        function(token, done) {
+            if (req.body.username) {
+                User.findOne({
+                    username: req.body.username
+                }, '-salt -password', function(err, user) {
+                    if (!user) {
+                        return res.status(400).send({
+                            message: '해당 ID는 존재하지 않습니다.'
+                        });
+                    } else if (user.email === undefined) {
+                        return res.status(400).send({
+                            message: '이메일 주소가 없는 사용자 입니다. 관리 기관에 문의 후 처리 바랍니다.'
+                        });
+                    } else if (user.provider !== 'local') {
+                        return res.status(400).send({
+                            message: 'It seems like you signed up using your ' + user.provider + ' account'
+                        });
+                    } else {
+                        user.resetPasswordToken = token;
+                        user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+
+                        user.save(function(err) {
+                            done(err, token, user);
+                        });
+                    }
+                });
+            } else {
+                return res.status(400).send({
+                    message: 'ID는 필수입니다.'
+                });
+            }
+        },
+        */
+        function(token, done) {
+            if (req.body.email) {
+                User.findOne({
+                    email: req.body.email
+                }, '-salt -password', function(err, user) {
+                    if (!user) {
+                        return res.status(400).send({
+                            message: '해당 ID는 존재하지 않습니다.'
+                        });
+                    } else if (user.email === undefined) {
+                        return res.status(400).send({
+                            message: '이메일 주소가 없는 사용자 입니다. 관리 기관에 문의 후 처리 바랍니다.'
+                        });
+                    } else if (user.provider !== 'local') {
+                        return res.status(400).send({
+                            message: 'It seems like you signed up using your ' + user.provider + ' account'
+                        });
+                    } else {
+                        user.resetPasswordToken = token;
+                        user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+
+                        user.save(function(err) {
+                            done(err, token, user);
+                        });
+                    }
+                });
+            } else {
+                return res.status(400).send({
+                    message: '이메일 주소는 필수입니다.'
+                });
+            }
+        },
+        function(token, user, done) {
+            res.render('templates/reset-password-email', {
+                name: user.name,
+                appName: config.app.title,
+                url: 'https://' + req.headers.host + '/auth/reset/' + token
+            }, function(err, emailHTML) {
+                done(err, emailHTML, user);
+            });
+        },
+        // If valid email, send reset email using service
+        function(emailHTML, user, done) {
+            var smtpTransport = nodemailer.createTransport(config.mailer.options);
+            var mailOptions = {
+                to: user.email,
+                from: config.mailer.from,
+                subject: '[마음 LRT] 비밀번호 재설정',
+                html: emailHTML
+            };
+            smtpTransport.sendMail(mailOptions, function(err) {
+                if (!err) {
+                    res.send({
+                        message: user.email + ' 주소로 메일이 발송되었습니다. 메일을 확인하시고 이후 단계를 진행해 주십시오.'
+                    });
+                }
+
+                done(err);
+            });
+        }
+    ], function(err) {
+        if (err) return next(err);
+    });
+};
+
+// 어드민용
+exports.forgot_admin = function(req, res, next) {
+    async.waterfall([
+        // Generate random token
+        function(done) {
+            crypto.randomBytes(20, function(err, buffer) {
+                var token = buffer.toString('hex');
+                done(err, token);
+            });
+        },
+        // Lookup user by username
         function(token, done) {
             if (req.body.username) {
                 User.findOne({
@@ -285,7 +395,7 @@ exports.changeRoleByAdmin = function(req, res) {
     var newUserRole = req.body.newUserRole;
 
     if (req.user) {
-        if (req.body) {
+        if (req.body.newUserRole) { // 권한세팅 수정
             User.findById(req.params.userId, function(err, a_user) {
                 if (!err && a_user) {
                     a_user.roles = newUserRole;
@@ -332,9 +442,15 @@ exports.changePasswordByAdmin = function(req, res) {
                                 (a_user.roles === 'manager' && user.center.toString() === a_user.center.toString()) ||
                                 (a_user.roles === 'therapist' >= 0 && user.assignedTherapist === a_user._id)) { // 3 condition
                                 if (passwordDetails.newPassword === passwordDetails.verifyPassword) {
+                                    /*
                                     user.password = passwordDetails.newPassword;
                                     delete user.salt;
-
+                                    */
+                                    delete user.salt;
+                                    user.password = passwordDetails.newPassword;
+                                    user.salt = new Buffer(crypto.randomBytes(16).toString('base64'), 'base64');
+                                    user.password = HashPassword(user.salt, user.password);
+                                    
                                     user.save(function(err) {
                                         if (err) {
                                             return res.status(400).send({

@@ -182,7 +182,7 @@ exports.centerByID = function(req, res, next, id) {
 exports.hasAuthorization = function(req, res, next) {
     if (req.user.roles === 'admin') {
         next();
-    } else if (req.user.roles === 'manager' && req.user.center.equals(req.center.id)) {
+    } else if (req.user.roles === 'manager' || req.user.roles === 'therapist'  && req.user.center.equals(req.center.id)) {
         next();
     } else {
         return res.status(403).send('User is not authorized');

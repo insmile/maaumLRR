@@ -1,0 +1,96 @@
+<fieldset>
+    <legend>환자 상세 정보 입력</legend>
+    <fieldset>
+        <div class="form-group">
+            <label class="col-lg-2 control-label">담당 치료사</label>
+            <div class="col-lg-10">
+                <select type="text" data-ng-model="credentials.assignedTherapist._id" class="form-control" >
+                    <option value="">치료사 미할당</option>
+                    <option ng-repeat="therapist in therapists" value="{{therapist._id}}">{{therapist.name}}</option>
+                </select>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <div class="form-group">
+            <label class="col-lg-2 control-label">생년월일</label>
+            <div class="col-lg-10">
+                <input type="text" data-ng-model="credentials.birthday" placeholder="" class="form-control"  />
+                <datepicker data-ng-model="credentials.birthday" min-date="minDate" show-weeks="false" class="well well-sm"></datepicker>
+            </div>
+        </div>
+    </fieldset>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">등록 번호</label>
+        <div class="col-lg-10">
+            <input type="text" data-ng-model="credentials.regNo" placeholder="" class="form-control"  />
+        </div>
+    </div>
+</fieldset>
+<fieldset>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">진단명</label>
+        <div class="col-lg-10">
+            <input type="text" data-ng-model="credentials.diagnosis" placeholder="" class="form-control"  />
+        </div>
+    </div>
+</fieldset>
+<fieldset>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">발병일</label>
+        <div class="col-lg-10">
+            <input type="text" data-ng-model="credentials.inciDate" placeholder="" class="form-control"  />
+            <datepicker data-ng-model="credentials.inciDate" min-date="minDate" show-weeks="false" class="well well-sm"></datepicker>
+        </div>
+    </div>
+</fieldset>
+<fieldset>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">성별</label>
+        <div class="col-lg-10">
+            <label class="radio-inline c-radio">
+                <input id="sexradio1" data-ng-model="credentials.sex" type="radio" name="sex" value="male" checked="checked" />
+                <span class="fa fa-circle"></span>남성</label>
+            <label class="radio-inline c-radio">
+                <input id="sexradio2" data-ng-model="credentials.sex" type="radio" name="sex" value="female" />
+                <span class="fa fa-circle"></span>여성</label>
+        </div>
+    </div>
+</fieldset>
+<fieldset>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">손잡이</label>
+        <div class="col-lg-10">
+            <label class="radio-inline c-radio">
+                <input id="handradio1" data-ng-model="credentials.handType" type="radio" name="handType" value="right" checked="checked" />
+                <span class="fa fa-circle"></span>오른손잡이</label>
+            <label class="radio-inline c-radio">
+                <input id="handradio2" data-ng-model="credentials.handType" type="radio" name="handType" value="left" />
+                <span class="fa fa-circle"></span>왼손잡이</label>
+        </div>
+    </div>
+</fieldset>
+<fieldset>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">교육년수</label>
+        <div class="col-lg-10">
+            <input type="number" data-ng-model="credentials.eduYear" placeholder="" class="form-control"  />
+        </div>
+    </div>
+</fieldset>
+<fieldset>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">실어증 유형</label>
+        <div class="col-lg-10">
+            <input type="text" data-ng-model="credentials.aphasiaType" placeholder="" class="form-control"  />
+        </div>
+    </div>
+</fieldset>
+<fieldset>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">실어증 점수 (AQ)</label>
+        <div class="col-lg-10">
+            <input type="number" data-ng-model="credentials.initialAQ" placeholder="" class="form-control"  />
+        </div>
+    </div>
+</fieldset>

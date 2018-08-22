@@ -740,6 +740,7 @@ angular.module('LRProject.controllers.exercise', ['LRProject.services'])
         function GetShowPieChart() {
             if ($scope.lrpModel.selectedTask.answer === 'record') return false;
             if ($scope.lrpModel.selectedTask.answer === 'draw-one') return false;
+            if ($scope.lrpModel.selectedTask.answer === 'draw-one2') return false;
             if ($scope.lrpModel.selectedTask.answer === 'draw-two') return false;
             if ($scope.lrpModel.selectedTask.answer === 'manual') return false;
             if ($scope.lrpModel.selectedTask.answer === 'ray') return false;
@@ -764,7 +765,10 @@ angular.module('LRProject.controllers.exercise', ['LRProject.services'])
         function GetCheckDate() {
             return $scope.resultSchema.tasks.map((x) => x.checkDate).reduce((x, y) => x > y ? x : y);
         }
-
+        
+        
+        
+        
         $scope.stageEnd = function(calcStat = true) {
             if ($scope.lrpModel.selectedTask.answer === 'forms') {
                 // 설문조사 유형 저장

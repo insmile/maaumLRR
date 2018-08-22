@@ -35,11 +35,27 @@
                             </div>
                         </div>
                     </div>
+                    
+                    Grading
 
                     <!-- 단일 그리기 -->
                     <div ng-if="(lrpModel.selectedResult.tasks[lrpModel.taskPivot].answerType === 'draw-one')">
-                        <div style="display: table-row;" ng-init="initDrawingPadAndLoad(1.0, 0.7, true)">
+                        <div style="display: table-row;" ng-init="initDrawingPadAndLoad(1.0, 0.7, true, 'draw-one')">
                             <div style="display: table-cell; vertical-align: middle; height:70vh; width:100vw" my-directive>
+                                단일그리기.1
+                                <div id="sketchpad"></div>
+                            </div>
+                        </div>
+                        <div style="display: table-row; height:20vh">
+                            <div style='display: table-cell; width:100vw'>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div ng-if="(lrpModel.selectedResult.tasks[lrpModel.taskPivot].answerType === 'draw-one2')">
+                        <div style="display: table-row;" ng-init="initDrawingPadAndLoad(1.0, 0.7, true, 'draw-one2')">
+                            <div style="display: table-cell; vertical-align: middle; height:70vh; width:100vw" my-directive>
+                                단일그리기.2
                                 <div id="sketchpad"></div>
                             </div>
                         </div>
@@ -76,6 +92,7 @@
                                 </div>
                             </div>
                             <div style="display: table-cell; vertical-align: middle; height:70vh; width:50vw" my-directive>
+                                사이드 바이 사이드 그리기.
                                 <div id="sketchpad"></div>
                             </div>
                         </div>

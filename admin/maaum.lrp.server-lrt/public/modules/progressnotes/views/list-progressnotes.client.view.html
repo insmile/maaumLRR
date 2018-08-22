@@ -1,0 +1,19 @@
+<section data-ng-controller="ProgressnotesController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Progressnotes</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="progressnote in progressnotes" data-ng-href="#!/progressnotes/{{progressnote._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="progressnote.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="progressnote.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="progressnote.name"></h4>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!progressnotes.$resolved || progressnotes.length">
+    	No Progressnotes yet, why don't you <a href="/#!/progressnotes/create">create one</a>?
+    </div>
+</section>

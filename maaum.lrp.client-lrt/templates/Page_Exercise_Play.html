@@ -1,4 +1,7 @@
+
+
 <ion-view view-title="Play">
+    
     <div ng-if="!endFlag" style="height: 100%;">
         <ion-header-bar class="lrp-bar-top lrp-header-padding" style="width: 100%; position: relative">
             <div class="buttons">
@@ -16,7 +19,7 @@
             </div>
             <!--<div class="buttons">
                 <button class="button button-clear icon ion-close" ng-click="endExerciseAsk()"></button>
-            </div>-->
+            </div>-->            
         </ion-header-bar>
 
         <div style="height: 100%;">
@@ -75,16 +78,74 @@
                             <button style='height:5vh' ng-click="dpRed()">빨간펜</button>
                             <button style='height:5vh' ng-click="dpBlue()">파란펜</button>
                         </div>
-                        <div style="display: table-row;" ng-init="initDrawingPad(1.0, 0.7)">
-                            <div style="display: table-cell; vertical-align: middle; width:100vw; height:70vh" my-directive>
-                                <div id="sketchpad"></div>
+                        
+                        
+                        <!--
+                            이미지화 시켜서 백그라운드로 깐다.
+                            정보를 보낸다.
+                            ddddddd
+                        -->
+                        <div style="display:table-row; " ng-init="initDrawingPad(1.0, 0.7,false, 'draw-one')" >
+                            <div style="display: table-cell; vertical-align: middle; width:100vw; height:70vh" my-directive>                                
+                                <div id="sketchpad"></div>                                
                             </div>
                         </div>
+
+
                         <div style="display: table-row; height:20vh">
                             <div style='display: table-cell; width:100vw'>
                             </div>
                         </div>
                     </div>
+
+                    
+                    <div ng-if="(lrpModel.selectedTask.answer === 'draw-one2')">
+                        <div style="position:relative; right:0;text-align:right">
+                        	      
+                        	  <button style='height:5vh' ng-click="makeShape2()">다시섞기</button>
+                            <button style='height:5vh' ng-click="dpUndo()">되돌리기</button>
+                            <button style='height:5vh' ng-click="dpWhite()">지우개</button>
+                            <button style='height:5vh' ng-click="dpBlack()">검정펜</button>
+                            <button style='height:5vh' ng-click="dpRed()">빨간펜</button>
+                            <button style='height:5vh' ng-click="dpBlue()">파란펜</button>
+                        </div>
+                        
+                        
+                        <!--
+                            이미지화 시켜서 백그라운드로 깐다.
+                            정보를 보낸다.
+                            ddddddd
+                        -->
+                        <div style="display:table-row; " ng-init="initDrawingPad(1.0, 0.7,false, 'draw-one2')" >
+                            <div style="display: table-cell; vertical-align: middle; width:100vw; height:70vh" my-directive>
+                                
+                               
+                                <!-- 
+                                <button ng-click="makeShape()" >makeShape</button>
+
+                                
+                                개수 : <input ng-model="shape_count" >
+
+                                <button ng-click="dddd_count('up')">UP</button>
+                                <button ng-click="dddd_count('down')">Down</button>
+
+                                <input type="radio" ng-model="shapeName" ng-change="shapeChange('rect')" value="rect">네모
+                                <input type="radio" ng-model="shapeName" ng-change="shapeChange('circle')" value="circle">원
+                                <input type="radio" ng-model="shapeName" ng-change="shapeChange('number')" value="number">숫자
+
+                                -->
+                                <div id="sketchpad"></div>
+                                
+                            </div>
+                        </div>
+
+
+                        <div style="display: table-row; height:20vh">
+                            <div style='display: table-cell; width:100vw'>
+                            </div>
+                        </div>
+                    </div>
+                    
 
                     <!-- 보고 그림 그리기 과제 -->
                     <div ng-if="(lrpModel.selectedTask.answer === 'draw-two')">
@@ -95,7 +156,7 @@
                             <button style='height:5vh' ng-click="dpRed()">빨간펜</button>
                             <button style='height:5vh' ng-click="dpBlue()">파란펜</button>
                         </div>
-                        <div style="display: table-row;" ng-init="initDrawingPad(0.5, 0.7)">
+                        <div style="display: table-row;" ng-init="initDrawingPad(0.5, 0.7,false, 'draw-two')">
                             <div id="resizeTarget" style="display: table-cell; vertical-align: middle; width:50vw; height:60vh">
                                 <div>
                                     <img src='{{lrpServer}}uploads/{{lrpModel.selectedProblemSet[stage].res[0].value}}' style="max-width: 100%; max-height: 100%;">
@@ -339,6 +400,12 @@
                             <button class="button" style="height: 100px; width: 100px;" ng-click="stageNext()">
                                         <span>다음</span>
                                     </button>
+                        </div>
+
+                        <div ng-if="(lrpModel.selectedTask.answer === 'draw-one2')" style="float: left; margin-left: 10px;">
+                            <button class="button" style="height: 100px; width: 100px;" ng-click="stageNext()">
+                                <span>다음</span>
+                            </button>
                         </div>
 
                         <div ng-if="(lrpModel.selectedTask.answer === 'draw-two')" style="float: left; margin-left: 10px;">

@@ -1,0 +1,60 @@
+@media (min-width: 900px) {
+  [dynamic-layout]{
+    width: 900px;
+    margin-top: 20px;
+  }
+  .dynamic-layout-col-4{
+    width : 300px;
+  }
+  .dynamic-layout-col-8{
+    width : 600px;
+  }
+}
+@media (min-width: 600px) and (max-width: 900px){
+  [dynamic-layout]{
+    width: 600px;
+  }
+  .dynamic-layout-col-4{
+    width : 300px;
+  }
+  .dynamic-layout-col-8{
+    width : 600px;
+  }
+}
+@media (max-width: 600px){
+  [dynamic-layout]{
+    width: 300px;
+  }
+  .dynamic-layout-col-4{
+    width : 300px;
+  }
+  .dynamic-layout-col-8{
+    width : 300px;
+  }
+}
+.dynamic-layout-item {
+  padding: 10px;
+}
+.move-items-animation{
+  transition-property: left, top;
+  transition-duration: .5s;
+  transition-timing-function: ease-in-out;
+}
+.dynamic-layout-item-parent.ng-enter{
+  transition: .5s ease-in-out;
+  opacity:0;
+}
+.dynamic-layout-item-parent.ng-enter.ng-enter-active{
+  opacity:1;
+}
+.dynamic-layout-item-parent.ng-leave{
+  transition: .5s ease-in-out;
+  opacity:1;
+}
+.dynamic-layout-item-parent.ng-leave.ng-leave-active{
+  opacity:0;
+}
+[dynamic-layout]{
+  float: left;
+  position: relative;
+}

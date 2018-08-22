@@ -8,15 +8,27 @@
         </div>
     </div>
 </fieldset>
+
 <fieldset>
     <div class="form-group">
-        <label class="col-lg-2 control-label">문제 유형</label>
+        <label class="col-lg-2 control-label">검사 유형</label>
+        <div class="col-lg-10">
+            <select data-ng-change="changeType($index)" data-ng-model="task.selectTaskType" data-ng-options="task.id as task.label for task in taskTypeSelect_problem" class="form-control">
+            </select>
+        </div>
+    </div>
+</fieldset>
+
+<fieldset>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">검사 제목</label>
         <div class="col-lg-10">
             <select data-ng-model="task" data-ng-options="task.name for task in tasks" class="form-control" data-ng-change="change()">
             </select>
         </div>
     </div>
 </fieldset>
+
 <fieldset data-ng-show="task">
     <legend>문제 상세 정보</legend>
     <div class="form-group">

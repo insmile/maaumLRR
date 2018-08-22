@@ -46,22 +46,25 @@ var ResourceSchema = new Schema({
     note: {
         type: String
     }
-    ,
-    taskGb: {
-        type: String,
-        default: "RRR"
-    }
 });
 
 /**
  * Task Schema
  */
-var TaskSchema = new Schema({
+var TaskSchema = new Schema( {
+    /*
     category: {
         type: String,
         trim: true,
         required: [true, '과제 유형을 입력해 주십시오.'],
     },
+    */
+
+   category: {
+        type: Schema.ObjectId,
+        ref: 'MyTaskCategory'
+    },
+    
     name: {
         type: String,
         default: '',
@@ -70,7 +73,7 @@ var TaskSchema = new Schema({
     },
     answer: {
         type: String,
-        enum: ['select', 'record', 'draw-one', 'draw-two', 'manual', 'manual_now', 'same', 'pick15', 'ray', 'forms', 'visual30', 'visual34', 'sound', 'pick08']
+        enum: ['select', 'record', 'draw-one', 'draw-two', 'manual', 'manual_now', 'same', 'pick15', 'ray', 'forms', 'visual30', 'visual34', 'sound', 'pick08','draw-one2']
     },
     isRandom: {
         type: Boolean
@@ -85,7 +88,8 @@ var TaskSchema = new Schema({
     max_score: {
         type: Number
     },
-    preview: {
+
+    preview: { // 사진!!
         type: String
     },
     resources: [ResourceSchema],
@@ -106,11 +110,14 @@ var TaskSchema = new Schema({
     center: {
         type: Schema.ObjectId,
         ref: 'Center'
-    },
-    taskGb: {
-        type: String,
-        default: "RRR"
     }
+
+    // 2018.08.07 추가.
+    , taskType : { 
+        type: String        
+        // , enum: ['LT', 'RT', 'LRE']
+    } 
+
 });
 
 
@@ -119,14 +126,18 @@ var ProblemSchema = new Schema({
         type: Number,
         required: [true, '문항 세트 ID를 입력해 주십시오.']
     },
+
     refTask: {
         type: Schema.ObjectId,
         ref: 'Task',
         required: [true, '과제를 선택해 주십시오.']
     },
+
+    // 원레 있던거.
     taskCategory: {
         type: String
     },
+
     taskName: {
         type: String
     },
@@ -160,12 +171,15 @@ var ProblemSchema = new Schema({
     updated: {
         type: Date
     }
-    ,
-    taskGb: {
-        type: String,
-        default: "RRR"
-    }
+    
+    // 2018.08.07 추가.
+    , taskType : { 
+        type: String        
+        // , enum: ['LT', 'RT', 'LRE']
+    } 
 });
 
 mongoose.model('Problem', ProblemSchema);
 mongoose.model('Task', TaskSchema);
+
+// problems, tasks 로 바뀐당.

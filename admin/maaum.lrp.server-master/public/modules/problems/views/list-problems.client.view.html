@@ -1,0 +1,37 @@
+<h3>문제 관리</h3>
+<section data-ng-controller="ProblemsController" data-ng-init="initDatatable()">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    문제 목록
+                </div>
+                <div class="panel-body">
+                    <table id="dt" class="table table-striped table-hover">
+                        <thead>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot>
+                        <tr>
+                            <th>
+                                <input type="text" name="filter_taskCategory" placeholder="범주" class="datatable_input_col_search">
+                            </th>
+                            <th>
+                                <input type="text" name="filter_taskNamer" placeholder="과제명" class="datatable_input_col_search">
+                            </th>
+                            <th>
+                                <input type="text" name="filter_seq" placeholder="문제 세트 ID" class="datatable_input_col_search">
+                            </th>
+                            <th>
+                                <input type="text" name="filter_name" placeholder="문제 순서" class="datatable_input_col_search">
+                            </th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

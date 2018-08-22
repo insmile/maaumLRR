@@ -8,15 +8,22 @@ var mongoose = require('mongoose'),
     Task = mongoose.model('Task'),
     Problem = mongoose.model('Problem'),
     async = require('async'),
+    MyTaskCategory = mongoose.model('MyTaskCategory'),
     _ = require('lodash');
 
 /**
  * Create a Task
  */
 exports.create = function(req, res) {
-    console.log("DDJJ create");
+    
+    
     var task = new Task(req.body);
+    
+    // console.log("task create = "+ req.body);
+    // console.log("task create2 = " + JSON.stringify(req.body));
+
     task.user = req.user;
+    
     if (req.user.center !== undefined)
         task.center = req.user.center;
 
@@ -32,7 +39,15 @@ exports.create = function(req, res) {
 };
 
 exports.DT = function getData(req, res) {
-    console.log("DDJJ DT getData");
+    getTaskList(req, res, getData2);
+}
+
+//2
+function getData2(req, res, taskList) {
+    
+    console.log("task list 조회 2차 시작");
+    // console.log("task list 조회 시작 req.query="+JSON.stringify(req.query) );
+
     var conditions = {};
 
     conditions.$or = [{ 'isOpen': null }, { 'isOpen': true }];
@@ -41,17 +56,128 @@ exports.DT = function getData(req, res) {
     }
 
     Task.dataTable(req.query, { 'conditions': conditions }, function(err, data) {
-        console.log(req.query);
+        
+       console.log("list result55 ===" +JSON.stringify(data) );
+
+       for(var i = 0; i < data.data.length;i++) {
+           if(data.data[i].category !== undefined) {
+
+                for(var j = 0; j < taskList.length; j++) {
+
+                    // console.log("비교 시작. data.data[i].category ="+data.data[i].category+", taskList[j]._id="+taskList[j]._id);
+                    
+                    var com1 = data.data[i].category + ""; // 스트링으로 인식 안대서 replace하면 에러뜸. 가끔 공백 붙어있어서 같아도 같다고 인식 안함. 그래서 그냥 화면에 아이디 뜸. 그래서 일부러 "" 붙여줌.
+                    var com2 = taskList[j]._id + "";
+                    
+                    if(com1 !==null && com1 !==undefined){
+                        com1 = com1.replace(/^\s*|\s*$/g,''); 
+
+                    }
+
+                    if(com2 !==null && com2 !==undefined){
+                        com2 = com2.replace(/^\s*|\s*$/g,''); 
+
+                    }
+                    /*
+                    if(data.data[i].category === taskList[j]._id) {
+                        console.log("비교 매치!" + taskList[j].categoryName);
+                        data.data[i].category = taskList[j].categoryName;
+                    }
+                    */                    
+                    
+                    if(com1 == com2) {
+                        console.log("비교 매치!" + taskList[j].categoryName);
+                        data.data[i].category = taskList[j].categoryName;
+                    }                    
+                }
+            }
+       }              
+       // console.log("list result777 ===" +JSON.stringify(data) );
+
+        if (err) console.log(err);
+        res.send(data);
+    });
+}
+
+
+//1
+function getTaskList(req, res, callback) {
+    
+    MyTaskCategory.find().exec(function(err, taskCategory) {
+        if (taskCategory === null) return [];
+        if (taskCategory === undefined) return [];
+
+        console.log("task 조회 1차 = 카테고리 먼저 조회.");
+        console.log("task 조회 1차 result = "+JSON.stringify(taskCategory));
+
+        callback(req, res, taskCategory);
+    });
+}
+
+
+/*
+exports.DT = function getData(req, res) {
+
+    console.log("task list 조회 시작");
+    console.log("task list 조회 시작 req.query="+req.query);
+    console.log("task list 조회 시작 req.query="+JSON.stringify(req.query) );
+
+    var conditions = {};
+
+    conditions.$or = [{ 'isOpen': null }, { 'isOpen': true }];
+    if (req.user.center !== undefined) {
+        conditions.$or.push({ 'isOpen': false, 'center': req.user.center });
+    }
+
+    
+    Task.dataTable(req.query, { 'conditions': conditions }, function(err, data) {
+        
+        // console.log("list result ===" +data);
+        console.log("list result 원본 ===" +JSON.stringify(data) );
+
+        var result = data.data;
+
+        for(var i = 0; i<result.length; i++) {
+            var dd = result[i];
+
+            var where2 = {};
+            where2._id = dd.category;
+
+            // 조회된 값으로 카테고리 네임 조회
+            MyTaskCategory.findOne()
+            .where(where2)
+            .exec(function(err, obj) {
+                if (err) {
+                                    
+                } else if (!obj) {                    
+                    
+                } else {
+                    console.log("list task 조회1 =  ===" +obj.categoryName);
+                    dd.category = obj.categoryName;
+                    console.log("list task 조회22 =  ===" +dd.category);
+
+                    data.data[i] = dd;
+                }
+            });
+
+            console.log("list result for ===" +JSON.stringify(dd));            
+        }//end for
+
+
+        console.log("list result55 ===" +JSON.stringify(data) );
+
         if (err) console.log(err);
         res.send(data);
     });
 };
+*/
+
+
 
 /**
  * Show the current Task
  */
 exports.read = function(req, res) {
-    console.log("DDJJ read");
     if (req.profile !== undefined) {
         console.log(req.profile);
     }
@@ -87,11 +213,11 @@ exports.read = function(req, res) {
  * Update a Task
  */
 exports.update = function(req, res) {
-    console.log("DDJJ update");
+
     console.log(req);
     var task = req.task;
 
-    console.log(req);
+    console.log("task update"+req);
 
     task = _.extend(task, req.body);
 
@@ -99,6 +225,7 @@ exports.update = function(req, res) {
         tasks.forEach(function(problem, index) {
             problem.taskName = task.name;
             problem.taskCategory = task.category;
+            problem.taskType = task.taskType;
             console.log(problem);
             problem.save();
         })
@@ -107,77 +234,11 @@ exports.update = function(req, res) {
     //task._id
 
     task.save(function(err) {
-        console.log("DDJJ save");
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
             });
         } else {
-            res.jsonp(task);
-        }
-    });
-};
-
-exports.update_Sever = function(req, res) {
-    console.log("DDJJ update_Sever");
-
-    var task = req.task;
-
-    task = _.extend(task, req.body);
-
-    Problem.find({ 'refTask': task._id }, function(err, tasks) {
-        tasks.forEach(function(problem, index) {
-            problem.taskName = task.name;
-            problem.taskCategory = task.category;
-            
-            problem.save();
-        })
-    });
-
-    //task._id
-
-    task.save(function(err) {
-        console.log("DDJJ save11");
-        if (err) {
-            return res.status(400).send({
-                message: errorHandler.getErrorMessage(err)
-            });
-        } else {
-            res.jsonp(task);
-        }
-    });
-};
-
-exports.test_clientService = function(req, res) {
-    console.log("DDJJ test_clientService");
-
-    var task = req.task;
-
-    task = _.extend(task, req.body);
-
-    Problem.find({ 'refTask': task._id }, function(err, tasks) {
-        tasks.forEach(function(problem, index) {
-            
-            console.log("DDJJ index  :" + index);
-            console.log("DDJJ task.name  :" + task.name);
-            console.log("DDJJ task.category  :" + task.category);
-            problem.taskName = task.name;
-            problem.taskCategory = task.category;
-            
-            problem.save();
-        })
-    });
-
-    //task._id
-
-    task.save(function(err) {
-        console.log("DDJJ save11");
-        if (err) {
-            return res.status(400).send({
-                message: errorHandler.getErrorMessage(err)
-            });
-        } else {
-            console.log("DDJJ task" + task);
             res.jsonp(task);
         }
     });
@@ -188,7 +249,7 @@ exports.test_clientService = function(req, res) {
  */
 exports.delete = function(req, res) {
     var task = req.task;
-    console.log("DDJJ delete");
+
     task.remove(function(err) {
         if (err) {
             return res.status(400).send({
@@ -204,7 +265,10 @@ exports.delete = function(req, res) {
  * List of Tasks
  */
 exports.list = function(req, res) {
-    console.log("DDJJ list");
+
+    console.log("list START:::"  );
+    console.log("list:::"+JSON.stringify(req.params) );
+
     var query = {};
     if (req.user.roles !== 'admin') {
         query = {
@@ -254,7 +318,6 @@ exports.list = function(req, res) {
 };
 
 exports.category = function(req, res) {
-    console.log("DDJJ category");
     Task.find().distinct('category').exec(function(err, tasks) {
         if (err) {
             return res.status(400).send({
@@ -267,7 +330,6 @@ exports.category = function(req, res) {
 };
 
 exports.name = function(req, res) {
-    console.log("DDJJ name");
     Task.find().distinct('name').exec(function(err, tasks) {
         if (err) {
             return res.status(400).send({
@@ -279,8 +341,9 @@ exports.name = function(req, res) {
     });
 };
 
+/*
 exports.list_a = function(req, res) {
-    console.log("DDJJ list_a");
+
     var query = {};
     if (req.user.roles !== 'admin') {
         query = {
@@ -291,8 +354,55 @@ exports.list_a = function(req, res) {
             ]
         };
     }
+
+    Task.find(query, { _id: 1, category: 1, name: 1 }).sort('sortOrder').exec(function(err, tasks) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            var c = [];
+            var t = [];
+            var cc;
+            tasks.forEach(function(x, index) {
+                //console.log(t.indexOf(x.category));
+                if (c[x.category] === undefined) {
+                    c[x.category] = [];
+                    cc = { category: x.category, tasks: [] };
+                    t.push(cc);
+                }
+                cc.tasks.push({ name: x.name, _id: x._id });
+            });
+            //console.log(t);
+            //console.log(JSON.stringify(t));
+            res.jsonp(t);
+        }
+    });
+};
+*/
+
+
+
+//////////////////
+
+exports.list_a = function(req, res) {
+
+    console.log("list_a::: START");
+    console.log("list_a::: " + JSON.stringify(req.params)  );
     
-    query = { type: 'LRE' };
+    var query = {};
+    
+    if (req.user.roles !== 'admin') {
+        query = {
+            $or: [
+                { 'isOpen': null },
+                { 'isOpen': true },
+                { 'isOpen': false, 'center': new mongoose.Types.ObjectId(req.user.center) }
+            ]
+        };
+    }
+    
+    query = { taskType: 'LRE' };
     
     Task.find(query, { _id: 1, category: 1, name: 1 }).sort('sortOrder').exec(function(err, tasks) {
         if (err) {
@@ -319,9 +429,24 @@ exports.list_a = function(req, res) {
     });
 };
 
-/** free lt 훈련 */
-exports.list_b = function(req, res) {
-    console.log("DDJJ list_b");
+
+/** lt, rt, LRE. 클라이언트에서 조회. */
+exports.list3 = function(req, res) {
+    console.log("task list3 START::" );        
+    console.log("list_CCCC1:::" + JSON.stringify(req.params));
+    
+    // 카테고리 먼저 가져오기.
+    getTaskList(req, res, getTaskList3);
+}
+
+function getTaskList3 (req, res, taskCategory){
+    var where = {};
+
+    if(req.params.gubun !="all" && req.params.gubun !="ALL" ) {
+        console.log("task list3 조건 붙이기." );        
+        where.taskType =  req.params.gubun;
+    }
+
     var query = {};
     if (req.user.roles !== 'admin') {
         query = {
@@ -332,9 +457,8 @@ exports.list_b = function(req, res) {
             ]
         };
     }
-    query = { type: 'LT' };
     
-    Task.find(query, { _id: 1, category: 1, name: 1 }).sort('sortOrder').exec(function(err, tasks) {
+    Task.find(query, { _id: 1, category: 1, name: 1 }).where(where).sort('sortOrder').exec(function(err, tasks) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
@@ -348,20 +472,58 @@ exports.list_b = function(req, res) {
                 if (c[x.category] === undefined) {
                     c[x.category] = [];
                     cc = { category: x.category, tasks: [] };
+
                     t.push(cc);
                 }
                 cc.tasks.push({ name: x.name, _id: x._id });
             });
+
+            for(var i = 0; i < t.length;i++) {
+                
+                for(var j = 0; j < taskCategory.length; j++) {
+
+                    // 비교해서 이름 바꾸기.                    
+                    var com1 = t[i].category + ""; // 스트링으로 인식 안대서 replace하면 에러뜸. 가끔 공백 붙어있어서 같아도 같다고 인식 안함. 그래서 그냥 화면에 아이디 뜸. 그래서 일부러 "" 붙여줌.
+                    var com2 = taskCategory[j]._id + "";
+                    
+                    if(com1 !==null && com1 !==undefined){
+                        com1 = com1.replace(/^\s*|\s*$/g,''); 
+                    }
+
+                    if(com2 !==null && com2 !==undefined){
+                        com2 = com2.replace(/^\s*|\s*$/g,''); 
+                    }
+
+                    if(com1 == com2) {
+                        t[i].categoryName =  taskCategory[j].categoryName;                      
+                    }                    
+                }            
+            }    
+
             //console.log(t);
-            console.log(JSON.stringify(t));
+            console.log("클라이언트 조회="+JSON.stringify(t));
             res.jsonp(t);
         }
     });
-};
+}
 
-/** free rt 훈련 */
-exports.list_c = function(req, res) {
-    console.log("DDJJ list_c");
+
+
+
+
+exports.list4 = function(req, res) {
+
+    console.log("task list4 START:::"  );
+    console.log("list:::"+JSON.stringify(req.params) );
+
+    var where = {};
+
+    if(req.params.gubun !="all" && req.params.gubun !="ALL" ) {
+        console.log("task list4 조건 붙이기." );        
+        where.taskType =  req.params.gubun;
+    }
+
+
     var query = {};
     if (req.user.roles !== 'admin') {
         query = {
@@ -372,42 +534,50 @@ exports.list_c = function(req, res) {
             ]
         };
     }
-    query = { type: 'RT' };
-    
-    Task.find(query, { _id: 1, category: 1, name: 1 }).sort('sortOrder').exec(function(err, tasks) {
+
+    Task.find(query).where(where).sort('-created').populate('user', 'displayName').exec(function(err, tasks) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
             });
         } else {
-            var c = [];
-            var t = [];
-            var cc;
-            tasks.forEach(function(x, index) {
-                //console.log(t.indexOf(x.category));
-                if (c[x.category] === undefined) {
-                    c[x.category] = [];
-                    cc = { category: x.category, tasks: [] };
-                    t.push(cc);
+            var t2 = [];
+            async.eachSeries(tasks, function iterator(task, callback) {
+                Problem.findOne()
+                    .where({ refTask: task._id })
+                    .sort('-name')
+                    .exec(function(err, obj) {
+                        if (err) {
+                            res.status(400).send("error" + err);
+                            callback();
+                        } else if (!obj) {
+                            t2.push(task);
+                            callback();
+                        } else {
+                            var max = obj.name;
+                            task.setSize = max;
+                            t2.push(task);
+                            callback();
+                        }
+                    });
+            }, function done(err) {
+                if (err) return res.status(400).send({
+                    message: errorHandler.getErrorMessage(err)
+                });
+                else {
+                    res.jsonp(t2);
                 }
-                cc.tasks.push({ name: x.name, _id: x._id });
             });
-            //console.log(t);
-            console.log(JSON.stringify(t));
-            res.jsonp(t);
         }
     });
 };
 
 
+////////////////////
 exports.info = function(req, res) {
-    console.log("DDJJ info");
     var taskInfo = {};
     taskInfo.answer = req.task.answer;
     taskInfo.resources = req.task.resources;
-
-    taskInfo.taskGb = req.task.taskGb;
-    
     res.jsonp(taskInfo);
 };
 
@@ -415,7 +585,6 @@ exports.info = function(req, res) {
  * Task middleware
  */
 exports.taskByID = function(req, res, next, id) {
-    console.log("DDJJ taskByID");
     Task.findById(id).populate('user', 'displayName').exec(function(err, task) {
         if (err) return next(err);
         if (!task) return next(new Error('Failed to load Task ' + id));
@@ -433,7 +602,6 @@ exports.taskByID = function(req, res, next, id) {
  * Task authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
-    console.log("DDJJ hasAuthorization");
     /*if (req.task.user.id !== req.user.id) {
     	return res.status(403).send('User is not authorized');
     }*/

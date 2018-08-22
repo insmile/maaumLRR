@@ -1,9 +1,12 @@
+
 <section class="row" data-ng-controller="ProblemsController" data-ng-init="findOne()">
+
+    
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="form-horizontal">
                 <fieldset>
-                    <legend>문제 입력</legend>
+                    <legend>문제 입력 view-problem.client.view.html</legend>
                     <div class="form-group">
                         <label class="col-lg-2 control-label">문제 세트 ID</label>
                         <div class="col-lg-10">
@@ -67,6 +70,36 @@
                         </div>
                     </div>
                 </fieldset>
+
+            <!-- -->
+            <div ng-show="checkShowDraw()">
+                <div class="form-group">
+                    <input type="radio" name="dd_shape" ng-click="draw2_selectShape(1)" >도형
+                    <br/>
+                    &nbsp;
+                    삼각형 <input type="checkbox"  id="sstt1"  value="tri" />&nbsp;&nbsp;
+                    사각형 <input type="checkbox"  id="sstt2"  value="rect"  />&nbsp;&nbsp;
+                    원 <input type="checkbox"    id="sstt3"   value="circle" />
+                    
+                    <br/><br/>
+
+                    <input type="radio" name="dd_shape" ng-click="draw2_selectShape(2)" >문자
+                    <br/>
+                        &nbsp;
+                        숫자 <input type="checkbox"  id="sstt4"  value="num" />&nbsp;&nbsp;
+                        가나다 <input type="checkbox" id="sstt5"   value="ganada" />
+                </div>
+
+                <br/><br/>
+                개수 : {{shape_count}}
+                <div ng-click="shape_countDD('up')">up</div>
+                <div ng-click="shape_countDD('down')">down</div>
+
+            </div>
+
+            <div ng-hide="checkShowDraw()">
+
+                <!-- 리소스 시작-->
                 <fieldset data-ng-repeat="res in problem.resources">
                     <div class="form-group">
                         <label class="col-lg-2 control-label">{{res.name}}</label>
@@ -87,7 +120,7 @@
                             </div>
                         </div>
                         <div class="form-group" data-ng-hide="res.isDefinition">
-                            <label class="col-lg-2 control-label">정답여부</label>
+                            <label class="col-lg-2 control-label">정답여부 view-problem.client.view.html</label>
                             <div class="col-lg-10">
                                 <div class="checkbox c-checkbox">
                                     <label>
@@ -129,6 +162,10 @@
                             </div>
                         </div>
                 </fieldset>
+                <!-- 리소스 끝.-->
+            </div>
+
+
                 <div class="form-group">
                     <a class="btn btn-primary" data-ng-click="update();">
 						수정

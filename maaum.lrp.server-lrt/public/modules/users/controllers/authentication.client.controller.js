@@ -146,12 +146,22 @@ angular.module('users').controller('ManagerController', ['$scope', '$stateParams
                 alert(response.message);
             });
         };
+
+        $scope.remove = function() {
+            if (confirm('제거하시겠습니까?')) {
+                $scope.credentials.$remove(function() {
+                    $location.path('therapist/list');
+                });
+            }
+        }
+
     }
 ]);
 
+
+
 angular.module('users').controller('CenterManagerController', ['$scope', '$stateParams', '$http', '$location', 'Authentication', 'Centers', 'Managers', 'Users', 'Pay',
     function($scope, $stateParams, $http, $location, Authentication, Centers, Managers, Users, Pay) {
-
 
         $scope.signup = function() {
 
@@ -238,8 +248,9 @@ angular.module('users').controller('AdminSignUpController', ['$scope', '$http', 
     }
 ]);
 
-angular.module('users').controller('PatientController', ['$scope', '$http', '$location', 'Authentication', 'Patients', '$stateParams',
-    function($scope, $http, $location, Authentication, Patients, $stateParams) {
+
+angular.module('users').controller('PatientController', ['$scope', '$http', '$location', 'Authentication', 'Patients', '$stateParams','$upload',    
+    function($scope, $http, $location, Authentication, Patients, $stateParams, $upload) {
 
         $scope.authentication = Authentication;
 
@@ -248,8 +259,11 @@ angular.module('users').controller('PatientController', ['$scope', '$http', '$lo
         var manager = $scope.authentication.user.roles === 'manager';
         $scope.title = "환자 계정 정보 입력";
 
-        $scope.findOne = function() {
+        $scope.findOne = function() {            
             $http.get('/therapist/list/').success(function(therapists) {
+
+                // console.log(JSON.stringify(therapists));
+
                 $scope.therapists = therapists;
                 $scope.title = "환자 계정 정보 수정";
                 if (!(admin || therapist || manager)) return;
@@ -259,8 +273,76 @@ angular.module('users').controller('PatientController', ['$scope', '$http', '$lo
                 $scope.credentials.password = undefined;
 
                 $scope.isUpdate = true;
+                
+                /*
+                $scope.isShowIndex = false;
+                
+                $scope.credentials.user_name_index = 32;
+                var nIndex = $scope.credentials.user_name_index;
+
+                if(nIndex==undefined || nIndex=="" ||nIndex==0) {
+                    $scope.isShowIndex = false;
+                }else {
+                    mfja rm ekdmadps andjf gkwl. gmdma. 
+                }
+                */                
+
+                try {
+                    $scope.credentials.picture_file.value = $scope.credentials.picture;
+                } catch (err) {;
+                }
             });
         };
+
+        
+        
+
+        $scope.upload = function(resource) {
+            
+            var files = resource.files;
+            
+            if (files && files.length) {
+                for (var i = 0; i < files.length; i++) {
+                    var file = files[i];
+                    this.generateThumb(file);
+                    $upload.upload({
+                        url: 'uploads/',
+                        file: file
+
+                    }).progress(function(evt) {
+                        resource.progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                        //var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                        //console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
+
+                    }).success(function(data, status, headers, config) {
+                        //console.log("DATA" + data);
+                        resource.value = data.file.name;
+                        $scope.credentials.picture = data.file.name;
+                        //console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
+                    });
+                }
+            }
+        };
+
+
+        $scope.generateThumb = function(file) {
+            if (file !== null) {
+                if ($scope.fileReaderSupported && file.type.indexOf('image') > -1) {
+                    $timeout(function() {
+                        var fileReader = new FileReader();
+                        fileReader.readAsDataURL(file);
+                        fileReader.onload = function(e) {
+                            $timeout(function() {
+                                //$scope.task.preview = e.target.result;
+                                file.dataUrl = e.target.result;
+                            });
+                        };
+                    });
+                }
+            }
+        };
+
+
 
         // Update a user profile
         $scope.updateUserProfile = function(isValid) {
@@ -279,6 +361,27 @@ angular.module('users').controller('PatientController', ['$scope', '$http', '$lo
 
                 var user = $scope.credentials;
 
+                console.log("userDDDD =="+ JSON.stringify(user));
+
+                /*
+{
+    "_id":"5aace6ee2f1eb95e058596d9",
+    "updated":"2018-08-10T04:44:06.070Z",
+    "expired_date":"2018-03-17T09:59:10.092Z",
+    "created":"2018-03-17T09:59:10.092Z",
+    "center_name":"MAAUM",
+    "officialTests":[],"progressNotes":[],
+    "starredProgressTemplates":[],
+    "roles":"patient",
+    "email":"",
+    "has_key":false,"certified":false,
+    "handType":"right",
+    "sex":"male",
+    "username":"박정자",
+    "name":"박정"
+    }
+                */
+                
                 user.$update(function(response) {
                     $scope.success = true;
                 }, function(response) {

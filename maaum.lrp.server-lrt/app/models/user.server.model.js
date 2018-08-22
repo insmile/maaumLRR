@@ -32,7 +32,7 @@ var UserSchema = new Schema({
 		default: '',
 		required : [true, '이름을 입력해 주십시오.']
 	},
-	username : {
+	username : { // 아이디
 		type: String,
 		trim: true,
 		default: '',
@@ -171,6 +171,17 @@ var UserSchema = new Schema({
 	resetPasswordExpires: {
 		type: Date
 	}
+
+	,picture: { // 사진!! 2018.08 추가!!!
+        type: String
+	}
+
+	// 이름을 변경하면 인덱스가 꼬일수 있으므로, 조회시 같은이름 + max(인덱스)로 조회해서 +1 시킨다.
+	, user_name_index: { // 같은 이름일 때 인덱스.
+        type: Number
+	}
+	
+
 });
 
 /**

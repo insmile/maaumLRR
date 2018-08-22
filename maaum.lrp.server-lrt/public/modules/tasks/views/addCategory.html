@@ -1,0 +1,50 @@
+
+
+<section class="row" data-ng-controller="TaskCategoryController" data-ng-init="init()">
+    <div class="panel panel-default">
+        <div class="panel-body">
+    
+            
+            <div class="panel-body">
+                <table  class="table table-striped table-hover">                    
+                    <thead>
+
+                    </thead>
+
+                    <tbody>
+                        <tr data-ng-repeat="list in categoryList">                                                                
+                            <td>
+                                <input type="text" name="categoryText" ng-model="list.categoryName"  /> 
+                            </td>
+                           
+                            <td>
+                                <button data-ng-click="updateCategory($index,list._id )">수정</button>
+                                <button data-ng-click="removeCategory($index,list._id)">삭제</button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <input ng-model="categoryNewName" type="text" name="categoryText"   /> 
+                            </td>
+                            
+                            <td>
+                                <button data-ng-click="addCategory( )">추가</button>                                
+                            </td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+
+
+                    
+                    
+                                
+
+        </div>
+    </div>
+</section>
+
+

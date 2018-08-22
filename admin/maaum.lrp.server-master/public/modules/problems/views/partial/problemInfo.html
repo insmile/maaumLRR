@@ -1,0 +1,36 @@
+<fieldset>
+    <legend>문제 입력</legend>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">문제 세트 ID</label>
+        <div class="col-lg-10">
+            <input type="text" data-ng-model="problem.name" id="name" class="form-control" placeholder="problem ID" required>
+            <span class="help-block">1부터 자연수로 입력, 오름차순으로 정렬되어 훈련 프로그램 시 문제 세트가 제시됨</span>
+        </div>
+    </div>
+</fieldset>
+<fieldset>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">문제 유형</label>
+        <div class="col-lg-10">
+            <select data-ng-model="task" data-ng-options="task.name for task in tasks" class="form-control" data-ng-change="change()">
+            </select>
+        </div>
+    </div>
+</fieldset>
+<fieldset data-ng-show="task">
+    <legend>문제 상세 정보</legend>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">문제 순서</label>
+        <div class="col-lg-10">
+            <input type="number" data-ng-model="problem.seq" class="form-control" placeholder="seq" required>
+            <span class="help-block">1~10 사이의 자연수로 입력, 오름 차순으로 제공</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">문제 설명</label>
+        <div class="col-lg-10">
+            <textarea data-ng-model="problem.note"></textarea>
+            <span class="help-block">채점 기준을 적음, 환자에게 제공되지 않음</span>
+        </div>
+    </div>
+</fieldset>

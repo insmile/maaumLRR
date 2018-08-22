@@ -1,5 +1,30 @@
 <fieldset>
-    <legend>환자 상세 정보 입력</legend>
+    <legend>환자 상세 정보 입력_ dddddd4 _ PatientController</legend>
+
+    <!-- 추가-->
+    <fieldset>
+        <div class="form-group">
+            <label class="col-lg-2 control-label">사진</label>
+
+            <div class="col-lg-10">
+                                   
+                credentials.picture
+                    
+                <div ng-file-select ng-model="credentials.picture_file.files" ng-file-change="upload(credentials.picture_file)">
+                    <span class="btn btn-default btn-info">이미지 파일 선택</span> 
+                    <span data-ng-show="credentials.picture_file.progressPercentage">업로드 : {{credentials.picture_file.progressPercentage}}% </span>
+                </div>
+        
+                <div data-ng-show="credentials.picture">            
+                    <img ng-src="/uploads/{{credentials.picture}}" class="img-responsive">
+                </div>
+
+                
+            </div>
+        </div>
+    </fieldset>
+
+
     <fieldset>
         <div class="form-group">
             <label class="col-lg-2 control-label">담당 평가자</label>

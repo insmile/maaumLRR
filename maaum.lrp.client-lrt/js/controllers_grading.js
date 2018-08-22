@@ -232,7 +232,7 @@ angular.module('LRProject.controllers.grading', ['LRProject.services'])
         }
 
         $scope.initStage = function() {
-            debugger;
+            // debugger;
             try {
                 $scope.lrpModel.taskPivot++;
 
@@ -278,6 +278,13 @@ angular.module('LRProject.controllers.grading', ['LRProject.services'])
                     $scope.pad.loadJSON(JSON.parse($scope.lrpModel.selectedResult.tasks[$scope.lrpModel.taskPivot].problems[$scope.stage].drawJson));
                     drawingPadUtil.loadBackgroundGrading($scope);
                 }
+                
+                if ($scope.lrpModel.selectedResult.tasks[$scope.lrpModel.taskPivot].answerType === 'draw-one2') {
+                    //$scope.pad.clear();
+                    $scope.pad.loadJSON(JSON.parse($scope.lrpModel.selectedResult.tasks[$scope.lrpModel.taskPivot].problems[$scope.stage].drawJson));
+                    drawingPadUtil.loadBackgroundGrading($scope);
+                }
+
                 if ($scope.lrpModel.selectedResult.tasks[$scope.lrpModel.taskPivot].answerType === 'draw-two') {
                     //$scope.pad.clear();
                     $scope.pad.loadJSON(JSON.parse($scope.lrpModel.selectedResult.tasks[$scope.lrpModel.taskPivot].problems[$scope.stage].drawJson));
@@ -294,6 +301,7 @@ angular.module('LRProject.controllers.grading', ['LRProject.services'])
         }
 
         $scope.stageNext = function(totalScore) {
+
             $scope.stage++;
 
             if (totalScore !== undefined) {

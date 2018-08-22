@@ -34,11 +34,11 @@ function UserSave(user, res) {
 		}
 	});
 }
-/**
- * Update user details
- */
-exports.update = function(req, res) {
 
+
+
+/////////// 추가아아아아아아 ///////// 
+function update1_getSameUserNameData(req, res, callback) {
 	// Init Variables
 	var user = req.user;
 
@@ -47,6 +47,57 @@ exports.update = function(req, res) {
 		user = req.profile;
 	}
 
+	var userName = user.name; // username은 아이디!!
+
+	console.log("user Update userName=" + userName);
+	
+	var where1 = {};
+	where1.name = userName;
+
+	// 같은이름 + 이름인덱스 조회시, 이름을 바꾸면 순서가 꼬일수 있으므로 인덱스 max뽑아온다.
+	// db.collection.find().sort({age:-1}).limit(1) // MAX
+
+	User.find()
+	.where(where1)	
+	.sort({user_name_index:-1}) // 높은순으로 조회
+
+	.exec(function(err, obj)
+	{
+		
+		var userIndex = 0;
+
+        if (err) {
+            res.status(400).send("error" + err);
+			userIndex = 0;
+        } else if (!obj) {
+			userIndex = 0;
+        } else {
+			console.log("dpdpdp="+JSON.stringify(obj));
+			userIndex = obj[0].user_name_index;
+
+			if(userIndex ==undefined || userIndex==""){
+				userIndex = 1;
+			}
+
+		}
+		
+		console.log("getUserData userIndex==="+userIndex);
+		callback(req,res,userIndex);
+		
+	});
+}
+
+
+function update2_do(req, res, userNameIndex) {
+
+	var user = req.user;
+
+	if(req.profile !== undefined)
+	{
+		user = req.profile;
+	}
+
+	
 	User.findById(user._id).exec(function(err, u) {
 		if(err) {
 			return res.status(400).send({
@@ -121,6 +172,8 @@ exports.update = function(req, res) {
 								message: errorHandler.getErrorMessage(err)
 							});
 						} else {
+
+							
 							user.assignedTherapistName =  therapist.name;
 							UserSave(user, res);
 						}
@@ -128,9 +181,11 @@ exports.update = function(req, res) {
 				}
 				else
 				{
+
+					user.user_name_index = userNameIndex;					
 					UserSave(user, res);
 				}
-			} else {
+			} else {				
 				console.log(res);
 				res.status(400).send({
 					message: 'User is not signed in'
@@ -138,6 +193,19 @@ exports.update = function(req, res) {
 			}
 		}
 	});
+	
+}
+
+
+
+/**
+ * Update user details  ddddddd5
+ */
+exports.update = function(req, res) {
+
+	console.log("user Update!!!!");
+	update1_getSameUserNameData(req, res, update2_do);
+	
 };
 
 /**
@@ -221,7 +289,8 @@ exports.activation = function(req,res) {
 	var center = null;
 	var has_key = true;
     var u;
-
+	var certified = true;
+	
     console.log("exports.activation : ");
     console.log(_query);
 
@@ -246,7 +315,9 @@ exports.activation = function(req,res) {
                 if(_query.expired_date !== undefined)
                     u.expired_date = _query.expired_date;
                 if(_query.has_key == false)
-                    u.expired_date = undefined;
+					u.expired_date = undefined;
+				
+				u.certified = true; //강제
                 return saveUser(u);
 			}
 		})

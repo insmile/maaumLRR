@@ -5,6 +5,10 @@ angular.module('tasks').config(['$stateProvider', 'RouteHelpersProvider',
 	function($stateProvider, helper) {
 		// Tasks state routing
 		$stateProvider.
+		state('app.addCategory', {
+            url: '/tasks/addCategory',
+            templateUrl: 'modules/tasks/views/addCategory.html'
+        }).
 		state('app.listTasks', {
 			url: '/tasks',
 			templateUrl: 'modules/tasks/views/list-tasks.client.view.html',
@@ -19,9 +23,11 @@ angular.module('tasks').config(['$stateProvider', 'RouteHelpersProvider',
 			url: '/tasks/:taskId',
 			templateUrl: 'modules/tasks/views/view-task.client.view.html'
 		}).
+         
 		state('app.editTask', {
 			url: '/tasks/:taskId/edit',
 			templateUrl: 'modules/tasks/views/edit-task.client.view.html'
-		});
+		})
+
 	}
 ]);

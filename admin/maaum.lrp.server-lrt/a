@@ -1,0 +1,102 @@
+
+> angle@0.0.1 start /home/lrp/kcog-admin-angle
+> grunt
+
+[4mRunning "jshint:all" (jshint) task[24m
+
+[1m   public/modules/problems/controllers/problems.client.controller.js[22m
+    115 |[90m          }).success(function (data, status, headers, config) {[39m
+                    ^ Don't make functions within a loop.
+    118 |[90m          });[39m
+                    ^ Don't make functions within a loop.
+[1m   public/modules/problems/directives/directives.js[22m
+      5 |[90m    return {[39m
+             ^ Missing "use strict" statement.
+     10 |[90m    }[39m
+              ^ Missing semicolon.
+     14 |[90m    return {[39m
+             ^ Missing "use strict" statement.
+     19 |[90m    }[39m
+              ^ Missing semicolon.
+[1m   public/modules/tasks/controllers/tasks.client.controller.js[22m
+     83 |[90m        ;[39m
+                 ^ Unnecessary semicolon.
+    163 |[90m          }).success(function (data, status, headers, config) {[39m
+                    ^ Don't make functions within a loop.
+    168 |[90m          });[39m
+                    ^ Don't make functions within a loop.
+[1m   public/modules/tasks/directives/resourceInfo.js[22m
+      5 |[90m    return {[39m
+             ^ Missing "use strict" statement.
+     10 |[90m    }[39m
+              ^ Missing semicolon.
+[1m   public/modules/tasks/directives/taskInfo.js[22m
+      5 |[90m    return {[39m
+             ^ Missing "use strict" statement.
+      9 |[90m    }[39m
+              ^ Missing semicolon.
+[1m   app/controllers/core.server.controller.js[22m
+     52 |[90m    })[39m
+               ^ Missing semicolon.
+     94 |[90m    })[39m
+               ^ Missing semicolon.
+    129 |[90m      })[39m
+                 ^ Missing semicolon.
+[1m   app/controllers/officialtestdata.server.controller.js[22m
+     45 |[90m            })[39m
+                       ^ Missing semicolon.
+    124 |[90m            })[39m
+                       ^ Missing semicolon.
+[1m   app/controllers/problems.server.controller.js[22m
+    201 |[90m      x.name = new Number();[39m
+                        ^ Do not use Number as a constructor.
+[1m   app/controllers/progressnotes.server.controller.js[22m
+     31 |[90m        var progressnote = new Progressnote(req.body);[39m
+                                  ^ 'progressnote' is already defined.
+     40 |[90m    progressnote.save(function (err) {[39m
+             ^ 'progressnote' used out of scope.
+[1m   app/controllers/tasks.server.controller.js[22m
+     83 |[90m    })[39m
+               ^ Missing semicolon.
+[1m   app/controllers/users/users.authentication.server.controller.js[22m
+     50 |[90m    var user = new User(req.body);[39m
+                      ^ 'user' is already defined.
+     56 |[90m  user.provider = 'local';[39m
+           ^ 'user' used out of scope.
+     58 |[90m  if(user.assignedTherapist !== undefined)[39m
+              ^ 'user' used out of scope.
+     61 |[90m    User.findById(user.assignedTherapist, function(err, therapist){[39m
+                           ^ 'user' used out of scope.
+     68 |[90m        UserSave(user, res);[39m
+                 ^ Missing 'new' prefix when invoking a constructor.
+     72 |[90m    UserSave(user, res);[39m
+             ^ Missing 'new' prefix when invoking a constructor.
+     72 |[90m    UserSave(user, res);[39m
+                      ^ 'user' used out of scope.
+[1m   app/controllers/users/users.data.server.controller.js[22m
+    203 |[90m    }[39m
+              ^ Missing semicolon.
+[1m   app/controllers/users/users.password.server.controller.js[22m
+     22 |[90m};[39m
+          ^ Unnecessary semicolon.
+    210 |[90m              user.password = HashPassword(user.salt, user.password);[39m
+                                       ^ Missing 'new' prefix when invoking a constructor.
+    272 |[90m                  user.password = HashPassword(user.salt, user.password);[39m
+                                           ^ Missing 'new' prefix when invoking a constructor.
+[1m   app/controllers/users/users.profile.server.controller.js[22m
+     19 |[90m};[39m
+          ^ Unnecessary semicolon.
+     72 |[90m      newUser.password = HashPassword(newUser.salt, newUser.password);[39m
+                                  ^ Missing 'new' prefix when invoking a constructor.
+     84 |[90m    user.password = HashPassword(user.salt, user.password);[39m
+                             ^ Missing 'new' prefix when invoking a constructor.
+    100 |[90m          UserSave(user, res);[39m
+                   ^ Missing 'new' prefix when invoking a constructor.
+    106 |[90m      UserSave(user, res);[39m
+               ^ Missing 'new' prefix when invoking a constructor.
+    152 |[90m  CheckTherapist(function(err, therapist) {[39m
+           ^ Missing 'new' prefix when invoking a constructor.
+    153 |[90m    if(err == null) {[39m
+                    ^ Use '===' to compare with 'null'.
+
+[31m>> [39m40 errors in 164 files

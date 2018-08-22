@@ -1,0 +1,52 @@
+<div data-ng-switch on="define.resType">
+    <div class="form-group">
+        <label class="col-lg-2 control-label">{{define.name}}</label>
+        <div class="col-lg-10">
+            <span data-ng-switch-when="str">
+            <span data-ng-switch on="define.strType">
+                <input data-ng-switch-when="text" data-ng-model="problem.resources[$index].value" type="text" class="form-control" placeholder="{{define.note}}" required>
+                <input data-ng-switch-default data-ng-model="problem.resources[$index].value" type="text" class="form-control" placeholder="{{define.note}}" required>
+                <textarea data-ng-switch-when="textarea" rows="4" cols="100" data-ng-model="problem.resources[$index].value"></textarea>
+            </span>
+            </span>
+            <div data-ng-switch-when="file">
+                <div ng-file-select ng-model="problem.resources[$index].files" ng-file-change="upload(problem.resources[$index])">
+                    <span class="btn btn-default btn-info">업로드 파일 선택</span>
+                    <span data-ng-show="problem.resources[$index].progressPercentage">업로드 : {{problem.resources[$index].progressPercentage}}%</span>
+                </div>
+            </div>
+            <div data-ng-switch-when="video">
+                <input data-ng-model="problem.resources[$index].value" type="text" class="form-control" placeholder="{{define.note}}" required>
+                <textarea data-ng-switch-when="textarea" rows="4" cols="100" data-ng-model="problem.resources[$index].value"></textarea>
+            </div>
+            <div data-ng-show="problem.resources[$index].files[0]">
+                <img ng-src="{{problem.resources[$index].files[0].dataUrl}}" class="img-responsive">
+            </div>
+        </div>
+    </div>
+    <div class="form-group" data-ng-switch-when="file">
+        <label class="col-lg-2 control-label">이미지 숨김 시간 (초)</label>
+        <div class="col-lg-10">
+            <input type="number" ng-model="program.resources[$index].timeout" placeholder="비울 시 기능 사용 안함">
+        </div>
+    </div>
+    <div class="form-group" data-ng-switch-when="file">
+        <label class="col-lg-2 control-label">그리기 과제에서 이미지 위치</label>
+        <div class="col-lg-10">
+            <select data-ng-model="program.resources[$index].imageOrientation" data-ng-options="obj.id as obj.label for obj in imageOrientation" class="form-control">
+            </select>
+        </div>
+    </div>
+</div>
+<div class="form-group" data-ng-hide="define.isDefinition">
+    <label class="col-lg-2 control-label">정답여부</label>
+    <div class="col-lg-10">
+        <div class="checkbox c-checkbox">
+            <label>
+                <input type="checkbox" data-ng-model="problem.resources[$index].isAnswer" checked="" />
+                <span class="fa fa-check"></span>
+                {{define.note}}
+            </label>
+        </div>
+    </div>
+</div>
