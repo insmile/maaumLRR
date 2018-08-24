@@ -10,7 +10,7 @@ angular.module('core').run(['Menus',
                 Menus.addMenuItem('sidebar', '상품 관리', 'products/list', 'dropdown', '/products(/.*)?', false, ['admin'], 1, 'icon-credit-card');
                 Menus.addSubMenuItem('sidebar', 'products/list', '상품 목록', 'products/list', 'products/list', false, ['admin']);
                 Menus.addSubMenuItem('sidebar', 'products/list', '상품 등록', 'products/create', 'products/create', false, ['admin']);
-                Menus.addMenuItem('sidebar', '결재 관리', 'pay/list', 'dropdown', '/pay(/.*)?', false, ['admin', 'manager'], 2, 'fa fa-krw');
+                Menus.addMenuItem('sidebar', '결재 관리', 'pay/list', 'dropdown', '/pay(/.*)?', false, ['admin'], 2, 'fa fa-krw');
                 Menus.addSubMenuItem('sidebar', 'pay/list', '결재 내역', 'pay/list', 'pay/list', false, ['admin', 'manager']);
                 Menus.addSubMenuItem('sidebar', 'pay/list', '상품 추가', 'pay/create', 'pay/create', false, ['admin', 'manager']);
                 Menus.addMenuItem('sidebar', '기관 관리', 'centers/list', 'dropdown', '/centers(/.*)?', false, ['admin'], 3, 'fa fa-building-o');
@@ -30,14 +30,15 @@ angular.module('core').run(['Menus',
             Menus.addSubMenuItem('sidebar', 'articles', 'List Articles', 'articles');
             Menus.addSubMenuItem('sidebar', 'articles', 'New Article', 'articles/create'); */
 
-            Menus.addMenuItem('sidebar', '검사 관리', 'tasks', 'dropdown', '/tasks(/.*)?', false, ['admin', 'manager'], 7, 'icon-magnifier');
+            Menus.addMenuItem('sidebar', '검사 관리', 'tasks', 'dropdown', '/tasks(/.*)?', false, ['admin'], 7, 'icon-magnifier');
             
             Menus.addSubMenuItem('sidebar', 'tasks', '검사 목록', 'tasks');            
             Menus.addSubMenuItem('sidebar', 'tasks', '검사 등록', 'tasks/create');
 
-            Menus.addMenuItem('sidebar', '문제 관리', 'problems', 'dropdown', '/problems(/.*)?', false, ['admin', 'manager'], 8, 'icon-puzzle');
+            Menus.addMenuItem('sidebar', '문제 관리', 'problems', 'dropdown', '/problems(/.*)?', false, ['admin'], 8, 'icon-puzzle');
             Menus.addSubMenuItem('sidebar', 'problems', '문제 목록', 'problems');
             Menus.addSubMenuItem('sidebar', 'problems', '문제 등록', 'problems/create');
+
             Menus.addMenuItem('sidebar', '경과기록지 서식 관리', 'progressTemplates', 'dropdown', '/progressTemplates(/.*)?', false, ['admin', 'therapist'], 9, 'icon-puzzle');
             Menus.addSubMenuItem('sidebar', 'progressTemplates', '경과기록지 서식 목록', 'progressTemplates');
             Menus.addSubMenuItem('sidebar', 'progressTemplates', '경과기록지 서식 등록', 'progressTemplates/create');
