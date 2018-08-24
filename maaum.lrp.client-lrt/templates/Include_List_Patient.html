@@ -39,7 +39,7 @@
             </div>
 
         </ion-item>
-    
+     
         <ion-item class="my-row-center" ng-repeat="patient in lrpModel.patientList | filter:{ assignedTherapist : '!undefined' } | filter:formSearch.searchPatient" ng-click="selectPatient(patient)" ng-class="isSelected(patient, 1)">     
             <div class="div-left div-flex">
                 <h2 ng-bind-html="patient.name | highlight:formSearch.searchPatient.name"></h2>
