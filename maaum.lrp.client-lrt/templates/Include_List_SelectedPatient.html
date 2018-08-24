@@ -1,7 +1,7 @@
 <ion-header-bar class="bar-stable lrp-header-padding lrp-sub-header">
     <div class="div-flex">
         <h3>{{lrpModel.selectedPatient.name}}</h3>
-    </div>
+    </div>    
     <div class="my-row-center">
         <div ng-show="lrpModel.selectedPatient.assignedTherapist === undefined">
             <button class="button button-dark" ng-show="lrpModel.userData.roles === 'admin'" ng-click="selectListOpenManager(1)" style="margin-right: 5px;">평가자배정</button>
@@ -11,6 +11,7 @@
         <button class="button button-dark" ng-click="playReportPrint()">출력</button>
     </div>
 </ion-header-bar>
+
 
 <ion-content direction="y" style="height: calc(100% - 128px);">
 
@@ -63,28 +64,38 @@
                 </div>
             </ion-item>
 
-            <ion-item class="item" style="text-align:left;">
+            <ion-item class="item">
+                <div class="my-row-center">
+                    <div style="width: 50%;text-align:left;">    
+                        <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
+                            <span class="input-label patient_c" style="width: 160px; display:table;">진단명</span>
+                            <span class="input-label">{{lrpModel.selectedPatient.diagnosis}}</span>
+                        </label>
 
-                <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
-                    <span class="input-label patient_c" style="width: 160px; display:table;">진단명</span>
-                    <span class="input-label">{{lrpModel.selectedPatient.diagnosis}}</span>
-                </label>
+                        <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
+                            <span class="input-label patient_c" style="width: 160px; display:table;">발병일</span>
+                            <span class="input-label">{{lrpModel.selectedPatient.inciDate | date: "yyyy-MM-dd"}}</span>
+                        </label>
 
-                <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
-                    <span class="input-label patient_c" style="width: 160px; display:table;">발병일</span>
-                    <span class="input-label">{{lrpModel.selectedPatient.inciDate | date: "yyyy-MM-dd"}}</span>
-                </label>
+                        <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
+                            <span class="input-label patient_c" style="width: 160px; display:table;">실어증 유형</span>
+                            <span class="input-label">{{lrpModel.selectedPatient.aphasiaType}}</span>
+                        </label>
 
-                <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
-                    <span class="input-label patient_c" style="width: 160px; display:table;">실어증 유형</span>
-                    <span class="input-label">{{lrpModel.selectedPatient.aphasiaType}}</span>
-                </label>
+                        <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
+                            <span class="input-label patient_c" style="display:table; width: 160px;">1차 실어증 평가점수</span>
+                            <span class="input-label">{{lrpModel.selectedPatient.initialAQ}}</span>
+                        </label>
+                    </div> 
 
-                <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
-                    <span class="input-label patient_c" style="display:table; width: 160px;">1차 실어증 평가점수</span>
-                    <span class="input-label">{{lrpModel.selectedPatient.initialAQ}}</span>
-                </label>
-
+                    <div style="width: 48%;text-align:left;">
+                        <label class="item item-input item-stacked-label" style="border: 0;padding: 0; display: flex;">
+                            <span class="input-label patient_c" style="display:table; width: 160px;">사진정보</span>
+                            <span class="input-label"><img style="max-height: 103px;" src="{{lrpServer}}uploads/{{lrpModel.selectedPatient.picture}}"> </span>
+                        </label>
+                          
+                    </div>
+                </div>    
             </ion-item> 
  
             <ion-item class="item">
