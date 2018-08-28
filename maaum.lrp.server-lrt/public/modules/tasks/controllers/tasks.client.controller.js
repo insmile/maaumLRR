@@ -58,13 +58,13 @@ angular.module('tasks').controller('TasksController', ['$scope', '$stateParams',
         // 2018.08.07 타입 추가.
         $scope.taskTypeSelect = [{
             id: 'LT',
-            label: 'LT(언어기능훈련)'
+            label: 'LT'
         }, {
             id: 'RT',
-            label: 'RT(인지기능훈련)'
+            label: 'RT'
         }, {
             id: 'LRE',
-            label: 'LRT(언어인지기능평가)'
+            label: 'LRE'
         }    
         ];
         
@@ -99,21 +99,62 @@ angular.module('tasks').controller('TasksController', ['$scope', '$stateParams',
         }];
 
 
+
+        $scope.taskTypeSelect_problem = [{
+            id: 'ALL',
+            label: 'ALL'
+        }, {
+            id: 'LRE',
+            label: 'LRE'
+        }, {
+            id: 'LT',
+            label: 'LT'
+        }, {
+            id: 'RT',
+            label: 'RT'
+        }];
+
+        $scope.task = new Tasks({
+            resources: []
+        });
+
+        $scope.task.selectTaskType = "ALL"; // 디폴트값.
+
+        $scope.changeCategory = function() {            
+            // alert("ed2f"+ $scope.task.selectTaskType);
+            $scope.initDatatable ();            
+        }
+
+
+        $scope.initDatatable = function() {
+            // alert(9);
+            $("#list_Table").empty();
+
+            var tableHtml = "<table id='dt' class='table table-striped table-hover'><thead></thead><tbody></tbody></table>";
+            $("#list_Table").append(tableHtml);
+            $scope.dt();
+        }
+
+
+
         // Define global instance we'll use to destroy later
         var dt;
         
         $scope.dt = function() {
 
+            // alert("122");
             if (!$.fn.dataTable) return;
 
             dt = $('#dt').dataTable({
                 processing: true,
                 serverSide: true,
-                ajax: { url: "/tasks/DT" },
+                // ajax: { url: "/tasks/DT" },
+
+                ajax: { url: "/tasks/DT" , data:{taskTypeSearch: $scope.task.selectTaskType } }, // 조건 추가.
+
                 "autoWidth": false,
-                /*tableTools: {
-                 sSwfPath : '/lib/datatables-tabletools/swf/copy_csv_xls_pdf.swf'
-                 },*/
+                
+                
                 responsive: true,
                 language: {
                     "emptyTable": "레코드가 없습니다.",
@@ -146,6 +187,7 @@ angular.module('tasks').controller('TasksController', ['$scope', '$stateParams',
                 aoColumns: [
                     { mData: 'category', sTitle: "범주", defaultContent: "" },
                     { mData: 'name', sTitle: "과제명", defaultContent: "" },
+                    { mData: 'taskType', sTitle: "업무타입", defaultContent: "" },
                     {
                         "mData": null,
                         sTitle: "기능",
@@ -163,7 +205,7 @@ angular.module('tasks').controller('TasksController', ['$scope', '$stateParams',
         };
 
         $scope.init = function() {
-                        
+            
             try {
                 $scope.task.preview_file.value = $scope.task.preview;
             } catch (err) {;

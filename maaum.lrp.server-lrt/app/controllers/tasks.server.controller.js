@@ -39,6 +39,11 @@ exports.create = function(req, res) {
 };
 
 exports.DT = function getData(req, res) {
+    // console.log("gogogogo11"+req.query);
+
+    // console.log("gogogogo1222"+JSON.stringify(req.query));
+    // console.log("gogogogo param ="+JSON.stringify(req.params));
+
     getTaskList(req, res, getData2);
 }
 
@@ -47,8 +52,17 @@ function getData2(req, res, taskList) {
     
     console.log("task list 조회 2차 시작");
     // console.log("task list 조회 시작 req.query="+JSON.stringify(req.query) );
-
+    
     var conditions = {};
+
+    var taskSelectType = req.query.taskTypeSearch;
+    console.log("task list 조회 2차 시작, taskSelectType="+taskSelectType);
+
+    if(taskSelectType =="ALL" || taskSelectType=="all" || taskSelectType=="" || taskSelectType==null) {
+        
+    }else {
+        conditions.taskType= taskSelectType;
+    }
 
     conditions.$or = [{ 'isOpen': null }, { 'isOpen': true }];
     if (req.user.center !== undefined) {
@@ -116,7 +130,9 @@ function getTaskList(req, res, callback) {
 
 
 /*
-exports.DT = function getData(req, res) {
+    
+
+    exports.DT = function getData(req, res) {
 
     console.log("task list 조회 시작");
     console.log("task list 조회 시작 req.query="+req.query);
@@ -457,6 +473,9 @@ function getTaskList3 (req, res, taskCategory){
             ]
         };
     }
+    
+
+
     
     Task.find(query, { _id: 1, category: 1, name: 1 }).where(where).sort('sortOrder').exec(function(err, tasks) {
         if (err) {
