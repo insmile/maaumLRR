@@ -1,0 +1,32 @@
+<section class="row" data-ng-controller="ManagerController" data-ng-init="findOne()">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<form name="userForm" data-ng-submit="updateUserProfile(userForm.$valid)" class="signin form-horizontal" autocomplete="off">
+				<fieldset>
+					<legend>관리자 계정 정보 수정</legend>
+					<div class="form-group">
+						<label class="col-lg-2 control-label">센터명</label>
+						<div class="col-lg-10">
+							<span class="form-control">{{credentials.center_name}}</span>
+						</div>
+					</div>
+				</fieldset>
+				<id_info></id_info>
+				<default_info></default_info>
+				<modify_info></modify_info>
+				<div class="form-group">
+					<div class="col-lg-offset-2 col-lg-10">
+						<button type="submit" class="btn btn-large btn-primary">저장</button>
+						<a class="btn btn-primary" data-ng-click="remove();">제거</a>
+					</div>
+				</div>
+				<div data-ng-show="success" class="text-center text-success">
+					<strong>사용자 정보 갱신이 완료되었습니다.</strong>
+				</div>
+				<div data-ng-show="error" class="text-center text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+			</form>
+		</div>
+	</div>
+</section>

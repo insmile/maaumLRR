@@ -1,0 +1,22 @@
+<section data-ng-controller="ProgressesController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1 data-ng-bind="progress.name"></h1>
+		<span data-ng-bind="progress.content"></span>
+	</div>
+	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == progress.user._id))">
+		<a class="btn btn-primary" href="/#!/progressTemplates/{{progress._id}}/edit">
+			수정
+		</a>
+		<a class="btn btn-primary" data-ng-click="remove();">
+			제거
+		</a>
+	</div>
+	<small>
+		<em class="text-muted">
+			생성일
+			<span data-ng-bind="progress.created | date:'mediumDate'"></span>
+			사용자
+			<span data-ng-bind="progress.user.displayName"></span>
+		</em>
+	</small>
+</section>

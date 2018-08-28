@@ -1,0 +1,17 @@
+<fieldset>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">이메일 주소</label>
+        <div class="col-lg-10">
+            <input type="email" name="email" data-ng-model="credentials.email" placeholder="" class="form-control" required data-ng-class="{'ng-invalid':userForm.confirmEmail.$error.match}" />
+            <span>비밀번호 찾기를 위해 사용합니다.</span>
+            <div role="alert"><span class="text-danger" ng-show="userForm.email.$error.email">이메일 양식(a@a.com)에 어긋납니다.</span></div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">이메일 주소 확인</label>
+        <div class="col-lg-10">
+            <input type="email" data-ng-model="credentials.confirmEmail" placeholder="" class="form-control" required match="credentials.email" name="confirmEmail" />
+            <span class="text-danger" data-ng-show="userForm.confirmEmail.$error.match">이메일 주소가 일치해야 합니다.</span>
+        </div>
+    </div>
+</fieldset>

@@ -1,0 +1,81 @@
+<style>
+    .sound35box {
+        margin-top: 20vh;
+        margin-bottom: 20vh;
+        width: 50vw;
+        height: 30vh;
+        border: solid 1px #eee;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        border-radius: 2%;
+    }
+    
+    .sound35btn {
+        display: inline-block;
+        width: 30vw;
+        height: 10vh;
+        text-align: center;
+        line-height: 10vh;
+        font-size: 3vw;
+        border-radius: 8%;
+        border: solid 1px #ccc;
+        background: #eee;
+        opacity: 0.8;
+    }
+    
+    .sound35btn:hover {
+        opacity: 1;
+    }
+    
+    .sound35btnbox {
+        width: 80vw;
+        margin: 0 auto 0 auto;
+        text-align: center;
+    }
+    
+    .sound35box:hover {
+        background: #eee;
+    }
+    
+    .sound35plane {
+        top: 64px;
+        width: 100%;
+        height: 80vh;
+        transform: scale(1);
+    }
+    
+    button.true {
+        box-shadow: 0px 0px 40px rgba(0, 0, 255, 1.0);
+    }
+    
+    button.false {
+        box-shadow: 0px 0px 40px rgba(255, 0, 0, 1.0);
+    }
+    
+    .sound35result {
+        display: inline-block;
+        text-align: center;
+        width: 95vw;
+        margin-top: 2vh;
+        margin-bottom: 2vh;
+        font-size: 3vh;
+    }
+</style>
+
+<ion-header-bar class="bar-stable lrp-bar-top lrp-header-padding lrp-popover-scroll" ng-init="Custom35SoundReady()">
+    <div class="div-flex">
+        <h3>청지각검사 (Auditory discrimination) - {{stage + 1}}</h3>
+    </div>
+    <button class="button button-clear icon ion-close" style="color: #ffffff;" ng-click="endExerciseAsk()"></button>
+</ion-header-bar>
+
+<div class='sound35plane'>
+    <div class='sound35box' ng-click="Custom35Play();"><img src='/img/partial/35_icon.png'></div>
+    <div class='sound35btnbox'>
+        <button class='ripple' ng-class="{true:tp,false:fp}" style='width:35vw;margin-right:3vw;font-size:1.5em; height:10vh; background:#A8C8F9' ng-Click="Custom35Click(1)">소리가 같습니다.</button>
+        <button class='ripple' ng-class="{true:tn, false:fn}" style='width:35vw;margin-left:3vw;font-size:1.5em; height:10vh; background:#FC9EBD' ng-Click="Custom35Click(0)">소리가 다릅니다.</button>
+    </div>
+    <div class='sound35result'>{{custom35result}}</div>
+    <button ng-show="custom35check === true" style='height:8vh; width:8vh;' ng-click="stageNext()">다음</button>
+</div>

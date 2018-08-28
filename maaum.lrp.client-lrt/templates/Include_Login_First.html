@@ -1,0 +1,42 @@
+<div class="login_wrap" ng-keyup="$event.keyCode == 13 && doLogin()">
+	<!-- left-->
+	<div class="left">
+		<h1 class="login_h1"><img src="./img/res/logo.png" alt="" /></h1> 
+		<p class="subject">언어 및 인지재활 서비스 플랫폼(LRR)은?</p>
+		<p class="info">언어와 인지재활에 최적화된 평가 및 맞춤형 훈련 플로토콜을 적용하여 온라인으로 누구나 손쉽게 접근하고 사용할 수 있는 언어 및 인지재활 통합 서비스 플랫폼 입니다.</p>
+		<p class="img"><img src="./img/res/iconImage.png" alt="" /></p>
+	</div>
+	<!-- left-->
+
+	<!-- right-->
+	<div class="right">
+		<h2 class="login_h2"><img src="./img/res/loginTit.gif" alt="" /></h2>
+		<div> 
+			<p>
+			 <label class="item item-input">   
+			    <input type="text" placeholder="아이디"  value="admin" ng-model="loginData.username" />
+			 </label>
+			 </p>
+			    
+			<p>
+            <label class="item item-input">   
+                <input type="password" value="rhfueo!" placeholder="비밀번호" ng-model="loginData.password"/>
+            </label>
+            </p>
+            
+			<p class="check">
+			    <input id="id_save" ng-model="loginModel.autoUserName" type="checkbox"><label for="id_save">아이디저장</label>
+			    <input id="pw_save" name="pw_save" type="checkbox" ng-model="loginModel.autoLogin"><label for="pw_save">패스워드 저장</label>
+			</p>
+			<p class="loginBtn"><img src="./img/res/btn_login.gif" ng-click="doLogin()" alt="로그인" /></p>
+            <div style="clear: both; padding: 2px 0px 10px 0px; color: red">
+                <div style="height: 20px;">{{logOnMsg}}</div>
+            </div>			
+			<ul class="login_util">
+				<li class="join"><a class="login" href="#n" ng-click="go_terms()">신규등록</a></li>
+				<li class="search"><a class="login" href="#n" ng-click="go_findpassword()">아이디/비밀번호 찾기</a></li>
+			</ul>
+		</div>
+	</div>
+	<!-- right-->
+</div>

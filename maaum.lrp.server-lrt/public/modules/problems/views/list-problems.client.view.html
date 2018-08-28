@@ -1,0 +1,32 @@
+<h3>문제 관리</h3>
+<section data-ng-controller="ProblemsController" data-ng-init="initDatatable()">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    문제 목록
+                </div>
+                <div class="panel-body">
+                              
+                    <!-- 2018.08.07 추가-->
+                    <fieldset>                        
+                        <div class="form-group" style="margin-left: 900px;">
+                            <label class="col-lg-2 control-label">업무 선택</label>
+                            <div class="col-lg-10">
+
+                                <select data-ng-change="changeCategory($index)" data-ng-model="task.selectTaskType" data-ng-options="task.id as task.label for task in taskTypeSelect_problem" class="form-control">
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <div id="list_Table">
+
+                    </div>
+                     
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

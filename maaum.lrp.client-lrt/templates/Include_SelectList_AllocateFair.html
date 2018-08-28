@@ -1,0 +1,57 @@
+<ion-header-bar class="bar-stable" style="background-color: #cbd9e5">
+    <div class="item-input-inset lrp-input-inset" style="width: 100%;height: 100%;">
+        <label class="item-input-wrapper" style="height: 100%;">
+            <img src="./img/res/search_inputpox_icon.png" style="width: 36px; height: auto;">
+            <input class="div-flex" type="text" placeholder="검색" ng-model="formSearch.searchAloc.name">
+        </label>
+        <button class="button lrp-search-delete-button" ng-click="formSearch.searchAloc.name = '';">
+            <i class="icon ion-android-close"></i>
+        </button>
+    </div>
+</ion-header-bar>
+
+<ion-content direction="x" class="has-header">
+
+    <ion-item style="overflow-x: hidden; display: inline;border: 0;top: 10px;">
+
+        <button class="button my-row-center lrp-allocated-button" style="display: inline;" ng-repeat="patient in lrpModel.patientList | filter:{ assignedTherapist : lrpModel.selectedTherapist._id } | filter: formSearch.searchAloc" ng-click="DeAllocate(patient)">
+            <h2 ng-bind-html="patient.name | highlight:formSearch.searchAloc.name"></h2>
+        </button>
+
+    </ion-item>
+
+</ion-content>
+
+<ion-content style="top: 136px; border-top: 5px solid #e0e0e0;">
+    <ion-list>
+
+        <ion-item class="my-row-center item-divider">
+            <div class="div-left div-flex">
+                <h2>미배정 환자목록</h2>
+            </div>
+        </ion-item>
+
+        <ion-item class="my-row-center" ng-repeat="patient in lrpModel.patientList | filter:{ assignedTherapist : undefined } | filter: formSearch.searchAloc" ng-click="AllocatePatient(patient)">
+            <div style="flex: 100 1 auto; padding-left: 20px;">
+                <h2 ng-bind-html="patient.name | highlight:formSearch.searchAloc.name"></h2>
+                <p>{{patient.email}}</p>
+            </div>
+        </ion-item>
+
+        <ion-item class="my-row-center item-divider">
+            <div class="div-left div-flex">
+                <h2>배정된 환자목록</h2>
+            </div>
+        </ion-item>
+
+        <ion-item class="my-row-center" ng-repeat="patient in lrpModel.patientList | filter:filterPatientAnotherTherapist | filter:formSearch.searchAloc">
+            <div style="flex: 100 1 auto; padding-left: 20px;">
+                <h2 ng-bind-html="patient.name | highlight:formSearch.searchAloc.name"></h2>
+            </div>
+            <div style="float: right;">
+                <h2><{{patient.assignedTherapistName}}></h2>
+            </div>
+        </ion-item>
+
+    </ion-list>
+</ion-content>

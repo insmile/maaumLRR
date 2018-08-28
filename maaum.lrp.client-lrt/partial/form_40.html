@@ -1,0 +1,117 @@
+<ion-header-bar class="bar-stable lrp-bar-top lrp-header-padding lrp-popover-scroll">
+    <div class="div-flex">
+        <h3>에딘버그 손잡이 검사</h3>
+    </div>
+    <button class="button button-clear icon ion-close" style="color: #ffffff;" ng-click="endExerciseAsk()"></button>
+</ion-header-bar>
+
+<ion-content style="margin: 0px;">
+    <div class="lrp-popover-q-header">
+        <p><label>에딘버그 손잡이 검사</br>다음의 일상생활 동작 할 때 주로 사용하는 손이 어느쪽인지 아래의 적당한 칸에 + 표시를 하십시오. 한쪽 손을 주로 사용하여 다른 손은 거의 사용하지 않는 경우 ++ 표시를 하십시오. 실제로 양손 모두 사용하는 경우 양쪽 칸 모두에 + 표시를 하십시오. 양손을 사용하는 일을 하는 경우에 주로 사용하고 싶은 손은 어느쪽인지 표시하십시오.</br>가급적 모든 질문에 답을 하시고 해 본 경험이 없는 경우에는 공란으로 남기십시오.</label></p>
+        <div class="lrp-popover-q-content" style='font-size:20px'>
+            <table>
+                <tr>
+                    <td width='50%'>1. 글씨쓰기</td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[0].c==0}'><input type='checkbox' ng-model='scoreModel.q[0]' ng-true-value={s:0,c:0}> 왼손(++)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[0].c==1}'><input type='checkbox' ng-model='scoreModel.q[0]' ng-true-value={s:0,c:1}> 왼손(+)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[0].c==2}'><input type='checkbox' ng-model='scoreModel.q[0]' ng-true-value={s:0,c:2}> 오른손(+)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[0].c==3}'><input type='checkbox' ng-model='scoreModel.q[0]' ng-true-value={s:0,c:3}> 오른손(++)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[0].c==4}'><input type='checkbox' ng-model='scoreModel.q[0]' ng-true-value={s:0,c:4}> 양손(+)</label></td>
+                </tr>
+                <tr>
+                    <td width='50%'>2. 그림그리기</td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[1].c==0}'><input type='checkbox' ng-model='scoreModel.q[1]' ng-true-value={s:0,c:0}> 왼손(++)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[1].c==1}'><input type='checkbox' ng-model='scoreModel.q[1]' ng-true-value={s:0,c:1}> 왼손(+)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[1].c==2}'><input type='checkbox' ng-model='scoreModel.q[1]' ng-true-value={s:0,c:2}> 오른손(+)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[1].c==3}'><input type='checkbox' ng-model='scoreModel.q[1]' ng-true-value={s:0,c:3}> 오른손(++)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[1].c==4}'><input type='checkbox' ng-model='scoreModel.q[1]' ng-true-value={s:0,c:4}> 양손(+)</label></td>
+                </tr>
+                <tr>
+                    <td width='50%'>3. 던지기</td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[2].c==0}'><input type='checkbox' ng-model='scoreModel.q[2]' ng-true-value={s:0,c:0}> 왼손(++)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[2].c==1}'><input type='checkbox' ng-model='scoreModel.q[2]' ng-true-value={s:0,c:1}> 왼손(+)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[2].c==2}'><input type='checkbox' ng-model='scoreModel.q[2]' ng-true-value={s:0,c:2}> 오른손(+)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[2].c==3}'><input type='checkbox' ng-model='scoreModel.q[2]' ng-true-value={s:0,c:3}> 오른손(++)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[2].c==4}'><input type='checkbox' ng-model='scoreModel.q[2]' ng-true-value={s:0,c:4}> 양손(+)</label></td>
+                </tr>
+                <tr>
+                    <td width='50%'>4. 가위질하기</td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[3].c==0}'><input type='checkbox' ng-model='scoreModel.q[3]' ng-true-value={s:0,c:0}> 왼손(++)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[3].c==1}'><input type='checkbox' ng-model='scoreModel.q[3]' ng-true-value={s:0,c:1}> 왼손(+)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[3].c==2}'><input type='checkbox' ng-model='scoreModel.q[3]' ng-true-value={s:0,c:2}> 오른손(+)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[3].c==3}'><input type='checkbox' ng-model='scoreModel.q[3]' ng-true-value={s:0,c:3}> 오른손(++)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[3].c==4}'><input type='checkbox' ng-model='scoreModel.q[3]' ng-true-value={s:0,c:4}> 양손(+)</label></td>
+                </tr>
+                <tr>
+                    <td width='50%'>5. 칫솔질하기</td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[4].c==0}'><input type='checkbox' ng-model='scoreModel.q[4]' ng-true-value={s:0,c:0}> 왼손(++)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[4].c==1}'><input type='checkbox' ng-model='scoreModel.q[4]' ng-true-value={s:0,c:1}> 왼손(+)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[4].c==2}'><input type='checkbox' ng-model='scoreModel.q[4]' ng-true-value={s:0,c:2}> 오른손(+)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[4].c==3}'><input type='checkbox' ng-model='scoreModel.q[4]' ng-true-value={s:0,c:3}> 오른손(++)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[4].c==4}'><input type='checkbox' ng-model='scoreModel.q[4]' ng-true-value={s:0,c:4}> 양손(+)</label></td>
+                </tr>
+                <tr>
+                    <td width='50%'>6. 칼질하기(포크없이)</td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[5].c==0}'><input type='checkbox' ng-model='scoreModel.q[5]' ng-true-value={s:0,c:0}> 왼손(++)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[5].c==1}'><input type='checkbox' ng-model='scoreModel.q[5]' ng-true-value={s:0,c:1}> 왼손(+)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[5].c==2}'><input type='checkbox' ng-model='scoreModel.q[5]' ng-true-value={s:0,c:2}> 오른손(+)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[5].c==3}'><input type='checkbox' ng-model='scoreModel.q[5]' ng-true-value={s:0,c:3}> 오른손(++)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[5].c==4}'><input type='checkbox' ng-model='scoreModel.q[5]' ng-true-value={s:0,c:4}> 양손(+)</label></td>
+                </tr>
+                <tr>
+                    <td width='50%'>7. 수저질하기</td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[6].c==0}'><input type='checkbox' ng-model='scoreModel.q[6]' ng-true-value={s:0,c:0}> 왼손(++)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[6].c==1}'><input type='checkbox' ng-model='scoreModel.q[6]' ng-true-value={s:0,c:1}> 왼손(+)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[6].c==2}'><input type='checkbox' ng-model='scoreModel.q[6]' ng-true-value={s:0,c:2}> 오른손(+)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[6].c==3}'><input type='checkbox' ng-model='scoreModel.q[6]' ng-true-value={s:0,c:3}> 오른손(++)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[6].c==4}'><input type='checkbox' ng-model='scoreModel.q[6]' ng-true-value={s:0,c:4}> 양손(+)</label></td>
+                </tr>
+                <tr>
+                    <td width='50%'>8. 빗자루는 어느 손으로 잡나요?</td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[7].c==0}'><input type='checkbox' ng-model='scoreModel.q[7]' ng-true-value={s:0,c:0}> 왼손(++)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[7].c==1}'><input type='checkbox' ng-model='scoreModel.q[7]' ng-true-value={s:0,c:1}> 왼손(+)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[7].c==2}'><input type='checkbox' ng-model='scoreModel.q[7]' ng-true-value={s:0,c:2}> 오른손(+)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[7].c==3}'><input type='checkbox' ng-model='scoreModel.q[7]' ng-true-value={s:0,c:3}> 오른손(++)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[7].c==4}'><input type='checkbox' ng-model='scoreModel.q[7]' ng-true-value={s:0,c:4}> 양손(+)</label></td>
+                </tr>
+                <tr>
+                    <td width='50%'>9. 성냥켜기</td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[8].c==0}'><input type='checkbox' ng-model='scoreModel.q[8]' ng-true-value={s:0,c:0}> 왼손(++)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[8].c==1}'><input type='checkbox' ng-model='scoreModel.q[8]' ng-true-value={s:0,c:1}> 왼손(+)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[8].c==2}'><input type='checkbox' ng-model='scoreModel.q[8]' ng-true-value={s:0,c:2}> 오른손(+)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[8].c==3}'><input type='checkbox' ng-model='scoreModel.q[8]' ng-true-value={s:0,c:3}> 오른손(++)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[8].c==4}'><input type='checkbox' ng-model='scoreModel.q[8]' ng-true-value={s:0,c:4}> 양손(+)</label></td>
+                </tr>
+                <tr>
+                    <td width='50%'>10. 상자열기</td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[9].c==0}'><input type='checkbox' ng-model='scoreModel.q[9]' ng-true-value={s:0,c:0}> 왼손(++)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[9].c==1}'><input type='checkbox' ng-model='scoreModel.q[9]' ng-true-value={s:0,c:1}> 왼손(+)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[9].c==2}'><input type='checkbox' ng-model='scoreModel.q[9]' ng-true-value={s:0,c:2}> 오른손(+)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[9].c==3}'><input type='checkbox' ng-model='scoreModel.q[9]' ng-true-value={s:0,c:3}> 오른손(++)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[9].c==4}'><input type='checkbox' ng-model='scoreModel.q[9]' ng-true-value={s:0,c:4}> 양손(+)</label></td>
+                </tr>
+                <tr>
+                    <td width='50%'>i. 찰 때 어느 발을 사용하십니까?</td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[10].c==0}'><input type='checkbox' ng-model='scoreModel.q[10]' ng-true-value={s:0,c:0}> 왼발(++)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[10].c==1}'><input type='checkbox' ng-model='scoreModel.q[10]' ng-true-value={s:0,c:1}> 왼발(+)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[10].c==2}'><input type='checkbox' ng-model='scoreModel.q[10]' ng-true-value={s:0,c:2}> 오른발(+)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[10].c==3}'><input type='checkbox' ng-model='scoreModel.q[10]' ng-true-value={s:0,c:3}> 오른발(++)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[10].c==4}'><input type='checkbox' ng-model='scoreModel.q[10]' ng-true-value={s:0,c:4}> 양발(+)</label></td>
+                </tr>
+                <tr>
+                    <td width='50%'>ii. 한쪽 눈을 사용할 때 어느 눈을 사용하십니까?</td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[11].c==0}'><input type='checkbox' ng-model='scoreModel.q[11]' ng-true-value={s:0,c:0}> 왼쪽눈(++)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[11].c==1}'><input type='checkbox' ng-model='scoreModel.q[11]' ng-true-value={s:0,c:1}> 왼쪽눈(+)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[11].c==2}'><input type='checkbox' ng-model='scoreModel.q[11]' ng-true-value={s:0,c:2}> 오른쪽눈(+)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[11].c==3}'><input type='checkbox' ng-model='scoreModel.q[11]' ng-true-value={s:0,c:3}> 오른쪽눈(++)</label></td>
+                    <td width='10%'><label ng-class='{bold:scoreModel.q[11].c==4}'><input type='checkbox' ng-model='scoreModel.q[11]' ng-true-value={s:0,c:4}> 양쪽눈(+)</label></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div>
+        <button class="button" style="height: 100px; width: 100px;" ng-click="stageNext()">
+            <span>다음</span>
+        </button>
+    </div>
+</ion-content>

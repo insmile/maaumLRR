@@ -1,0 +1,285 @@
+<ion-view view-title="Play">
+    <div ng-if="!endFlag">
+
+        <ion-header-bar class="lrp-bar-top lrp-header-padding" style="width: 100%; position: relative">
+            <div class="div-flex">
+                <h3>채점 {{lrpModel.selectedResult.name}} ({{stage + 1}} / {{lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfProblem}}) </h3>
+            </div>
+            <div class="buttons">
+                <button class="button button-clear icon ion-close" ng-click="endExerciseAsk()"></button>
+            </div>
+        </ion-header-bar>
+
+        <img ng-if="lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].taskID.answer === 'record' && lrpModel.selectedResult.tasks[lrpModel.taskPivot].problems[stage].isCorrect" style="position: absolute;max-width: 600px;max-height: 600px;top: calc(60% - 300px); left: calc(50% - 300px);"
+            src="./img/res/training_img_answer01.png">
+
+        <div>
+            <div class="outer" style="height: 620px;">
+                <div class="inner">
+                    <div ng-if="lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].problems[stage].def.length === 1" style="display: table; width: 100%; height: 280px;padding-left: 5px;" ng-class="{ lrpRecordMarginTop : lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].taskID.answer === 'record' }">
+                        <div style="display: table-row;" ng-repeat="definition in lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].problems[stage].def">
+                            <div style="display: table-cell; vertical-align: middle;">
+                                <img ng-if="definition.resType === 'file'" class="lrp-fade" ng-class="{ lrpPlayImgL: lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].taskID.answer === 'record', lrpPlayImgM: lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].taskID.answer === 'select' }"
+                                    src="{{fsURL + definition.value}}">
+                                <h1 style="font-size: {{ setFontSize(definition, lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].problems[stage].def.length) }}px;" ng-if="definition.resType === 'str'">{{definition.value}}</h1>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div ng-if="(lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].problems[stage].def.length === 2)" style="display: table;padding-bottom: 20px; padding-left: 5px; height: 368px;" ng-class="{ lrpRecordMarginTop : lrpModel.selectedTask.answer === 'record' }">
+                        <div style="display: table-row;">
+                            <div style="display: table-cell; vertical-align: middle;padding-bottom: 20px;">
+                                <div>
+                                    <h1 style="font-size: 45px; text-align: left; padding-left: 10px;">{{lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].problems[stage].def[0].value}}</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display: table-row;">
+                            <div style="display: table-cell; vertical-align: middle;">
+                                <div>
+                                    <h1 style="font-size: 55px; text-align: left; padding-left: 10px;">{{lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].problems[stage].def[1].value}}</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div ng-if="lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].taskID.answer === 'select' && lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].problems[stage].def.length === 2 && lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].problems[stage].res.length === 4"
+                        style="display: table; width: 100%; margin-top: 5px;">
+                        <div style="display: table-cell; vertical-align: middle;">
+                            <div ng-if="lrpModel.selectedProblemSet[stage].res.length < 1 || lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].problems[stage].res[0].resType !== 'bool'">
+                                <div ng-repeat="resource in lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].problems[stage].res" style="display: inline-block; width: 50%; height: 140px;" ng-class="{
+                              lrpImgCorrected: selectFlag && (resource.isAnswer) && selectImg !== $index,
+                              lrpImgSelected : selectImg === $index
+                            }" ng-click="selectAnswer($index)">
+                                    <div style="display: table; width: 100%; height: 100%;">
+                                        <div style="display: table-cell; vertical-align: middle; text-align: center;">
+                                            <img ng-if="resource.resType === 'file'" class="lrpPlayImgS lrp-fade" src="{{fsURL + resource.value}}">
+                                            <h1 ng-if="resource.resType === 'str'" style="font-size: 60px;">{{resource.value}}</h1>
+                                            <img ng-if="lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].taskID.answer === 'select' && (resource.isAnswer) && selectFlag && selectImg === $index" style="position: absolute;max-width: 300px;max-height: 300px;" class="{{'lrpCorrect244' + $index}}"
+                                                src="./img/res/training_img_answer01.png">
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div ng-if="lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].taskID.answer === 'select' && lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].problems[stage].def.length === 0 && lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].problems[stage].res.length === 4"
+                        style="display: table; width: 100%; height: 285px; margin-top: 10px;">
+                        <div style="display: table-cell; vertical-align: middle;">
+                            <div ng-if="lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].problems[stage].res.length < 1 || lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].problems[stage].res[0].resType !== 'bool'">
+                                <div ng-repeat="resource in lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].problems[stage].res" style="display: inline-block; width: 50%; height: 280px;" ng-class="{
+                              lrpImgCorrected: selectFlag && (resource.isAnswer) && selectImg !== $index,
+                              lrpImgSelected : selectImg === $index
+                            }">
+                                    <div style="display: table; width: 100%; height: 100%;">
+
+                                        <div style="display: table-cell; vertical-align: middle; text-align: center;">
+                                            <img ng-if="resource.resType === 'file'" class="lrpPlayImgM lrp-fade" src="{{fsURL + resource.value}}">
+                                            <h1 ng-if="resource.resType === 'str'" ng-if="resource.resType === 'str'" class="lrpPlayFontSizeS">{{resource.value}}</h1>
+                                            <img ng-if="lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].taskID.answer === 'select' && (resource.isAnswer) && selectFlag && selectImg === $index" style="position: absolute;max-width: 600px;max-height: 600px;" class="{{'lrpCorrect44' + $index}}"
+                                                src="./img/res/training_img_answer01.png">
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div ng-if="lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].taskID.answer === 'select' && lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].problems[stage].res.length < 4" style="display: table; width: 100%; height: 285px; margin-top: 10px;">
+                        <div style="display: table-cell; vertical-align: middle;">
+                            <div ng-if="lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].problems[stage].res.length < 1 || lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].problems[stage].res[0].resType !== 'bool'">
+                                <div ng-repeat="resource in lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].problems[stage].res" style="display: inline-block; width: 33%; height: 280px;" ng-class="{
+                              lrpImgCorrected: selectFlag && (resource.isAnswer) && selectImg !== $index,
+                              lrpImgSelected : selectImg === $index
+                            }">
+                                    <div style="display: table; width: 100%; height: 100%;">
+
+                                        <div style="display: table-cell; vertical-align: middle; text-align: center;">
+                                            <img ng-if="resource.resType === 'file'" class="lrpPlayImgM lrp-fade" src="{{fsURL + resource.value}}">
+                                            <h1 ng-if="resource.resType === 'str'" ng-if="resource.resType === 'str'" class="lrpPlayFontSizeS">{{resource.value}}</h1>
+                                            <img ng-if="lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].taskID.answer === 'select' && (resource.isAnswer) && selectFlag && selectImg === $index" style="position: absolute;max-width: 600px;max-height: 600px;top: calc(75% - 300px);" class="{{'lrpCorrect' + $index}}"
+                                                src="./img/res/training_img_answer01.png">
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div ng-if="lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].problems[stage].res.length === 1 && lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].problems[stage].res[0].resType === 'bool'">
+                                <div style="display: inline-block; width: 33%; height: 285px;" ng-class="{
+                              lrpImgCorrected: selectFlag && lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].problems[stage].res[0].isAnswer && selectImg !== 1,
+                              lrpImgSelected : selectImg === 1
+                            }">
+                                    <div style="display: table; width: 100%; height: 100%;">
+                                        <div style="display: table-cell; vertical-align: middle; text-align: center;">
+                                            <h1 class="lrpPlayFontSizeS">예</h1>
+                                            <img ng-if="lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].problems[stage].res[0].isAnswer && selectFlag && selectImg === 1" style="position: absolute;max-width: 600px;max-height: 600px;top: calc(75% - 300px);left: calc(33.3% - 300px);" src="./img/res/training_img_answer01.png">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="display: inline-block; width: 33%; height: 285px;" ng-class="{
+                              lrpImgCorrected: selectFlag && !lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].problems[stage].res[0].isAnswer && selectImg !== 2,
+                              lrpImgSelected : selectImg === 2
+                            }">
+                                    <div style="display: table; width: 100%; height: 100%;">
+                                        <div style="display: table-cell; vertical-align: middle; text-align: center;">
+                                            <h1 class="lrpPlayFontSizeS">아니오</h1>
+                                            <img ng-if="!lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].problems[stage].res[0].isAnswer && selectFlag && selectImg === 2" style="position: absolute;max-width: 600px;max-height: 600px;top: calc(75% - 300px);left: calc(66.6% - 300px);" src="./img/res/training_img_answer01.png">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--div ng-if="lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].taskID.answer === 'record'">
+                        <a href="{{fsURL + lrpModel.selectedResult.tasks[lrpModel.taskPivot].problems[stage].recordFile}}">{{lrpModel.selectedResult.tasks[lrpModel.taskPivot].problems[stage].recordFile}}</a>
+                    </div-->
+                </div>
+            </div>
+
+            <div style="position: absolute; width: 100%; padding: 10px; bottom: 0px;">
+
+                <div ng-if="lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].taskID.answer === 'record'">
+                    <div style="float: left;">
+                        <button class="button" style="height: 100px; width: 100px;" ng-click="recordPlay()" ng-disabled="playLock">
+                            <img src="./img/res/training_progress_btn_play_normal.png" style="width: 70px; margin-top: 14px;">
+                        </button>
+                    </div>
+                </div>
+
+                <div style="float: right;">
+                    <button class="button" style="height: 100px; width: 180px;" ng-click="stageNext()" ng-disabled="playLock">
+                        다음
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div ng-if="endFlag">
+
+        <ion-header-bar class="lrp-bar-top lrp-header-padding" style="width: 100%; position: relative">
+            <div class="div-flex  my-row-center">
+                <h3>{{lrpModel.selectedResult.name}}</h3>
+            </div>
+            <div class="buttons">
+                <button class="button button-clear icon ion-close" ng-click="reportResult()"></button>
+            </div>
+        </ion-header-bar>
+
+        <div>
+            <div style="text-align: center; padding: 20px; height: 140px; background-color: azure;">
+                <div style="width: 20%; float: left; margin-left: 5%;">
+                    <h4>평가자 : 오프라인</h4>
+                    <h4>평가자 : 오프라인</h4>
+                    <h4>평가일 : {{lrpModel.selectedResult.created | date: "yyyy-MM-dd"}}</h4>
+                </div>
+                <div style="width: 70%; height: 100%; float: left; margin-left: 5%; display: table;">
+                    <div style="display: table-cell; vertical-align: middle;">
+                        <div ng-if="lrpModel.selectedResult.tasks.length > 1" style="margin-bottom: 10px;">
+                            <div ng-repeat="task in lrpModel.selectedResult.tasks" style="display: inline;">
+                                <input ng-class="{ lrpMarginResPx : !$first }" type="radio" name="group" ng-model="lrpModel.taskPivot" ng-value="$index" ng-click="setPivot($index)">
+                            </div>
+                        </div>
+                        <div>
+                            <div ng-if="lrpModel.selectedResult.tasks.length > 1" style="float: left;">
+                                <button class="button icon ion-ios-arrow-back" style="background-color: azure;" ng-click="backPivot()"></button>
+                            </div>
+                            <div style="display: inline-block; width: 80%; overflow: hidden; white-space: nowrap;" style="overflow: hidden;">
+                                <h1>{{lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].taskID.name}} Set : {{lrpModel.selectedResult.tasks[lrpModel.taskPivot].setID}}</h1>
+                            </div>
+                            <div ng-if="lrpModel.selectedResult.tasks.length > 1" style="float: right;">
+                                <button class="button icon ion-ios-arrow-forward" style="background-color: azure;" ng-click="frontPivot(lrpModel.selectedResult.tasks.length)"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="outer" style="margin-top: 6%;">
+                <div class="inner">
+
+                    <div style="width: 32%; float: left; margin-left: 10px;">
+                        <ion-item style="border: none;">
+                            <div ng-if="lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].taskID.answer === 'select'" style="position: inherit;">
+                                <div style="position: absolute; top: calc(50% - 25px); left: calc(50% - 50px); font-size: xx-large;">{{(lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfCorrect / lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfProblem) * 100 | number : 2}} %</div>
+                                <div style="position: absolute; top: calc(50% + 10px); left: calc(50% - 12px); font-size: medium;">{{lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfCorrect}} / {{lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfProblem}} <span ng-if="lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfResponse !== lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfProblem">({{lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfResponse}})</span></div>
+                                <progress-arc style="margin-left: 1px;" size="300" stroke="#3080E8" stroke-width="55" complete="(lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfCorrect / lrpModel.selectedResult.tasks[lrpModel.taskPivot].numOfProblem)" background="#ddd">
+                                </progress-arc>
+                            </div>
+
+                        </ion-item>
+                    </div>
+
+                    <div style="width: 50%; float: left">
+                        <ion-item style="border: none;">
+                            <canvas id="line" class="chart chart-line" data="graphData[lrpModel.taskPivot]" labels="labels[lrpModel.taskPivot]" legend="false" series="series" click="" style="width: 100%; height: 296px;">
+                            </canvas>
+                        </ion-item>
+                    </div>
+
+                    <div style="display: table; float: right; margin-right: 10px; height: 336px;">
+                        <div style="display: table-cell; vertical-align: middle;">
+                            <div>
+                                <h2>총 수행시간</h2>
+                                <h3>{{lrpModel.selectedResult.tasks[lrpModel.taskPivot].totalTime / 1000 | number : 2}} s</h3>
+                            </div>
+                            <div>
+                                <h2>평균시간</h2>
+                                <h3>{{lrpModel.selectedResult.tasks[lrpModel.taskPivot].meanTime / 1000 | number : 2}} s</h3>
+                            </div>
+                            <div>
+                                <h2>표준편차</h2>
+                                <h3>{{lrpModel.selectedResult.tasks[lrpModel.taskPivot].stdTime / 1000 | number : 2}} s</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div style="position: absolute; width: 100%; padding: 10px; bottom: 0px; text-align: end;">
+                <div ng-if="lrpModel.selectedProtocol.tasks[lrpModel.taskPivot].taskID.answer === 'select'" style="display: table;width: 52%; position: absolute; top: -32%;left: 31%;text-align:center;border: solid;overflow: hidden;">
+                    <div style="display: table-row">
+                        <div style="display: table-cell;vertical-align: middle; background-color: #11c1f3;">
+                            <div style="height: 24px;">
+                                문항
+                            </div>
+                            <div style="height: 24px;">
+                                채점
+                            </div>
+                        </div>
+
+                        <div style="display: table-cell;" ng-repeat="grade in lrpModel.selectedResult.tasks[lrpModel.taskPivot].problems">
+                            <div style="height: 24px;">
+                                {{$index + 1}}
+                            </div>
+                            <div style="height: 24px;">
+                                <img ng-if="grade.isCorrect" style="width: 24px;" src="./img/res/training_img_answer01.png">
+                                <img ng-if="!grade.isCorrect" style="width: 24px;" src="./img/res/training_img_answer02_100.png">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button class="button" style="height: 100px; width: 100px;" ng-click="reportResult()">
+                        확인
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</ion-view>

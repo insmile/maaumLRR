@@ -1,0 +1,28 @@
+<section class="row" data-ng-controller="TasksController" data-ng-init="findOne()">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<div class="form-horizontal">
+				<task_info></task_info>
+				<div data-ng-repeat="resource in task.resources">
+						<resource_info></resource_info>
+				</div>
+
+				<div class="form-group">
+					<div class="col-lg-offset-2 col-lg-10">
+						<a data-ng-click="addResource()" class="btn btn-large btn-success">리소스 추가</a>
+						<a class="btn btn-primary" data-ng-click="update();">
+							수정
+						</a>
+						<a class="btn btn-primary" data-ng-click="remove();">
+							제거
+						</a>
+					</div>
+				</div>
+				<div data-ng-show="error" class="text-center text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+

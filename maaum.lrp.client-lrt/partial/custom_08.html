@@ -1,0 +1,179 @@
+<style>
+    .custom08plane img {
+        width: 70%;
+        height: 70%;
+        object-fit: contain;
+        margin: 15% 15% 15% 15%;
+    }
+    
+    .custom08box {
+        float: left;
+    }
+    
+    .custom08selector {
+        margin: 10px;
+        border: solid 3px gray;
+        border-radius: 10%;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, .4);
+    }
+    
+    .w04 {
+        width: 4vw;
+    }
+    
+    .w06 {
+        width: 6vw;
+    }
+    
+    .w08 {
+        width: 8vw;
+    }
+    
+    .w1 {
+        width: 17vw;
+    }
+    
+    .h1 {
+        height: 17vw;
+    }
+    
+    .w2 {
+        width: 34vw;
+    }
+    
+    .h2 {
+        height: 34vw;
+    }
+    
+    .w3 {
+        width: 51vw;
+    }
+    
+    .h3 {
+        height: 51vw;
+    }
+    
+    .w4 {
+        width: 68vw;
+    }
+    
+    .h4 {
+        height: 68vw;
+    }
+    
+    .w5 {
+        width: 85vw;
+    }
+    
+    .h5 {
+        height: 85vw;
+    }
+    
+    .custom08selector:hover {
+        opacity: 0.8;
+    }
+    
+    .custom08selector:active {
+        opacity: 0.5;
+    }
+    
+    .custom08selector.select {
+        border: solid 3px #0888F9;
+    }
+    
+    .custom08selector.true {
+        box-shadow: 0px 0px 10px rgba(255, 0, 0, 1.0);
+    }
+    
+    .custom08plane {
+        top: 64px;
+        width: 100vw;
+        height: 80vh;
+        transform: scale(1);
+    }
+</style>
+
+<ion-header-bar class="bar-stable lrp-bar-top lrp-header-padding lrp-popover-scroll" ng-init="Custom08Ready()">
+    <div class="div-flex">
+        <h3>Rey 복합도형 재인</h3>
+    </div>
+    <button class="button button-clear icon ion-close" style="color: #ffffff;" ng-click="endExerciseAsk()"></button>
+</ion-header-bar>
+
+<ion-content style="margin: 0px;">
+    <div class='custom08plane'>
+        <div class='custom08box'><span>1.</span>
+            <div id='custom080' class='custom08selector w06' ng-class='{select : custom08sel[0], true : custom08positives[0]}' ng-click='Custom08Click(0)'><img src='/img/partial/08_1.png'></div>
+        </div>
+        <div class='custom08box'><span>2.</span>
+            <div id='custom081' class='custom08selector w2' ng-class='{select : custom08sel[1], true : custom08positives[1]}' ng-click='Custom08Click(1)'><img src='/img/partial/08_2.png'></div>
+        </div>
+        <div class='custom08box'><span>3.</span>
+            <div id='custom082' class='custom08selector w1' ng-class='{select : custom08sel[2], true : custom08positives[2]}' ng-click='Custom08Click(2)'><img src='/img/partial/08_3.png'></div>
+        </div>
+        <div class='custom08box'><span>4.</span>
+            <div id='custom083' class='custom08selector w06' ng-class='{select : custom08sel[3], true : custom08positives[3]}' ng-click='Custom08Click(3)'><img src='/img/partial/08_4.png'></div>
+        </div>
+        <div class='custom08box'><span>5.</span>
+            <div id='custom084' class='custom08selector w08' ng-class='{select : custom08sel[4], true : custom08positives[4]}' ng-click='Custom08Click(4)'><img src='/img/partial/08_5.png'></div>
+        </div>
+        <div class='custom08box'><span>6.</span>
+            <div id='custom085' class='custom08selector w1' ng-class='{select : custom08sel[5], true : custom08positives[5]}' ng-click='Custom08Click(5)'><img src='/img/partial/08_6.png'></div>
+        </div>
+        <div class='custom08box'><span>7.</span>
+            <div id='custom086' class='custom08selector w1' ng-class='{select : custom08sel[6], true : custom08positives[6]}' ng-click='Custom08Click(6)'><img src='/img/partial/08_7.png'></div>
+        </div>
+        <div class='custom08box'><span>8.</span>
+            <div id='custom087' class='custom08selector w2' ng-class='{select : custom08sel[7], true : custom08positives[7]}' ng-click='Custom08Click(7)'><img src='/img/partial/08_8.png'></div>
+        </div>
+        <div class='custom08box'><span>9.</span>
+            <div id='custom088' class='custom08selector w06' ng-class='{select : custom08sel[8], true : custom08positives[8]}' ng-click='Custom08Click(8)'><img src='/img/partial/08_9.png'></div>
+        </div>
+        <div class='custom08box'><span>10.</span>
+            <div id='custom089' class='custom08selector w1' ng-class='{select : custom08sel[9], true : custom08positives[9]}' ng-click='Custom08Click(9)'><img src='/img/partial/08_10.png'></div>
+        </div>
+        <div class='custom08box'><span>11.</span>
+            <div id='custom0810' class='custom08selector w2' ng-class='{select : custom08sel[10], true : custom08positives[10]}' ng-click='Custom08Click(10)'><img src='/img/partial/08_11.png'></div>
+        </div>
+        <div class='custom08box'><span>12.</span>
+            <div id='custom0811' class='custom08selector w1' ng-class='{select : custom08sel[11], true : custom08positives[11]}' ng-click='Custom08Click(11)'><img src='/img/partial/08_12.png'></div>
+        </div>
+        <div class='custom08box'><span>13.</span>
+            <div id='custom0812' class='custom08selector w1' ng-class='{select : custom08sel[12], true : custom08positives[12]}' ng-click='Custom08Click(12)'><img src='/img/partial/08_13.png'></div>
+        </div>
+        <div class='custom08box'><span>14.</span>
+            <div id='custom0813' class='custom08selector w3' ng-class='{select : custom08sel[13], true : custom08positives[13]}' ng-click='Custom08Click(13)'><img src='/img/partial/08_14.png'></div>
+        </div>
+        <div class='custom08box'><span>15.</span>
+            <div id='custom0814' class='custom08selector w5' ng-class='{select : custom08sel[14], true : custom08positives[14]}' ng-click='Custom08Click(14)'><img src='/img/partial/08_15.png'></div>
+        </div>
+        <div class='custom08box'><span>16.</span>
+            <div id='custom0815' class='custom08selector w04' ng-class='{select : custom08sel[15], true : custom08positives[15]}' ng-click='Custom08Click(15)'><img src='/img/partial/08_16.png'></div>
+        </div>
+        <div class='custom08box'><span>17.</span>
+            <div id='custom0816' class='custom08selector w1' ng-class='{select : custom08sel[16], true : custom08positives[16]}' ng-click='Custom08Click(16)'><img src='/img/partial/08_17.png'></div>
+        </div>
+        <div class='custom08box'><span>18.</span>
+            <div id='custom0817' class='custom08selector w1' ng-class='{select : custom08sel[17], true : custom08positives[17]}' ng-click='Custom08Click(17)'><img src='/img/partial/08_18.png'></div>
+        </div>
+        <div class='custom08box'><span>19.</span>
+            <div id='custom0818' class='custom08selector w2' ng-class='{select : custom08sel[18], true : custom08positives[18]}' ng-click='Custom08Click(18)'><img src='/img/partial/08_19.png'></div>
+        </div>
+        <div class='custom08box'><span>20.</span>
+            <div id='custom0819' class='custom08selector w2' ng-class='{select : custom08sel[19], true : custom08positives[19]}' ng-click='Custom08Click(19)'><img src='/img/partial/08_20.png'></div>
+        </div>
+        <div class='custom08box'><span>21.</span>
+            <div id='custom0820' class='custom08selector w2' ng-class='{select : custom08sel[20], true : custom08positives[20]}' ng-click='Custom08Click(20)'><img src='/img/partial/08_21.png'></div>
+        </div>
+        <div class='custom08box'><span>22.</span>
+            <div id='custom0821' class='custom08selector w06' ng-class='{select : custom08sel[21], true : custom08positives[21]}' ng-click='Custom08Click(21)'><img src='/img/partial/08_22.png'></div>
+        </div>
+        <div class='custom08box'><span>23.</span>
+            <div id='custom0822' class='custom08selector w08' ng-class='{select : custom08sel[22], true : custom08positives[22]}' ng-click='Custom08Click(22)'><img src='/img/partial/08_23.png'></div>
+        </div>
+        <div class='custom08box'><span>24.</span>
+            <div id='custom0823' class='custom08selector w2' ng-class='{select : custom08sel[23], true : custom08positives[23]}' ng-click='Custom08Click(23)'><img src='/img/partial/08_24.png'></div>
+        </div>
+        <button style='margin:10% 10% 10% 10%; width:80%; height:10vh' class='ripple' ng-click="Custom08Done()">{{Custom08NextText}}</button>
+    </div>
+</ion-content>

@@ -1,0 +1,34 @@
+<style>
+    .visual34box {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border: solid 1px;
+        text-align: center;
+        border-radius: 2%;
+        font-size: 50vh;
+        padding-top: 30vh;
+    }
+    
+    .visual34box:hover {
+        background: #eee;
+    }
+    
+    .visual34plane {
+        top: 64px;
+        width: 100%;
+        height: 80vh;
+        transform: scale(1);
+    }
+</style>
+
+<ion-header-bar class="bar-stable lrp-bar-top lrp-header-padding lrp-popover-scroll" ng-init="Custom34VisualReady()">
+    <div class="div-flex">
+        <h3>시각적지속수행검사 (Visual Continuous Performance Task) - {{stage + 1}}</h3>
+    </div>
+    <button class="button button-clear icon ion-close" style="color: #ffffff;" ng-click="endExerciseAsk()"></button>
+</ion-header-bar>
+
+<div class='visual34plane'>
+    <button class='visual34box ripple' id="box1" ng-click="Custom34Click()">{{num}}</button>
+</div>
