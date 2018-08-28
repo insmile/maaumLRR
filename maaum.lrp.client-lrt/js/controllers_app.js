@@ -2268,7 +2268,7 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
                             }, onFail);
                         }, onFail);
                     }
-                }``
+                }
 
                 if (check) setLogin();
             }, onFail);
