@@ -58,13 +58,13 @@ angular.module('tasks').controller('TasksController', ['$scope', '$stateParams',
         // 2018.08.07 타입 추가.
         $scope.taskTypeSelect = [{
             id: 'LT',
-            label: 'LT'
+            label: 'LT(언어기능훈련)'
         }, {
             id: 'RT',
-            label: 'RT'
+            label: 'RT(인지기능훈련)'
         }, {
             id: 'LRE',
-            label: 'LRE'
+            label: 'LRT(언어인지기능평가)'
         }    
         ];
         
