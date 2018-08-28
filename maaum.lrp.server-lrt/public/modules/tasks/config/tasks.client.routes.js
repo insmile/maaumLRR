@@ -5,10 +5,13 @@ angular.module('tasks').config(['$stateProvider', 'RouteHelpersProvider',
 	function($stateProvider, helper) {
 		// Tasks state routing
 		$stateProvider.
+<<<<<<< HEAD
 		state('app.addCategory', {
             url: '/tasks/addCategory',
             templateUrl: 'modules/tasks/views/addCategory.html'
         }).
+=======
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
 		state('app.listTasks', {
 			url: '/tasks',
 			templateUrl: 'modules/tasks/views/list-tasks.client.view.html',
@@ -23,11 +26,18 @@ angular.module('tasks').config(['$stateProvider', 'RouteHelpersProvider',
 			url: '/tasks/:taskId',
 			templateUrl: 'modules/tasks/views/view-task.client.view.html'
 		}).
+<<<<<<< HEAD
          
 		state('app.editTask', {
 			url: '/tasks/:taskId/edit',
 			templateUrl: 'modules/tasks/views/edit-task.client.view.html'
 		})
 
+=======
+		state('app.editTask', {
+			url: '/tasks/:taskId/edit',
+			templateUrl: 'modules/tasks/views/edit-task.client.view.html'
+		});
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
 	}
 ]);

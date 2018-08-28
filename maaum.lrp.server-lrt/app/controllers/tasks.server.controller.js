@@ -8,13 +8,17 @@ var mongoose = require('mongoose'),
     Task = mongoose.model('Task'),
     Problem = mongoose.model('Problem'),
     async = require('async'),
+<<<<<<< HEAD
     MyTaskCategory = mongoose.model('MyTaskCategory'),
+=======
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
     _ = require('lodash');
 
 /**
  * Create a Task
  */
 exports.create = function(req, res) {
+<<<<<<< HEAD
     
     
     var task = new Task(req.body);
@@ -24,6 +28,10 @@ exports.create = function(req, res) {
 
     task.user = req.user;
     
+=======
+    var task = new Task(req.body);
+    task.user = req.user;
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
     if (req.user.center !== undefined)
         task.center = req.user.center;
 
@@ -39,6 +47,7 @@ exports.create = function(req, res) {
 };
 
 exports.DT = function getData(req, res) {
+<<<<<<< HEAD
     // console.log("gogogogo11"+req.query);
 
     // console.log("gogogogo1222"+JSON.stringify(req.query));
@@ -138,6 +147,8 @@ function getTaskList(req, res, callback) {
     console.log("task list 조회 시작 req.query="+req.query);
     console.log("task list 조회 시작 req.query="+JSON.stringify(req.query) );
 
+=======
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
     var conditions = {};
 
     conditions.$or = [{ 'isOpen': null }, { 'isOpen': true }];
@@ -145,6 +156,7 @@ function getTaskList(req, res, callback) {
         conditions.$or.push({ 'isOpen': false, 'center': req.user.center });
     }
 
+<<<<<<< HEAD
     
     Task.dataTable(req.query, { 'conditions': conditions }, function(err, data) {
         
@@ -182,13 +194,20 @@ function getTaskList(req, res, callback) {
 
         console.log("list result55 ===" +JSON.stringify(data) );
 
+=======
+    Task.dataTable(req.query, { 'conditions': conditions }, function(err, data) {
+        console.log(req.query);
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
         if (err) console.log(err);
         res.send(data);
     });
 };
+<<<<<<< HEAD
 */
 
 
+=======
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
 
 /**
  * Show the current Task
@@ -233,7 +252,11 @@ exports.update = function(req, res) {
     console.log(req);
     var task = req.task;
 
+<<<<<<< HEAD
     console.log("task update"+req);
+=======
+    console.log(req);
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
 
     task = _.extend(task, req.body);
 
@@ -241,7 +264,10 @@ exports.update = function(req, res) {
         tasks.forEach(function(problem, index) {
             problem.taskName = task.name;
             problem.taskCategory = task.category;
+<<<<<<< HEAD
             problem.taskType = task.taskType;
+=======
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
             console.log(problem);
             problem.save();
         })
@@ -281,10 +307,13 @@ exports.delete = function(req, res) {
  * List of Tasks
  */
 exports.list = function(req, res) {
+<<<<<<< HEAD
 
     console.log("list START:::"  );
     console.log("list:::"+JSON.stringify(req.params) );
 
+=======
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
     var query = {};
     if (req.user.roles !== 'admin') {
         query = {
@@ -357,7 +386,10 @@ exports.name = function(req, res) {
     });
 };
 
+<<<<<<< HEAD
 /*
+=======
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
 exports.list_a = function(req, res) {
 
     var query = {};
@@ -370,7 +402,13 @@ exports.list_a = function(req, res) {
             ]
         };
     }
+<<<<<<< HEAD
 
+=======
+    
+    query = { type: 'LRE' };
+    
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
     Task.find(query, { _id: 1, category: 1, name: 1 }).sort('sortOrder').exec(function(err, tasks) {
         if (err) {
             return res.status(400).send({
@@ -395,6 +433,7 @@ exports.list_a = function(req, res) {
         }
     });
 };
+<<<<<<< HEAD
 */
 
 
@@ -408,6 +447,13 @@ exports.list_a = function(req, res) {
     
     var query = {};
     
+=======
+
+/** free lt 훈련 */
+exports.list_b = function(req, res) {
+
+    var query = {};
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
     if (req.user.roles !== 'admin') {
         query = {
             $or: [
@@ -417,8 +463,12 @@ exports.list_a = function(req, res) {
             ]
         };
     }
+<<<<<<< HEAD
     
     query = { taskType: 'LRE' };
+=======
+    query = { type: 'LT' };
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
     
     Task.find(query, { _id: 1, category: 1, name: 1 }).sort('sortOrder').exec(function(err, tasks) {
         if (err) {
@@ -439,12 +489,17 @@ exports.list_a = function(req, res) {
                 cc.tasks.push({ name: x.name, _id: x._id });
             });
             //console.log(t);
+<<<<<<< HEAD
             //console.log(JSON.stringify(t));
+=======
+            console.log(JSON.stringify(t));
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
             res.jsonp(t);
         }
     });
 };
 
+<<<<<<< HEAD
 
 /** lt, rt, LRE. 클라이언트에서 조회. */
 exports.list3 = function(req, res) {
@@ -462,6 +517,10 @@ function getTaskList3 (req, res, taskCategory){
         console.log("task list3 조건 붙이기." );        
         where.taskType =  req.params.gubun;
     }
+=======
+/** free rt 훈련 */
+exports.list_c = function(req, res) {
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
 
     var query = {};
     if (req.user.roles !== 'admin') {
@@ -473,11 +532,17 @@ function getTaskList3 (req, res, taskCategory){
             ]
         };
     }
+<<<<<<< HEAD
     
 
 
     
     Task.find(query, { _id: 1, category: 1, name: 1 }).where(where).sort('sortOrder').exec(function(err, tasks) {
+=======
+    query = { type: 'RT' };
+    
+    Task.find(query, { _id: 1, category: 1, name: 1 }).sort('sortOrder').exec(function(err, tasks) {
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
@@ -491,11 +556,15 @@ function getTaskList3 (req, res, taskCategory){
                 if (c[x.category] === undefined) {
                     c[x.category] = [];
                     cc = { category: x.category, tasks: [] };
+<<<<<<< HEAD
 
+=======
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
                     t.push(cc);
                 }
                 cc.tasks.push({ name: x.name, _id: x._id });
             });
+<<<<<<< HEAD
 
             for(var i = 0; i < t.length;i++) {
                 
@@ -593,6 +662,16 @@ exports.list4 = function(req, res) {
 
 
 ////////////////////
+=======
+            //console.log(t);
+            console.log(JSON.stringify(t));
+            res.jsonp(t);
+        }
+    });
+};
+
+
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
 exports.info = function(req, res) {
     var taskInfo = {};
     taskInfo.answer = req.task.answer;

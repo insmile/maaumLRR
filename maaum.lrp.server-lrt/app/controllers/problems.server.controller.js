@@ -8,7 +8,10 @@ var mongoose = require('mongoose'),
     Problem = mongoose.model('Problem'),
     Center = mongoose.model('Center'),
     Task = mongoose.model('Task'),
+<<<<<<< HEAD
     MyTaskCategory = mongoose.model('MyTaskCategory'),
+=======
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
     _ = require('lodash');
 
 /**
@@ -42,11 +45,15 @@ exports.create = function(req, res) {
     });
 };
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
 exports.DT = function getData(req, res) {
     getTaskList(req, res, getData2);
 };
 
+<<<<<<< HEAD
 
 // 업무 가테고리 조회.
 function getData2(req, res, taskList) {
@@ -118,10 +125,20 @@ function getData3(req, res, taskList, taskCategory) {
                  }
              }
         }   
+=======
+function getData2(req, res, taskList) {
+    var conditions = {};
+    conditions.refTask = { $in: taskList };
+
+    Problem.dataTable(req.query, { 'conditions': conditions }, function(err, data) {
+        if (err) console.log(err);
+        console.log(data);
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
         res.send(data);
     });
 }
 
+<<<<<<< HEAD
 
 function getTaskList(req, res, callback) {
     // 1
@@ -129,6 +146,11 @@ function getTaskList(req, res, callback) {
 
     // console.log("problem req.query ===="+JSON.stringify(req.query));
     // console.log("problem req.params ===="+JSON.stringify(req.params));
+=======
+function getTaskList(req, res, callback) {
+
+    console.log(req.user);
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
 
     var query = {};
     if (req.user.roles !== 'admin') {
@@ -150,8 +172,11 @@ function getTaskList(req, res, callback) {
         }));
     });
 }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
 /**
  * Show the current Problem
  */
@@ -211,11 +236,14 @@ exports.delete = function(req, res) {
  * List of Problems
  */
 exports.list = function(req, res) {
+<<<<<<< HEAD
     
     console.log("pppppp: list1");
     console.log("pppppp: req"+JSON.stringify(req.params));
 
 
+=======
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
     Problem.find().sort('-created').populate('user', 'name').populate('refTask', 'center isOpen').exec(function(err, problems) {
         if (err) {
             return res.status(400).send({
@@ -232,6 +260,10 @@ exports.list = function(req, res) {
     });
 };
 
+<<<<<<< HEAD
+=======
+// 문제 조회
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
 exports.listByTask = function(req, res) {
     if (req.body.taskID === undefined) {
         return res.status(400).send({
@@ -246,6 +278,11 @@ exports.listByTask = function(req, res) {
     var taskID = req.body.taskID;
     var setNO = req.body.setNum;
 
+<<<<<<< HEAD
+=======
+    console.log("ddd _ Problem.find_1::taskID="+taskID);
+
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
     Problem.find({
         'refTask': taskID,
         'name': setNO
@@ -254,7 +291,10 @@ exports.listByTask = function(req, res) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
             });
+<<<<<<< HEAD
             
+=======
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
         } else {
             var rst = [];
             problems = problems.filter(function(problem) {
@@ -271,12 +311,27 @@ exports.listByTask = function(req, res) {
                 p.seq = x.seq;
                 p.def = [];
                 p.res = [];
+<<<<<<< HEAD
                 x.resources.forEach(function(x, index) {
+=======
+
+                x.resources.forEach(function(x, index) {
+
+                    console.log("ddd _ Problem.find_2::x._id="+x._id);
+
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
                     var r = {};
                     r._id = x._id;
                     r.value = x.value;
                     r.name = x.name;
                     r.resType = x.resType;
+<<<<<<< HEAD
+=======
+                    r.note = x.note;
+
+                    console.log("ddd _ Problem.find_2::x.note = "+x.note);
+
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
                     if (x.isDefinition === true) {
                         p.def.push(r);
                     } else {
@@ -296,7 +351,13 @@ exports.listByTask = function(req, res) {
  * Problem middleware
  */
 exports.problemByID = function(req, res, next, id) {
+<<<<<<< HEAD
     console.log("in");
+=======
+    
+    console.log("ddd _ problemByID::"+id);
+
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
     Problem.findById(id).populate('user', 'name').populate('refTask', 'name center isOpen').exec(function(err, problem) {
         if (err) return next(err);
         if (!problem) return next(new Error('Failed to load Problem ' + id));
@@ -304,6 +365,12 @@ exports.problemByID = function(req, res, next, id) {
         if (problem.refTask.isOpen === false && req.user.center.equals(problem.refTask.center) === false) {
             return res.status(400).send("has no permission");
         } else {
+<<<<<<< HEAD
+=======
+
+            console.log("ddd _ problemByID2::"+problem);
+
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
             req.problem = problem;
             next();
         }

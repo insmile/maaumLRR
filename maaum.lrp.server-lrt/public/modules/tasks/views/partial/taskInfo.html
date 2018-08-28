@@ -11,6 +11,7 @@
     <div class="form-group">
         <label class="col-lg-2 control-label">검사 카테고리</label>
         <div class="col-lg-10">
+<<<<<<< HEAD
             <!--
             <input type="text" data-ng-model="task.category" id="category" class="form-control" placeholder="Category" required>
             -->
@@ -26,19 +27,30 @@
     </div>
 
     
+=======
+            <input type="text" data-ng-model="task.category" id="category" class="form-control" placeholder="Category" required>
+        </div>
+    </div>
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
     
     <fieldset>
         <div class="form-group">
             <label class="col-lg-2 control-label">문제 유형</label>
             <div class="col-lg-10">
+<<<<<<< HEAD
                 
                 <select data-ng-model="task.answer" data-ng-options="task.id as task.label for task in answerType" class="form-control">
                 </select>
 
+=======
+                <select data-ng-model="task.answer" data-ng-options="task.id as task.label for task in answerType" class="form-control">
+                    </select>
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
             </div>
         </div>
     </fieldset>
 
+<<<<<<< HEAD
     
 
 
@@ -47,13 +59,23 @@
             <label class="col-lg-2 control-label">업무 타입</label>
             <div class="col-lg-10">
                 <select data-ng-model="task.taskType" data-ng-options="task.id as task.label for task in taskTypeSelect" class="form-control">
+=======
+    <fieldset>
+        <div class="form-group">
+            <label class="col-lg-2 control-label">문제 타입</label>
+            <div class="col-lg-10">
+                <select data-ng-model="task.type" data-ng-options="task.id as task.label for task in type_" class="form-control">
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
                 </select>
             </div>
         </div>
     </fieldset>
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
     <fieldset>
         <div class="form-group">
             <label class="col-lg-2 control-label">평가 유형</label>
@@ -98,6 +120,7 @@
     </div>
     <div class="form-group">
         <label class="col-lg-2 control-label">미리보기</label>
+<<<<<<< HEAD
 
         <!-- 미리보기 이미진 업로드. -->
         <div class="col-lg-10">
@@ -111,6 +134,12 @@
             </div>
         </div>
 
+=======
+        <div class="col-lg-10">
+            <div ng-file-select ng-model="task.preview_file.files" ng-file-change="upload(task.preview_file)"><span class="btn btn-default btn-info">업로드 파일 선택</span> <span data-ng-show="task.preview_file.progressPercentage">업로드 : {{task.preview_file.progressPercentage}}% </span></div>
+            <div data-ng-show="task.preview"><img ng-src="/uploads/{{task.preview}}" class="img-responsive"></div>
+        </div>
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
     </div>
     <div class="form-group">
         <label class="col-lg-2 control-label">과제 공개 여부</label>

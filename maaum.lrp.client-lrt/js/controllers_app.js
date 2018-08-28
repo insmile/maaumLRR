@@ -18,7 +18,11 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
                 else $scope.lrpModel.isMenuOff = true;
             }
         });
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
         $scope.classholder = [
             'lrpState0',
             'lrpState1',
@@ -55,12 +59,22 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
                 listStatePage: ['','']                
             },
             {
+<<<<<<< HEAD
                 hasTab: false,
                 baseReload: [
                     { url: 'tasks/list3/LRE', dataSetter: 'taskList' }
                 ],
                 listStatePage: [
                     './templates/Include_List_Individual2.html',
+=======
+
+                hasTab: false,
+                baseReload: [
+                    { url: 'tasks/list', dataSetter: 'taskList' }
+                ],
+                listStatePage: [
+                    './templates/Include_List_Individual.html',
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
                     './templates/Include_List_SelectedIndividual.html'
                 ]                
             },
@@ -176,7 +190,11 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
                 obParam.callback();
                 return;
             }
+<<<<<<< HEAD
             //console.log(obParam);
+=======
+            //console.log("callback obParam : " + obParam);
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
             obParam.callback(obParam.callbackArg);
         }
 
@@ -216,8 +234,11 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
         };
 
         $scope.initLRP = function() {
+<<<<<<< HEAD
 
             
+=======
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
             $scope.lrpServer = lrpServer;
 
             console.log($scope.lrpServer)
@@ -364,10 +385,17 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
                 },
                 {
                     baseReload: [
+<<<<<<< HEAD
                         { url: 'tasks/list3/LRE', dataSetter: 'taskList' }
                     ],
                     listStatePage: [
                         './templates/Include_List_Individual2.html',
+=======
+                        { url: 'tasks/list', dataSetter: 'taskList' }
+                    ],
+                    listStatePage: [
+                        './templates/Include_List_Individual.html',
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
                         './templates/Include_List_SelectedIndividual.html'
                     ]                    
                 },
@@ -411,6 +439,7 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
         //for $http - 이것도 다 합쳐야 되는데...
         $scope.loadDataGet = function(obParam) {
             console.log("loadDataGet = "+lrpServer + obParam.url);
+<<<<<<< HEAD
 
             $http.get(lrpServer + obParam.url).
             success(function(data) {
@@ -419,6 +448,12 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
                 console.log('loadDataGet');
                 console.log("ddd데이터 리턴=" + $scope.lrpModel[obParam.dataSetter]);
 
+=======
+            $http.get(lrpServer + obParam.url).
+            success(function(data) {
+                if (obParam.dataSetter !== undefined && $scope.lrpModel[obParam.dataSetter] !== undefined) $scope.lrpModel[obParam.dataSetter] = data;
+                console.log("loadDataGet 데이터 리턴=" + $scope.lrpModel[obParam.dataSetter]);
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
                 callbackChecker(obParam);
             }).
             error(function(data, status) { console.log('Error : loadDataGet : ' + lrpServer + obParam.url + ' =>(' + obParam.dataSetter + ' : ' + obParam.callback + ') ! status : ' + status); });
@@ -426,14 +461,21 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
 
         $scope.loadDataPost = function(obParam) {
             //console.log(obParam);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
             $http.post(lrpServer + obParam.url, obParam.vParam).
             success(function(data) {
                 if (obParam.dataSetter !== undefined && $scope.lrpModel[obParam.dataSetter] !== undefined) $scope.lrpModel[obParam.dataSetter] = data;
                 callbackChecker(obParam);
+<<<<<<< HEAD
 
                 console.log('loadDataPost');
                 console.log(data);
+=======
+                console.log("loadDataPost 데이터 리턴=" + $scope.lrpModel[obParam.dataSetter]);
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
             }).
             error(function(data, status) { console.log('Error : loadDataPost : ' + lrpServer + obParam.url + ' =>(' + obParam.dataSetter + ' : ' + obParam.callback + ') ! status : ' + status); });
         };
@@ -443,8 +485,12 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
             success(function(data) {
                 if (obParam.dataSetter !== undefined && $scope.lrpModel[obParam.dataSetter] !== undefined) $scope.lrpModel[obParam.dataSetter] = data;
                 callbackChecker(obParam);
+<<<<<<< HEAD
 
                 //console.log('loadDataDelete'); console.log(data);
+=======
+                console.log('loadDataDelete'); console.log($scope.lrpModel[obParam.dataSetter]);
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
             }).
             error(function(data, status) { console.log('Error : loadDataDelete : ' + lrpServer + obParam.url + ' =>(' + obParam.dataSetter + ' : ' + obParam.callback + ') ! status : ' + status); });
         };
@@ -453,17 +499,29 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
         $scope.subLocation = function(arg) {
              $scope.lrpModel.statePage = arg;
              $state.transitionTo('app.subPage');
+<<<<<<< HEAD
          }
+=======
+        }
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
        
         
         //for List
         $scope.menuActivate = function(arg, arg2) {
             
+<<<<<<< HEAD
             console.log("[statePage  >> ]" + $scope.lrpModel.statePage);
 
             if ( arg2 == undefined || arg2 === null ) arg2 = 'N';
             
             console.log("[statePage bool >> ]" + arg2);
+=======
+            console.log("[statePage]  >> " + arg);
+
+            if ( arg2 == undefined || arg2 === null ) arg2 = 'N';
+            
+            console.log("[statePage arg2] >> " + arg2);
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
                         
             if ( arg2 == 'N'  ) {
                 if (arg < 0 || arg >= pageBluePrint.length) {
@@ -471,6 +529,7 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
                     return;
                 }
             }
+<<<<<<< HEAD
             var i;
 
             $scope.lrpModel.statePage = arg;
@@ -494,6 +553,25 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
                 pageBluePrint[2] = {
                     baseReload: [
                         { url: 'tasks/list3/LT', dataSetter: 'taskList' }
+=======
+
+            var i;
+            $scope.lrpModel.statePage = arg;
+
+            //add subpage 이동
+            if ( $scope.lrpModel.statePage == 2 && arg2 == 'N' )  {
+                hasTab: false;
+                $state.transitionTo('app.subPage');
+                //return;
+            }
+            
+            //add LT 추가 
+            if ( $scope.lrpModel.statePage === 2 && arg2 == 'LT' )  {
+                $scope.lrpModel.pageTag[2] = '기능훈련';
+                pageBluePrint[2] = {
+                    baseReload: [
+                        { url: 'tasks/list1', dataSetter: 'taskList' }
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
                     ],
                     listStatePage: [
                         './templates/Include_List_Individual2.html',
@@ -503,11 +581,18 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
             } 
             //add RT 
             else if ( $scope.lrpModel.statePage === 2 && arg2 == 'RT' )  {
+<<<<<<< HEAD
                 $scope.lrpModel.pageTag[2] = '기능훈련RT';
                 
                 pageBluePrint[2] = {
                     baseReload: [
                         { url: 'tasks/list3/RT', dataSetter: 'taskList' }
+=======
+                $scope.lrpModel.pageTag[2] = '기능훈련';
+                pageBluePrint[2] = {
+                    baseReload: [
+                        { url: 'tasks/list2', dataSetter: 'taskList' }
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
                     ],
                     listStatePage: [
                         './templates/Include_List_Individual2.html',
@@ -516,6 +601,10 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
                 };               
             }
                         
+<<<<<<< HEAD
+=======
+                                    
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
             if ($scope.lrpModel.statePage === 5) {
                 $scope.isOffline = true;
 
@@ -543,6 +632,12 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
 
                 if ($scope.lrpModel.userData !== null) pageBluePrint[4].baseReload.url = 'progressTemplates/list/' + $scope.lrpModel.userData._id;
 
+<<<<<<< HEAD
+=======
+                
+                console.log("[listStatePage length  >> ]" + pageBluePrint[arg].listStatePage.length);
+                
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
                 for (i = 0; i < pageBluePrint[arg].listStatePage.length; i++) {
                     $scope.lrpModel.listPageHolder[i] = pageBluePrint[arg].listStatePage[i];
                 }
@@ -578,10 +673,15 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
             for (i = 0; i < pageBluePrint[arg].listStatePage.length; i++) {
                 console.log("pageCacheHolder >> " + $scope.lrpModel.listPageHolder[i]);
             }
+<<<<<<< HEAD
             
             console.log("statePage >> " + $scope.lrpModel.statePage);
             setListState(pageCacheHolder);
 
+=======
+            console.log("statePage >> " + $scope.lrpModel.statePage);
+            setListState(pageCacheHolder);
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
             $state.transitionTo('app.list');
         };
 
@@ -944,10 +1044,13 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
             callbackChecker(obParam);
         };
 
+<<<<<<< HEAD
 
 
         //db.getCollection('tasks').update( {'taskType':'LRE'},  {$set :'taskType':'RT'}})
 
+=======
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
         $scope.addOfficialTest = function() {
             $scope.loadDataPost({
                 url: 'officialtestdata/',
@@ -1577,10 +1680,17 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
                 case 3:
                     $scope.orderData = {
                         tag: '개별평가 선택',
+<<<<<<< HEAD
                         template: './templates/Include_List_Individual2.html'
                     };
 
                     vParm = { url: 'tasks/list3/LRE', dataSetter: 'taskList' };
+=======
+                        template: './templates/Include_List_Individual.html'
+                    };
+
+                    vParm = { url: 'tasks/list', dataSetter: 'taskList' };
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
                     $scope.lrpModel.selectedHomework = null;
                     break;
 
@@ -1721,6 +1831,10 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
                 $scope.makeShape();
             }
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
         
         $scope.initDrawingPad = function(vw = 0.5, vh = 0.7, lock = false, drawType) {
             var el = document.getElementById('sketchpad');
@@ -1745,6 +1859,10 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
             $scope.vw = vw;
             $scope.vh = vh;
             $scope.aspectRatio = aspectRatio;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
         }
 
         $scope.dpUndo = function() {
@@ -1779,8 +1897,15 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
 
             // console.log("bbbb=" +  JSON.stringify( $scope.lrpModel.selectedResult.tasks[$scope.lrpModel.taskPivot].problems[0].drawJson));
 
+<<<<<<< HEAD
             $scope.pad.loadJSON(JSON.parse($scope.lrpModel.selectedResult.tasks[$scope.lrpModel.taskPivot].problems[0].drawJson));
                         
+=======
+            
+            $scope.pad.loadJSON(JSON.parse($scope.lrpModel.selectedResult.tasks[$scope.lrpModel.taskPivot].problems[0].drawJson));
+            
+            
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
             if (bg) {
                 console.log($scope.lrpModel.selectedResult.tasks[$scope.lrpModel.taskPivot].problems[0]);
                 drawingPadUtil.loadBackgroundGrading($scope, true);
@@ -2173,7 +2298,11 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
         error(function (data, status) { console.log('Error : loadDataPost : ' + lrpServer + obParam.url + ' =>(' + obParam.dataSetter + ' : ' + obParam.callback + ') ! status : ' + status); });
         */
 
+<<<<<<< HEAD
         $scope.loginData = { username: 'admin', password: 'rhfueo!' };
+=======
+        //$scope.loginData = { username: 'admin', password: 'rhfueo!' };
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
         //$scope.loginData = { username: 'testpatient', password: 'rhfueo!' };
         
         $scope.doLogin = function() {
@@ -2268,7 +2397,11 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
                             }, onFail);
                         }, onFail);
                     }
+<<<<<<< HEAD
                 }``
+=======
+                }
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
 
                 if (check) setLogin();
             }, onFail);
@@ -2430,7 +2563,11 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
         $scope.go_findpassword = function() {
             $scope.logonInclude = './templates/Include_Login_Find.html';
         };
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
         $scope.forgotData = {
             email: ''   
         }
@@ -2453,7 +2590,10 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
             $scope.logonInclude = './templates/Include_Login_First.html';
         };
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
         $scope.findAccount_email = function() {
             $scope.FindeMsg = '';
             

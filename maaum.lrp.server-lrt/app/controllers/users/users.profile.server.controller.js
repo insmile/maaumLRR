@@ -34,11 +34,19 @@ function UserSave(user, res) {
 		}
 	});
 }
+<<<<<<< HEAD
 
 
 
 /////////// 추가아아아아아아 ///////// 
 function update1_getSameUserNameData(req, res, callback) {
+=======
+/**
+ * Update user details
+ */
+exports.update = function(req, res) {
+
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
 	// Init Variables
 	var user = req.user;
 
@@ -47,6 +55,7 @@ function update1_getSameUserNameData(req, res, callback) {
 		user = req.profile;
 	}
 
+<<<<<<< HEAD
 	var userName = user.name; // username은 아이디!!
 
 	console.log("user Update userName=" + userName);
@@ -98,6 +107,8 @@ function update2_do(req, res, userNameIndex) {
 	}
 
 	
+=======
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
 	User.findById(user._id).exec(function(err, u) {
 		if(err) {
 			return res.status(400).send({
@@ -172,8 +183,11 @@ function update2_do(req, res, userNameIndex) {
 								message: errorHandler.getErrorMessage(err)
 							});
 						} else {
+<<<<<<< HEAD
 
 							
+=======
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
 							user.assignedTherapistName =  therapist.name;
 							UserSave(user, res);
 						}
@@ -181,11 +195,17 @@ function update2_do(req, res, userNameIndex) {
 				}
 				else
 				{
+<<<<<<< HEAD
 
 					user.user_name_index = userNameIndex;					
 					UserSave(user, res);
 				}
 			} else {				
+=======
+					UserSave(user, res);
+				}
+			} else {
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
 				console.log(res);
 				res.status(400).send({
 					message: 'User is not signed in'
@@ -193,6 +213,7 @@ function update2_do(req, res, userNameIndex) {
 			}
 		}
 	});
+<<<<<<< HEAD
 	
 }
 
@@ -206,6 +227,8 @@ exports.update = function(req, res) {
 	console.log("user Update!!!!");
 	update1_getSameUserNameData(req, res, update2_do);
 	
+=======
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
 };
 
 /**
@@ -289,8 +312,13 @@ exports.activation = function(req,res) {
 	var center = null;
 	var has_key = true;
     var u;
+<<<<<<< HEAD
 	var certified = true;
 	
+=======
+    var certified = true;
+
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
     console.log("exports.activation : ");
     console.log(_query);
 
@@ -315,9 +343,15 @@ exports.activation = function(req,res) {
                 if(_query.expired_date !== undefined)
                     u.expired_date = _query.expired_date;
                 if(_query.has_key == false)
+<<<<<<< HEAD
 					u.expired_date = undefined;
 				
 				u.certified = true; //강제
+=======
+                    u.expired_date = undefined;
+                    
+                u.certified = true; //강제
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
                 return saveUser(u);
 			}
 		})

@@ -32,7 +32,11 @@ var UserSchema = new Schema({
 		default: '',
 		required : [true, '이름을 입력해 주십시오.']
 	},
+<<<<<<< HEAD
 	username : { // 아이디
+=======
+	username : {
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
 		type: String,
 		trim: true,
 		default: '',
@@ -171,6 +175,7 @@ var UserSchema = new Schema({
 	resetPasswordExpires: {
 		type: Date
 	}
+<<<<<<< HEAD
 
 	,picture: { // 사진!! 2018.08 추가!!!
         type: String
@@ -182,6 +187,8 @@ var UserSchema = new Schema({
 	}
 	
 
+=======
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
 });
 
 /**

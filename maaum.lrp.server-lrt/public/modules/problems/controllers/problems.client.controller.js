@@ -21,6 +21,7 @@ angular.module('problems').controller('ProblemsController', ['$scope', '$statePa
             label: '중앙'
         }];
 
+<<<<<<< HEAD
 
         $scope.taskTypeSelect_problem = [{
             id: 'ALL',
@@ -62,6 +63,9 @@ angular.module('problems').controller('ProblemsController', ['$scope', '$statePa
         }
 
         
+=======
+        $scope.tasks = Tasks.query();
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
 
         $scope.task = new Tasks();
 
@@ -73,17 +77,25 @@ angular.module('problems').controller('ProblemsController', ['$scope', '$statePa
             $scope.error = data.message;
         });
 
+<<<<<<< HEAD
 
         $http.get('/tasks/name').success(function(data, status, headers, config) {
             // alert("get name1");            
             $scope.name = data;
             // alert("get name"+JSON.stringify(data));            
 
+=======
+        $http.get('/tasks/name').success(function(data, status, headers, config) {
+            $scope.name = data;
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
         }).error(function(data, status, headers, config) {
             $scope.error = data.message;
         });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
         $scope.change = function() {
             // alert("change!!!!");
             // console.log("change~!!!"+$scope.task);
@@ -94,6 +106,7 @@ angular.module('problems').controller('ProblemsController', ['$scope', '$statePa
             $scope.toggle = !$scope.toggle;
         };
 
+<<<<<<< HEAD
         // 2018.08.07 카테고리별 검색 추가.
         $scope.task.selectTaskType = "ALL";
 
@@ -104,6 +117,14 @@ angular.module('problems').controller('ProblemsController', ['$scope', '$statePa
 
         $scope.checkShowDraw = function() {
             // console.log("dpdpdpdpdpdpdp = "+JSON.stringify($scope.task));            
+=======
+
+        $scope.checkShowDraw = function() {
+            // console.log("dpdpdpdpdpdpdp = "+JSON.stringify($scope.task));
+
+            // alert($scope.task.answer);
+            
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
             // 그리기2
             if($scope.task.answer == "draw-one2"){
                 return true;
@@ -158,6 +179,10 @@ angular.module('problems').controller('ProblemsController', ['$scope', '$statePa
 
         
         
+<<<<<<< HEAD
+=======
+        
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
 
 
         $scope.changeTask = function() {
@@ -188,6 +213,7 @@ angular.module('problems').controller('ProblemsController', ['$scope', '$statePa
         var dtInstance;
 
         $scope.initDatatable = function() {
+<<<<<<< HEAD
             
             $("#list_Table").empty();
 
@@ -211,6 +237,15 @@ angular.module('problems').controller('ProblemsController', ['$scope', '$statePa
 
                 ajax: { url: "/problems/DT" , data:{taskTypeSearch: $scope.task.selectTaskType } }, // 조건 추가.
                 
+=======
+
+            if (!$.fn.dataTable) return;
+
+            dtInstance = $('#dt').dataTable({
+                processing: true,
+                serverSide: true,
+                ajax: { url: "/problems/DT" },
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
                 "autoWidth": false,
                 /*tableTools: {
                  sSwfPath : '/lib/datatables-tabletools/swf/copy_csv_xls_pdf.swf'
@@ -261,9 +296,12 @@ angular.module('problems').controller('ProblemsController', ['$scope', '$statePa
                 ]
             });
 
+<<<<<<< HEAD
             
             
 
+=======
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
             var inputSearchClass = 'datatable_input_col_search';
             var columnInputs = $('tfoot .' + inputSearchClass);
 
@@ -374,9 +412,12 @@ angular.module('problems').controller('ProblemsController', ['$scope', '$statePa
             $scope.problem.refTask = $scope.task._id;
             $scope.problem.taskName = $scope.task.name;
             $scope.problem.taskCategory = $scope.task.category;
+<<<<<<< HEAD
             $scope.problem.taskType = $scope.task.taskType;
 
             // alert("$scope.problem.taskType : :"+$scope.problem.taskType);
+=======
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
 
             var skip = false;
 

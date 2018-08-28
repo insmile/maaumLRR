@@ -11,12 +11,22 @@
 </ion-header-bar>
 
 <ion-content direction="y" has-bouncing="false" style="width: initial; height: calc(100% - 128px);">
+<<<<<<< HEAD
     <ion-list>
+=======
+
+    <ion-list>
+
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
         <div ng-repeat="category in lrpModel.taskList">
 
             <ion-item class="item-divider">
                 <div class="div-left">
+<<<<<<< HEAD
                     <h2>{{category.categoryName}}_카테고리 이름</h2>
+=======
+                    <h2>{{category.category}}</h2>
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
                 </div>
             </ion-item>
 
@@ -25,6 +35,14 @@
                     <h2 ng-bind-html="task.name | highlight:formSearch.searchIndividual.name"></h2>
                 </div>
             </ion-item>
+<<<<<<< HEAD
         </div>
     </ion-list>
+=======
+
+        </div>
+
+    </ion-list>
+
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
 </ion-content>

@@ -1,7 +1,10 @@
 'use strict';
 
 module.exports = function(app) {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
 	var users = require('../../app/controllers/users.server.controller');
 	var tasks = require('../../app/controllers/tasks.server.controller');
 
@@ -14,6 +17,7 @@ module.exports = function(app) {
 		.get(users.requiresLogin, tasks.DT);
 
 	app.route('/tasks/category').get(users.requiresLogin, tasks.category);
+<<<<<<< HEAD
 	app.route('/tasks/name').get(users.requiresLogin, tasks.name);		
 	app.route('/tasks/list').get(users.requiresLogin, tasks.list_a);
 
@@ -27,6 +31,12 @@ module.exports = function(app) {
 	app.route('/tasks/list4/:gubun').get(users.requiresLogin, tasks.list4);
 
 
+=======
+	app.route('/tasks/name').get(users.requiresLogin, tasks.name);
+	app.route('/tasks/list').get(users.requiresLogin, tasks.list_a);
+	app.route('/tasks/list1').get(users.requiresLogin, tasks.list_b);	
+	app.route('/tasks/list2').get(users.requiresLogin, tasks.list_c);
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
 	app.route('/tasks/info/:taskId').get(users.requiresLogin, tasks.info);
 
 	app.route('/tasks/:taskId')
@@ -39,6 +49,7 @@ module.exports = function(app) {
 	// Finish by binding the Task middleware
 	app.param('taskId', tasks.taskByID);
 	app.param('userID', users.userByID);
+<<<<<<< HEAD
 
 };
 
@@ -49,3 +60,6 @@ module.exports = function(app) {
 
 
 
+=======
+};
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9

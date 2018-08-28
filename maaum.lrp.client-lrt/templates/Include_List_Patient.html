@@ -35,11 +35,20 @@
         <ion-item class="item-divider">
 
             <div class="div-left">
+<<<<<<< HEAD
                 <h2>배정환자</h2>
             </div>
 
         </ion-item>
         <ion-item class="my-row-center" ng-repeat="patient in lrpModel.patientList |  filter:{ assignedTherapist : '!undefined' } | filter:formSearch.searchPatient" ng-click="selectPatient(patient)" ng-class="isSelected(patient, 1)">        
+=======
+                <h2>배정 환자</h2>
+            </div>
+
+        </ion-item>
+     
+        <ion-item class="my-row-center" ng-repeat="patient in lrpModel.patientList | filter:{ assignedTherapist : '!undefined' } | filter:formSearch.searchPatient" ng-click="selectPatient(patient)" ng-class="isSelected(patient, 1)">     
+>>>>>>> 45e3dfab886cba0e59c30f547b6998c89a9f0cc9
             <div class="div-left div-flex">
                 <h2 ng-bind-html="patient.name | highlight:formSearch.searchPatient.name"></h2>
                 <p>{{patient.center_name}} {{patient.email}}</p>
