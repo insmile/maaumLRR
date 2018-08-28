@@ -27,13 +27,13 @@ angular.module('problems').controller('ProblemsController', ['$scope', '$statePa
             label: 'ALL'
         }, {
             id: 'LRE',
-            label: 'LRE'
+            label: 'LRT(언어인지기능평가)'
         }, {
             id: 'LT',
-            label: 'LT'
+            label: 'LT(언어기능훈련)'
         }, {
             id: 'RT',
-            label: 'RT'
+            label: 'RT(인지기능훈련)'
         }];
 
 
