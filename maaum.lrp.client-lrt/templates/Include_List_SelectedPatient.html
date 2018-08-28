@@ -4,7 +4,7 @@
     </div>    
     <div class="my-row-center">
         <div ng-show="lrpModel.selectedPatient.assignedTherapist === undefined">
-            <button class="button button-dark" ng-show="lrpModel.userData.roles === 'admin'" ng-click="selectListOpenManager(1)" style="margin-right: 5px;">평가자배정</button>
+            <button class="button button-dark" ng-show="lrpModel.userData.roles === 'admin' || lrpModel.userData.roles === 'manager'" ng-click="selectListOpenManager(1)" style="margin-right: 5px;">평가자배정</button>
             <button class="button button-dark" ng-show="lrpModel.userData.roles === 'therapist'" ng-click="AllocateTherapist(lrpModel.userData)" style="margin-right: 5px;">환자담당</button>
         </div>
         <button class="button button-dark" ng-click="userFormOpenManager(4)" style="margin-right: 5px;">정보수정</button>
