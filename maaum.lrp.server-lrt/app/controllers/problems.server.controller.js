@@ -156,6 +156,10 @@ function getTaskList(req, res, callback) {
  * Show the current Problem
  */
 exports.read = function(req, res) {
+    console.log("프라블럼 read..");
+
+    console.log("프라블럼 req.problem.."+JSON.stringify(req.problem));
+
     res.jsonp(req.problem);
 };
 
@@ -277,6 +281,8 @@ exports.listByTask = function(req, res) {
                     r.value = x.value;
                     r.name = x.name;
                     r.resType = x.resType;
+                    r.note = x.note;
+
                     if (x.isDefinition === true) {
                         p.def.push(r);
                     } else {
@@ -296,7 +302,8 @@ exports.listByTask = function(req, res) {
  * Problem middleware
  */
 exports.problemByID = function(req, res, next, id) {
-    console.log("in");
+    console.log("innnnn");
+    
     Problem.findById(id).populate('user', 'name').populate('refTask', 'name center isOpen').exec(function(err, problem) {
         if (err) return next(err);
         if (!problem) return next(new Error('Failed to load Problem ' + id));

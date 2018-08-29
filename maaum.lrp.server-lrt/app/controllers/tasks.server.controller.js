@@ -203,7 +203,8 @@ exports.read = function(req, res) {
     where.$or.push({ 'isOpen': null });
     where.$or.push({ 'isOpen': true });
 
-    console.log(req);
+    console.log("Task _ READ!!="+req);
+
     if (req.user.center !== undefined)
         where.$or.push({ 'isOpen': false }, { 'center': req.user.center });
 
@@ -594,6 +595,9 @@ exports.list4 = function(req, res) {
 
 ////////////////////
 exports.info = function(req, res) {
+
+    console.log("task inininfo!!");
+
     var taskInfo = {};
     taskInfo.answer = req.task.answer;
     taskInfo.resources = req.task.resources;

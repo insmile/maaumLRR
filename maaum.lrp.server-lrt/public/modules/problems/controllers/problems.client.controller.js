@@ -27,13 +27,13 @@ angular.module('problems').controller('ProblemsController', ['$scope', '$statePa
             label: 'ALL'
         }, {
             id: 'LRE',
-            label: 'LRT(언어인지기능평가)'
+            label: 'LRE'
         }, {
             id: 'LT',
-            label: 'LT(언어기능훈련)'
+            label: 'LT'
         }, {
             id: 'RT',
-            label: 'RT(인지기능훈련)'
+            label: 'RT'
         }];
 
 
@@ -249,6 +249,7 @@ angular.module('problems').controller('ProblemsController', ['$scope', '$statePa
                     { mData: 'taskName', sTitle: "과제명", defaultContent: "" },
                     { mData: 'name', sTitle: "문제 세트 ID" },
                     { mData: 'seq', sTitle: "문제 순서" },
+                    { mData: 'taskType', sTitle: "업무타입" },
                     { mData: 'created', sTitle: "생성일" },
                     {
                         "mData": null,
