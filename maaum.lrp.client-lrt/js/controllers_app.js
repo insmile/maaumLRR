@@ -1005,19 +1005,7 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
 
             $scope.lrpModel.setNum = 1;
 
-/*
-            if ($scope.lrpModel.statePage === 2) {
-                vParam.callback = setListState;
-                vParam.callbackArg = { listState: 1 };
-
-                setChacheData(1, vParam);
-            } else if ($scope.lrpModel.statePage === 0 || $scope.lrpModel.statePage === 1) {
-                $scope.selectTabItem(task, 3);
-                $scope.lrpModel.setDelay = 7;
-                $scope.selectListPopover.hide();
-                return;
-            }
-*/            
+            
             /** free 메뉴위치 조정 */
             if ($scope.lrpModel.statePage === 3) {
                 vParam.callback = setListState;
@@ -1046,7 +1034,15 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
 
             $scope.lrpModel.setNum = 1;
 
-            if ($scope.lrpModel.statePage === 2) {
+
+            if ($scope.lrpModel.statePage === 3) {
+                vParam.callback = setListState;
+                vParam.callbackArg = { listState: 1 };
+
+                setChacheData(1, vParam);
+            }
+
+            else if ($scope.lrpModel.statePage === 2) {
                 vParam.callback = setListState;
                 vParam.callbackArg = { listState: 1 };
 
@@ -2268,7 +2264,7 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
                             }, onFail);
                         }, onFail);
                     }
-                }
+                }``
 
                 if (check) setLogin();
             }, onFail);
@@ -2611,3 +2607,9 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
             });
         }, element);
     });
+
+
+
+
+
+
