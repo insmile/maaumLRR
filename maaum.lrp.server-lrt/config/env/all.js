@@ -6,7 +6,7 @@ module.exports = {
         description: 'Bootstrap Admin Theme + Meanjs',
         keywords: 'MongoDB, Express, AngularJS, Node.js'
     },
-    port: process.env.PORT || 4040,
+    port: process.env.PORT || 4050,
     templateEngine: 'swig',
     sessionSecret: 'MEAN',
     sessionCollection: 'sessions',

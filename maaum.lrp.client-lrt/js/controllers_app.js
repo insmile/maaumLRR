@@ -4,8 +4,11 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
 
         $http.defaults.withCredentials = true;
 
-        //var lrpServer = 'https://lrtadmin.maaum.net/';
-        var lrpServer = 'http://localhost:4040/';
+        /*운영*/
+        //var lrpServer = 'https://admin.aphasia.co.kr/';
+
+        /*개발*/
+        var lrpServer = 'http://localhost:4050/';
         var pageCacheHolder = null;
 
         $scope.$on('$locationChangeSuccess', function() {
