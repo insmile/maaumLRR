@@ -5,39 +5,27 @@
 </ion-header-bar>
 
 <ion-content direction="y" has-bouncing="false" style="width: initial;">
-<div id="lrpOuterList"></div>            
-<div id="con_lf">
+    <div id="lrpOuterList"></div>            
+    <div id="con_lf"></div>
     
-    <!--div class="new_con_cm svc_01">
-       
-        <div class="sv_wr">
-            <p>기능 훈련을 선택하세요.</p> 
-            <div class="sv_pg" ng-click="menuActivate(2,'LT')">
-                <img src="./img/res/btn_01.gif"><br>
-                언어기능훈련[LT]</h3>
-            </div>
-            <div class="sv_pg" ng-click="menuActivate(2, 'RT')">
-                <img src="./img/res/btn_02.gif"><br>
-                인지기능훈련[RT]
-            </div>
-        </div>
-    </div-->
-    
-    <div id="detailWrap">
-        
-    	<div class="contents">
-    		<h3>기능 훈련을 선택하세요</h3>
-    
-    		<ul>
-    			<li><a href="#" ng-click="menuActivate(2,'LT')"><img src="./img/res/sub_lr.png" alt="" /></a></li>
-    			<li><a href="#" ng-click="menuActivate(2,'RT')"><img src="./img/res/sub_rt.png" alt="" /></a></li>
-    		</ul>
-    	</div>
-    	
-    	
-    </div>
-</div>
+    <ion-item style="text-align: center;">      
+        <a href="#" ng-click="menuActivate(2,'LT')"><img src="./img/res/sub_lr.png" alt="" /></a>
+        <a href="#" ng-click="menuActivate(2,'RT')"><img src="./img/res/sub_rt.png" alt="" /></a>
+    </ion-item>
 
+    
+    <ion-item style="text-align: left;">      
+        <div>
+            <p class="subject">본 훈련프로그램은 효과적인 언어재활 훈련을 위해 손상된 언어기능을 제대로 평가하고,
+                    체계적인 언어 및 인지 재활을 위해 개발되었습니다.</p>
+            <p class="info">언어기능훈련은 말장애, 실어증 환자의 언어훈련프로그램 입니다.</p>
+            <p class="info">인지기능훈련은 인지기능과 관련 인지 영역별(지각능력, 주의력, 기억력, 집행능력 등)훈련프로그램 입니다.</p>
+            
+        </div>
+    </ion-item>
+    
 </ion-content>
+
+  
 
 </ion-view>  
