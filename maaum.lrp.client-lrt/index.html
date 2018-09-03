@@ -33,6 +33,7 @@
     <script src="lib/RecordRTC.min.js"></script>
     <script src="lib/gumadapter.js"></script>
     <script src="lib/responsive-sketchpad.js"></script>
+    
 
     <!-- cordova script (this will be a 404 during development) -->
     <!--script src="cordova.js"></script-->
@@ -54,3 +55,24 @@
 </body>
 
 </html>
+
+<script type = "text/javascript">
+//<![CDATA[
+function my_code(){
+    
+    /*운영체제 체크*/
+    var ua = window.navigator.userAgent;    
+    if(!ua.match("Windows")){
+        alert("윈도우가 아니시군요");
+    }
+    
+    /*
+    if(ua.indexOf("Windows ") != -1){
+        alert("윈도우가 아니시군요");
+    }
+    */
+}
+
+window.onload=my_code();
+//]]>
+</script>    
