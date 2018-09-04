@@ -63,8 +63,43 @@ function my_code(){
     /*운영체제 체크*/
     var ua = window.navigator.userAgent;    
     if(!ua.match("Windows")){
-        alert("윈도우가 아니시군요");
+        alert('본 서비스는 언어재활에 필요한 녹음등 다양한 \n\n'+
+              '훈련을 위해 PC에서만 사용가능합니다.');
+              location.replace("http://maaum.net/");
     }
+
+
+    /*브라우져 체크*/
+    var agent = navigator.userAgent, match;
+    var browser, version;
+
+    if((match = agent.match(/MSIE ([0-9]+)/)) || (match = agent.match(/Trident.*rv:([0-9]+)/))) browser = 'Internet Explorer';
+    else if(match = agent.match(/Chrome\/([0-9]+)/)) browser = 'Chrome';
+    else if(match = agent.match(/Firefox\/([0-9]+)/)) browser = 'Firefox';
+    else if(match = agent.match(/Safari\/([0-9]+)/)) browser = 'Safari';
+    else if((match = agent.match(/OPR\/([0-9]+)/)) || (match = agent.match(/Opera\/([0-9]+)/))) browser = 'Opera';
+    else browser = 'Unknown';
+
+    if(browser !== 'Unknown') version = match[1];
+
+    console.log('Browser: [' + browser+']');
+    console.log('Version: ' + version);
+
+    /*윈도우 환경이지만 
+      크롬브라우져가 아닌 경우.*/
+    if(ua.match("Windows")){
+        if(!browser.match("Chrome")){
+            if(confirm('본 서비스는 언어재활에 필요한 녹음등 다양한 훈련을 위해\n\n'+
+                       '크롬브라우저 에서만 사용가능합니다.\n\n'+
+                       '원활한 사용을 위해 크롬브라우저로 재접속 하십시오.\n\n'+
+                       '크롬브라우저 설치를 원하시면 [취소]를 눌러주세요.')){
+                
+            }else{
+                location.replace("https://www.google.com/intl/ko_ALL/chrome/");
+            }
+        }
+    }
+
     
     /*
     if(ua.indexOf("Windows ") != -1){
