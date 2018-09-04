@@ -4,6 +4,10 @@
     </div>
 </ion-header-bar>
 
+
+
+
+
 <div class="scroll-content has-header">
 
     <div class="outer" style="height: auto;">
@@ -18,7 +22,7 @@
                 </div>
             </div>
 
-            <ion-item>  
+            <ion-item>
                 <button class="button" style="width: 200px;" ng-click="selectListOpenManager(9);">
                     <div ng-if="lrpModel.selectedPatient === null">환자 선택</div>
                     <div ng-if="lrpModel.selectedPatient !== null">{{lrpModel.selectedPatient.name}}</div>
@@ -47,12 +51,25 @@
                     <option value="14">14 일</option>
                     <option value="21">21 일</option>
                     <option value="28">28 일</option>
-                </select>-->
+                </select>
+
+                
+                -->
                 <button class="button" style="width: 30%;" ng-click="assignHomework(lrpModel.selectedTask, lrpModel.setDelay, false)">
                     과제 할당
                 </button>
             </ion-item>
-
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+

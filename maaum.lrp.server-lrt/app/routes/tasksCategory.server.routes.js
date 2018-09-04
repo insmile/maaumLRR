@@ -22,9 +22,10 @@ module.exports = function(app) {
 		.post(taskCategory.readTest2);
 	
 		
-	app.route('/category/update/:categoryId')
-		.get(taskCategory.update)
-		;
+	app.route('/category/update/:categoryId').get(taskCategory.update);
+
+
+	app.route('/category/delete/:categoryId').post(taskCategory.delete);
 
 
 	app.param('categoryId', taskCategory.categoryByID);

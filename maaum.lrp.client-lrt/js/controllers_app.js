@@ -4,39 +4,6 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
 
         $http.defaults.withCredentials = true;
 
-        /*운영체제 체크*/
-        var ua = window.navigator.userAgent;
-        console.log("운영체제 : " + ua);
-        if(ua.indexOf("Windows") != -1){
-            console.log("OS : 윈도우");
-        }else if(ua.indexOf("Linux") != -1){
-            console.log("OS : 리눅스");
-        }
-
-
-        /*브라우져 체크*/
-        var agent = navigator.userAgent, match;
-        var browser, version;
-
-        if((match = agent.match(/MSIE ([0-9]+)/)) || (match = agent.match(/Trident.*rv:([0-9]+)/))) browser = 'Internet Explorer';
-        else if(match = agent.match(/Chrome\/([0-9]+)/)) browser = 'Chrome';
-        else if(match = agent.match(/Firefox\/([0-9]+)/)) browser = 'Firefox';
-        else if(match = agent.match(/Safari\/([0-9]+)/)) browser = 'Safari';
-        else if((match = agent.match(/OPR\/([0-9]+)/)) || (match = agent.match(/Opera\/([0-9]+)/))) browser = 'Opera';
-        else browser = 'Unknown';
-
-        if(browser !== 'Unknown') version = match[1];
-
-        console.log('Browser: [' + browser+']');
-        console.log('Version: ' + version);
-
-
-        if(browser != 'Chrome'){            
-            alert('본 서비스는 크롬브라우져 에서만 지원됩니다.');            
-        }
-
-
-
 
         /*운영
         클라이언트 : aphasia.co.kr       -> aphasia.maaum.net
@@ -1839,11 +1806,22 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
         };
 
         $scope.playProtocol = function() {
-            if ($scope.lrpModel.selectedProtocol.tasks.length < 1) return;
+            // alert(1);
+
+            if ($scope.lrpModel.selectedProtocol.tasks.length < 1) {
+                return;
+            }
+
+            // console.log("wefdfpdpdp===1="+JSON.stringify($scope.lrpModel));
 
             if ($scope.lrpModel.selectedHomework !== null && $scope.lrpModel.statePage < 2 && $scope.listStateCode === 2) {
                 $scope.lrpModel.selectedProtocol.refTakehome = $scope.lrpModel.selectedHomework._id;
-            } else $scope.lrpModel.selectedProtocol.refTakehome = null;
+                //alert(1);
+            } else {
+                $scope.lrpModel.selectedProtocol.refTakehome = null;
+                //alert(2);
+
+            }
 
             $scope.playExercise('app.play');
         };

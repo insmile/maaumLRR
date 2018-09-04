@@ -21,14 +21,10 @@
         return obj3;
     }
 
-    var drawType;
-
-    //초기화.
-    function Sketchpad(el, opts, drawType_) {
+    // 문제등록. 흐음.
+    function Sketchpad(el, opts) {
+        // alert("sketchpad 초기화!");
         
-        // alert("sketchpad 초기화! = " + drawType_);
-        drawType = drawType_;
-
         backCode2 = "";
 
         var that = this;
@@ -205,79 +201,59 @@
          */
         function drawStroke(stroke) {
                         
-            if(drawType=="draw-one2"){
-                var ddd_term = 0;
+            var ddd_term = 0;
 
-                for (var j = 0; j < stroke.points.length - 1; j++) {
-                    
-                    context.lineWidth = ddddd;
-                    context.beginPath();
-    
-                    var start = normalizePoint(stroke.points[j]);
-                    var end = normalizePoint(stroke.points[j + 1]);
-    
-                    context.moveTo(start.x, start.y);
-                    context.lineTo(end.x, end.y);
-    
-                    context.closePath();
-                    // context.miterLimit = stroke.miterLimit;
-        
-                    context.strokeStyle = stroke.color;
-    
-                    context.lineJoin = stroke.join;
-                    context.lineCap = stroke.cap;
+            for (var j = 0; j < stroke.points.length - 1; j++) {
                 
-                    context.stroke();
-    
-                    if(ddddd < 8){ // 두께 최대치
-    
-                        if(ddd_term > 6){                    
-                            ddddd += 0.1;
-                            ddd_term=0;
-                        }
-                    }
-    
-                    ddd_term++;
-    
-                    if(j==0){
-                        makeCircle(start.x, start.y, j);
-                    }
-    
-                    if(j == stroke.points.length - 2){
-                        // alert("last!!!!");
-                        makeCircle(start.x, start.y, j);
-                    }
-                    
-                }
+                context.lineWidth = ddddd;
+                context.beginPath();
 
-            }else {
-                dddd = 1.6;
+                var start = normalizePoint(stroke.points[j]);
+                var end = normalizePoint(stroke.points[j + 1]);
 
-                for (var j = 0; j < stroke.points.length - 1; j++) {
-                    
-                    context.lineWidth = ddddd;
-                    context.beginPath();
+                // console.log("start_x:"+start.x+", start_y:"+start.y);
+                // console.log("end_x:"+end.x+", end_y:"+end.y);
+
+                context.moveTo(start.x, start.y);
+                context.lineTo(end.x, end.y);
+
+                context.closePath();
+                // context.miterLimit = stroke.miterLimit;
     
-                    var start = normalizePoint(stroke.points[j]);
-                    var end = normalizePoint(stroke.points[j + 1]);
-    
-                    context.moveTo(start.x, start.y);
-                    context.lineTo(end.x, end.y);
-    
-                    context.closePath();
-                    // context.miterLimit = stroke.miterLimit;
-        
-                    context.strokeStyle = stroke.color;
-    
-                    context.lineJoin = stroke.join;
-                    context.lineCap = stroke.cap;
-                
-                    context.stroke();                    
-                }
-            }
+                context.strokeStyle = stroke.color;
+
+                context.lineJoin = stroke.join;
+                context.lineCap = stroke.cap;
             
+                context.stroke();
+
+                if(ddddd < 7){ // 두께 최대치
+
+                    if(ddd_term > 4){                    
+                        ddddd += 0.1;
+                        ddd_term=0;
+                    }
+                }
+
+                ddd_term++;
+
+                if(j==0){
+                    makeCircle(start.x, start.y, j);
+                }
+
+                if(j == stroke.points.length - 2){
+                    // alert("last!!!!");
+                    makeCircle(start.x, start.y, j);
+                }
+                
+            }
         }
 
+        // ddddd1
+        function makeBack()
+        {
+
+        }
 
         function makeCircle(posX, posY, order){
             var ctx = canvas.getContext('2d');
@@ -383,10 +359,10 @@
             if (that.onDrawEnd) that.onDrawEnd();
         }
 
-        // console.log(opts.drawingLock);
+        console.log(opts.drawingLock);
 
         if (opts.drawingLock === undefined || opts.drawingLock === false) {
-            //console.log("drawlingLock = false");
+            console.log("drawlingLock = false");
             // Event Listeners
             canvas.addEventListener('mousedown', startLine);
             canvas.addEventListener('touchstart', startLine);
@@ -464,6 +440,7 @@
      * other sketchpads or stored on a server
      */
     Sketchpad.prototype.toJSON = function() {
+        
         
         return {
             aspectRatio: this.canvas.height / this.canvas.width,
@@ -669,7 +646,7 @@
         원 크기.
         원+세모.
         원 안에 숫자+가나다.
-    */    
+    */
     function makeShapeDD(shapeType, count) {
         
         // shapeType = "ganada:number";
@@ -683,8 +660,8 @@
         var c_w = canvas.width;
         var c_h = canvas.height;
                 
-        var min = 6; // 최소 사이즈.
-        var add = 6; // 증가율.
+        var min = 10;
+        var add = 10;
         
         var ctx = canvas.getContext('2d');
 
@@ -703,33 +680,23 @@
         var index_ganada = 0;
         var ganadaArr = ["가","나","다","라","마","바","사","아","자","차","카","타","파","하"];
 
-        var sizeArr = [12,17,22,27,33,39,45,52,57,64,71,78,85,92,100,108,116,100,40,40,40,40,40,40,40,40,40,40];
-
         while(true){
             var shapeStr = my_shapesArr[shapeIndex];
             
-            // console.log("daddddd:"+shapeStr);
+            console.log("daddddd:"+shapeStr);
 
             // var my_shapesArr = shapeType.split(":");        
             // var shapeIndex = 0; 
 
             indexLimit++
+            var www = min + add * index;
 
-            // var www = sizeArr[index];
-            var www = add * (index+1) + min;
-
-            
             if(shapeStr=="number" || shapeStr=="ganada" ){ // 숫자 혹은 가나다.
-
-                www = 44; // 글자크기 배경. 반지름 22.
-
-                if(count >= 20){
-                    www = 38;
-                }                
+                www = 50; // 글자크기 적당히.
             }
 
-            var padding_x = 50;
-            var padding_y = 50;
+            var padding_x = 150;
+            var padding_y = 150;
 
             var x_ran;
             var y_ran;
@@ -789,13 +756,14 @@
                     var ttt = ganadaArr[index_ganada];
                     textData = ttt;
 
+                   
                     index_ganada++;
                 }
                 else if(shapeStr=="triangle") {
                     
                 }
                 else { // 원.
-                    www = www / 2;
+
                 }
 
                 myShapeArr.push({"x":x_ran, "y":y_ran, "www":www, "shapeStr":shapeStr,"textData":textData});
@@ -803,7 +771,7 @@
                 indexLimit = 0;
             }  
 
-            if(indexLimit>400){
+            if(indexLimit>200){
                 alert("겹치지 않게 그릴 공간이 없습니다.");
                 break;
             }
@@ -849,23 +817,11 @@
 
             }else if(shapeStr=="number" || shapeStr=="ganada"){ // 숫자
                 ctx.beginPath();
-                var circleSize = www / 2; // 반지름. 44, 38.
-
-
-                ctx.arc(x_ran, y_ran, circleSize, 0,2*Math.PI);
+                ctx.arc(x_ran, y_ran-10, 30, 0,2*Math.PI);
                 
+                ctx.font = "32px Arial";
                 ctx.fillStyle = "grey";
-
-                if(circleSize==22){ // 그리는게 20개 이하.
-                    ctx.font = "23px Arial";
-                    ctx.fillText(textData, x_ran, y_ran+6);
-
-                }else { // 그리는게 20개 이상.
-                    ctx.font = "20px Arial";
-                    ctx.fillText(textData, x_ran, y_ran+6);
-                }
-                                
-
+                ctx.fillText(textData, x_ran, y_ran);
                 ctx.textAlign = "center";                     
                 ctx.stroke(); 
             }
@@ -891,25 +847,24 @@
     function checkOverlap(myShapeArr, x_ran, y_ran, www, shapeType){
         
         // 중심 포인트가 왼쪽 위. 
-        // console.log("myShapeArr.length==="+myShapeArr.length);
-        // console.log("myShapeArr.length==="+JSON.stringify(myShapeArr));
+        console.log("myShapeArr.length==="+myShapeArr.length);
+        console.log("myShapeArr.length==="+JSON.stringify(myShapeArr));
 
         var ddf = false;
         
-        www = www + 5; // 약간 더 크게 해서 계산.
+        www = www + 20; // 약간 더 크게 해서 계산.
 
-        for(var i=0; i < myShapeArr.length; i++) {
+        for(var i=0; i<myShapeArr.length; i++) {
             var x_ = myShapeArr[i]['x'];
             var y_ = myShapeArr[i]['y'];
             var www_ = myShapeArr[i]['www'];
 
-            www_ = www_ + 5; // 약간 더 크게 해서 계산.
+            www_ = www_ + 20; // 약간 더 크게 해서 계산.
 
             var x_term1;
             var x_term2;
             var y_term1;
             var y_term2;
-
             var newShape_x1;
             var newShape_x2;
             var newShape_y1;
@@ -937,16 +892,16 @@
 
             }else { // 가운데가 기준점.
                 // 왼쪽.
-                x_term1 = x_ - www_/2 ;
+                x_term1 = x_ - www_ ;
 
                 // 오른쪽.
-                x_term2 = x_ + www_/2 ;
+                x_term2 = x_ + www_ ;
 
                 // 아래
-                y_term1 = y_ - www_/2 ;
+                y_term1 = y_ - www_ ;
 
                 // 위
-                y_term2 = y_ + www_/2 ;
+                y_term2 = y_ + www_ ;
 
                 
                 newShape_x1 = x_ran - www ;
@@ -956,29 +911,29 @@
                 newShape_y2 = y_ran + www ;
             }
 
-            // console.log("index="+i+"기본x : "+x_term1+ ", "+x_term2);
-            // console.log("index="+i+"기본y : "+y_term1+ ", "+y_term2);
+            console.log("index="+i+"기본x : "+x_term1+ ", "+x_term2);
+            console.log("index="+i+"기본y : "+y_term1+ ", "+y_term2);
 
-            // console.log("index="+i+"newShape_x : "+newShape_x1+ ", "+newShape_x2);
-            // console.log("index="+i+"newShape_y : "+newShape_y1+ ", "+newShape_y2);
+            console.log("index="+i+"newShape_x : "+newShape_x1+ ", "+newShape_x2);
+            console.log("index="+i+"newShape_y : "+newShape_y1+ ", "+newShape_y2);
 
             var x_overlap = false;
             var y_overlap = false;
 
-            if( x_term1 >= newShape_x1 && x_term1 <= newShape_x2) {
+            if( x_term1 > newShape_x1 && x_term1 < newShape_x2) {
                 x_overlap = true;                    
             }
 
-            if(x_term2 >= newShape_x1 && x_term2 <= newShape_x2){
+            if(x_term2 > newShape_x1 && x_term2 < newShape_x2){
                 x_overlap = true;
             }
 
                 
-            if(  y_term1 >= newShape_y1 && y_term1 <= newShape_y2) {
+            if(  y_term1 > newShape_y1 && y_term1 < newShape_y2) {
                 y_overlap = true;                    
             }
 
-            if(y_term2 >= newShape_y1 && y_term2 <= newShape_y2) {
+            if(y_term2 > newShape_y1 && y_term2 < newShape_y2) {
                 y_overlap = true;
             }
 
@@ -987,7 +942,6 @@
                 return true;                
             }
         }
-
         return false;
     }
 

@@ -216,10 +216,6 @@ exports.delete = function(req, res) {
  */
 exports.list = function(req, res) {
     
-    console.log("pppppp: list1");
-    console.log("pppppp: req"+JSON.stringify(req.params));
-
-
     Problem.find().sort('-created').populate('user', 'name').populate('refTask', 'center isOpen').exec(function(err, problems) {
         if (err) {
             return res.status(400).send({
@@ -326,7 +322,6 @@ exports.hasAuthorization = function(req, res, next) {
      }*/
     next();
 };
-
 
 exports.updatedb = function(req, res) {
 

@@ -35,6 +35,8 @@ angular.module('LRProject.controllers.exercise', ['LRProject.services'])
         $scope.labelMaxIdx = 0;
         $scope.graphData = [];
 
+        
+
         $scope.resultSchema = {
             name: '',
             trainingType: trainingType,

@@ -7,6 +7,8 @@ var mongoose = require('mongoose'),
     errorHandler = require('./errors.server.controller'),
 
     MyTaskCategory = mongoose.model('MyTaskCategory'),
+    Task = mongoose.model('Task'),
+    Problem = mongoose.model('Problem'),
 
     async = require('async'),
     _ = require('lodash');
@@ -69,13 +71,8 @@ exports.readList = function(req, res){
         
     });        
     
-    
-    
     // var data = [ {"efd33":"efdf"},{"1efd33":"e22fdf"} ]
     // res.send(data);
-
-    
-
 }
 
 
@@ -104,10 +101,63 @@ exports.update = function(req, res) {
                 
         res.json( { message: 'updated' } );
     })
+};
 
-        
+
+
+exports.delete = function(req, res) {
+
+    console.log("Task Category delete ====");
+    console.log("Task Category delete ==== "+JSON.stringify(req.params));
+    console.log("Task Category delete ==== "+JSON.stringify(req.params.categoryId));
     
+    var id =  req.params.categoryId;
 
+
+    Task.remove( { category : id}, function(err){
+        /*
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            var returnData ={};
+            // res.jsonp(returnData);
+        }
+        */
+    })
+
+    console.log("Task 먼저 지웠다.");
+
+    Problem.remove( { taskCategory : id}, function(err){
+        /*
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            var returnData ={};
+            // res.jsonp(returnData);
+        }
+        */
+    })
+
+
+
+    console.log("Problem 도 먼저 지웠다.");
+
+    
+    MyTaskCategory.remove( { _id : id}, function(err){
+                
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            var returnData ={};
+            res.jsonp(returnData);
+        }
+    })
 };
 
 
@@ -173,10 +223,8 @@ exports.readTest2 = function(req, res) {
 }
 
 
-exports.delete = function(req, res) {
-    
-};
- 
+
+
 exports.readTest1 = function(req, res) {
     console.log("cocococ readTest1__");
    
@@ -186,8 +234,10 @@ exports.readTest1 = function(req, res) {
 
 
 exports.categoryByID = function(req, res, next, id) {
+
     console.log("cocococ middle카테고리 미들웨어");
-   next();
+
+    next();
 };
 
 

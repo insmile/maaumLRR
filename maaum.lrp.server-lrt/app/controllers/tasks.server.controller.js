@@ -73,44 +73,72 @@ function getData2(req, res, taskList) {
         
        console.log("list result55 ===" +JSON.stringify(data) );
 
-       for(var i = 0; i < data.data.length;i++) {
-           if(data.data[i].category !== undefined) {
-
-                for(var j = 0; j < taskList.length; j++) {
-
-                    // console.log("비교 시작. data.data[i].category ="+data.data[i].category+", taskList[j]._id="+taskList[j]._id);
-                    
-                    var com1 = data.data[i].category + ""; // 스트링으로 인식 안대서 replace하면 에러뜸. 가끔 공백 붙어있어서 같아도 같다고 인식 안함. 그래서 그냥 화면에 아이디 뜸. 그래서 일부러 "" 붙여줌.
-                    var com2 = taskList[j]._id + "";
-                    
-                    if(com1 !==null && com1 !==undefined){
-                        com1 = com1.replace(/^\s*|\s*$/g,''); 
-
-                    }
-
-                    if(com2 !==null && com2 !==undefined){
-                        com2 = com2.replace(/^\s*|\s*$/g,''); 
-
-                    }
-                    /*
-                    if(data.data[i].category === taskList[j]._id) {
-                        console.log("비교 매치!" + taskList[j].categoryName);
-                        data.data[i].category = taskList[j].categoryName;
-                    }
-                    */                    
-                    
-                    if(com1 == com2) {
-                        console.log("비교 매치!" + taskList[j].categoryName);
-                        data.data[i].category = taskList[j].categoryName;
-                    }                    
-                }
-            }
-       }              
+       data.data = getTaskAddCategory_list(data.data, taskList);
+                  
        // console.log("list result777 ===" +JSON.stringify(data) );
 
         if (err) console.log(err);
         res.send(data);
     });
+}
+
+function getTaskAddCategory_list(taskData, taskList) {
+    for(var i = 0; i < taskData.length;i++) {
+        if(taskData[i].category !== undefined) {
+
+             for(var j = 0; j < taskList.length; j++) {
+
+                 // console.log("비교 시작. data.data[i].category ="+data.data[i].category+", taskList[j]._id="+taskList[j]._id);
+                 
+                 var com1 = taskData[i].category + ""; // 스트링으로 인식 안대서 replace하면 에러뜸. 가끔 공백 붙어있어서 같아도 같다고 인식 안함. 그래서 그냥 화면에 아이디 뜸. 그래서 일부러 "" 붙여줌.
+                 var com2 = taskList[j]._id + "";
+                 
+                 if(com1 !==null && com1 !==undefined){
+                     com1 = com1.replace(/^\s*|\s*$/g,''); 
+
+                 }
+
+                 if(com2 !==null && com2 !==undefined){
+                     com2 = com2.replace(/^\s*|\s*$/g,''); 
+
+                 }
+
+                 if(com1 == com2) {
+                     console.log("비교 매치!" + taskList[j].categoryName);
+                     taskData[i].category = taskList[j].categoryName;
+                 }                    
+             }
+         }
+    }
+    return taskData;
+}
+
+function getTaskAddCategorySingle(taskData, taskList) {
+    
+    
+    for(var j = 0; j < taskList.length; j++) {
+
+        var com1 = taskData._doc.category + ""; // 스트링으로 인식 안대서 replace하면 에러뜸. 가끔 공백 붙어있어서 같아도 같다고 인식 안함. 그래서 그냥 화면에 아이디 뜸. 그래서 일부러 "" 붙여줌.
+
+        var com2 = taskList[j]._id + "";
+        
+        if(com1 !==null && com1 !==undefined){
+            com1 = com1.replace(/^\s*|\s*$/g,''); 
+
+        }
+
+        if(com2 !==null && com2 !==undefined){
+            com2 = com2.replace(/^\s*|\s*$/g,''); 
+
+        }
+
+        if(com1 == com2) {
+            taskData._doc.category = taskList[j].categoryName;
+            break;
+        }                    
+    }
+
+    return taskData;
 }
 
 
@@ -129,88 +157,31 @@ function getTaskList(req, res, callback) {
 }
 
 
-/*
-    
 
-    exports.DT = function getData(req, res) {
+function read2(req, res, taskCategory) {
 
-    console.log("task list 조회 시작");
-    console.log("task list 조회 시작 req.query="+req.query);
-    console.log("task list 조회 시작 req.query="+JSON.stringify(req.query) );
-
-    var conditions = {};
-
-    conditions.$or = [{ 'isOpen': null }, { 'isOpen': true }];
-    if (req.user.center !== undefined) {
-        conditions.$or.push({ 'isOpen': false, 'center': req.user.center });
-    }
-
-    
-    Task.dataTable(req.query, { 'conditions': conditions }, function(err, data) {
-        
-        // console.log("list result ===" +data);
-        console.log("list result 원본 ===" +JSON.stringify(data) );
-
-        var result = data.data;
-
-        for(var i = 0; i<result.length; i++) {
-            var dd = result[i];
-
-            var where2 = {};
-            where2._id = dd.category;
-
-            // 조회된 값으로 카테고리 네임 조회
-            MyTaskCategory.findOne()
-            .where(where2)
-            .exec(function(err, obj) {
-                if (err) {
-                                    
-                } else if (!obj) {                    
-                    
-                } else {
-                    console.log("list task 조회1 =  ===" +obj.categoryName);
-                    dd.category = obj.categoryName;
-                    console.log("list task 조회22 =  ===" +dd.category);
-
-                    data.data[i] = dd;
-                }
-            });
-
-            console.log("list result for ===" +JSON.stringify(dd));            
-        }//end for
-
-
-        console.log("list result55 ===" +JSON.stringify(data) );
-
-        if (err) console.log(err);
-        res.send(data);
-    });
-};
-*/
-
-
-
-/**
- * Show the current Task
- */
-exports.read = function(req, res) {
     if (req.profile !== undefined) {
         console.log(req.profile);
     }
+
     var where = {};
     where.refTask = req.task._id;
     where.$or = [];
     where.$or.push({ 'isOpen': null });
     where.$or.push({ 'isOpen': true });
 
-    console.log("Task _ READ!!="+req);
+    // console.log("Task _ READ!!="+req);
 
     if (req.user.center !== undefined)
         where.$or.push({ 'isOpen': false }, { 'center': req.user.center });
 
+
     Problem.findOne()
         .where(where)
         .sort('-name')
+        
+        // .populate('category') // 안댐..... 
+
         .exec(function(err, obj) {
             if (err) {
                 res.status(400).send("error" + err);
@@ -219,11 +190,22 @@ exports.read = function(req, res) {
             } else {
                 var max = obj.name;
                 req.task.setSize = max;
-                res.jsonp(req.task);
 
+                // 카테고리 아이이-> 이름변환
+                req.task = getTaskAddCategorySingle(req.task, taskCategory);
+
+                // console.log("taks 읽기333="+JSON.stringify(req.task));
+
+                res.jsonp(req.task);
             }
-        });
-    //Problem.find({'refTask' : req.task._id}).max('name')
+    });
+}
+
+/**
+ * Show the current Task
+ */
+exports.read = function(req, res) {
+    getTaskList(req, res, read2) 
 };
 
 /**
@@ -457,6 +439,7 @@ exports.list3 = function(req, res) {
 }
 
 function getTaskList3 (req, res, taskCategory){
+
     var where = {};
 
     if(req.params.gubun !="all" && req.params.gubun !="ALL" ) {
@@ -475,35 +458,61 @@ function getTaskList3 (req, res, taskCategory){
         };
     }
     
-
-
-    
     Task.find(query, { _id: 1, category: 1, name: 1 }).where(where).sort('sortOrder').exec(function(err, tasks) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
             });
         } else {
-            var c = [];
-            var t = [];
-            var cc;
+           
+            console.log("1차 조회 결과::"+JSON.stringify(tasks));
+            
+            var resultData=[];
+            
             tasks.forEach(function(x, index) {
-                //console.log(t.indexOf(x.category));
-                if (c[x.category] === undefined) {
-                    c[x.category] = [];
-                    cc = { category: x.category, tasks: [] };
+                
+                var category = x.category+"";
+                var isPush = false;
 
-                    t.push(cc);
+                // console.log("Loop 1 ::" + category);
+
+                for(var i=0; i<resultData.length; i++) {
+
+                    var oneData = resultData[i];
+                    var oneDataCategory = oneData.category+"";
+
+                    if(oneDataCategory !==null && oneDataCategory !==undefined){
+                        oneDataCategory = oneDataCategory.replace(/^\s*|\s*$/g,''); 
+                    }
+
+                    if(category !==null && category !==undefined){
+                        category = category.replace(/^\s*|\s*$/g,''); 
+                    }
+
+                    if(oneDataCategory == category){
+                        // console.log("Loop 2 :: 같은거 있다!!:: x="+JSON.stringify(x) );
+                        resultData[i].tasks.push(x);
+                        isPush = true;
+                    }
+
                 }
-                cc.tasks.push({ name: x.name, _id: x._id });
+
+                if(!isPush){
+                    var taskArr=[];
+                    taskArr.push(x);
+                    var newCategory = {'category':category, 'tasks':taskArr };
+                    resultData.push(newCategory);
+                }
+
             });
 
-            for(var i = 0; i < t.length;i++) {
+
+            for(var i = 0; i < resultData.length;i++) {
                 
                 for(var j = 0; j < taskCategory.length; j++) {
 
                     // 비교해서 이름 바꾸기.                    
-                    var com1 = t[i].category + ""; // 스트링으로 인식 안대서 replace하면 에러뜸. 가끔 공백 붙어있어서 같아도 같다고 인식 안함. 그래서 그냥 화면에 아이디 뜸. 그래서 일부러 "" 붙여줌.
+                    var com1 = resultData[i].category + ""; // 스트링으로 인식 안대서 replace하면 에러뜸. 가끔 공백 붙어있어서 같아도 같다고 인식 안함. 그래서 그냥 화면에 아이디 뜸. 그래서 일부러 "" 붙여줌.
                     var com2 = taskCategory[j]._id + "";
                     
                     if(com1 !==null && com1 !==undefined){
@@ -515,14 +524,14 @@ function getTaskList3 (req, res, taskCategory){
                     }
 
                     if(com1 == com2) {
-                        t[i].categoryName =  taskCategory[j].categoryName;                      
+                        resultData[i].categoryName =  taskCategory[j].categoryName;                      
                     }                    
                 }            
             }    
 
-            //console.log(t);
-            console.log("클라이언트 조회="+JSON.stringify(t));
-            res.jsonp(t);
+            // console.log(t);
+            // console.log("클라이언트 조회="+JSON.stringify(t));
+            res.jsonp(resultData);
         }
     });
 }

@@ -10,7 +10,7 @@ angular.module('tasks').controller('TaskCategoryController', ['$scope', '$stateP
         $scope.init = function() {
             
             $scope.categoryBase = new TaskCategory.categoryBase({}); //List, Create
-            $scope.categoryUpdate = new TaskCategory.categoryUpdate({});
+            //$scope.categoryUpdate = new TaskCategory.categoryUpdate({});
             $scope.categoryReadData = new TaskCategory.categoryRead({});
             
             // $scope.categoryBase = Tasks.categoryBase.query();
@@ -45,7 +45,7 @@ angular.module('tasks').controller('TaskCategoryController', ['$scope', '$stateP
         
         $scope.updateCategory = function(index, id) {
                         
-            alert("Category update1 = "+index+"=="+id);
+            // alert("Category update1 = "+index+"=="+id);
             
             var upData = $scope.categoryList[index];
 
@@ -58,7 +58,7 @@ angular.module('tasks').controller('TaskCategoryController', ['$scope', '$stateP
             $http.get('/category/update/'+ data)
             .success(function (data, status, headers) {
                 alert("수정완료!");
-                $location.path('/tasks/addCategory');
+                $location.path('tasks/create');
 
             })
             .error(function (data, status, header, config) {
@@ -66,10 +66,6 @@ angular.module('tasks').controller('TaskCategoryController', ['$scope', '$stateP
                 
                 }    
             );
-            
-            
-            
-
 
             return false;   
         }
@@ -86,7 +82,8 @@ angular.module('tasks').controller('TaskCategoryController', ['$scope', '$stateP
 
             // 이때 서버 컨트롤러 호출 됨.
             $scope.categoryBase.$save(function(response) {
-              
+                alert("등록완료");
+
                 // Clear form fields
             }, function(errorResponse) {
                 $scope.error = errorResponse.data.message;
@@ -96,31 +93,25 @@ angular.module('tasks').controller('TaskCategoryController', ['$scope', '$stateP
             return false;   
         };
 
-        
-         
 
         // Remove existing Task
-        $scope.removeCategory = function(task) {
+        $scope.removeCategory = function(index, id) {
 
-            if (task) {
-                task.$remove();
+            // alert(222);
 
-                for (var i in $scope.tasks) {
-                    if ($scope.tasks[i] === task) {
-                        $scope.tasks.splice(i, 1);
-                    }
-                }
+            $http.post('/category/delete/'+ id)
+            .success(function (data, status, headers) {
+                
+                alert("삭제 완료!");
 
-            } else {
-
-                console.log("delete:::" + JSON.stringify($scope.tasks));
-
-                if (confirm('제거하시겠습니까?')) {
-                    $scope.task.$remove(function() {
-                        $location.path('tasks');
-                    });
-                }
-            }
+                // $location.path('/tasks/addCategory');
+                $location.path('tasks/create');
+            })
+            .error(function (data, status, header, config) {
+                
+                }    
+            );
+            
         };
 
           

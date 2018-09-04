@@ -273,7 +273,7 @@ angular.module('tasks').controller('TasksController', ['$scope', '$stateParams',
             $scope.task.preview = $scope.task.preview_file.value;
             // Redirect after save
 
-            alert("$scope.task.taskType=="+$scope.task.taskType);
+            // alert("$scope.task.taskType=="+$scope.task.taskType);
             
             $scope.task.$save(function(response) {
                 console.log($scope.task);
