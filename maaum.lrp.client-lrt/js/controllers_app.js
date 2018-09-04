@@ -1792,7 +1792,23 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
         }
 
         $scope.playIndividual = function() {
-            if ($scope.lrpModel.selectedTask.setSize === undefined || $scope.lrpModel.selectedTask.setSize === null || $scope.lrpModel.selectedTask.setSize < 1) return;
+            /*
+            * 검사자/ 훈련자 선택여부 체크
+            */            
+            if ($scope.lrpModel.selectedPatient === null){
+                if("LRE" == $scope.lrpModel.selectedTask.taskType){
+                    alert('검사 및 평가 대상  훈련자를 선택해 주십시오.');
+                }else{
+                    alert('훈련대상 훈련자를 선택해 주십시오.');        
+                }
+                
+            }
+            
+            
+            if ($scope.lrpModel.selectedTask.setSize === undefined || $scope.lrpModel.selectedTask.setSize === null || $scope.lrpModel.selectedTask.setSize < 1){
+                 return;
+            }    
+            
 
             $scope.lrpModel.selectedProtocol = {
                 name: $scope.lrpModel.selectedTask.name,
