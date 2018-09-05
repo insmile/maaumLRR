@@ -27,11 +27,11 @@
         <ion-content class="lrp-list-content menu-animated" has-bouncing="false" scroll="false" style="margin-top: 0;padding-top: 0;" ng-class="{ 'lrp-on-mark' : lrpModel.isMenuToggle, 'lrp-menu-icon' : !lrpModel.isMenuToggle }">
             <ion-list>
 
-                <ion-item nav-clear ng-if="lrpModel.userData.roles === 'admin' && !isOffline" style="padding: 0;" ng-click="menuActivate(0)">
+                <ion-item nav-clear ng-if="lrpModel.userData.roles !== 'patient' && !isOffline" style="padding: 0;" ng-click="menuActivate(0)">
                     <div class="my-row-center">
                         <div class="lrp-menu-side-active" ng-class="{ lrpMenuSelected: lrpModel.statePage === 0 }"></div>
                         <div>
-                            <img src="./img/res/menu_icon00_normal.png" style="width: 60px; height: auto;" title="평가자 관리 메뉴">
+                            <img id="icon_00" src="./img/res/menu_icon00_normal.png" style="width: 60px; height: auto;" title="평가자 관리 메뉴">
                             <div style="text-align: center;">
                                 <h4 ng-show="!lrpModel.isMenuToggle">평가자</h4>
                             </div>
@@ -78,7 +78,7 @@
                 </ion-item>
                               
                 
-                <ion-item nav-clear ng-if="lrpModel.userData.roles === 'admin' && !isOffline" style="padding: 0;" ng-click="menuActivate(4)">
+                <ion-item nav-clear ng-if="lrpModel.userData.roles !== 'patient' && !isOffline" style="padding: 0;" ng-click="menuActivate(4)">
                     <div class="my-row-center">
                         <div class="lrp-menu-side-active" ng-class="{ lrpMenuSelected: lrpModel.statePage === 4 }"></div>
                         <div>
