@@ -261,7 +261,7 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
 
             $scope.lrpModel.selectedProblemSet = null;
 
-            $scope.hideCategory = Array(100).fill(true);
+            $scope.hideCategory = Array(100).fill(false);
 
             $scope.lrpModel.setNum = 1;
             $scope.lrpModel.setDelay = 7;
@@ -1579,7 +1579,7 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
 
                 case 3:
                     $scope.orderData = {
-                        tag: '개별평가 선택',
+                        tag: '개별훈련 선택',
                         template: './templates/Include_List_Individual2.html'
                     };
 
@@ -1589,7 +1589,7 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
 
                 case 4:
                     $scope.orderData = {
-                        tag: '구성평가 선택',
+                        tag: '구성훈련 선택',
                         template: './templates/Include_List_Protocol.html'
                     };
 
@@ -2203,7 +2203,7 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
         error(function (data, status) { console.log('Error : loadDataPost : ' + lrpServer + obParam.url + ' =>(' + obParam.dataSetter + ' : ' + obParam.callback + ') ! status : ' + status); });
         */
 
-        $scope.loginData = { username: 'admin', password: 'rhfueo!' };
+        //$scope.loginData = { username: 'admin', password: 'rhfueo!' };
         //$scope.loginData = { username: 'testpatient', password: 'rhfueo!' };
         
         $scope.doLogin = function() {
@@ -2298,7 +2298,7 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
                             }, onFail);
                         }, onFail);
                     }
-                }``
+                }
 
                 if (check) setLogin();
             }, onFail);
