@@ -149,8 +149,8 @@ function update2_do(req, res, userNameIndex) {
 
 			if(newUser.assignedTherapist === undefined) {
 				console.log("new user has no assigned therapist");
-				user.assignedTherapist = undefined;
-				user.assignedTherapistName = undefined;
+				//user.assignedTherapist = undefined;
+				//user.assignedTherapistName = undefined;
 			}
 
 			console.log(user);
