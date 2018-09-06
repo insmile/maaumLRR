@@ -730,15 +730,15 @@ h3,
 /** free */
 .lrpListSelected {
     /*background-color: #8B0029 !important;*/
-    background-color: #B8C2CF !important;
+    background-color: #E3E3E3 !important;
 }
 
 .lrpListSelected h2 {
-    color: white;
+    color: #000;
 }
 
 .lrpListSelected p {
-    color: whitesmoke;
+    color: #000;
 }
 
 .lrp-allocated-button {
