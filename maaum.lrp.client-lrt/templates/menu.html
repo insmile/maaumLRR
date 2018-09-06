@@ -31,12 +31,12 @@
                     <div class="my-row-center">
                         <div class="lrp-menu-side-active" ng-class="{ lrpMenuSelected: lrpModel.statePage === 0 }"></div>
                         <div>
-                            <img id="icon_00" src="./img/res/menu_icon00_normal.png" style="width: 60px; height: auto;" title="평가자 관리 메뉴">
+                            <img src="./img/res/menu_icon00_normal.png" style="width: 60px; height: auto;" title="치료사 관리 메뉴">
                             <div style="text-align: center;">
-                                <h4 ng-show="!lrpModel.isMenuToggle">평가자</h4>
+                                <h4 ng-show="!lrpModel.isMenuToggle">치료사</h4>
                             </div>
                         </div>
-                        <div class="div-left">평가자</div>
+                        <div class="div-left">치료사</div>
                     </div>
                 </ion-item>
                 <ion-item nav-clear ng-if="lrpModel.userData.roles !== 'patient' && !isOffline" style="padding: 0;" ng-click="menuActivate(1)">
