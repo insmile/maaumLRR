@@ -163,8 +163,7 @@
          * Erase everything in the canvase
          */
         function clearCanvas() {
-            
-            
+
             context.clearRect(0, 0, canvas.width, canvas.height);
 
             if (opts.backgroundColor) {
@@ -440,8 +439,7 @@
      * other sketchpads or stored on a server
      */
     Sketchpad.prototype.toJSON = function() {
-        
-        
+
         return {
             aspectRatio: this.canvas.height / this.canvas.width,
             strokes: this.strokes,
@@ -529,7 +527,7 @@
         // 삼각형, 사각형, 원, // 숫자, 가나다.
         draw2Data = drawData;
         
-        var makeShape="";
+        var makeShape=""; //
 
         if(drawData.sstt1=="on") {
             if(makeShape=="") {
@@ -582,7 +580,7 @@
     };
 
     Sketchpad.prototype.makeDraw2_reset = function() {
-        // alert("939393912333");
+
         var drawData = draw2Data;
         this.undos = []; // TODO: Add clear action to undo
         this.strokes = [];
@@ -680,28 +678,35 @@
         var index_ganada = 0;
         var ganadaArr = ["가","나","다","라","마","바","사","아","자","차","카","타","파","하"];
 
+        // 총 15개.
+        var shapeSize=[9,13,17, 21,25,29, 34,39,44, 50,56,62, 69,75,81, 87,93,99, 105,111,117 ];
+        
+        // alert("indexLimit START6 : "+indexLimit);
+
         while(true){
             var shapeStr = my_shapesArr[shapeIndex];
             
-            console.log("daddddd:"+shapeStr);
+            // console.log("daddddd:"+shapeStr);
 
             // var my_shapesArr = shapeType.split(":");        
             // var shapeIndex = 0; 
 
             indexLimit++
-            var www = min + add * index;
+            // var www = min + add * index;
+            var www = shapeSize[index];
 
             if(shapeStr=="number" || shapeStr=="ganada" ){ // 숫자 혹은 가나다.
-                www = 50; // 글자크기 적당히.
+                www = 70; // 글자크기 적당히.
             }
 
             var padding_x = 150;
-            var padding_y = 150;
+            var padding_y = 20;
 
             var x_ran;
             var y_ran;
 
             if(shapeStr=="rect"){
+                www = www+3; // 사각형 살짝 더 크게.
                 // 도형 기준점이 왼쪽 위.
                 x_ran = Math.floor(Math.random() * (c_w - www - padding_x*2 ) ) + padding_x;
                 y_ran = Math.floor(Math.random() * (c_h - www - padding_y*2 ) ) + padding_y;
@@ -741,6 +746,7 @@
                 }
                 
                 index++;
+
                 var textData="";
                 
                 if(shapeStr=="rect"){ // 네모
@@ -766,20 +772,23 @@
 
                 }
 
+                // console.log("그려지는 www:"+www);
+
                 myShapeArr.push({"x":x_ran, "y":y_ran, "www":www, "shapeStr":shapeStr,"textData":textData});
 
                 indexLimit = 0;
             }  
 
-            if(indexLimit>200){
+            if(indexLimit > 2000){
                 alert("겹치지 않게 그릴 공간이 없습니다.");
                 break;
             }
             if(index >= count){
                 break;
             }            
-        }      
+        }
 
+        // alert("indexLimit final:"+indexLimit);
         realDraw_(myShapeArr);
         
         this.backCode = canvas.toDataURL();
@@ -847,8 +856,8 @@
     function checkOverlap(myShapeArr, x_ran, y_ran, www, shapeType){
         
         // 중심 포인트가 왼쪽 위. 
-        console.log("myShapeArr.length==="+myShapeArr.length);
-        console.log("myShapeArr.length==="+JSON.stringify(myShapeArr));
+        // console.log("myShapeArr.length==="+myShapeArr.length);
+        // console.log("myShapeArr.length==="+JSON.stringify(myShapeArr));
 
         var ddf = false;
         
@@ -911,11 +920,11 @@
                 newShape_y2 = y_ran + www ;
             }
 
-            console.log("index="+i+"기본x : "+x_term1+ ", "+x_term2);
-            console.log("index="+i+"기본y : "+y_term1+ ", "+y_term2);
+            // console.log("index="+i+"기본x : "+x_term1+ ", "+x_term2);
+            // console.log("index="+i+"기본y : "+y_term1+ ", "+y_term2);
 
-            console.log("index="+i+"newShape_x : "+newShape_x1+ ", "+newShape_x2);
-            console.log("index="+i+"newShape_y : "+newShape_y1+ ", "+newShape_y2);
+            // console.log("index="+i+"newShape_x : "+newShape_x1+ ", "+newShape_x2);
+            // console.log("index="+i+"newShape_y : "+newShape_y1+ ", "+newShape_y2);
 
             var x_overlap = false;
             var y_overlap = false;
