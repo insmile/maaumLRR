@@ -84,6 +84,18 @@ app.config(function($stateProvider, $urlRouterProvider) {
             } 
         }
     })
+
+
+    .state('app.ExternalSubPage', {
+        cache: false,
+        url: "/resultPage",
+        views: {
+            'menuContent': {
+                templateUrl: "templates/Include_List_ExternalFramePage.html",
+                controller: 'Ctrl_List'
+            } 
+        }
+    })
     
     // add
     .state('app.subPage', {

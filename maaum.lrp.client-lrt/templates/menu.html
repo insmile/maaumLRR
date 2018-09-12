@@ -91,6 +91,19 @@
                     </div>
                 </ion-item>
 
+                <ion-item nav-clear ng-if="!isOffline" style="padding: 0;" ng-click="subLocation(3)">
+                    <div class="my-row-center">
+                        <div class="lrp-menu-side-active" ng-class="{ lrpMenuSelected: lrpModel.statePage === 2 }"></div>
+                        <div>
+                            <img src="./img/res/menu_icon03_normal.png" style="width: 60px; height: auto;" title="단일과제 관리 메뉴">
+                            <div style="text-align: center;">
+                                <h4 ng-show="!lrpModel.isMenuToggle">읽기능력</h4>
+                            </div>
+                        </div>
+                        <div class="div-left">읽기능력</div>
+                    </div>
+                </ion-item>
+
                 <!--ion-item nav-clear ng-if="isOffline" style="padding: 0;" ng-click="menuActivate(5)">
                     <div class="my-row-center">
                         <div class="lrp-menu-side-active" ng-class="{ lrpMenuSelected: lrpModel.statePage === 5 }"></div>

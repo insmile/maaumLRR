@@ -1,0 +1,33 @@
+<ion-view view-title="읽기능력">
+  
+<ion-header-bar class="bar-stable lrp-bar-top lrp-header-padding lrp-header-bottomless">
+    <div class="div-flex"><h3>{{lrpModel.pageTag[lrpModel.statePage]}}</h3></div>
+</ion-header-bar>
+
+<ion-content direction="y" has-bouncing="false" style="width: initial;">
+    <div id="lrpOuterList"></div>            
+    <div id="con_lf"></div>
+    
+    
+    
+    <!--
+        iframe 으로 마이크기능을 사용하려면 allow="geolocation; microphone; camera;" 추가해야함.
+        
+        *Reference : 
+        https://sites.google.com/a/chromium.org/dev/Home/chromium-security/deprecating-permissions-in-cross-origin-iframes
+    -->
+    <iframe src="https://mc2.maaum.net/run/1" frameborder="0" style="overflow:hidden;height:100%;width:100%" height="100%" width="100%" allow="geolocation; microphone; camera;"></iframe>
+
+    <!--<object id="nzeo" width="100%" height="100%" data="https://mc2.maaum.net/run/1"></object>-->
+    
+    <!--
+    <ion-item style="text-align: left;">      
+        <a href="#" ng-click=""><img src="./img/res/intro_program.png" alt="" /></a>    
+    </ion-item>
+    -->
+    
+</ion-content>
+
+  
+
+</ion-view>  

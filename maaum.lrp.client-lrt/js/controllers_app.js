@@ -458,8 +458,13 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
 
         
         $scope.subLocation = function(arg) {
-             $scope.lrpModel.statePage = arg;
-             $state.transitionTo('app.subPage');
+            if(arg=="3"){
+                $scope.lrpModel.statePage = arg;
+                $state.transitionTo('app.ExternalSubPage');
+            }else{
+                $scope.lrpModel.statePage = arg;
+                $state.transitionTo('app.subPage');
+            }
          }
        
         
