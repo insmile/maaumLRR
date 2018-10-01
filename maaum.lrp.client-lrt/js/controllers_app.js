@@ -458,7 +458,7 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
 
         
         $scope.subLocation = function(arg) {
-            if(arg=="3"){
+            if(arg== 6){
                 $scope.lrpModel.statePage = arg;
                 $state.transitionTo('app.ExternalSubPage');
             }else{
