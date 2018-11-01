@@ -4,7 +4,7 @@
 </h3>
 
 <section data-ng-controller="DashboardController">
-    <div data-ng-show="isAdmin" class="jumbotron text-center">
+    <div data-ng-show="isAdmin" class="text-center">
         <div class="btn col-lg-3 col-sm-6">
             <!-- START widget-->
             <div class="panel widget bg-primary" data-ng-click="go('/centers/list')">
@@ -50,12 +50,13 @@
                 </div>
             </div>
         </div>
-        <div class="text-center">
-            <img src="https://lrp.withcat.net/uploads/login_logo.png"><br>
+        <!--div class="text-center">
+            <img src="/uploads/login_logo.png"><br>
                 언어재활프로그램 (Language Rehabilition Program, LRP) 관리 페이지
-                </div>
+                </div-->
     </div>
-    <div class="jumbotron text-center" data-ng-show="isManager">
+    <!-- jumbotron 주석처리 -->
+    <div class="text-center" data-ng-show="isManager">
         <div class="btn col-lg-3 col-sm-6">
             <!-- START widget-->
             <div class="panel widget bg-primary"  data-ng-click="go('/patient/list')">
@@ -115,9 +116,9 @@
                 </div>
             </div>
         </div>
-        <div class="text-center">
-            <img src="https://lrp.withcat.net/uploads/login_logo.png"><br>
+        <!--div class="text-center">
+            <img src="/uploads/login_logo.png"><br>
                 언어재활프로그램 (Language Rehabilition Program, LRP) 관리 페이지
-                </div>
+                </div-->
     </div>
 </section>
