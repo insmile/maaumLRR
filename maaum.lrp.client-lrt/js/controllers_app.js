@@ -299,7 +299,7 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
             $scope.progressDownLoad = 0;
 
             $scope.lrpModel.pageTag = [
-                '평가자', '환자', '선택과제 평가', '구성 평가', '경과기록지 서식', '오프라인 과제'
+                '평가자', '환자', '구성 평가', '기능 훈련', '경과기록지 서식', '오프라인 과제'
             ];
 
             pageCacheData = [{
@@ -363,13 +363,6 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
                     ]
                 },
                 {
-                    //sub page move
-                    hasTab: false,
-                    baseReload: [],                
-                    listStatePage: ['','']      
-                                        
-                },
-                {
                     baseReload: [
                         { url: 'tasks/list3/LRE', dataSetter: 'taskList' }
                     ],
@@ -377,6 +370,13 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
                         './templates/Include_List_Individual2.html',
                         './templates/Include_List_SelectedIndividual.html'
                     ]                    
+                },
+                {
+                    //sub page move
+                    hasTab: false,
+                    baseReload: [],                
+                    listStatePage: ['','']      
+                                        
                 },
                 {
                     hasTab: false,
@@ -488,10 +488,10 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
             $scope.lrpModel.statePage = arg;
 
             // add subpage 이동
-            if ( $scope.lrpModel.statePage == 2 && arg2 == 'N' )  {                
+            if ( $scope.lrpModel.statePage == 3 && arg2 == 'N' )  {                
                 // 메인메뉴 눌렀다, LR, RT 고를수 있는 메인으로 가기위해 초기화.
-                $scope.lrpModel.pageTag[2] = '';                
-                pageBluePrint[2] = { };                
+                $scope.lrpModel.pageTag[3] = '기능훈련';                
+                pageBluePrint[3] = { };                
 
                 hasTab: false;
                 $state.transitionTo('app.subPage');
@@ -499,11 +499,11 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
             }            
 
             // add LT 추가 
-            if ( $scope.lrpModel.statePage === 2 && arg2 == 'LT' )  {
+            if ( $scope.lrpModel.statePage === 3 && arg2 == 'LT' )  {
 
-                $scope.lrpModel.pageTag[2] = '기능훈련LT';
+                $scope.lrpModel.pageTag[3] = '기능훈련LT';
                 
-                pageBluePrint[2] = {
+                pageBluePrint[3] = {
                     baseReload: [
                         { url: 'tasks/list3/LT', dataSetter: 'taskList' }
                     ],
@@ -514,10 +514,10 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
                 };                
             } 
             //add RT 
-            else if ( $scope.lrpModel.statePage === 2 && arg2 == 'RT' )  {
-                $scope.lrpModel.pageTag[2] = '기능훈련RT';
+            else if ( $scope.lrpModel.statePage === 3 && arg2 == 'RT' )  {
+                $scope.lrpModel.pageTag[3] = '기능훈련RT';
                 
-                pageBluePrint[2] = {
+                pageBluePrint[3] = {
                     baseReload: [
                         { url: 'tasks/list3/RT', dataSetter: 'taskList' }
                     ],
@@ -1019,7 +1019,7 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
 
             
             /** free 메뉴위치 조정 */
-            if ($scope.lrpModel.statePage === 3) {
+            if ($scope.lrpModel.statePage === 2) {
                 vParam.callback = setListState;
                 vParam.callbackArg = { listState: 1 };
 
@@ -1047,14 +1047,14 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
             $scope.lrpModel.setNum = 1;
 
 
-            if ($scope.lrpModel.statePage === 3) {
+            if ($scope.lrpModel.statePage === 2) {
                 vParam.callback = setListState;
                 vParam.callbackArg = { listState: 1 };
 
                 setChacheData(1, vParam);
             }
 
-            else if ($scope.lrpModel.statePage === 2) {
+            else if ($scope.lrpModel.statePage === 3) {
                 vParam.callback = setListState;
                 vParam.callbackArg = { listState: 1 };
 
@@ -1077,7 +1077,7 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
                 obj.setNum--;
             } else obj.setNum = 1;
 
-            if ($scope.lrpModel.statePage === 3) $scope.protcolTaskAddApply();
+            if ($scope.lrpModel.statePage === 2) $scope.protcolTaskAddApply();
             else pageCacheHolder.setNum = obj.setNum;
         };
 
@@ -1088,7 +1088,7 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
                 obj.setNum++;
             } else obj.setNum = max;
 
-            if ($scope.lrpModel.statePage === 3) $scope.protcolTaskAddApply();
+            if ($scope.lrpModel.statePage === 2) $scope.protcolTaskAddApply();
             else pageCacheHolder.setNum = obj.setNum;
         };
 
@@ -1134,7 +1134,7 @@ angular.module('LRProject.controllers', ['LRProject.services', 'LRProject.contro
 
             $scope.lrpModel.selectedHomework = null;
 
-            if ($scope.lrpModel.statePage === 3) {
+            if ($scope.lrpModel.statePage === 2) {
                 vParam.callback = setListState;
                 vParam.callbackArg = { listState: 1 };
 

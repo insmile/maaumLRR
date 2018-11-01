@@ -51,22 +51,10 @@
                         <div class="div-left">환자</div>
                     </div>
                 </ion-item>
-                
-                <ion-item nav-clear ng-if="!isOffline" style="padding: 0;" ng-click="subLocation(2)">
+
+                <ion-item nav-clear ng-if="!isOffline" style="padding: 0;" ng-click="menuActivate(2)">
                     <div class="my-row-center">
                         <div class="lrp-menu-side-active" ng-class="{ lrpMenuSelected: lrpModel.statePage === 2 }"></div>
-                        <div>
-                            <img src="./img/res/menu_icon03_normal.png" style="width: 60px; height: auto;" title="단일과제 관리 메뉴">
-                            <div style="text-align: center;">
-                                <h4 ng-show="!lrpModel.isMenuToggle">훈련</h4>
-                            </div>
-                        </div>
-                        <div class="div-left">기능 훈련</div>
-                    </div>
-                </ion-item>
-                <ion-item nav-clear ng-if="!isOffline" style="padding: 0;" ng-click="menuActivate(3)">
-                    <div class="my-row-center">
-                        <div class="lrp-menu-side-active" ng-class="{ lrpMenuSelected: lrpModel.statePage === 3 }"></div>
                         <div>
                             <img src="./img/res/menu_icon05_normal.png" style="width: 60px; height: auto;" title="구성 평가 관리 메뉴">
                             <div style="text-align: center;">
@@ -76,7 +64,20 @@
                         <div class="div-left">구성 평가</div>
                     </div>
                 </ion-item>
-                              
+                                
+                <ion-item nav-clear ng-if="!isOffline" style="padding: 0;" ng-click="subLocation(3)">
+                    <div class="my-row-center">
+                        <div class="lrp-menu-side-active" ng-class="{ lrpMenuSelected: lrpModel.statePage === 3 }"></div>
+                        <div>
+                            <img src="./img/res/menu_icon03_normal.png" style="width: 60px; height: auto;" title="단일과제 관리 메뉴">
+                            <div style="text-align: center;">
+                                <h4 ng-show="!lrpModel.isMenuToggle">훈련</h4>
+                            </div>
+                        </div>
+                        <div class="div-left">기능 훈련</div>
+                    </div>
+                </ion-item>
+                            
                 
                 <ion-item nav-clear ng-if="lrpModel.userData.roles !== 'patient' && !isOffline" style="padding: 0;" ng-click="menuActivate(4)">
                     <div class="my-row-center">
