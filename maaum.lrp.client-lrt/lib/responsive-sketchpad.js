@@ -20,10 +20,17 @@
         }
         return obj3;
     }
+    
+    var isGetBig; // true : 점점 두꺼워짐, flase : 보통 일직선 선
 
     // 문제등록. 흐음.
-    function Sketchpad(el, opts) {
-        // alert("sketchpad 초기화!");
+    function Sketchpad(el, opts, type) {
+        isGetBig = false;
+
+        if(type=="draw-one2"){
+            isGetBig = true;                
+        }
+        // alert("sketchpad 초기화! type="+type);
         
         backCode2 = "";
 
@@ -41,7 +48,7 @@
 
         if (opts.data) {
             opts.aspectRatio = opts.data.aspectRatio;
-            strokes = opts.data.strokes;            
+            strokes = opts.data.strokes;
         }
 
         // alert("sketch init: opts ="+JSON.stringify(opts));
@@ -194,7 +201,7 @@
 
 
         var ddddd=1; // 선두께 초기값
-
+        
         /**
          * Draw a stroke on the canvas
          */
@@ -225,26 +232,25 @@
                 context.lineCap = stroke.cap;
             
                 context.stroke();
-
-                if(ddddd < 7){ // 두께 최대치
-
-                    if(ddd_term > 4){                    
-                        ddddd += 0.1;
-                        ddd_term=0;
-                    }
-                }
-
-                ddd_term++;
-
-                if(j==0){
-                    makeCircle(start.x, start.y, j);
-                }
-
-                if(j == stroke.points.length - 2){
-                    // alert("last!!!!");
-                    makeCircle(start.x, start.y, j);
-                }
                 
+                if(isGetBig){ // 점점 두꺼워짐. //ddddd
+                    if(ddddd < 7){ // 두께 최대치
+                        if(ddd_term > 4){                    
+                            ddddd += 0.1;
+                            ddd_term=0;
+                        }
+                    }
+    
+                    ddd_term++;
+    
+                    if(j==0){
+                        makeCircle(start.x, start.y, j);
+                    }
+    
+                    if(j == stroke.points.length - 2){
+                        makeCircle(start.x, start.y, j);
+                    }
+                }                
             }
         }
 
