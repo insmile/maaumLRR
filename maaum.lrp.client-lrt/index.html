@@ -5,38 +5,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
 
-
-
     <!-- 여기 막으면 마이크 기능 안됨
          child-src blob: => 이게 있으면 iframe 기능이 안됨.
     -->
-    <meta http-equiv="Content-Security-Policy" content="default-src *  blob: ; 
-    			img-src * 'self' data: https:; 
-    			style-src 'self' 'unsafe-inline'; 
-                script-src 'self' 'unsafe-inline' 'unsafe-eval *' ;                                 
-                child-src blob: ;
-                frame-src 'self' https://mc2.maaum.net;" />    
-    
-    <!-- 여기 막으면 마이크 기능 안됨
-    <meta http-equiv="Content-Security-Policy" content="default-src *  blob: ; 
-    			img-src * 'self' data: https:; 
-    			style-src 'self' 'unsafe-inline'; 
-    			script-src 'self' 'unsafe-inline' 'unsafe-eval *' ; 
-    			child-src blob: " />    
-    
-    -->
-    
-    <!--
-        <meta http-equiv="Content-Security-Policy" content="default-src *;
-   				img-src * 'self' data: https:; 
-   				script-src 'self' 'unsafe-inline' 'unsafe-eval' *;
-	   			style-src 'self' 'unsafe-inline' *">
-   -->
-    
-    <!--
-    <meta http-equiv="Content-Security-Policy" content="default-src *; img-src * 'self' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src  'self' 'unsafe-inline' *">
-    -->
-   
+    <meta http-equiv="Content-Security-Policy" content="default-src * blob: ;
+   img-src * 'self' data: https:; 
+   script-src 'self' 'unsafe-inline' 'unsafe-eval' *;
+   child-src blob: ;
+   frame-src 'self' https://mc2.maaum.net;
+   style-src  'self' 'unsafe-inline' *   
+   "/>
+  
     <title></title>
 
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
